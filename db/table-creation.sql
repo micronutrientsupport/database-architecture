@@ -49,6 +49,8 @@ CREATE TABLE FOOD_DATA_SOURCE_LINK (
 	fooditem_id               integer NOT NULL
 	, date_source_id          integer NOT NULL
 	, PRIMARY KEY (fooditem_id, date_source_id)
+	, CONSTRAINT FOOD_DATA_SOURCE_LINK_FK1 FOREIGN KEY fooditem_id REFERENCES FOODITEM.id
+	, CONSTRAINT FOOD_DATA_SOURCE_LINK_FK2 FOREGIN KEY date_source_id REFERENCES DATA_SOURCE.id
 );
 
 

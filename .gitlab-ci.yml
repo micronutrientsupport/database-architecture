@@ -1,0 +1,16 @@
+wipe-db:
+  image:
+    name: flyway/flyway:latest
+    entrypoint: [""]
+  variables:
+    host: $dbdevmachine1ip
+    port: 5432
+    database: $devdb1_user
+    user: $devdb1_user
+    password: $devdeb1_password
+  script:
+    - echo $host
+    - flyway clean   -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/
+    - flyway migrate -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/
+    - flyway info    -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/
+

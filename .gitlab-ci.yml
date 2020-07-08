@@ -10,7 +10,7 @@ wipe-db:
     password: $devdeb1_password
   script:
     - echo $host
-    - flyway clean   -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/
-    - flyway migrate -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/
-    - flyway info    -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/
+    - flyway clean   -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password}
+    - flyway migrate -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/,filesystem:raw-data -validateOnMigrate=true
+    - flyway info    -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/,filesystem:raw-data
 

@@ -1,9 +1,8 @@
-
 INSERT INTO
-    "fooditem" (
-        data_source
+    fooditem (
+        FCT_SOURCE_ID
       , Food_Code
-      , RefNo
+      , DATA_REFERENCE_ID
       , Food_name
       , Food_Group
       , Moisture_in_g

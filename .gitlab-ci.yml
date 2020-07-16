@@ -4,13 +4,14 @@ wipe-db:
     entrypoint: [""]
   variables:
     host: $dbdevmachine1ip
-    port: 5432
-    database: $devdb1_user
+    port: 3010
+    database: bmgf
+    schemas: bmgf
     user: $devdb1_user
     password: $devdeb1_password
   script:
     - echo $host
-    - flyway clean   -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password}
-    - flyway migrate -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/,filesystem:raw-data -validateOnMigrate=true
-    - flyway info    -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -locations=filesystem:db/,filesystem:raw-data
+    - flyway clean   -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -schemas=${schemas}
+    - flyway migrate -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -schemas=${schemas} -locations=filesystem:db/,filesystem:raw-data -validateOnMigrate=true
+    - flyway info    -url="jdbc:postgresql://${host}:${port}/${database}" -user=${user} -password=${password} -schemas=${schemas} -locations=filesystem:db/,filesystem:raw-data
 

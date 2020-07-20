@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+    postgis:
+        image: 'kartoza/postgis:9.6-2.4'
+        container_name: postgisrr1
+        environment:
+            - 'POSTGRES_USER=${dbuser}'
+            - 'POSTGRES_PASS=${password}'
+            - 'POSTGRES_DBNAME=${databasename}'
+            - ALLOW_IP_RANGE=0.0.0.0/0
+        ports:
+            - '${port}:5432'
+        # volumes:
+        #     - 'pg_data:/var/lib/postgresql'
+        # restart: always
+

@@ -22,7 +22,7 @@ COMMENT ON COLUMN FOODITEM.Ash_in_g                       IS ' ';
 COMMENT ON COLUMN FOODITEM.Ca_in_mg                       IS ' ';
 COMMENT ON COLUMN FOODITEM.Fe_in_mg                       IS ' ';
 COMMENT ON COLUMN FOODITEM.Mg_in_mg                       IS ' ';
-COMMENT ON COLUMN FOODITEM.P_in_mg                        IS ' ';
+COMMENT ON COLUMN FOODITEM.P_in_mg                        IS 'The Phosporous content of the food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.K_in_mg                        IS ' ';
 COMMENT ON COLUMN FOODITEM.Na_in_mg                       IS ' ';
 COMMENT ON COLUMN FOODITEM.Zn_in_mg                       IS ' ';

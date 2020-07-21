@@ -1,7 +1,7 @@
 version: '3.3'
 services:
     postgis:
-        image: 'kartoza/postgis:9.6-2.4'
+        image: 'kartoza/postgis:12.1'
         container_name: postgisrr1
         environment:
             - 'POSTGRES_USER=${dbuser}'

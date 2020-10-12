@@ -7,7 +7,7 @@ CREATE TABLE FOODITEM (
 	, Soil_Class                     text
 	, DATA_REFERENCE_ID              text
 	, Moisture_in_g                  numeric(20,10)
-	, EnergyCalculated_in_kCal       numeric(20,10)
+	, EnergyCalculated_in_kCal       numeric(20,10) GENERATED ALWAYS AS ((TotalProtein_in_g * 4) + (TotalFats_in_g * 9) + (Carbohydrateavailable_in_g * 4)) STORED
 	, EnergyCalculated_in_kJ         numeric(20,10)
 	, Nitrogen_in_g                  numeric(20,10)
 	, TotalProtein_in_g              numeric(20,10)

@@ -1,7 +1,7 @@
 INSERT INTO
     fooditem (
         FCT_SOURCE_ID
-      , Food_Code
+      , Original_Food_Id
       , DATA_REFERENCE_ID
       , Food_name
       , Food_Group

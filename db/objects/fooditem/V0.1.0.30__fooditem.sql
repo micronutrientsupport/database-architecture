@@ -4,7 +4,6 @@ CREATE TABLE FOODITEM (
     , FCT_SOURCE_ID                  integer REFERENCES FCT_SOURCE (ID)
 	, Food_name                      text
 	, Food_Group                     text REFERENCES FOOD_GROUP (name)
-	, Soil_Class                     text
 	, DATA_REFERENCE_ID              text
 	, Moisture_in_g                  numeric(20,10)
 	, EnergyCalculated_in_kCal       numeric(20,10)

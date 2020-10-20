@@ -1,7 +1,6 @@
 COMMENT ON TABLE FOODITEM IS 'Table of food items and their micronutrient contents' ;
 -- Note, for all comments, make sure to include the full name of the unit and to spell out any abbreviations and acronyms.
 COMMENT ON COLUMN FOODITEM.Food_Group                     IS ' ';
-COMMENT ON COLUMN FOODITEM.Soil_Class                     IS ' ';
 COMMENT ON COLUMN FOODITEM.Moisture_in_g                  IS 'The moisture content of this food item, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.EnergyCalculated_in_kCal       IS ' ';
 COMMENT ON COLUMN FOODITEM.EnergyCalculated_in_kJ         IS ' ';

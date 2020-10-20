@@ -2,6 +2,7 @@ COMMENT ON TABLE FOODITEM IS 'Table of food items and their micronutrient conten
 -- Note, for all comments, make sure to include the full name of the unit and to spell out any abbreviations and acronyms.
 COMMENT ON COLUMN FOODITEM.Food_Group                     IS ' ';
 COMMENT ON COLUMN FOODITEM.Original_Food_Id               IS 'The food ID as it was found in the original Food Composition Table. Kept for informational purposes only';
+COMMENT ON COLUMN FOODITEM.Original_Food_Name             IS 'The food name as it was found in the original Food Composition Table. This in constrast to the Food_Name column, which comes from a standardised list of foods. Kept for informational purposes only';
 COMMENT ON COLUMN FOODITEM.Moisture_in_g                  IS 'The moisture content of this food item, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.EnergyCalculated_in_kCal       IS ' ';
 COMMENT ON COLUMN FOODITEM.EnergyCalculated_in_kJ         IS ' ';

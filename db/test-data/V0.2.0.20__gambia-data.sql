@@ -3,7 +3,7 @@ INSERT INTO
     "fooditem" (
       FCT_SOURCE_ID
       , Original_Food_Id
-      , Food_name
+      , Original_Food_Name
       , EnergyCalculated_in_kCal
       , EnergyCalculated_in_kJ
       , TotalProtein_in_g

@@ -11,4 +11,4 @@ COMMENT ON TABLE household_consumption IS 'What food items what been consumed by
 COMMENT on column household_consumption.fooditem_id          IS 'The id of the fooditem that was consumed';
 COMMENT on column household_consumption.household_id         IS 'The id of the household that consumed the food item';
 COMMENT on column household_consumption.date_consumed        IS 'The date when the fooditem was consumed';
-COMMENT on column household_consumption.amount_consumed_in_g IS 'How much of the fooditem was consumed, in grams';
+COMMENT on column household_consumption.amount_consumed_in_g IS 'How much of the fooditem was consumed on average per day, in grams';

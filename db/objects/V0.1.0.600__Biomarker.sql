@@ -3,11 +3,33 @@ CREATE TABLE BIOMARKER (
     , household_member_id     integer REFERENCES household_member (id)
     , date_sampled            date
     , sample_type             text
-    , Zinc_in_mcg             numeric(20,10)
+    , haemoglobin             numeric(5,2)
+    , ferritin                numeric(5,2)
+    , stfr                    numeric(3,2)
+    , rbp                     numeric(3,2)
+    , serum_retinol           numeric(3,2)
+    , rbc_folate                    numeric(10,5)  -- ????
+    , serum_folate                  numeric(10,5)  -- ????
+    , vitamin_b12               numeric(10,5)  -- ????
+    , zinc                    numeric(3,1)
+    , crp                     numeric(3,2)
+    , agp                     numeric(3,2)
+    , iodine                    numeric(10,5)  -- ????
+
 );
 COMMENT ON TABLE BIOMARKER IS '';
+COMMENT ON COLUMN BIOMARKER.household_member_id IS 'The id of the household member from which the blood, urine, or breastmilk sample was taken';
 COMMENT ON COLUMN BIOMARKER.date_sampled IS 'The date when the sample was taken from the body';
-COMMENT ON COLUMN BIOMARKER.sample_type IS 'Whether this is a urine or blood sample';
-COMMENT ON COLUMN BIOMARKER.Zinc_in_mcg IS 'the amount of zinc in mcg per 10ml';
-
-
+COMMENT ON COLUMN BIOMARKER.sample_type IS 'Whether this is a urine, blood, or breastmilk sample';
+COMMENT ON COLUMN BIOMARKER.haemoglobin      IS 'The amount of haemoglbin (also known as hemoglobin) in the blood, in grams per litre.';
+COMMENT ON COLUMN BIOMARKER.ferritin         IS 'The amount of Serum Ferritn found in the blood, in micrograms per litre';
+COMMENT ON COLUMN BIOMARKER.stfr             IS 'The amount of Soluble Transferrin Receptors (sTfR) in the blood, in milligrams per litre';
+COMMENT ON COLUMN BIOMARKER.rbp              IS 'The amount of Retinol Binding Protein (RBP) in the blood, in micromoles per litre';
+COMMENT ON COLUMN BIOMARKER.serum_retinol    IS 'The amount of Serum Retinol in the blood, in micromoles per litre';
+COMMENT ON COLUMN BIOMARKER.rbc_folate       IS 'The amount of Red Blood Cell (RBC) Folate in the blood, in nanomoles per litre';
+COMMENT ON COLUMN BIOMARKER.serum_folate     IS 'The amount of Serum Folate in the blood, in nanomoles per litre';
+COMMENT ON COLUMN BIOMARKER.vitamin_b12      IS 'The amount of Vitamin B12 (also known as cobalamin) in the blood, in picomoles per litre';
+COMMENT ON COLUMN BIOMARKER.zinc             IS 'The amount of plasma or serum zinc, in micrograms per decilitre';
+COMMENT ON COLUMN BIOMARKER.crp              IS 'The amount of C-reactive protein (CRP) in the blood, in milligrams per litre. A value ≥5 defines inflammation';
+COMMENT ON COLUMN BIOMARKER.agp              IS 'The amount of Alpha 1 acid GlycoProtein (AGO) in the blood, in grams per litre. A value ≥1 defines inflammation';
+COMMENT ON COLUMN BIOMARKER.iodine           IS 'The amount of Urinary Iodine, in micrograms per litre. ';

@@ -1,6 +1,7 @@
 CREATE TABLE FCT_SOURCE (
 	id                            integer primary key
 	, name                        text
+	, geometry                    geometry(Polygon,4326)
 	, notes                       text
 );
 INSERT INTO FCT_SOURCE (id, name) VALUES (1, 'Malawi');

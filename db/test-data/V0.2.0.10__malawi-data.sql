@@ -1,9 +1,9 @@
 INSERT INTO
     fooditem (
         FCT_SOURCE_ID
-      , Food_Code
+      , Original_Food_Id
       , DATA_REFERENCE_ID
-      , Food_name
+      , Original_Food_Name
       , Food_Group
       , Moisture_in_g
       , EnergyCalculated_in_kCal

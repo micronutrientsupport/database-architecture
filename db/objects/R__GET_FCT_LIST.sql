@@ -1,74 +1,61 @@
 CREATE OR REPLACE FUNCTION get_fct_list(geometry(Point, 4326))
 RETURNS SETOF integer AS
 
+-- when given a point, returns a list of fct ids, ordered by FCT_PRIORITY, size, newness.
+
 $BODY$
 BEGIN
-    RETURN QUERY
+	-- list Food Composition Tables that overlap, sort them by priority, then area, then publication date
+	RETURN query
+		SELECT
+			id
+		FROM
+			fct_source
+		WHERE
+			ST_Contains(geometry, $1)
+		ORDER BY
+			--priority asc
+			ST_AREA(geometry) ASC
+			, publication_date DESC
+		;
 
-    -- List of FCT overrides per location
-    WITH OVERRIDE_FCTS AS (
-        SELECT
-            fct_id
-            , name
-            , "priority"
-            , FCT_RIORITY.location_id
-        FROM FCT_RIORITY
-        LEFT JOIN "LOCATION" ON FCT_RIORITY.location_id = "LOCATION".id
-        LEFT JOIN "FOOD_COMPOSITION_TABLE" ON FCT_RIORITY.fct_id = "FOOD_COMPOSITION_TABLE".id
-    ),
-    -- Smallest location that matches the requested geometry
-    FIRST_LOCATION AS (
-        SELECT *
-        FROM "LOCATION"
-        WHERE ST_Contains(geom, $1)
-            ORDER BY ST_AREA(geom) ASC
-            LIMIT 1
-    )
+	IF NOT FOUND THEN-- special postgres variable, set depending on if the previous query returns results
+		RETURN QUERY
+		-- Find several close bounding boxes first, before measuring accurate distance from the search point to the nearest FCT-area border
+		WITH closest_candidates AS (
+			SELECT
+				id,
+				publication_date,
+				geometry
+			FROM FCT_SOURCE
+			ORDER BY
+				FCT_SOURCE.geometry <#> $1 -- <#> is an operator that find the distance to the nearest bounding-box edge
+			LIMIT 10
+		)
+		SELECT
+			id
+		FROM
+			closest_candidates
+		ORDER BY
+			--priority asc
+			ST_DISTANCE($1, closest_candidates.geometry)
+			-- We do not sort by smallest to largest, because smaller FCTs are likely to be more specific to their own area and less likely to be applicable to elsewhere
+			--ST_AREA(geometry) ASC,
+			, publication_date DESC
+		;
+	END IF;
 
-    -- Return ordered list of override FCT priorities
-    SELECT OVERRIDE_FCTS.fct_id as fct
-    FROM FIRST_LOCATION
-    JOIN OVERRIDE_FCTS
-        ON OVERRIDE_FCTS.location_id = FIRST_LOCATION.id
-    ORDER BY "priority" ASC;
+	RETURN;
 
-    -- If no rows were returned then a special priority order for this location
-    -- has not been specified.  Therefore follow the default ranking
-    IF NOT FOUND THEN
-        RETURN QUERY
-        -- order FCTs for a given location such that the newest FCT is used
-        -- (and older FCTs for that location ignored)
-        WITH ORDERED_FCTS AS(
-            SELECT
-                *
-                ,row_number() OVER (PARTITION BY location_id ORDER BY date DESC) as order
-            FROM "FOOD_COMPOSITION_TABLE"
-        )
-
-        -- return the newest FCT for each matching location
-        -- with the smallest area match first
-        SELECT
-            ORDERED_FCTS.id as fct
-        FROM
-            "LOCATION"
-            LEFT JOIN ORDERED_FCTS ON ORDERED_FCTS.location_id = "LOCATION".id
-            AND ORDERED_FCTS.order = 1
-        WHERE
-            ST_Contains(geom, $1)
-        ORDER BY
-            ST_AREA(geom) ASC;
-    END IF;
-
-    RETURN;
 END
 $BODY$
 LANGUAGE plpgsql;
 
 -- Example call for Malawi
--- SELECT get_fct_list(ST_SetSRID( ST_Point( 34, -14), 4326));
+-- SELECT get_fct_list(ST_SetSRID( ST_Point( 33, -14), 4326));
 
 -- Example call for Ethiopia
---SELECT get_fct_list(ST_SetSRID( ST_Point( 38, 8), 4326));
+-- SELECT get_fct_list(ST_SetSRID( ST_Point( 38,   8), 4326));
 
 -- Example call for UK
---SELECT get_fct_list(ST_SetSRID( ST_Point( 0, 52), 4326));
+-- SELECT get_fct_list(ST_SetSRID( ST_Point( 0, 52), 4326));

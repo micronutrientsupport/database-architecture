@@ -1,6 +1,6 @@
 CREATE TABLE household (
 	id                            integer primary key
-	, location                    integer  REFERENCES LOCATION (id)-- foreign key to a GIS point, the closest to where the household is actually located
+	, location                    geometry(Point,4326)
 	, urbanity                    text   --- urban, rural, unknown
 	-- , household_size              integer
 	, household_expenditure       integer

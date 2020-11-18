@@ -11,4 +11,5 @@ CREATE TABLE intake_threshold (
     , breastfed_YN         boolean
     , lactating_YN         boolean
     , pregnant_YN          boolean
+    , validity_area        geometry(Polygon,4326)
 );

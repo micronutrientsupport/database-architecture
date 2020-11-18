@@ -1,4 +1,3 @@
-
 DROP FUNCTION IF EXISTS get_fct_list;
 CREATE FUNCTION get_fct_list(geometry(Point, 4326)) RETURNS SETOF integer AS
 

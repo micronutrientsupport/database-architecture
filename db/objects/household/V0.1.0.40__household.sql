@@ -1,5 +1,3 @@
-CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
-
 CREATE TABLE household (
 	id                            integer primary key
 	, location                    geometry(Point,4326)

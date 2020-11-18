@@ -1,5 +1,3 @@
-CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
-
 CREATE TABLE COUNTRY (
 	id        text primary key ---ISO 3166  two letter codes
 	, name    text

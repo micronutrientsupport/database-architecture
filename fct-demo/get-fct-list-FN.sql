@@ -1,6 +1,3 @@
-
-CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
-
 DROP FUNCTION IF EXISTS get_fct_list;
 CREATE FUNCTION get_fct_list(geometry(Point, 4326)) RETURNS SETOF integer AS
 

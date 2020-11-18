@@ -5,8 +5,8 @@ CREATE TABLE intake_threshold (
     , unit_of_measurement  text
     , age_lower            integer
     , age_upper            integer
-    , EAR                  numeric(10,10)
-    , RDA                  numeric(10,10)
+    , EAR                  numeric(20,10)
+    , RDA                  numeric(20,10)
     , sex                  text CHECK (sex in ('Male','Female'))
     , breastfed_YN         boolean
     , lactating_YN         boolean

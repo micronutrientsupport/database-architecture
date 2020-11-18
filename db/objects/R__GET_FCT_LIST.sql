@@ -1,3 +1,5 @@
+CREATE EXTENSION postgis;
+
 CREATE OR REPLACE FUNCTION get_fct_list(geometry(Point, 4326))
 RETURNS SETOF integer AS
 

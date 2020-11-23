@@ -5,6 +5,6 @@ SELECT
     , ST_AsGeoJSON(geometry) as geometry-- return as GeoJSON for API consumption
 
 FROM
-    country
+    country;
 
-COMMENT ON VIEW vw_country IS 'View on country table returning geometry as GeoJSON'
+COMMENT ON VIEW vw_country IS 'View on country table returning geometry as GeoJSON';

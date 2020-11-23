@@ -2,7 +2,7 @@ CREATE OR REPLACE VIEW vw_country AS
 SELECT
     id
     , name
-    , ST_AsGeoJSON(geometry) as geometry-- return as GeoJSON for API consumption
+    , ST_AsGeoJSON(ST_ForcePolygonCCW(geometry)) as geometry-- return as GeoJSON for API consumption
 
 FROM
     country;

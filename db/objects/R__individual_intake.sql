@@ -50,6 +50,6 @@ FROM
     JOIN HOUSEHOLD_MEMBER member ON member.id = hhmc.HOUSEHOLD_MEMBER_id
 GROUP BY member.id
 ORDER BY member.id
-
+;
 
 COMMENT ON VIEW individual_intake IS 'View of amount of micronutrients consumed in total by individual household members';

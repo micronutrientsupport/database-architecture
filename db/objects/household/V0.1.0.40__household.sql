@@ -4,7 +4,7 @@ CREATE TABLE household (
 	, location                    geometry(Point,4326)
 	, urbanity                    text   --- urban, rural
 	-- , household_size              integer
-	, household_expenditure       integer
+	, household_expenditure       NUMERIC(20,6)
 	, wealth_quintile             integer
 	, survey_id                   integer NOT NULL REFERENCES survey(id)
 	, interview_date              date

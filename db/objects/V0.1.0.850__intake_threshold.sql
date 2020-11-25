@@ -7,8 +7,8 @@ CREATE TABLE intake_threshold (
     , EAR                  numeric(20,10)
     , RDA                  numeric(20,10)
     , sex                  text CHECK (sex in ('Male','Female'))
-    , breastfed_YN         boolean
-    , lactating_YN         boolean
-    , pregnant_YN          boolean
+    , is_breastfed         boolean
+    , is_lactating         boolean
+    , is_pregnant          boolean
     , validity_area        geometry(Polygon,4326)
 );

@@ -1,4 +1,4 @@
-CREATE TYPE mn_category AS ENUM ('Vitamin', 'Mineral', 'Other');
+CREATE TYPE mn_category AS ENUM ('vitamin', 'mineral', 'other');
 CREATE TABLE micronutrients (
 	id         integer primary key
 	, name     text

@@ -4,7 +4,7 @@ VALUES
     (1, 'Vitamin A', 'Vitamin'),
     (2, 'Vitamin B6', 'Vitamin'),
     (3, 'Vitamin B12', 'Vitamin'),
-    (4, 'Vitamin C', 'Vitains'),
+    (4, 'Vitamin C', 'Vitamin'),
     (5, 'Vitamin D', 'Vitamin'),
     (6, 'Vitamin E', 'Vitamin'),
     (7, 'Thiamin', 'Vitamin'),

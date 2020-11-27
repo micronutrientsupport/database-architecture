@@ -2,6 +2,7 @@ CREATE OR REPLACE VIEW individual_intake AS
 
 SELECT
     member.id
+    , household_id
     , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as  Moisture_in_g
     , sum(EnergyCalculated_in_kCal       / 100 * amount_consumed_in_g) as  EnergyCalculated_in_kCal
     , sum(EnergyCalculated_in_kJ         / 100 * amount_consumed_in_g) as  EnergyCalculated_in_kJ

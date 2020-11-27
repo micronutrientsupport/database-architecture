@@ -52,4 +52,4 @@ GROUP BY household.id
 ORDER BY household.id
 ;
 
-COMMENT ON VIEW individual_intake IS 'View of amount of micronutrients consumed in total by individual households';
+COMMENT ON VIEW household_intake IS 'View of amount of micronutrients consumed in total by individual households ';

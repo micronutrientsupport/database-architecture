@@ -1,3 +1,6 @@
+DROP VIEW IF EXISTS individual_intake;
+-- the below timestamp comment ensure that flyway always runs this script, beacause it always thinks that the script has changed
+-- ${flyway:timestamp}
 CREATE OR REPLACE VIEW individual_intake AS
 
 SELECT

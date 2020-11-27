@@ -52,7 +52,54 @@ FROM
     JOIN HOUSEHOLD_CONSUMPTION as hhc ON hhc.fooditem_id = food.id
     JOIN HOUSEHOLD_MEMBER as household ON household.id = hhc.HOUSEHOLD_id
 GROUP BY household.id
-ORDER BY household.id
+--ORDER BY household.id
+UNION ALL
+SELECT
+    household_id
+    , sum(Moisture_in_g              ) as  Moisture_in_g
+    , sum(EnergyCalculated_in_kCal   ) as  EnergyCalculated_in_kCal
+    , sum(EnergyCalculated_in_kJ     ) as  EnergyCalculated_in_kJ
+    , sum(Nitrogen_in_g              ) as  Nitrogen_in_g
+    , sum(TotalProtein_in_g          ) as  TotalProtein_in_g
+    , sum(TotalFats_in_g             ) as  TotalFats_in_g
+    , sum(SaturatedFA_in_g           ) as  SaturatedFA_in_g
+    , sum(MonounsaturatedFA_in_g     ) as  MonounsaturatedFA_in_g
+    , sum(PolyunsaturatedFA_in_g     ) as  PolyunsaturatedFA_in_g
+    , sum(Cholesterol_in_mg          ) as  Cholesterol_in_mg
+    , sum(TotalCHOforUDB             ) as  TotalCHOforUDB
+    , sum(Carbohydrateavailable_in_g ) as  Carbohydrateavailable_in_g
+    , sum(Totalsugars_in_g           ) as  Totalsugars_in_g
+    , sum(Addedsugar_in_g            ) as  Addedsugar_in_g
+    , sum(Totalfibre_in_g            ) as  Totalfibre_in_g
+    , sum(Starch_in_g                ) as  Starch_in_g
+    , sum(Ash_in_g                   ) as  Ash_in_g
+    , sum(Ca_in_mg                   ) as  Ca_in_mg
+    , sum(Fe_in_mg                   ) as  Fe_in_mg
+    , sum(Mg_in_mg                   ) as  Mg_in_mg
+    , sum(P_in_mg                    ) as  P_in_mg
+    , sum(K_in_mg                    ) as  K_in_mg
+    , sum(Na_in_mg                   ) as  Na_in_mg
+    , sum(Zn_in_mg                   ) as  Zn_in_mg
+    , sum(Cu_in_mg                   ) as  Cu_in_mg
+    , sum(Mn_in_mcg                  ) as  Mn_in_mcg
+    , sum(I_in_mcg                   ) as  I_in_mcg
+    , sum(Se_in_mcg                  ) as  Se_in_mcg
+    , sum(VitaminA_in_RAE_in_mcg     ) as  VitaminA_in_RAE_in_mcg
+    , sum(VitaminA_in_RE_in_mcg      ) as  VitaminA_in_RE_in_mcg
+    , sum(Thiamin_in_mg              ) as  Thiamin_in_mg
+    , sum(Riboflavin_in_mg           ) as  Riboflavin_in_mg
+    , sum(Niacin_in_mg               ) as  Niacin_in_mg
+    , sum(VitaminB6_in_mg            ) as  VitaminB6_in_mg
+    , sum(Folicacid_in_mcg           ) as  Folicacid_in_mcg
+    , sum(VitaminB12_in_mcg          ) as  VitaminB12_in_mcg
+    , sum(Pantothenate_in_mg         ) as  Pantothenate_in_mg
+    , sum(Biotin_in_mcg              ) as  Biotin_in_mcg
+    , sum(VitaminC_in_mg             ) as  VitaminC_in_mg
+    , sum(VitaminD_in_mcg            ) as  VitaminD_in_mcg
+    , sum(VitaminE_in_mg             ) as  VitaminE_in_mg
+    , sum(PhyticAcid_in_mg           ) as  PhyticAcid_in_mg
+FROM individual_intake
+GROUP BY household_id
 ;
 
 COMMENT ON VIEW household_intake IS 'View of amount of micronutrients consumed in total by individual households ';

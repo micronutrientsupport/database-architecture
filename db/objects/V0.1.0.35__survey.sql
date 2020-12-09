@@ -13,6 +13,6 @@ COMMENT ON COLUMN survey.name                  IS 'The name of the survey';
 COMMENT ON COLUMN survey.publication_date      IS 'The date when the survey was published';
 COMMENT ON COLUMN survey.surveying_date_start  IS 'The date when surveying and interviewing started';
 COMMENT ON COLUMN survey.surveying_date_end    IS 'The date when no further interviews took place';
-COMMENT ON COLUMN survey.geometry              IS 'The area covered by teh survey; all households interviewed by the survey should fall into this area';
+COMMENT ON COLUMN survey.geometry              IS 'The area covered by the survey; all households interviewed by the survey should fall into this area';
 COMMENT ON COLUMN survey.geonetwork_uuid       IS 'a UUID for Geonetwork. See https://geonetwork-opensource.org/ for further info';
 

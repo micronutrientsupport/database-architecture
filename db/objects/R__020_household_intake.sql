@@ -3,7 +3,6 @@ CREATE OR REPLACE VIEW household_intake AS
     SELECT
         household.id as household_id
         , household.survey_id
-        , household.subregion_id
         , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as Moisture_in_g
         , sum(EnergyCalculated_in_kCal       / 100 * amount_consumed_in_g) as EnergyCalculated_in_kCal
         , sum(EnergyCalculated_in_kJ         / 100 * amount_consumed_in_g) as EnergyCalculated_in_kJ
@@ -58,7 +57,6 @@ UNION ALL
     SELECT
         household.id as household_id
         , household.survey_id
-        , household.subregion_id
         , sum(Moisture_in_g              ) as  Moisture_in_g
         , sum(EnergyCalculated_in_kCal   ) as  EnergyCalculated_in_kCal
         , sum(EnergyCalculated_in_kJ     ) as  EnergyCalculated_in_kJ

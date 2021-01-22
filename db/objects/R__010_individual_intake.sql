@@ -1,8 +1,9 @@
 CREATE OR REPLACE VIEW individual_intake AS
 
 SELECT
-    member.id
-    , household_id
+    member.id as household_member_id
+    , member.household_id
+    , household.survey_id
     , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as  Moisture_in_g
     , sum(EnergyCalculated_in_kCal       / 100 * amount_consumed_in_g) as  EnergyCalculated_in_kCal
     , sum(EnergyCalculated_in_kJ         / 100 * amount_consumed_in_g) as  EnergyCalculated_in_kJ
@@ -46,10 +47,13 @@ SELECT
     , sum(VitaminE_in_mg                 / 100 * amount_consumed_in_g) as  VitaminE_in_mg
     , sum(PhyticAcid_in_mg               / 100 * amount_consumed_in_g) as  PhyticAcid_in_mg
 FROM
-    fooditem food
-    JOIN HOUSEHOLD_MEMBER_CONSUMPTION hhmc ON hhmc.fooditem_id = food.id
+    fooditem
+    JOIN foodex ON foodex.id = fooditem.foodex_id
+    JOIN HOUSEHOLD_MEMBER_CONSUMPTION hhmc ON hhmc.foodex_id = foodex.id
     JOIN HOUSEHOLD_MEMBER member ON member.id = hhmc.HOUSEHOLD_MEMBER_id
-GROUP BY member.id
+    JOIN household on member.household_id = household.id
+    JOIN survey on household.survey_id = survey.id
+GROUP BY member.id, household.survey_id
 ORDER BY member.id
 ;
 

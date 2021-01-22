@@ -7,7 +7,7 @@ COMMENT ON TABLE foodex_confidence IS 'Dictionary table of possible values used 
 
 INSERT INTO foodex_confidence (id)
 VALUES
-    ('Good')
-    , ('Sketchy')
-    , ('Bad')
+    ('High')
+    , ('Medium')
+    , ('Low')
 

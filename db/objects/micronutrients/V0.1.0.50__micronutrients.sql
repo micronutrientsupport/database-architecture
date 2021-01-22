@@ -4,8 +4,8 @@ CREATE TABLE micronutrients (
 	, unit              text
 	, description       text
 	, category          text CHECK (category IN ('vitamin', 'mineral', 'other'))
-	, fooditem_column	text,
-	, in_impact			boolean,
+	, fooditem_column	text
+	, in_impact			boolean
 	, impact_column		text
 
 );

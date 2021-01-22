@@ -41,6 +41,7 @@ COMMENT ON COLUMN FOODITEM.Riboflavin_in_mg               IS 'The Riboflavin con
 COMMENT ON COLUMN FOODITEM.Niacin_in_mg                   IS 'The Niacin content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.VitaminB6_in_mg                IS 'The Vitamin B6 content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Folicacid_in_mcg               IS 'The Folic Acid content of this food item, in micrograms per 100g';
+COMMENT ON COLUMN FOODITEM.Folate_in_mcg                  IS 'The Folate content of this food item, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.VitaminB12_in_mcg              IS 'The Vitamin B12 content of this food item, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.Pantothenate_in_mg             IS 'The Pantothenate content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Biotin_in_mcg                  IS 'The Biotin content of this food item, in micrograms per 100g';

@@ -39,6 +39,7 @@ SELECT
     , sum(Niacin_in_mg                   / 100 * amount_consumed_in_g) as  Niacin_in_mg
     , sum(VitaminB6_in_mg                / 100 * amount_consumed_in_g) as  VitaminB6_in_mg
     , sum(Folicacid_in_mcg               / 100 * amount_consumed_in_g) as  Folicacid_in_mcg
+    , sum(Folate_in_mcg                  / 100 * amount_consumed_in_g) as  Folate_in_mcg
     , sum(VitaminB12_in_mcg              / 100 * amount_consumed_in_g) as  VitaminB12_in_mcg
     , sum(Pantothenate_in_mg             / 100 * amount_consumed_in_g) as  Pantothenate_in_mg
     , sum(Biotin_in_mcg                  / 100 * amount_consumed_in_g) as  Biotin_in_mcg

@@ -42,6 +42,7 @@ CREATE TABLE FOODITEM (
 	, Niacin_in_mg                   numeric(20,10)
 	, VitaminB6_in_mg                numeric(20,10)
 	, Folicacid_in_mcg               numeric(20,10)
+	, Folate_in_mcg                  numeric(20,10)
 	, VitaminB12_in_mcg              numeric(20,10)
 	, Pantothenate_in_mg             numeric(20,10)
 	, Biotin_in_mcg                  numeric(20,10)

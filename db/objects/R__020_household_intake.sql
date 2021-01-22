@@ -38,6 +38,7 @@ CREATE OR REPLACE VIEW household_intake AS
         , sum(Niacin_in_mg                   / 100 * amount_consumed_in_g) as Niacin_in_mg
         , sum(VitaminB6_in_mg                / 100 * amount_consumed_in_g) as VitaminB6_in_mg
         , sum(Folicacid_in_mcg               / 100 * amount_consumed_in_g) as Folicacid_in_mcg
+        , sum(Folate_in_mcg                  / 100 * amount_consumed_in_g) as Folate_in_mcg
         , sum(VitaminB12_in_mcg              / 100 * amount_consumed_in_g) as VitaminB12_in_mcg
         , sum(Pantothenate_in_mg             / 100 * amount_consumed_in_g) as Pantothenate_in_mg
         , sum(Biotin_in_mcg                  / 100 * amount_consumed_in_g) as Biotin_in_mcg
@@ -93,6 +94,7 @@ UNION ALL
         , sum(Niacin_in_mg               ) as  Niacin_in_mg
         , sum(VitaminB6_in_mg            ) as  VitaminB6_in_mg
         , sum(Folicacid_in_mcg           ) as  Folicacid_in_mcg
+        , sum(Folate_in_mcg              ) as  Folate_in_mcg
         , sum(VitaminB12_in_mcg          ) as  VitaminB12_in_mcg
         , sum(Pantothenate_in_mg         ) as  Pantothenate_in_mg
         , sum(Biotin_in_mcg              ) as  Biotin_in_mcg

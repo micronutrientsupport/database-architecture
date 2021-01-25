@@ -20,7 +20,7 @@ COMMENT ON COLUMN FOODITEM.TotalCHOforUDB                 IS ' ';
 COMMENT ON COLUMN FOODITEM.Carbohydrateavailable_in_g     IS ' ';
 COMMENT ON COLUMN FOODITEM.Totalsugars_in_g               IS ' ';
 COMMENT ON COLUMN FOODITEM.Addedsugar_in_g                IS ' ';
-COMMENT ON COLUMN FOODITEM.Fibre_in_g                     IS ' ';
+COMMENT ON COLUMN FOODITEM.Fibre_in_g                     IS 'The total dietary fibre content of this food item (determined by multiple methods), in grams per 100g';
 COMMENT ON COLUMN FOODITEM.Starch_in_g                    IS 'Starch content of this food item, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.Ash_in_g                       IS ' ';
 COMMENT ON COLUMN FOODITEM.Ca_in_mg                       IS 'The Calcium content of this food item, in milligrams per 100g';
@@ -41,7 +41,7 @@ COMMENT ON COLUMN FOODITEM.Riboflavin_in_mg               IS 'The Riboflavin con
 COMMENT ON COLUMN FOODITEM.Niacin_in_mg                   IS 'The Niacin content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.VitaminB6_in_mg                IS 'The Vitamin B6 content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Folicacid_in_mcg               IS 'The Folic Acid content of this food item, in micrograms per 100g';
-COMMENT ON COLUMN FOODITEM.Folate_in_mcg                  IS 'The Folate content of this food item, in micrograms per 100g';
+COMMENT ON COLUMN FOODITEM.Folate_in_mcg                  IS 'The total folate content of this food item, including food folate and synthetic folate, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.VitaminB12_in_mcg              IS 'The Vitamin B12 content of this food item, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.Pantothenate_in_mg             IS 'The Pantothenate content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Biotin_in_mcg                  IS 'The Biotin content of this food item, in micrograms per 100g';

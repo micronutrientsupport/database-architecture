@@ -34,5 +34,5 @@ VALUES
     ('Cholesterol'  , 'Cholestorol'   , 'other'   , 'mg'    , 'Description for Cholestorol'                 , 'Cholesterol_in_mg'          , '0' , NULL) ,
     ('Protein'      , 'Total Protein' , 'other'   , 'g'     , 'Description for Protetin'                    , 'TotalProtein_in_g'          , '1' , 'protein') ,
     ('Fat'          , 'Total Fats'    , 'other'   , 'g'     , 'Description for Fats'                        , 'TotalFats_in_g'             , '0' , NULL) ,
-    ('Energy'       , 'Energy'        , 'other'   , 'kCal'  , 'Description for Energy'                      , 'EnergyCalculated_in_kCal'   , '0' , NULL) ,
+    ('Energy'       , 'Energy'        , 'other'   , 'kCal'  , 'Description for Energy'                      , 'Energy_in_kCal'             , '0' , NULL) ,
     ('Moisture'     , 'Moisture'      , 'other'   , 'g'     , 'Descriptiom for Moisture'                    , 'Moisture_in_g'              , '0' , NULL)

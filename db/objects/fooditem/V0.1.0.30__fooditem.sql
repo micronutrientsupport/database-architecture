@@ -8,7 +8,7 @@ CREATE TABLE FOODITEM (
 	, DATA_REFERENCE_ID              text
 	, Food_Group                     text REFERENCES FOOD_GROUP (name)
 	, Moisture_in_g                  numeric(20,10)
-	, EnergyCalculated_in_kCal       numeric(20,10)
+	, Energy_in_kCal                 numeric(20,10)
 	, EnergyCalculated_in_kJ         numeric(20,10)
 	, Nitrogen_in_g                  numeric(20,10)
 	, TotalProtein_in_g              numeric(20,10)

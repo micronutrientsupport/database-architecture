@@ -7,7 +7,7 @@ COMMENT ON COLUMN FOODITEM.FCT_SOURCE_ID                  IS 'Foreign Key to the
 COMMENT ON COLUMN FOODITEM.DATA_REFERENCE_ID              IS 'The publication in which the micronutrient contents of this food were found. Taken from the Food Composition Table';
 COMMENT ON COLUMN FOODITEM.Food_Group                     IS ' ';
 COMMENT ON COLUMN FOODITEM.Moisture_in_g                  IS 'The moisture content of this food item, in grams per 100g';
-COMMENT ON COLUMN FOODITEM.EnergyCalculated_in_kCal       IS ' ';
+COMMENT ON COLUMN FOODITEM.Energy_in_kCal                 IS ' ';
 COMMENT ON COLUMN FOODITEM.EnergyCalculated_in_kJ         IS ' ';
 COMMENT ON COLUMN FOODITEM.Nitrogen_in_g                  IS 'Nitrogen content of this fooditem, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.TotalProtein_in_g              IS 'Total Protein Content, in grams per 100g';

@@ -7,8 +7,8 @@ COMMENT ON COLUMN FOODITEM.FCT_SOURCE_ID                  IS 'Foreign Key to the
 COMMENT ON COLUMN FOODITEM.DATA_REFERENCE_ID              IS 'The publication in which the micronutrient contents of this food were found. Taken from the Food Composition Table';
 COMMENT ON COLUMN FOODITEM.Food_Group                     IS ' ';
 COMMENT ON COLUMN FOODITEM.Moisture_in_g                  IS 'The moisture content of this food item, in grams per 100g';
-COMMENT ON COLUMN FOODITEM.EnergyCalculated_in_kCal       IS ' ';
-COMMENT ON COLUMN FOODITEM.EnergyCalculated_in_kJ         IS ' ';
+COMMENT ON COLUMN FOODITEM.Energy_in_kCal                 IS ' ';
+COMMENT ON COLUMN FOODITEM.Energy_in_kJ                   IS ' ';
 COMMENT ON COLUMN FOODITEM.Nitrogen_in_g                  IS 'Nitrogen content of this fooditem, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.TotalProtein_in_g              IS 'Total Protein Content, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.TotalFats_in_g                 IS 'Total Fats, in grams per 100g';
@@ -16,12 +16,8 @@ COMMENT ON COLUMN FOODITEM.SaturatedFA_in_g               IS 'Saturated Fatty Ac
 COMMENT ON COLUMN FOODITEM.MonounsaturatedFA_in_g         IS 'Monounsaturated Fatty Acids, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.PolyunsaturatedFA_in_g         IS 'Polyunsaturated Fatty Acids, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.Cholesterol_in_mg              IS 'The Cholesterol content of this food item, in milligrams per 100g';
-COMMENT ON COLUMN FOODITEM.TotalCHOforUDB                 IS ' ';
 COMMENT ON COLUMN FOODITEM.Carbohydrateavailable_in_g     IS ' ';
-COMMENT ON COLUMN FOODITEM.Totalsugars_in_g               IS ' ';
-COMMENT ON COLUMN FOODITEM.Addedsugar_in_g                IS ' ';
-COMMENT ON COLUMN FOODITEM.Totalfibre_in_g                IS ' ';
-COMMENT ON COLUMN FOODITEM.Starch_in_g                    IS 'Starch content of this food item, in grams per 100g';
+COMMENT ON COLUMN FOODITEM.Fibre_in_g                     IS 'The total dietary fibre content of this food item (determined by multiple methods), in grams per 100g';
 COMMENT ON COLUMN FOODITEM.Ash_in_g                       IS ' ';
 COMMENT ON COLUMN FOODITEM.Ca_in_mg                       IS 'The Calcium content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Fe_in_mg                       IS 'The Iron content of this food item, in milligrams per 100g';
@@ -35,12 +31,12 @@ COMMENT ON COLUMN FOODITEM.Mn_in_mcg                      IS 'The Manganese cont
 COMMENT ON COLUMN FOODITEM.I_in_mcg                       IS 'the Iondine content of this food item, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.Se_in_mcg                      IS 'The Selenium content of this food item, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.VitaminA_in_RAE_in_mcg         IS 'The Vitamin A content of the food, in Retinol Activity Equivalent (RAE), and in micrograms per 100g';
-COMMENT ON COLUMN FOODITEM.VitaminA_in_RE_in_mcg          IS 'The Vitamin A content of the food, in Retinol Equivalent (RE), and in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.Thiamin_in_mg                  IS 'The Thiamin content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Riboflavin_in_mg               IS 'The Riboflavin content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Niacin_in_mg                   IS 'The Niacin content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.VitaminB6_in_mg                IS 'The Vitamin B6 content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Folicacid_in_mcg               IS 'The Folic Acid content of this food item, in micrograms per 100g';
+COMMENT ON COLUMN FOODITEM.Folate_in_mcg                  IS 'The total folate content of this food item, including food folate and synthetic folate, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.VitaminB12_in_mcg              IS 'The Vitamin B12 content of this food item, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.Pantothenate_in_mg             IS 'The Pantothenate content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Biotin_in_mcg                  IS 'The Biotin content of this food item, in micrograms per 100g';

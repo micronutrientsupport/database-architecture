@@ -29,7 +29,7 @@ VALUES
     ('N'            , 'Nitrogen'      , 'mineral' , 'g'     , 'Description for Nitrogen'                    , 'Nitrogen_in_g '             , '0' , NULL) ,
     ('Starch'       , 'Starch'        , 'other'   , 'g'     , 'Description for Starch'                      , 'Starch_in_g'                , '0' , NULL) ,
     ('Ash'          , 'Ash'           , 'other'   , 'g'     , 'Description for Ash'                         , 'Ash_in_g'                   , '0' , NULL) ,
-    ('Fibre'        , 'Fibre'         , 'other'   , 'g'     , 'Description for Fibre'                       , 'Totalfibre_in_g'            , '0' , NULL) ,
+    ('Fibre'        , 'Fibre'         , 'other'   , 'g'     , 'Description for Fibre'                       , 'Fibre_in_g'            , '0' , NULL) ,
     ('Carbohydrate' , 'Carbhohydrate' , 'other'   , 'g'     , 'Description for Carbohydrate'                , 'Carbohydrateavailable_in_g' , '0' , NULL) ,
     ('Cholesterol'  , 'Cholestorol'   , 'other'   , 'mg'    , 'Description for Cholestorol'                 , 'Cholesterol_in_mg'          , '0' , NULL) ,
     ('Protein'      , 'Total Protein' , 'other'   , 'g'     , 'Description for Protetin'                    , 'TotalProtein_in_g'          , '1' , 'protein') ,

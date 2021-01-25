@@ -20,7 +20,7 @@ COMMENT ON COLUMN FOODITEM.TotalCHOforUDB                 IS ' ';
 COMMENT ON COLUMN FOODITEM.Carbohydrateavailable_in_g     IS ' ';
 COMMENT ON COLUMN FOODITEM.Totalsugars_in_g               IS ' ';
 COMMENT ON COLUMN FOODITEM.Addedsugar_in_g                IS ' ';
-COMMENT ON COLUMN FOODITEM.Totalfibre_in_g                IS ' ';
+COMMENT ON COLUMN FOODITEM.Fibre_in_g                     IS ' ';
 COMMENT ON COLUMN FOODITEM.Starch_in_g                    IS 'Starch content of this food item, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.Ash_in_g                       IS ' ';
 COMMENT ON COLUMN FOODITEM.Ca_in_mg                       IS 'The Calcium content of this food item, in milligrams per 100g';

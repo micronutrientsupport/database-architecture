@@ -21,7 +21,7 @@ CREATE TABLE FOODITEM (
 	, Carbohydrateavailable_in_g     numeric(20,10)
 	, Totalsugars_in_g               numeric(20,10)
 	, Addedsugar_in_g                numeric(20,10)
-	, Totalfibre_in_g                numeric(20,10)
+	, Fibre_in_g                     numeric(20,10)
 	, Starch_in_g                    numeric(20,10)
 	, Ash_in_g                       numeric(20,10)
 	, Ca_in_mg                       numeric(20,10)

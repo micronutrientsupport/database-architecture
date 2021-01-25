@@ -17,7 +17,7 @@ CREATE OR REPLACE VIEW household_intake AS
         , sum(Carbohydrateavailable_in_g     / 100 * amount_consumed_in_g) as Carbohydrateavailable_in_g
         , sum(Totalsugars_in_g               / 100 * amount_consumed_in_g) as Totalsugars_in_g
         , sum(Addedsugar_in_g                / 100 * amount_consumed_in_g) as Addedsugar_in_g
-        , sum(Totalfibre_in_g                / 100 * amount_consumed_in_g) as Totalfibre_in_g
+        , sum(Fibre_in_g                     / 100 * amount_consumed_in_g) as Fibre_in_g
         , sum(Starch_in_g                    / 100 * amount_consumed_in_g) as Starch_in_g
         , sum(Ash_in_g                       / 100 * amount_consumed_in_g) as Ash_in_g
         , sum(Ca_in_mg                       / 100 * amount_consumed_in_g) as Ca_in_mg
@@ -73,7 +73,7 @@ UNION ALL
         , sum(Carbohydrateavailable_in_g ) as  Carbohydrateavailable_in_g
         , sum(Totalsugars_in_g           ) as  Totalsugars_in_g
         , sum(Addedsugar_in_g            ) as  Addedsugar_in_g
-        , sum(Totalfibre_in_g            ) as  Totalfibre_in_g
+        , sum(Fibre_in_g                 ) as  Fibre_in_g
         , sum(Starch_in_g                ) as  Starch_in_g
         , sum(Ash_in_g                   ) as  Ash_in_g
         , sum(Ca_in_mg                   ) as  Ca_in_mg

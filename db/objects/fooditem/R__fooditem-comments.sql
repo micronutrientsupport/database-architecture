@@ -16,12 +16,8 @@ COMMENT ON COLUMN FOODITEM.SaturatedFA_in_g               IS 'Saturated Fatty Ac
 COMMENT ON COLUMN FOODITEM.MonounsaturatedFA_in_g         IS 'Monounsaturated Fatty Acids, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.PolyunsaturatedFA_in_g         IS 'Polyunsaturated Fatty Acids, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.Cholesterol_in_mg              IS 'The Cholesterol content of this food item, in milligrams per 100g';
-COMMENT ON COLUMN FOODITEM.TotalCHOforUDB                 IS ' ';
 COMMENT ON COLUMN FOODITEM.Carbohydrateavailable_in_g     IS ' ';
-COMMENT ON COLUMN FOODITEM.Totalsugars_in_g               IS ' ';
-COMMENT ON COLUMN FOODITEM.Addedsugar_in_g                IS ' ';
 COMMENT ON COLUMN FOODITEM.Fibre_in_g                     IS 'The total dietary fibre content of this food item (determined by multiple methods), in grams per 100g';
-COMMENT ON COLUMN FOODITEM.Starch_in_g                    IS 'Starch content of this food item, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.Ash_in_g                       IS ' ';
 COMMENT ON COLUMN FOODITEM.Ca_in_mg                       IS 'The Calcium content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Fe_in_mg                       IS 'The Iron content of this food item, in milligrams per 100g';
@@ -35,7 +31,6 @@ COMMENT ON COLUMN FOODITEM.Mn_in_mcg                      IS 'The Manganese cont
 COMMENT ON COLUMN FOODITEM.I_in_mcg                       IS 'the Iondine content of this food item, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.Se_in_mcg                      IS 'The Selenium content of this food item, in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.VitaminA_in_RAE_in_mcg         IS 'The Vitamin A content of the food, in Retinol Activity Equivalent (RAE), and in micrograms per 100g';
-COMMENT ON COLUMN FOODITEM.VitaminA_in_RE_in_mcg          IS 'The Vitamin A content of the food, in Retinol Equivalent (RE), and in micrograms per 100g';
 COMMENT ON COLUMN FOODITEM.Thiamin_in_mg                  IS 'The Thiamin content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Riboflavin_in_mg               IS 'The Riboflavin content of this food item, in milligrams per 100g';
 COMMENT ON COLUMN FOODITEM.Niacin_in_mg                   IS 'The Niacin content of this food item, in milligrams per 100g';

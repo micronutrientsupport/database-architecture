@@ -13,7 +13,6 @@ CREATE OR REPLACE VIEW household_intake AS
         , sum(MonounsaturatedFA_in_g         / 100 * amount_consumed_in_g) as MonounsaturatedFA_in_g
         , sum(PolyunsaturatedFA_in_g         / 100 * amount_consumed_in_g) as PolyunsaturatedFA_in_g
         , sum(Cholesterol_in_mg              / 100 * amount_consumed_in_g) as Cholesterol_in_mg
-        , sum(TotalCHOforUDB                 / 100 * amount_consumed_in_g) as TotalCHOforUDB
         , sum(Carbohydrateavailable_in_g     / 100 * amount_consumed_in_g) as Carbohydrateavailable_in_g
         , sum(Totalsugars_in_g               / 100 * amount_consumed_in_g) as Totalsugars_in_g
         , sum(Addedsugar_in_g                / 100 * amount_consumed_in_g) as Addedsugar_in_g
@@ -69,7 +68,6 @@ UNION ALL
         , sum(MonounsaturatedFA_in_g     ) as  MonounsaturatedFA_in_g
         , sum(PolyunsaturatedFA_in_g     ) as  PolyunsaturatedFA_in_g
         , sum(Cholesterol_in_mg          ) as  Cholesterol_in_mg
-        , sum(TotalCHOforUDB             ) as  TotalCHOforUDB
         , sum(Carbohydrateavailable_in_g ) as  Carbohydrateavailable_in_g
         , sum(Totalsugars_in_g           ) as  Totalsugars_in_g
         , sum(Addedsugar_in_g            ) as  Addedsugar_in_g

@@ -6,7 +6,7 @@ SELECT
     , household.survey_id
     , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as  Moisture_in_g
     , sum(Energy_in_kCal                 / 100 * amount_consumed_in_g) as  Energy_in_kCal
-    , sum(EnergyCalculated_in_kJ         / 100 * amount_consumed_in_g) as  EnergyCalculated_in_kJ
+    , sum(Energy_in_kJ                   / 100 * amount_consumed_in_g) as  Energy_in_kJ
     , sum(Nitrogen_in_g                  / 100 * amount_consumed_in_g) as  Nitrogen_in_g
     , sum(TotalProtein_in_g              / 100 * amount_consumed_in_g) as  TotalProtein_in_g
     , sum(TotalFats_in_g                 / 100 * amount_consumed_in_g) as  TotalFats_in_g

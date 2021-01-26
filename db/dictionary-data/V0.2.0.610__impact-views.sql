@@ -10,7 +10,7 @@ CREATE MATERIALIZED VIEW impact_commodity_aggregation as
         , calcium AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, calcium, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, calcium, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by calcium DESC) AS rank 
                 FROM impact_food_availability 
@@ -27,7 +27,7 @@ CREATE MATERIALIZED VIEW impact_commodity_aggregation as
         , sum(calcium) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, calcium, row_number () OVER (
+            SELECT year, scenario, commodity, country, calcium, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by calcium DESC) AS rank 
                 FROM impact_food_availability
@@ -45,7 +45,7 @@ UNION
         , folate AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, folate, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, folate, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by folate DESC) AS rank 
                 FROM impact_food_availability 
@@ -62,7 +62,7 @@ UNION
         , sum(folate) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, folate, row_number () OVER (
+            SELECT year, scenario, commodity, country, folate, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by folate DESC) AS rank 
                 FROM impact_food_availability
@@ -80,7 +80,7 @@ UNION
         , iron AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, iron, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, iron, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by iron DESC) AS rank 
                 FROM impact_food_availability 
@@ -97,7 +97,7 @@ UNION
         , sum(iron) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, iron, row_number () OVER (
+            SELECT year, scenario, commodity, country, iron, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by iron DESC) AS rank 
                 FROM impact_food_availability
@@ -115,7 +115,7 @@ UNION
         , magnesium AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, magnesium, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, magnesium, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by magnesium DESC) AS rank 
                 FROM impact_food_availability 
@@ -132,7 +132,7 @@ UNION
         , sum(magnesium) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, magnesium, row_number () OVER (
+            SELECT year, scenario, commodity, country, magnesium, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by magnesium DESC) AS rank 
                 FROM impact_food_availability
@@ -150,7 +150,7 @@ UNION
         , niacin AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, niacin, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, niacin, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by niacin DESC) AS rank 
                 FROM impact_food_availability 
@@ -167,7 +167,7 @@ UNION
         , sum(niacin) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, niacin, row_number () OVER (
+            SELECT year, scenario, commodity, country, niacin, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by niacin DESC) AS rank 
                 FROM impact_food_availability
@@ -185,7 +185,7 @@ UNION
         , phosphorus AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, phosphorus, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, phosphorus, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by phosphorus DESC) AS rank 
                 FROM impact_food_availability 
@@ -202,7 +202,7 @@ UNION
         , sum(phosphorus) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, phosphorus, row_number () OVER (
+            SELECT year, scenario, commodity, country, phosphorus, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by phosphorus DESC) AS rank 
                 FROM impact_food_availability
@@ -220,7 +220,7 @@ UNION
         , potassium AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, potassium, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, potassium, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by potassium DESC) AS rank 
                 FROM impact_food_availability 
@@ -237,7 +237,7 @@ UNION
         , sum(potassium) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, potassium, row_number () OVER (
+            SELECT year, scenario, commodity, country, potassium, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by potassium DESC) AS rank 
                 FROM impact_food_availability
@@ -255,7 +255,7 @@ UNION
         , protein AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, protein, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, protein, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by protein DESC) AS rank 
                 FROM impact_food_availability 
@@ -272,7 +272,7 @@ UNION
         , sum(protein) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, protein, row_number () OVER (
+            SELECT year, scenario, commodity, country, protein, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by protein DESC) AS rank 
                 FROM impact_food_availability
@@ -290,7 +290,7 @@ UNION
         , riboflavin AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, riboflavin, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, riboflavin, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by riboflavin DESC) AS rank 
                 FROM impact_food_availability 
@@ -307,7 +307,7 @@ UNION
         , sum(riboflavin) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, riboflavin, row_number () OVER (
+            SELECT year, scenario, commodity, country, riboflavin, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by riboflavin DESC) AS rank 
                 FROM impact_food_availability
@@ -325,7 +325,7 @@ UNION
         , thiamin AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, thiamin, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, thiamin, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by thiamin DESC) AS rank 
                 FROM impact_food_availability 
@@ -342,7 +342,7 @@ UNION
         , sum(thiamin) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, thiamin, row_number () OVER (
+            SELECT year, scenario, commodity, country, thiamin, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by thiamin DESC) AS rank 
                 FROM impact_food_availability
@@ -360,7 +360,7 @@ UNION
         , vit_a AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, vit_a, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, vit_a, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by vit_a DESC) AS rank 
                 FROM impact_food_availability 
@@ -377,7 +377,7 @@ UNION
         , sum(vit_a) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, vit_a, row_number () OVER (
+            SELECT year, scenario, commodity, country, vit_a, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by vit_a DESC) AS rank 
                 FROM impact_food_availability
@@ -395,7 +395,7 @@ UNION
         , vit_b6 AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, vit_b6, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, vit_b6, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by vit_b6 DESC) AS rank 
                 FROM impact_food_availability 
@@ -412,7 +412,7 @@ UNION
         , sum(vit_b6) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, vit_b6, row_number () OVER (
+            SELECT year, scenario, commodity, country, vit_b6, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by vit_b6 DESC) AS rank 
                 FROM impact_food_availability
@@ -430,7 +430,7 @@ UNION
         , vit_c AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, vit_c, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, vit_c, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by vit_c DESC) AS rank 
                 FROM impact_food_availability 
@@ -447,7 +447,7 @@ UNION
         , sum(vit_c) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, vit_c, row_number () OVER (
+            SELECT year, scenario, commodity, country, vit_c, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by vit_c DESC) AS rank 
                 FROM impact_food_availability
@@ -465,7 +465,7 @@ UNION
         , zinc AS value
         , rank 
         FROM (
-            SELECT year, scenario, impact_commodity.name AS commodity, country, zinc, row_number () OVER (
+            SELECT year, scenario, impact_commodity.name AS commodity, country, zinc, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by zinc DESC) AS rank 
                 FROM impact_food_availability 
@@ -482,7 +482,7 @@ UNION
         , sum(zinc) AS value
         , 6 AS rank 
         FROM (
-            SELECT year, scenario, commodity, country, zinc, row_number () OVER (
+            SELECT year, scenario, commodity, country, zinc, row_number() OVER (
                 PARTITION BY 
                 year, country, scenario order by zinc DESC) AS rank 
                 FROM impact_food_availability

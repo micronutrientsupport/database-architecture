@@ -1,5 +1,5 @@
 INSERT INTO
-    impact_scenario (id, name, breif_description, description, is_baseline )
+    impact_scenario (id, name, brief_description, description, is_baseline )
 VALUES
     ('SSP1', 'SSP1', 'Scenario SSP1 is called the Sustainability scenario', 'Sustainable development is realized, with relatively high levels of investment in research and development, which leads to rapid technological change (with a sustainable focus), decreasing inequality, lower energy intensity, and high land productivity. This development pathway leads to a future where society is able to relatively easily mitigate or adapt to climate change. There are a high rate of economic growth, declining population growth, and increasing levels of education globally.', '0'),
     ('SSP2', 'SSP2', 'Scenario SSP2 is the Middle of the Road scenario', 'This is a middle-of-the-road scenario that follows historical trends. Economic development continues but is not uniform. Environmental degradation continues but at a slowing pace. There is general improvement, but it is much slower than that seen in SSP 1. Climate change presents moderate challenges to both adaptation and mitigation.', '1'),

@@ -43,8 +43,8 @@ CREATE OR REPLACE VIEW household_intake AS
         , sum(PhyticAcid_in_mg               / 100 * amount_consumed_in_g) as PhyticAcid_in_mg
     FROM
         fooditem
-        JOIN foodex ON foodex.id = fooditem.foodex_id
-        JOIN HOUSEHOLD_CONSUMPTION as hhc ON hhc.foodex_id = foodex.id
+        JOIN food_genus ON food_genus.id = fooditem.food_genus_id
+        JOIN HOUSEHOLD_CONSUMPTION as hhc ON hhc.food_genus_id = food_genus.id
         JOIN HOUSEHOLD_MEMBER as hhm ON hhm.id = hhc.HOUSEHOLD_id
         JOIN household ON hhm.household_id = household.id
         JOIN survey on household.survey_id = survey.id

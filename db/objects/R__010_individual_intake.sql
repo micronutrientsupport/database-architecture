@@ -44,8 +44,8 @@ SELECT
     , sum(PhyticAcid_in_mg               / 100 * amount_consumed_in_g) as  PhyticAcid_in_mg
 FROM
     fooditem
-    JOIN foodex ON foodex.id = fooditem.foodex_id
-    JOIN HOUSEHOLD_MEMBER_CONSUMPTION hhmc ON hhmc.foodex_id = foodex.id
+    JOIN food_genus ON food_genus.id = fooditem.food_genus_id
+    JOIN HOUSEHOLD_MEMBER_CONSUMPTION hhmc ON hhmc.food_genus_id = food_genus.id
     JOIN HOUSEHOLD_MEMBER member ON member.id = hhmc.HOUSEHOLD_MEMBER_id
     JOIN household on member.household_id = household.id
     JOIN survey on household.survey_id = survey.id

@@ -46,6 +46,6 @@ SELECT
         JOIN food_genus ON food_genus.id = fooditem.food_genus_id
         JOIN COUNTRY_CONSUMPTION as cc ON cc.food_genus_id = food_genus.id
         --JOIN survey on household.survey_id = survey.id
-    GROUP BY fooditem.fct_source_id, cc.country_id
+    GROUP BY fooditem.fct_source_id, cc.country_id;
 
 COMMENT ON VIEW country_intake IS 'View of amount of micronutrients consumed in total by country';

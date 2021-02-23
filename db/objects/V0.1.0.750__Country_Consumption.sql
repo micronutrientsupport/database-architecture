@@ -4,6 +4,7 @@ CREATE TABLE country_consumption (
     , food_genus_confidence text references food_genus_confidence (id)
     , country_id            text references country (id)
     , original_id           text
+    , original_name         text
     , date_consumed         date
     , amount_consumed_in_g  numeric(10,3)
 

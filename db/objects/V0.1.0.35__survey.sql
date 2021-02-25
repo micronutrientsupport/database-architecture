@@ -4,7 +4,7 @@ CREATE TABLE survey (
     , publication_date        date
     , surveying_date_start    date
     , surveying_date_end      date
-    , geometry                geometry(Polygon,4326)
+    , geometry                geometry(MultiPolygon,4326)
     , geonetwork_uuid         text
 );
 

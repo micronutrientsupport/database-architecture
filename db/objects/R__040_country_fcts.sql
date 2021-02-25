@@ -2,7 +2,7 @@ CREATE OR REPLACE VIEW country_fcts AS
 with fcts as (
     select 
         fct_source.id as fct_id
-        , fct_source.name as fct_name,
+        , fct_source.name as fct_name
         , country.id as country_id
         , ROW_NUMBER() over 
           (partition by country.id order BY			

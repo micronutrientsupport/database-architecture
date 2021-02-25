@@ -4,6 +4,7 @@ SELECT
     member.id as household_member_id
     , member.household_id
     , household.survey_id
+    , fooditem.fct_source_id
     , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as  Moisture_in_g
     , sum(Energy_in_kCal                 / 100 * amount_consumed_in_g) as  Energy_in_kCal
     , sum(Energy_in_kJ                   / 100 * amount_consumed_in_g) as  Energy_in_kJ
@@ -49,7 +50,7 @@ FROM
     JOIN HOUSEHOLD_MEMBER member ON member.id = hhmc.HOUSEHOLD_MEMBER_id
     JOIN household on member.household_id = household.id
     JOIN survey on household.survey_id = survey.id
-GROUP BY member.id, household.survey_id
+GROUP BY member.id, household.survey_id, fooditem.fct_source_id
 ORDER BY member.id
 ;
 

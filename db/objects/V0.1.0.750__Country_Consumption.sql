@@ -6,6 +6,7 @@ CREATE TABLE country_consumption (
     , original_id           text
     , original_name         text
     , date_consumed         date
+    , data_source_id        integer REFERENCES COUNTRY_CONSUMPTION_SOURCE (ID)
     , amount_consumed_in_g  numeric(10,3)
 
 );
@@ -16,4 +17,5 @@ COMMENT on column COUNTRY_CONSUMPTION.original_id           IS 'The original nam
 COMMENT on column COUNTRY_CONSUMPTION.food_genus_confidence IS 'How confident we are in matching this food to the corresponding food_genus entry';
 COMMENT on column COUNTRY_CONSUMPTION.country_id            IS 'The id of the country that consumed the food item';
 COMMENT on column COUNTRY_CONSUMPTION.date_consumed         IS 'The year when the commodity was consumed';
+COMMENT ON COLUMN COUNTRY_CONSUMPTION.data_source_id        IS 'Foreign Key to the data source for this consumption data';
 COMMENT on column COUNTRY_CONSUMPTION.amount_consumed_in_g  IS 'How much of the commodity was consumed, in grams per capita';

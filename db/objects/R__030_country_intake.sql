@@ -2,7 +2,8 @@ CREATE OR REPLACE VIEW country_intake AS
 
 SELECT
         cc.country_id
-        , fooditem.fct_source_id 
+        , fooditem.fct_source_id
+        , data_source_id
         , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as Moisture_in_g
         , sum(Energy_in_kCal                 / 100 * amount_consumed_in_g) as Energy_in_kCal
         , sum(Energy_in_kJ                   / 100 * amount_consumed_in_g) as Energy_in_kJ
@@ -46,6 +47,6 @@ SELECT
         JOIN food_genus ON food_genus.id = fooditem.food_genus_id
         JOIN COUNTRY_CONSUMPTION as cc ON cc.food_genus_id = food_genus.id
         --JOIN survey on household.survey_id = survey.id
-    GROUP BY fooditem.fct_source_id, cc.country_id;
+    GROUP BY data_source_id, fooditem.fct_source_id, cc.country_id;
 
 COMMENT ON VIEW country_intake IS 'View of amount of micronutrients consumed in total by country';

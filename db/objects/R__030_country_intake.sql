@@ -49,4 +49,4 @@ SELECT
         --JOIN survey on household.survey_id = survey.id
     GROUP BY data_source_id, fooditem.fct_source_id, cc.country_id;
 
-COMMENT ON VIEW country_intake IS 'View of amount of micronutrients consumed in total by country';
+COMMENT ON VIEW country_intake IS 'View of amount of micronutrients consumed per capita per year by country';

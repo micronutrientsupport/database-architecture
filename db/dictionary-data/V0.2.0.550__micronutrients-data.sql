@@ -1,5 +1,5 @@
 INSERT INTO
-    micronutrients (id, name, category, unit, description, fooditem_column, in_impact, impact_column )
+    micronutrient (id, name, category, unit, description, fooditem_column, in_impact, impact_column )
 VALUES
     ('A'            , 'Vitamin A'     , 'vitamin' , 'mcg'   , 'Description for Vitamin A'                   , 'VitaminA_in_RAE_in_mcg'     , '1' , 'vit_a') ,
     ('B6'           , 'Vitamin B6'    , 'vitamin' , 'mg'    , 'Description for Vitamin B6'                  , 'VitaminB6_in_mg'            , '1' , 'vit_b6') ,

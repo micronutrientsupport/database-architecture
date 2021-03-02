@@ -1,4 +1,5 @@
-CREATE OR REPLACE VIEW vw_country AS
+DROP MATERIALIZED VIEW IF EXISTS vw_country;
+CREATE MATERIALIZED VIEW vw_country AS
 SELECT
     id
     , name

@@ -5,7 +5,7 @@ CREATE TABLE micronutrient (
 	, description       text
 	, category          text CHECK (category IN ('vitamin', 'mineral', 'other'))
 	, fooditem_column	text
-	, in_impact			boolean
+	, is_in_impact	    boolean
 	, impact_column		text
 	, is_biomarker      boolean
 	, is_diet           boolean
@@ -13,7 +13,7 @@ CREATE TABLE micronutrient (
 );
 COMMENT ON TABLE micronutrient IS 'Collection of micronutrients for user selection of MN interest';
 COMMENT on column micronutrient.category is 'broad groupings of Vitamins, Minerals and Other';
-COMMENT on column micronutrient.in_impact is 'Boolean value representing whether micronutrient is included in IMPACT model output';
+COMMENT on column micronutrient.is_in_impact is 'Boolean value representing whether micronutrient is included in IMPACT model output';
 COMMENT on column micronutrient.impact_column is 'Column name for IMPACT model output relating to this MN';
 COMMENT on column micronutrient.is_biomarker is 'Boolean value for whether this micronutrient is measurable via biomarkers';
 COMMENT on column micronutrient.is_diet is 'Boolean value for whether this micronutrient is measurable via diet data';

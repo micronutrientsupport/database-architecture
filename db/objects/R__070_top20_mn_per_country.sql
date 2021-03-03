@@ -5,12 +5,17 @@ FROM (
 	SELECT
 		*
 		, row_number() over (
-			PARTITION BY country_id, mn_name
+			PARTITION BY
+				country_id
+				, fct_source_id
+				, data_source_id
+				, mn_name
 			ORDER BY mn_consumed_per_day desc
 		) as ranking
 	FROM (
 		SELECT
 			cc.country_id
+			, fi.fct_source_id
 			, cc.data_source_id
 			, mn.mn_name
 			, fi.food_genus_id
@@ -58,6 +63,7 @@ FROM (
 		GROUP BY
 			cc.data_source_id
 			, fi.food_genus_id
+			, fi.fct_source_id
 			, country_id
 			, mn_name
 	) a

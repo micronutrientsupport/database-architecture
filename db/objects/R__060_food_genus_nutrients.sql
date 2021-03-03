@@ -2,6 +2,7 @@ CREATE OR REPLACE VIEW food_genus_nutrients AS
 
 SELECT
     food_genus_id
+    , fct_source_id
     , avg(moisture_in_g              )  as moisture_in_g
     , avg(energy_in_kcal             )  as energy_in_kcal
     , avg(energy_in_kj               )  as energy_in_kj
@@ -45,4 +46,6 @@ SELECT
 from
     fooditem
     JOIN food_genus ON fooditem.food_genus_id = food_genus.id
-    GROUP BY food_genus_id
+    GROUP BY
+        food_genus_id
+        , fct_source_id

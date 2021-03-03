@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW top20 AS
+CREATE OR REPLACE VIEW top20_mn_per_country AS
 
 SELECT b.* , food_genus.food_name
 FROM (
@@ -59,7 +59,7 @@ FROM (
 		) AS mn("mn_name", "mn_value")
 		JOIN country_consumption cc ON cc.food_genus_id = fi.food_genus_id
 		-- WHERE date_part('year', cc.date_consumed) = 2018
-		GROUP BY 
+		GROUP BY
 			cc.data_source_id
 			, fi.food_genus_id
 			, country_id
@@ -70,3 +70,6 @@ JOIN food_genus ON b.food_genus_id = food_genus.id
 WHERE ranking <= 20
 ORDER BY country_id, mn_name, ranking asc
 ;
+
+
+COMMENT ON VIEW top20_mn_per_country IS 'View showing the rankings of how much each food genus contributes to a particular micronutrient intake in a particular country and data set.'

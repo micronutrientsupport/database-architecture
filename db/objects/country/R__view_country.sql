@@ -1,4 +1,5 @@
-CREATE OR REPLACE VIEW vw_country AS
+DROP MATERIALIZED VIEW IF EXISTS vw_country;
+CREATE MATERIALIZED VIEW vw_country AS
 SELECT
     id
     , name
@@ -7,4 +8,4 @@ SELECT
 FROM
     country;
 
-COMMENT ON VIEW vw_country IS 'View on country table returning geometry as GeoJSON';
+COMMENT ON MATERIALIZED VIEW vw_country IS 'View on country table returning geometry as GeoJSON';

@@ -11,7 +11,7 @@ CREATE TABLE country_consumption (
 
 );
 
-COMMENT ON TABLE COUNTRY_CONSUMPTION IS 'What food items what been consumed per capita per year in a country, and in what quantity.';
+COMMENT ON TABLE COUNTRY_CONSUMPTION IS 'What food items have been consumed per capita per year in a country, and in what quantity.';
 COMMENT on column COUNTRY_CONSUMPTION.food_genus_id         IS 'The food genus id of the fooditem that was consumed';
 COMMENT on column COUNTRY_CONSUMPTION.original_id           IS 'The original name or id of the fooditem that was consumed';
 COMMENT on column COUNTRY_CONSUMPTION.food_genus_confidence IS 'How confident we are in matching this food to the corresponding food_genus entry';

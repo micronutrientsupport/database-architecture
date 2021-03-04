@@ -10,7 +10,7 @@ FROM (
 				, fct_source_id
 				, data_source_id
 				, mn_name
-			ORDER BY mn_consumed_per_day desc
+			ORDER BY mn_consumed_per_day desc NULLS LAST
 		) as ranking
 	FROM (
 		SELECT

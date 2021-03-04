@@ -1,4 +1,5 @@
-CREATE OR REPLACE VIEW top20_mn_per_country AS
+DROP MATERIALIZED VIEW IF EXISTS top20_mn_per_country;
+CREATE MATERIALIZED VIEW top20_mn_per_country AS
 
 SELECT b.* , food_genus.food_name
 FROM (
@@ -74,4 +75,4 @@ ORDER BY country_id, mn_name, ranking asc
 ;
 
 
-COMMENT ON VIEW top20_mn_per_country IS 'View showing the rankings of how much each food genus contributes to a particular micronutrient intake in a particular country and data set.'
+COMMENT ON MATERIALIZED VIEW top20_mn_per_country IS 'View showing the rankings of how much each food genus contributes to a particular micronutrient intake in a particular country and data set.'

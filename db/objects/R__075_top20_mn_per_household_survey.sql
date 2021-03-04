@@ -1,5 +1,5 @@
-DROP MATERIALIZED VIEW IF EXISTS top20_mn_per_country;
-CREATE MATERIALIZED VIEW top20_mn_per_country AS
+DROP MATERIALIZED VIEW IF EXISTS top20_mn_per_hhsurvey;
+CREATE MATERIALIZED VIEW top20_mn_per_hhsurvey AS
 
 SELECT b.* , food_genus.food_name
 FROM (
@@ -7,17 +7,17 @@ FROM (
 		*
 		, row_number() over (
 			PARTITION BY
-				country_id
+				survey_id
 				, fct_source_id
-				, data_source_id
+				-- , data_source_id
 				, mn_name
 			ORDER BY mn_consumed_per_day desc NULLS LAST
 		) as ranking
 	FROM (
 		SELECT
-			cc.country_id
+			household.survey_id
 			, fi.fct_source_id
-			, cc.data_source_id
+			-- , cc.data_source_id
 			, mn.mn_name
 			, fi.food_genus_id
 			, sum( (mn.mn_value / 100 * amount_consumed_in_g) ) / 365  AS mn_consumed_per_day
@@ -59,20 +59,21 @@ FROM (
 				('Energy'      , Energy_in_kCal             ),
 				('Moisture'    , Moisture_in_g              )
 		) AS mn("mn_name", "mn_value")
-		JOIN country_consumption cc ON cc.food_genus_id = fi.food_genus_id
-		-- WHERE date_part('year', cc.date_consumed) = 2018
+		JOIN household_consumption hc ON hc.food_genus_id = fi.food_genus_id
+        JOIN household ON hc.household_id = household.id
+        JOIN survey ON household.survey_id = survey.id
+		-- WHERE date_part('year', hc.date_consumed) = 2018
 		GROUP BY
-			cc.data_source_id
+			household.survey_id
 			, fi.food_genus_id
 			, fi.fct_source_id
-			, country_id
 			, mn_name
 	) a
 ) b
 JOIN food_genus ON b.food_genus_id = food_genus.id
 WHERE ranking <= 20
-ORDER BY country_id, mn_name, ranking asc
+ORDER BY survey_id, mn_name, ranking asc
 ;
 
 
-COMMENT ON MATERIALIZED VIEW top20_mn_per_country IS 'View showing the rankings of how much each food genus contributes to a particular micronutrient intake in a particular country and data set.'
+COMMENT ON MATERIALIZED VIEW top20_mn_per_hhsurvey IS 'View showing the rankings of how much each food genus contributes to a particular micronutrient intake in a particular household consumption survey.'

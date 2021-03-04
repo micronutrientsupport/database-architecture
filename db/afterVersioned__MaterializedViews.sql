@@ -1,0 +1,2 @@
+REFRESH MATERIALIZED VIEW top20_mn_per_country;
+REFRESH MATERIALIZED VIEW top20_mn_per_hhsurvey;

@@ -3,7 +3,7 @@ CREATE MATERIALIZED VIEW impact_summary as
     with baseline as (
     select id from impact_scenario),
     impact_nutrients as (
-    select id, impact_column from micronutrient where in_impact = true),
+    select id, impact_column from micronutrient where is_in_impact = true),
     threshold as (
     select 107000 as threshold 
     )

@@ -1,8 +1,9 @@
+DROP MATERIALIZED VIEW IF EXISTS impact_commodity_aggregation;
 CREATE MATERIALIZED VIEW impact_commodity_aggregation as
 
 -- Calcium
     -- rank top 5 commodities for Calcium
-    SELECT 'calcium' AS nutrient
+    SELECT 'Ca' AS nutrient
         , country
         , scenario
         , commodity
@@ -19,7 +20,7 @@ CREATE MATERIALIZED VIEW impact_commodity_aggregation as
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'calcium' AS nutrient
+    SELECT 'Ca' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -72,7 +73,7 @@ UNION
 UNION
 -- iron
     -- rank top 5 commodities for iron
-    SELECT 'iron' AS nutrient
+    SELECT 'Fe' AS nutrient
         , country
         , scenario
         , commodity
@@ -89,7 +90,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'iron' AS nutrient
+    SELECT 'Fe' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -107,7 +108,7 @@ UNION
 UNION
 -- magnesium
     -- rank top 5 commodities for magnesium
-    SELECT 'magnesium' AS nutrient
+    SELECT 'Mg' AS nutrient
         , country
         , scenario
         , commodity
@@ -124,7 +125,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'magnesium' AS nutrient
+    SELECT 'Mg' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -142,7 +143,7 @@ UNION
 UNION
 -- niacin
     -- rank top 5 commodities for niacin
-    SELECT 'niacin' AS nutrient
+    SELECT 'B3' AS nutrient
         , country
         , scenario
         , commodity
@@ -159,7 +160,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'niacin' AS nutrient
+    SELECT 'B3' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -177,7 +178,7 @@ UNION
 UNION
 -- phosphorus
     -- rank top 5 commodities for phosphorus
-    SELECT 'phosphorus' AS nutrient
+    SELECT 'P' AS nutrient
         , country
         , scenario
         , commodity
@@ -194,7 +195,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'phosphorus' AS nutrient
+    SELECT 'P' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -212,7 +213,7 @@ UNION
 UNION
 -- potassium
     -- rank top 5 commodities for potassium
-    SELECT 'potassium' AS nutrient
+    SELECT 'K' AS nutrient
         , country
         , scenario
         , commodity
@@ -229,7 +230,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'potassium' AS nutrient
+    SELECT 'K' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -247,7 +248,7 @@ UNION
 UNION
 -- protein
     -- rank top 5 commodities for protein
-    SELECT 'protein' AS nutrient
+    SELECT 'Protein' AS nutrient
         , country
         , scenario
         , commodity
@@ -264,7 +265,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'protein' AS nutrient
+    SELECT 'Protein' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -282,7 +283,7 @@ UNION
 UNION
 -- riboflavin
     -- rank top 5 commodities for riboflavin
-    SELECT 'riboflavin' AS nutrient
+    SELECT 'B2' AS nutrient
         , country
         , scenario
         , commodity
@@ -299,7 +300,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'riboflavin' AS nutrient
+    SELECT 'B2' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -317,7 +318,7 @@ UNION
 UNION
 -- thiamin
     -- rank top 5 commodities for thiamin
-    SELECT 'thiamin' AS nutrient
+    SELECT 'B1' AS nutrient
         , country
         , scenario
         , commodity
@@ -334,7 +335,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'thiamin' AS nutrient
+    SELECT 'B1' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -352,7 +353,7 @@ UNION
 UNION
 -- vit_a
     -- rank top 5 commodities for vit_a
-    SELECT 'vit_a' AS nutrient
+    SELECT 'A' AS nutrient
         , country
         , scenario
         , commodity
@@ -369,7 +370,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'vit_a' AS nutrient
+    SELECT 'A' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -387,7 +388,7 @@ UNION
 UNION
 -- vit_b6
     -- rank top 5 commodities for vit_b6
-    SELECT 'vit_b6' AS nutrient
+    SELECT 'B6' AS nutrient
         , country
         , scenario
         , commodity
@@ -404,7 +405,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'vit_b6' AS nutrient
+    SELECT 'B6' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -422,7 +423,7 @@ UNION
 UNION
 -- vit_c
     -- rank top 5 commodities for vit_c
-    SELECT 'vit_c' AS nutrient
+    SELECT 'C' AS nutrient
         , country
         , scenario
         , commodity
@@ -439,7 +440,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'vit_c' AS nutrient
+    SELECT 'C' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity
@@ -457,7 +458,7 @@ UNION
 UNION
 -- zinc
     -- rank top 5 commodities for zinc
-    SELECT 'zinc' AS nutrient
+    SELECT 'Zn' AS nutrient
         , country
         , scenario
         , commodity
@@ -474,7 +475,7 @@ UNION
     WHERE rank <=5
     UNION
     -- aggregate remaining commodities
-    SELECT 'zinc' AS nutrient
+    SELECT 'Zn' AS nutrient
         , country
         , scenario
         , 'Other' AS commodity

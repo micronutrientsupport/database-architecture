@@ -9,3 +9,15 @@ CREATE  MATERIALIZED VIEW IF NOT EXISTS top20_mn_per_country AS SELECT 'x';
 REFRESH MATERIALIZED VIEW top20_mn_per_country;
 CREATE  MATERIALIZED VIEW IF NOT EXISTS top20_mn_per_hhsurvey AS SELECT 'x';
 REFRESH MATERIALIZED VIEW top20_mn_per_hhsurvey;
+
+CREATE  MATERIALIZED VIEW IF NOT EXISTS impact_commodity_aggregation AS SELECT 'x';
+REFRESH MATERIALIZED VIEW impact_commodity_aggregation;
+CREATE  MATERIALIZED VIEW IF NOT EXISTS impact_food_group_aggregation AS SELECT 'x';
+REFRESH MATERIALIZED VIEW impact_food_group_aggregation;
+CREATE  MATERIALIZED VIEW IF NOT EXISTS impact_summary AS SELECT 'x';
+REFRESH MATERIALIZED VIEW impact_summary;
+CREATE  MATERIALIZED VIEW IF NOT EXISTS vw_country AS SELECT 'x';
+REFRESH MATERIALIZED VIEW vw_country;
+update country_consumption set data_source_id = 1 where date_consumed = '2018-01-01';
+CREATE  MATERIALIZED VIEW IF NOT EXISTS country_intake_geojson AS SELECT 'x';
+REFRESH MATERIALIZED VIEW country_intake_geojson;

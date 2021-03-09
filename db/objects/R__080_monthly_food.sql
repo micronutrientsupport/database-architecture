@@ -30,6 +30,7 @@ FROM (
 		, mn_name
 		, month_consumed
 ) a
+WHERE mn_consumed > 0
 
 ORDER BY
 	mn_name

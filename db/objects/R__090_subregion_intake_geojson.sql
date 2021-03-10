@@ -66,49 +66,73 @@ join household on household.id=household_intake.household_id
 join subregion on ST_CONTAINS(subregion.geometry, household.location)
 group by subregion_id, household_intake.survey_id, fct_source_id;
 
-
-CREATE OR REPLACE FUNCTION get_subregion_intake_geoJSON(_subregion_id text, _fct_id numeric, _survey_id numeric, _micronutrient text)
-RETURNS json AS
-
-$BODY$
-  declare
-  	retval json;
-begin
+create or replace view household_intake_sebregion_pivot as 
+select hi.country_id, hi.survey_id, hi.fct_source_id, hi.subregion_id, hi.subregion_name, mn.mn_name, mn.mn_value from household_intake_sebregion hi
+		CROSS JOIN LATERAL (
+			VALUES
+				('A'           , VitaminA_in_RAE_in_mcg     ),
+				('B6'          , VitaminB6_in_mg            ),
+				('B12'         , VitaminB12_in_mcg          ),
+				('C'           , VitaminC_in_mg             ),
+				('D'           , VitaminD_in_mcg            ),
+				('E'           , VitaminE_in_mg             ),
+				('B1'          , Thiamin_in_mg              ),
+				('B2'          , Riboflavin_in_mg           ),
+				('B3'          , Niacin_in_mg               ),
+				('Folic Acid'  , Folicacid_in_mcg           ),
+				('B9'          , Folate_in_mcg              ),
+				('B5'          , Pantothenate_in_mg         ),
+				('B7'          , Biotin_in_mcg              ),
+				('IP6'         , PhyticAcid_in_mg           ),
+				('Ca'          , Ca_in_mg                   ),
+				('Cu'          , Cu_in_mg                   ),
+				('Fe'          , Fe_in_mg                   ),
+				('Mg'          , Mg_in_mg                   ),
+				('Mn'          , Mn_in_mcg                  ),
+				('P'           , P_in_mg                    ),
+				('K'           , K_in_mg                    ),
+				('Na'          , Na_in_mg                   ),
+				('Zn'          , Zn_in_mg                   ),
+				('I'           , I_in_mcg                   ),
+				('N'           , Nitrogen_in_g              ),
+				('Se'          , Se_in_mcg                  ),
+				('Ash'         , Ash_in_g                   ),
+				('Fibre'       , Fibre_in_g                 ),
+				('Carbohydrate', Carbohydrateavailable_in_g ),
+				('Cholesterol' , Cholesterol_in_mg          ),
+				('Protein'     , TotalProtein_in_g          ),
+				('Fat'         , TotalFats_in_g             ),
+				('Energy'      , Energy_in_kCal             ),
+				('Moisture'    , Moisture_in_g              )
+		) AS mn("mn_name", "mn_value");
 	
-	execute '
 
-SELECT row_to_json(fc)
- FROM ( SELECT ''FeatureCollection'' As type, array_to_json(array_agg(f)) As features
- FROM (SELECT ''Feature'' As type
-    , public.ST_AsGeoJSON(public.ST_ForcePolygonCCW(c2.geometry))::json As geometry
-    , row_to_json(ci) As properties
-   FROM household_intake_sebregion
-INNER JOIN (SELECT country_id
-         					,' || $4 || ' as mn_absolute
-         					, micronutrient.unit as mn_absolute_unit
-         					, subregion_name as subregion_name
-         					, ''District'' as subregion_type
-         					FROM household_intake_sebregion 
-							JOIN micronutrient on micronutrient.fooditem_column = ''' || $4 || '''
-         					where household_intake_sebregion.fct_source_id=' || $2 || ' and household_intake_sebregion.survey_id=' || $3 || '
-         					) As ci 
-       ON household_intake_sebregion.country_id = ci.country_id 
-       join subregion c2 on c2.id = household_intake_sebregion.subregion_id 
-       where household_intake_sebregion.subregion_id=''' || $1 || '''
-       ) As f )  As fc
-       ' INTO retval using _subregion_id, _fct_id, _survey_id, _micronutrient;
-    RETURN retval;
-    END
-$BODY$
-LANGUAGE plpgsql;
+--TODO: JOIN this against household_intake_subregion to generate geojson for all 
+-- country/survey/fct combinations.
 
+	DROP MATERIALIZED VIEW IF EXISTS subregion_intake_geojson;
+create or replace materialized view subregion_intake_geojson as
 
-DROP MATERIALIZED VIEW IF EXISTS subregion_intake_geojson;
-CREATE MATERIALIZED VIEW subregion_intake_geojson AS
+select hisp.*, (SELECT row_to_json(fc)
+ FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
+ FROM (SELECT 'Feature' As type
+    , ST_AsGeoJSON(ST_ForcePolygonCCW(lg.geometry))::json As geometry
+    , row_to_json((SELECT l FROM (
+    			SELECT 
+    			mn_value as mn_absolute
+    			,micronutrient.unit as mn_absolute_unit
+    			,'0' as mn_threshold
+         		, '%' as mn_threshold_unit
+         		, subregion_name as subregion_name
+         		, 'District' as subregion_type
+    			from household_intake_sebregion_pivot 
+    			JOIN micronutrient on micronutrient.id=hisp.mn_name 
+    			where 
+    				subregion_id=lg.id
+    				and survey_id = hisp.survey_id 
+    				and fct_source_id = hisp.fct_source_id 
+    				and mn_name=hisp.mn_name 
+    			) As l)) As properties
+   FROM subregion as lg where country = hisp.country_id ) As f )  As fc) as geojson from household_intake_sebregion_pivot hisp;
 
-select hi.country_id, hi.subregion_id, hi.fct_source_id, hi.survey_id, mn.mn_name, mn.mn_value, geojson.* 
-from household_intake_sebregion hi
-     CROSS JOIN LATERAL (select id, fooditem_column from micronutrient)
-		AS mn("mn_name", "mn_value")
-		, get_subregion_intake_geoJSON(hi.subregion_id, hi.fct_source_id, hi.survey_id, mn.mn_value) geojson;
 

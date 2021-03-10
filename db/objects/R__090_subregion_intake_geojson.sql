@@ -109,11 +109,13 @@ select hi.country_id, hi.survey_id, hi.fct_source_id, hi.subregion_id, hi.subreg
 
 --TODO: JOIN this against household_intake_subregion to generate geojson for all 
 -- country/survey/fct combinations.
-
 	DROP MATERIALIZED VIEW IF EXISTS subregion_intake_geojson;
-create or replace materialized view subregion_intake_geojson as
+create materialized view subregion_intake_geojson as
 
-select hisp.*, (SELECT row_to_json(fc)
+select 'MWI' as country_id,
+3 as fct_source_id,
+4 as survey_id,
+(SELECT row_to_json(fc)
  FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
  FROM (SELECT 'Feature' As type
     , ST_AsGeoJSON(ST_ForcePolygonCCW(lg.geometry))::json As geometry
@@ -126,13 +128,14 @@ select hisp.*, (SELECT row_to_json(fc)
          		, subregion_name as subregion_name
          		, 'District' as subregion_type
     			from household_intake_sebregion_pivot 
-    			JOIN micronutrient on micronutrient.id=hisp.mn_name 
+    			JOIN micronutrient on micronutrient.id='A'
     			where 
     				subregion_id=lg.id
-    				and survey_id = hisp.survey_id 
-    				and fct_source_id = hisp.fct_source_id 
-    				and mn_name=hisp.mn_name 
+    				and survey_id = 4 
+    				and fct_source_id = 3
+    				and mn_name='A' 
     			) As l)) As properties
-   FROM subregion as lg where country = hisp.country_id ) As f )  As fc) as geojson from household_intake_sebregion_pivot hisp;
+   FROM subregion as lg where country = 'MWI' ) As f )  As fc) as geojson
+
 
 

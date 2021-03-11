@@ -5,11 +5,7 @@
 -- materialized view. The dummy tables should get overwritten by the actual
 -- scripts for the materialized views
 
-CREATE  MATERIALIZED VIEW IF NOT EXISTS top20_mn_per_country AS SELECT 'x';
-REFRESH MATERIALIZED VIEW top20_mn_per_country;
-CREATE  MATERIALIZED VIEW IF NOT EXISTS top20_mn_per_hhsurvey AS SELECT 'x';
-REFRESH MATERIALIZED VIEW top20_mn_per_hhsurvey;
-CREATE  MATERIALIZED VIEW IF NOT EXISTS monthly_food AS SELECT 'x';
-REFRESH MATERIALIZED VIEW monthly_food;
-CREATE  MATERIALIZED VIEW IF NOT EXISTS impact_summary AS SELECT 'x';
-REFRESH MATERIALIZED VIEW impact_summary;
+CREATE MATERIALIZED VIEW IF NOT EXISTS top20_mn_per_country  AS SELECT 'x'; REFRESH MATERIALIZED VIEW top20_mn_per_country;
+CREATE MATERIALIZED VIEW IF NOT EXISTS top20_mn_per_hhsurvey AS SELECT 'x'; REFRESH MATERIALIZED VIEW top20_mn_per_hhsurvey;
+CREATE MATERIALIZED VIEW IF NOT EXISTS monthly_food          AS SELECT 'x'; REFRESH MATERIALIZED VIEW monthly_food;
+CREATE MATERIALIZED VIEW IF NOT EXISTS impact_summary        AS SELECT 'x'; REFRESH MATERIALIZED VIEW impact_summary;

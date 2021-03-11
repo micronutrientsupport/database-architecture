@@ -9,11 +9,7 @@ SELECT
     , interpolate_impact_year.reference_year
     , interpolate_impact_year.intersect_year
 	, -1 * round(
-		(
-			(
-				intake_threshold.rda - (interpolate_impact_year.reference_val /365)
-			) / intake_threshold.rda
-		) * 100,
+			((intake_threshold.rda - (interpolate_impact_year.reference_val / 365)) / intake_threshold.rda) * 100,
 		2
 	) as difference
 FROM

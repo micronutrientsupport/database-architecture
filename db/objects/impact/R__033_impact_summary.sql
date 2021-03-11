@@ -1,3 +1,4 @@
+DROP MATERIALIZED VIEW IF EXISTS impact_summary;
 CREATE MATERIALIZED VIEW impact_summary as
 
 with baseline as (

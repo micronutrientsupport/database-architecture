@@ -8,13 +8,13 @@ CREATE TABLE BIOMARKER (
     , stfr                    numeric(3,2)
     , rbp                     numeric(3,2)
     , serum_retinol           numeric(3,2)
-    , rbc_folate                    numeric(10,5)  -- ????
-    , serum_folate                  numeric(10,5)  -- ????
-    , vitamin_b12               numeric(10,5)  -- ????
+    , rbc_folate              numeric(5,2)
+    , serum_folate            numeric(5,2)
+    , vitamin_b12             numeric(5,1)
     , zinc                    numeric(3,1)
     , crp                     numeric(3,2)
     , agp                     numeric(3,2)
-    , iodine                    numeric(10,5)  -- ????
+    , iodine                  numeric(5,2)
 
 );
 COMMENT ON TABLE BIOMARKER IS '';

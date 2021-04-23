@@ -3,11 +3,11 @@ CREATE TABLE biomarker_threshold
 biomarker_id text REFERENCES biomarker (id),
 group_id text REFERENCES biomarker_group (group_id),
 gender text CHECK (gender IN ('M','F','both')),
-age_category text CHECK (age_category IN ('5 to 10','11 to 14','all')),
+age_category text CHECK (age_category IN ('0-6 months','6-12 months', '12-24 months', '2-5 years', '5-10 years', '11-14 years','all')),
 conditional_info text,
 threshold_type text,
 source text,
-matrix text CHECK (matrix IN ('Plasma or Serum','Whole blood','Red blood cell')),
+matrix text CHECK (matrix IN ('Plasma or Serum','Red blood cell','Whole blood')),
 lower_threshold numeric,
 upper_threshold numeric
 );

@@ -11,12 +11,12 @@ values
 insert into biomarker_group
 (group_id,supra_group,group_name)
 values
-('PSC','Children','Pre School Children	PSC');
+('PSC','Children','Pre School Children');
 
 insert into biomarker_group
 (group_id,supra_group,group_name)
 values
-('SAC','Children','School Age Children	SAC');
+('SAC','Children','School Age Children');
 
 insert into biomarker_group
 (group_id,supra_group,group_name)

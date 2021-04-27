@@ -267,7 +267,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('haemoglobin', 'PSC', 'both', NULL, NULL, 
+   ('haemoglobin', 'PSC', 'both', 0, NULL, 
     'must have been adjusted for altitude and smoking', 'deficiency - severe', 'WHO, 2011', 'Whole blood', 0, 
     69, 'lower, to define severe anemia');
 Insert into BIOMARKER_THRESHOLD
@@ -275,7 +275,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('haemoglobin', 'PSC', 'both', NULL, NULL, 
+   ('haemoglobin', 'PSC', 'both', 0, NULL, 
     'must have been adjusted for altitude and smoking', 'deficiency - moderate', 'WHO, 2011', 'Whole blood', 70, 
     99, 'lower, to define moderate anemia');
 Insert into BIOMARKER_THRESHOLD
@@ -283,7 +283,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('haemoglobin', 'PSC', 'both', NULL, NULL, 
+   ('haemoglobin', 'PSC', 'both', 0, NULL, 
     'must have been adjusted for altitude and smoking', 'deficiency - mild', 'WHO, 2011', 'Whole blood', 100, 
     109, 'lower, to define mild anemia');
 Insert into BIOMARKER_THRESHOLD
@@ -291,7 +291,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('haemoglobin', 'SAC', 'both', NULL, NULL, 
+   ('haemoglobin', 'SAC', 'both', 0, NULL, 
     'must have been adjusted for altitude and smoking', 'deficiency - severe', 'WHO, 2011', 'Whole blood', 0, 
     79, 'lower, to define severe anemia');
 Insert into BIOMARKER_THRESHOLD
@@ -299,7 +299,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('haemoglobin', 'SAC', 'both', NULL, NULL, 
+   ('haemoglobin', 'SAC', 'both', 0, NULL, 
     'must have been adjusted for altitude and smoking', 'deficiency - moderate', 'WHO, 2011', 'Whole blood', 80, 
     109, 'lower, to define moderate anemia');
 Insert into BIOMARKER_THRESHOLD
@@ -307,7 +307,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('haemoglobin', 'SAC', 'both', NULL, NULL, 
+   ('haemoglobin', 'SAC', 'both', 0, NULL, 
     'must have been adjusted for altitude and smoking', 'deficiency - mild', 'WHO, 2011', 'Whole blood', 110, 
     114, 'lower, to define mild anemia');
 Insert into BIOMARKER_THRESHOLD
@@ -315,7 +315,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('haemoglobin', 'SAC', 'both', NULL, NULL, 
+   ('haemoglobin', 'SAC', 'both', 0, NULL, 
     'must have been adjusted for altitude and smoking', 'deficiency - severe', 'WHO, 2011', 'Whole blood', 0, 
     79, 'lower, to define severe anemia');
 Insert into BIOMARKER_THRESHOLD
@@ -323,7 +323,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('haemoglobin', 'SAC', 'both', NULL, NULL, 
+   ('haemoglobin', 'SAC', 'both', 0, NULL, 
     'must have been adjusted for altitude and smoking', 'deficiency - moderate', 'WHO, 2011', 'Whole blood', 80, 
     109, 'lower, to define moderate anemia');
 Insert into BIOMARKER_THRESHOLD
@@ -331,7 +331,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'PSC', 'both', NULL, NULL, 
+   ('ferritin', 'PSC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2020', 'Plasma or Serum', 0, 
     12, 'Lower');
 Insert into BIOMARKER_THRESHOLD
@@ -339,7 +339,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'SAC', 'both', NULL, NULL, 
+   ('ferritin', 'SAC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2020', 'Plasma or Serum', 0, 
     15, 'lower');
 Insert into BIOMARKER_THRESHOLD
@@ -347,7 +347,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'SAC', 'f', NULL, NULL, 
+   ('ferritin', 'SAC', 'f', 0, NULL, 
     NULL, 'excess', 'WHO 2020', 'Plasma or Serum', 150, 
     NULL, 'upper, to define excess in healthy people');
 Insert into BIOMARKER_THRESHOLD
@@ -355,7 +355,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'SAC', 'm', NULL, NULL, 
+   ('ferritin', 'SAC', 'm', 0, NULL, 
     NULL, 'excess', 'WHO 2020', 'Plasma or Serum', 200, 
     NULL, 'upper, to define excess in healthy people');
 Insert into BIOMARKER_THRESHOLD
@@ -363,7 +363,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'SAC', 'both', NULL, NULL, 
+   ('ferritin', 'SAC', 'both', 0, NULL, 
     NULL, 'excess', 'WHO 2020', 'Plasma or Serum', 500, 
     NULL, 'upper, to define excess in non-healthy people');
 Insert into BIOMARKER_THRESHOLD
@@ -371,7 +371,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'WRA', 'f', NULL, NULL, 
+   ('ferritin', 'WRA', 'f', 0, NULL, 
     NULL, 'excess', 'WHO 2020', 'Plasma or Serum', 150, 
     NULL, 'upper, to define excess in healthy people');
 Insert into BIOMARKER_THRESHOLD
@@ -379,7 +379,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'MEN', 'm', NULL, NULL, 
+   ('ferritin', 'MEN', 'm', 0, NULL, 
     NULL, 'deficiency', 'WHO 2020', 'Plasma or Serum', 0, 
     15, 'Lower');
 Insert into BIOMARKER_THRESHOLD
@@ -387,7 +387,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'MEN', 'm', NULL, NULL, 
+   ('ferritin', 'MEN', 'm', 0, NULL, 
     NULL, 'excess', 'WHO 2020', 'Plasma or Serum', 200, 
     NULL, 'upper, to define excess in healthy people');
 Insert into BIOMARKER_THRESHOLD
@@ -395,7 +395,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'MEN', 'm', NULL, NULL, 
+   ('ferritin', 'MEN', 'm', 0, NULL, 
     NULL, 'excess', 'WHO 2020', 'Plasma or Serum', 500, 
     NULL, 'upper, to define excess in non-healthy people');
 Insert into BIOMARKER_THRESHOLD
@@ -403,7 +403,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_retinol', 'WRA', 'f', NULL, NULL, 
+   ('serum_retinol', 'WRA', 'f', 0, NULL, 
     NULL, 'deficiency', 'WHO 2011', 'Plasma or Serum', 0, 
     0.7, 'lower');
 Insert into BIOMARKER_THRESHOLD
@@ -411,7 +411,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_retinol', 'PSC', 'both', NULL, NULL, 
+   ('serum_retinol', 'PSC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2011', 'Plasma or Serum', 0, 
     0.7, 'lower');
 Insert into BIOMARKER_THRESHOLD
@@ -419,7 +419,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_retinol', 'SAC', 'both', NULL, NULL, 
+   ('serum_retinol', 'SAC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2011', 'Plasma or Serum', 0, 
     0.7, 'lower');
 Insert into BIOMARKER_THRESHOLD
@@ -427,7 +427,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_retinol', 'MEN', 'm', NULL, NULL, 
+   ('serum_retinol', 'MEN', 'm', 0, NULL, 
     NULL, 'deficiency', 'WHO 2011', 'Plasma or Serum', 0, 
     0.7, 'lower');
 Insert into BIOMARKER_THRESHOLD
@@ -435,7 +435,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'PSC', NULL, NULL, NULL, 
+   ('serum_folate', 'PSC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     6.8, 'lower, deficiency using macrocytic anaemia as a haematological indicato');
 Insert into BIOMARKER_THRESHOLD
@@ -443,7 +443,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'SAC', NULL, NULL, NULL, 
+   ('serum_folate', 'SAC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     6.8, 'lower, deficiency using macrocytic anaemia as a haematological indicato');
 Insert into BIOMARKER_THRESHOLD
@@ -451,7 +451,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'WRA', NULL, NULL, NULL, 
+   ('serum_folate', 'WRA', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     13.5, 'lower, possible deficiency, using macrocytic anemia as hematological indicator');
 Insert into BIOMARKER_THRESHOLD
@@ -459,7 +459,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'SAC', NULL, NULL, NULL, 
+   ('serum_folate', 'SAC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     13.5, 'lower, possible deficiency, using macrocytic anemia as hematological indicator');
 Insert into BIOMARKER_THRESHOLD
@@ -467,7 +467,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'MEN', NULL, NULL, NULL, 
+   ('serum_folate', 'MEN', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     13.5, 'lower, possible deficiency, using macrocytic anemia as hematological indicator');
 Insert into BIOMARKER_THRESHOLD
@@ -475,7 +475,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'WRA', NULL, NULL, NULL, 
+   ('serum_folate', 'WRA', 'both', 0, NULL, 
     NULL, 'excess', 'WHO 2015', 'Plasma or Serum', 45.3, 
     NULL, 'upper');
 Insert into BIOMARKER_THRESHOLD
@@ -483,7 +483,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'PSC', NULL, NULL, NULL, 
+   ('serum_folate', 'PSC', 'both', 0, NULL, 
     NULL, 'excess', 'WHO 2015', 'Plasma or Serum', 45.3, 
     NULL, 'upper');
 Insert into BIOMARKER_THRESHOLD
@@ -491,7 +491,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'SAC', NULL, NULL, NULL, 
+   ('serum_folate', 'SAC', 'both', 0, NULL, 
     NULL, 'excess', 'WHO 2015', 'Plasma or Serum', 45.3, 
     NULL, 'upper');
 Insert into BIOMARKER_THRESHOLD
@@ -499,7 +499,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'MEN', NULL, NULL, NULL, 
+   ('serum_folate', 'MEN', 'both', 0, NULL, 
     NULL, 'excess', 'WHO 2015', 'Plasma or Serum', 45.3, 
     NULL, 'upper');
 Insert into BIOMARKER_THRESHOLD
@@ -507,7 +507,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'WRA', NULL, NULL, NULL, 
+   ('serum_folate', 'WRA', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     10, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
@@ -515,7 +515,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'PSC', NULL, NULL, NULL, 
+   ('serum_folate', 'PSC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     10, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
@@ -523,7 +523,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'SAC', NULL, NULL, NULL, 
+   ('serum_folate', 'SAC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     10, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
@@ -531,7 +531,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'MEN', NULL, NULL, NULL, 
+   ('serum_folate', 'MEN', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     10, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
@@ -539,7 +539,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('rbc_folate', 'WRA', NULL, NULL, NULL, 
+   ('rbc_folate', 'WRA', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Red blood cell', 0, 
     226.5, 'lower, using macrocytic anaemia as a haematological indicator');
 Insert into BIOMARKER_THRESHOLD
@@ -547,7 +547,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('rbc_folate', 'PSC', NULL, NULL, NULL, 
+   ('rbc_folate', 'PSC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Red blood cell', 0, 
     226.5, 'lower, using macrocytic anaemia as a haematological indicator');
 Insert into BIOMARKER_THRESHOLD
@@ -555,7 +555,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('rbc_folate', 'SAC', NULL, NULL, NULL, 
+   ('rbc_folate', 'SAC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Red blood cell', 0, 
     226.5, 'lower, using macrocytic anaemia as a haematological indicator');
 Insert into BIOMARKER_THRESHOLD
@@ -563,7 +563,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('rbc_folate', 'MEN', NULL, NULL, NULL, 
+   ('rbc_folate', 'MEN', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Red blood cell', 0, 
     226.5, 'lower, using macrocytic anaemia as a haematological indicator');
 Insert into BIOMARKER_THRESHOLD
@@ -571,7 +571,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('rbc_folate', 'WRA', NULL, NULL, NULL, 
+   ('rbc_folate', 'WRA', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Red blood cell', 0, 
     340, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
@@ -579,7 +579,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('rbc_folate', 'PSC', NULL, NULL, NULL, 
+   ('rbc_folate', 'PSC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Red blood cell', 0, 
     340, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
@@ -587,7 +587,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('rbc_folate', 'SAC', NULL, NULL, NULL, 
+   ('rbc_folate', 'SAC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Red blood cell', 0, 
     340, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
@@ -595,7 +595,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('rbc_folate', 'MEN', NULL, NULL, NULL, 
+   ('rbc_folate', 'MEN', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Red blood cell', 0, 
     340, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
@@ -603,7 +603,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('rbc_folate', 'WRA', 'f', NULL, NULL, 
+   ('rbc_folate', 'WRA', 'f', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Red blood cell', 0, 
     906, 'lower, to prevent NTD');
 Insert into BIOMARKER_THRESHOLD
@@ -611,7 +611,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'WRA', 'f', NULL, NULL, 
+   ('vitamin_b12', 'WRA', 'f', 0, NULL, 
     NULL, 'deficiency - severe', 'BONDS 2018', 'Plasma or Serum', 0, 
     75, 'lower, to define severe deficiency');
 Insert into BIOMARKER_THRESHOLD
@@ -619,7 +619,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'WRA', 'f', NULL, NULL, 
+   ('vitamin_b12', 'WRA', 'f', 0, NULL, 
     NULL, 'deficiency', 'BONDS 2018', 'Plasma or Serum', 76, 
     150, 'lower, to define deficiency');
 Insert into BIOMARKER_THRESHOLD
@@ -627,7 +627,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'WRA', 'f', NULL, NULL, 
+   ('vitamin_b12', 'WRA', 'f', 0, NULL, 
     NULL, 'deficiency', 'BONDS 2018', 'Plasma or Serum', 151, 
     221, 'lower, to define depletion');
 Insert into BIOMARKER_THRESHOLD
@@ -635,7 +635,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'MEN', 'm', NULL, NULL, 
+   ('vitamin_b12', 'MEN', 'm', 0, NULL, 
     NULL, 'deficiency - severe', 'BONDS 2018', 'Plasma or Serum', 0, 
     75, 'lower, to define severe deficiency');
 Insert into BIOMARKER_THRESHOLD
@@ -643,7 +643,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'MEN', 'm', NULL, NULL, 
+   ('vitamin_b12', 'MEN', 'm', 0, NULL, 
     NULL, 'deficiency', 'BONDS 2018', 'Plasma or Serum', 76, 
     150, 'lower, to define deficiency');
 Insert into BIOMARKER_THRESHOLD
@@ -651,7 +651,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'MEN', 'm', NULL, NULL, 
+   ('vitamin_b12', 'MEN', 'm', 0, NULL, 
     NULL, 'deficiency', 'BONDS 2018', 'Plasma or Serum', 151, 
     221, 'lower, to define depletion');
 Insert into BIOMARKER_THRESHOLD
@@ -659,7 +659,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'PSC', NULL, 0, 6, 
+   ('vitamin_b12', 'PSC', 'both', 0, 6, 
     NULL, 'deficiency', 'BONDS 2018', 'Plasma or Serum', 0, 
     119, 'lower, to define depletion');
 Insert into BIOMARKER_THRESHOLD
@@ -667,7 +667,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'PSC', NULL, 0, 6, 
+   ('vitamin_b12', 'PSC', 'both', 0, 6, 
     NULL, 'excess', 'BONDS 2018', 'Plasma or Serum', 120, 
     691, 'upper, to define inadequacy');
 Insert into BIOMARKER_THRESHOLD
@@ -675,7 +675,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'PSC', NULL, 6, 12, 
+   ('vitamin_b12', 'PSC', 'both', 6, 12, 
     NULL, 'deficiency', 'BONDS 2018', 'Plasma or Serum', 0, 
     120, 'lower, to define depletion');
 Insert into BIOMARKER_THRESHOLD
@@ -683,7 +683,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'PSC', NULL, 6, 12, 
+   ('vitamin_b12', 'PSC', 'both', 6, 12, 
     NULL, 'excess', 'BONDS 2018', 'Plasma or Serum', 121, 
     521, 'upper, to define inadequacy');
 Insert into BIOMARKER_THRESHOLD
@@ -691,7 +691,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'PSC', NULL, 12, 24, 
+   ('vitamin_b12', 'PSC', 'both', 12, 24, 
     NULL, 'deficiency', 'BONDS 2018', 'Plasma or Serum', 0, 
     164, 'lower, to define depletion');
 Insert into BIOMARKER_THRESHOLD
@@ -699,7 +699,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'PSC', NULL, 12, 24, 
+   ('vitamin_b12', 'PSC', 'both', 12, 24, 
     NULL, 'excess', 'BONDS 2018', 'Plasma or Serum', 165, 
     581, 'upper, to define inadequacy');
 Insert into BIOMARKER_THRESHOLD
@@ -707,7 +707,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'PSC', NULL, 24, 60, 
+   ('vitamin_b12', 'PSC', 'both', 24, 60, 
     NULL, 'deficiency', 'BONDS 2018', 'Plasma or Serum', 0, 
     182, 'lower, to define depletion');
 Insert into BIOMARKER_THRESHOLD
@@ -715,7 +715,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('vitamin_b12', 'PSC', NULL, 24, 60, 
+   ('vitamin_b12', 'PSC', 'both', 24, 60, 
     NULL, 'excess', 'BONDS 2018', 'Plasma or Serum', 183, 
     261, 'upper, to define inadequacy');
 Insert into BIOMARKER_THRESHOLD
@@ -723,7 +723,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('haemoglobin', 'SAC', 'both', NULL, NULL, 
+   ('haemoglobin', 'SAC', 'both', 0, NULL, 
     'must have been adjusted for altitude and smoking', 'deficiency - mild', 'WHO, 2011', 'Whole blood', 110, 
     119, 'lower, to define mild anemia');
 Insert into BIOMARKER_THRESHOLD
@@ -731,7 +731,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'WRA', 'f', NULL, NULL, 
+   ('ferritin', 'WRA', 'f', 0, NULL, 
     NULL, 'deficiency', 'WHO 2020', 'Plasma or Serum', 0, 
     15, 'lower');
 Insert into BIOMARKER_THRESHOLD
@@ -739,7 +739,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'WRA', 'f', NULL, NULL, 
+   ('ferritin', 'WRA', 'f', 0, NULL, 
     NULL, 'excess', 'WHO 2020', 'Plasma or Serum', 500, 
     NULL, 'upper, to define excess in non-healthy people');
 Insert into BIOMARKER_THRESHOLD
@@ -747,7 +747,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('ferritin', 'PREG', 'f', NULL, NULL, 
+   ('ferritin', 'PREG', 'f', 0, NULL, 
     'first trimester', 'deficiency', 'WHO 2020', 'Plasma or Serum', 0, 
     15, 'lower');
 Insert into BIOMARKER_THRESHOLD
@@ -755,7 +755,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'WRA', NULL, NULL, NULL, 
+   ('serum_folate', 'WRA', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     6.8, 'lower, deficiency using macrocytic anaemia as a haematological indicato');
 Insert into BIOMARKER_THRESHOLD
@@ -763,7 +763,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'MEN', NULL, NULL, NULL, 
+   ('serum_folate', 'MEN', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     6.8, 'lower, deficiency using macrocytic anaemia as a haematological indicato');
 Insert into BIOMARKER_THRESHOLD
@@ -771,7 +771,7 @@ Insert into BIOMARKER_THRESHOLD
     CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE, MATRIX, LOWER_THRESHOLD, 
     UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'PSC', NULL, NULL, NULL, 
+   ('serum_folate', 'PSC', 'both', 0, NULL, 
     NULL, 'deficiency', 'WHO 2015', 'Plasma or Serum', 0, 
     13.5, 'lower, possible deficiency, using macrocytic anemia as hematological indicator');
 COMMIT;

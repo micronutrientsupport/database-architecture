@@ -15,8 +15,8 @@ CREATE TABLE biomarker_measurement (
     , crp                     numeric(3,2)
     , agp                     numeric(3,2)
     , iodine                  numeric(5,2)
-	, am_or_pm    			  text check (am_or_pm in ('am','pm') )   
-	, fasting_yn		      boolean
+    , am_or_pm                text check (am_or_pm in ('am','pm') )   
+    , was_fasting             boolean
 
 );
 COMMENT ON TABLE  Biomarker_measurement IS 'Levels of various biomarkers as measured by sampling blood, urine, or breastmilk from a household member';
@@ -36,4 +36,4 @@ COMMENT ON COLUMN Biomarker_measurement.crp              IS 'The amount of C-rea
 COMMENT ON COLUMN Biomarker_measurement.agp              IS 'The amount of Alpha 1 acid GlycoProtein (AGO) in the blood, in grams per litre. A value ≥1 defines inflammation';
 COMMENT ON COLUMN Biomarker_measurement.iodine           IS 'The amount of Urinary Iodine, in micrograms per litre. ';
 COMMENT ON COLUMN Biomarker_measurement.am_or_pm         IS 'Whether the measurement was taken in the morning or afternoon (pre or post noon local time)';
-COMMENT ON COLUMN Biomarker_measurement.fasting_yn       IS 'Whether the sample was taken while the patient was fasting';
+COMMENT ON COLUMN Biomarker_measurement.was_fasting      IS 'Whether the sample was taken while the patient was fasting';

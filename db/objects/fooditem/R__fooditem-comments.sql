@@ -5,7 +5,6 @@ COMMENT ON COLUMN FOODITEM.Original_Food_Name             IS 'The food name as i
 COMMENT ON COLUMN FOODITEM.food_genus_id                  IS 'Foreign key to the corresponding entry in the food_genus2 table. To which food_genus2 food does this entry best correspond to?';
 COMMENT ON COLUMN FOODITEM.FCT_SOURCE_ID                  IS 'Foreign Key to the Food Composition Table from which this food came';
 COMMENT ON COLUMN FOODITEM.DATA_REFERENCE_ID              IS 'The publication in which the micronutrient contents of this food were found. Taken from the Food Composition Table';
-COMMENT ON COLUMN FOODITEM.Food_Group                     IS ' ';
 COMMENT ON COLUMN FOODITEM.Moisture_in_g                  IS 'The moisture content of this food item, in grams per 100g';
 COMMENT ON COLUMN FOODITEM.Energy_in_kCal                 IS ' ';
 COMMENT ON COLUMN FOODITEM.Energy_in_kJ                   IS ' ';

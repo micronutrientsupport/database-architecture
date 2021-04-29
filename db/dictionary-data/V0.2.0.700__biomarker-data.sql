@@ -14,7 +14,8 @@ VALUES
     ( 'zinc'          , 'Zinc'                                 , 'µg/dL'  , 'blood' ),
     ( 'crp'           , 'C-reactive Protein (CRP)'             , 'mg/L'   , 'blood' ),
     ( 'agp'           , 'Alpha 1 acid GlycoProtein (AGP)'      , 'g/L'    , 'blood' ),
-    ( 'iodine'        , 'Iodine'                               , 'µg/L'   , 'urine' )
+    ( 'iodine'        , 'Iodine'                               , 'µg/L'   , 'urine' ),
+	( 'selenium'      , 'Selenium'                             , 'ng/mL'  , 'blood' )
 
 
 

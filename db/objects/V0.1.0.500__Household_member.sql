@@ -11,6 +11,9 @@ CREATE TABLE household_member (
     , had_illness          boolean
     , had_malaria          boolean
     , had_diarrhoea        boolean
+    , survey_cluster       integer
+    , survey_strata        integer
+    , survey_weight        integer
 );
 COMMENT ON TABLE household_member IS 'The people living in a household and their biological characteristics';
 COMMENT ON COLUMN household_member.household_id     IS 'The ID number of the household that this person belongs to';
@@ -24,4 +27,7 @@ COMMENT on COLUMN household_member.is_smoker        IS 'Whether this person smok
 COMMENT on COLUMN household_member.had_illness      IS 'Whether this person has been ill in the last two weeks';
 COMMENT on COLUMN household_member.had_malaria      IS 'Whether this person has had malaria in the last two weeks';
 COMMENT on COLUMN household_member.had_diarrhoea    IS 'Whether this person has had diarrhoea in the last two weeks';
+COMMENT on COLUMN household_member.survey_cluster   IS 'The surveying cluster used for selecting this individual';
+COMMENT on COLUMN household_member.survey_strata    IS 'The surveying strata used for selecting this individual';
+COMMENT on COLUMN household_member.survey_weight    IS 'The surveying weight used for selecting this individual';
 

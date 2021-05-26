@@ -28,28 +28,31 @@ join household hh on hm.household_id = hh.id -- Details of the household e.g. lo
 left join subregion sr on st_contains(sr.geometry, hh.location) -- Which subregion the household falls into for aggregation
 
 join survey_group_def sgd on -- Details of the survey, groupings WRA, AGE etc.
+	sgd.survey_id = hh.survey_id and
 	(
-	-- If age bounds, match between bounds
-	-- and by sex.
-	-- TODO: check which of the bounds is inclusive and which exclusive
-	sgd.age_lower_in_months < hm.age_in_months 
-	and sgd.age_upper_in_months >= hm.age_in_months
-	and (( sgd.sex = hm.sex) or (sgd.sex = 'both'))
-	)
-	or
-	(
-	-- No age bounds,  still join in sex but not if PREG as
-	-- has extra constraints
-	sgd.age_lower_in_months isnull 
-	and sgd.age_upper_in_months isnull 
-	and (( sgd.sex = hm.sex) or (sgd.sex = 'both'))
-	and sgd.group_id != 'PREG'
-	)
-	or
-	(
-	-- Special case for pregnant
-	sgd.group_id = 'PREG'
-	and hm.is_pregnant
+		(
+		-- If age bounds, match between bounds
+		-- and by sex.
+		-- TODO: check which of the bounds is inclusive and which exclusive
+		sgd.age_lower_in_months < hm.age_in_months 
+		and sgd.age_upper_in_months >= hm.age_in_months
+		and (( sgd.sex = hm.sex) or (sgd.sex = 'both'))
+		)
+		or
+		(
+		-- No age bounds,  still join in sex but not if PREG as
+		-- has extra constraints
+		sgd.age_lower_in_months isnull 
+		and sgd.age_upper_in_months isnull 
+		and (( sgd.sex = hm.sex) or (sgd.sex = 'both'))
+		and sgd.group_id != 'PREG'
+		)
+		or
+		(
+		-- Special case for pregnant
+		sgd.group_id = 'PREG'
+		and hm.is_pregnant
+		)
 	)
 	
 	order by sgd.survey_id, sgd.group_id ASC

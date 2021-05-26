@@ -9,6 +9,7 @@ select
 	, hm.age_in_months
 	, hm.is_pregnant
 	, bm.was_fasting
+	, bm.am_or_pm
 	, bm.haemoglobin
 	, bm.ferritin
 	, bm.stfr

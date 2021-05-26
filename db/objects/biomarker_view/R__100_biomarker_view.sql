@@ -8,6 +8,7 @@ select
     , hh.urbanity
 	, hm.age_in_months
 	, hm.is_pregnant
+	, bm.was_fasting
 	, bm.haemoglobin
 	, bm.ferritin
 	, bm.stfr

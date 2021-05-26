@@ -10,6 +10,9 @@ select
 	, hm.is_pregnant
 	, bm.was_fasting
 	, bm.am_or_pm
+	, hm.survey_cluster
+	, hm.survey_strata
+	, hm.survey_weight
 	, bm.haemoglobin
 	, bm.ferritin
 	, bm.stfr

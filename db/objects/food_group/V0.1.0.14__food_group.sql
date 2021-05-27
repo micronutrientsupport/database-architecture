@@ -7,7 +7,8 @@ CREATE TABLE FOOD_GROUP (
 
 INSERT INTO FOOD_GROUP (id, parent_id, name)
 VALUES
-    (1,1, 'Cereals and their products')
+    (0,0,'other')
+    , (1,1, 'Cereals and their products')
     , (101,1,'Rice and rice-based products')
     , (102,1,'Maize and maize-based products')
     , (103,1,'Wheat and wheat-based products')

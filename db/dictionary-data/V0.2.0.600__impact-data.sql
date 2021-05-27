@@ -68,6 +68,9 @@ VALUES
     ('ctoml', 'Total Other Oilseed Meal', 3),
     ('ccoco', 'Cocoa', 14),
     ('ccafe', 'Coffee', 14),
+    ('ccott', 'Cotton', 0),
     ('cteas', 'Tea', 14),
-    ('cgrss', 'Grass', 9)
+    ('cothr', 'Other Crops', 0),
+    ('cfodr', 'Fodders', 0),
+    ('cgrss', 'Grass', 0)
 ;

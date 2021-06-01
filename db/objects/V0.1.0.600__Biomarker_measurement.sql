@@ -7,15 +7,14 @@ CREATE TABLE biomarker_measurement (
     , ferritin                numeric(5,2)
     , stfr                    numeric(3,2)
     , rbp                     numeric(3,2)
-    , serum_retinol           numeric(3,2)
-    , rbc_folate              numeric(4,1)
-    , serum_folate            numeric(3,1)
+    , retinol                 numeric(3,2)
+    , folate                  numeric(4,1)
     , vitamin_b12             numeric(5,1)
     , zinc                    numeric(3,1)
     , crp                     numeric(3,2)
     , agp                     numeric(3,2)
     , iodine                  numeric(5,2)
-    , am_or_pm                text check (am_or_pm in ('am','pm') )   
+    , am_or_pm                text check (am_or_pm in ('am','pm') )
     , was_fasting             boolean
 
 );
@@ -27,9 +26,8 @@ COMMENT ON COLUMN Biomarker_measurement.haemoglobin      IS 'The amount of haemo
 COMMENT ON COLUMN Biomarker_measurement.ferritin         IS 'The amount of Serum Ferritn found in the blood, in micrograms per litre';
 COMMENT ON COLUMN Biomarker_measurement.stfr             IS 'The amount of Soluble Transferrin Receptors (sTfR) in the blood, in milligrams per litre';
 COMMENT ON COLUMN Biomarker_measurement.rbp              IS 'The amount of Retinol Binding Protein (RBP) in the blood, in micromoles per litre';
-COMMENT ON COLUMN Biomarker_measurement.serum_retinol    IS 'The amount of Serum Retinol in the blood, in micromoles per litre';
-COMMENT ON COLUMN Biomarker_measurement.rbc_folate       IS 'The amount of Red Blood Cell (RBC) Folate in the blood, in nanomoles per litre';
-COMMENT ON COLUMN Biomarker_measurement.serum_folate     IS 'The amount of Serum Folate in the blood, in nanomoles per litre';
+COMMENT ON COLUMN Biomarker_measurement.retinol          IS 'The amount of Retinol in the blood, in micromoles per litre';
+COMMENT ON COLUMN Biomarker_measurement.folate           IS 'The amount of Folate in the blood, in nanomoles per litre';
 COMMENT ON COLUMN Biomarker_measurement.vitamin_b12      IS 'The amount of Vitamin B12 (also known as cobalamin) in the blood, in picomoles per litre';
 COMMENT ON COLUMN Biomarker_measurement.zinc             IS 'The amount of plasma or serum zinc, in micrograms per decilitre';
 COMMENT ON COLUMN Biomarker_measurement.crp              IS 'The amount of C-reactive protein (CRP) in the blood, in milligrams per litre. A value ≥5 defines inflammation';

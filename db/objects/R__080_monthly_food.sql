@@ -10,7 +10,7 @@ FROM (
 		 mn_name
 		 , sum((mn_value / 100 * amount_consumed_in_g )) AS mn_consumed
 		 , EXTRACT(MONTH FROM hh.interview_date) AS month_consumed
-		 , fg.food_group
+		 , fg.food_group_id
 		 , fct_source_id
 		 , hh.survey_id
 	FROM
@@ -26,7 +26,7 @@ FROM (
 	GROUP BY
 		survey_id
 		, fct_source_id
-		, food_group
+		, food_group_id
 		, mn_name
 		, month_consumed
 ) a

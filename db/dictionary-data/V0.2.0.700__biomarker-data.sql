@@ -7,7 +7,7 @@ VALUES
     ( 'ferritin'      , 'Ferritin'                             , 'µg/L'   , 'blood' ),
     ( 'stfr'          , 'Soluble Transferrin Receptors (sTfR)' , 'mg/L'   , 'blood' ),
     ( 'rbp'           , 'Retinol Binding Protein (RBP)'        , 'µmol/L' , 'blood' ),
-    ( 'serum_retinol' , 'Serum Retinol'                        , 'µmol/L' , 'blood' ),
+    ( 'retinol'       , 'Retinol'                              , 'µmol/L' , 'blood' ),
     ( 'rbc_folate'    , 'RBC Folate'                           , 'nmol/L' , 'blood' ),
     ( 'serum_folate'  , 'Serum Folate'                         , 'nmol/L' , 'blood' ),
     ( 'vitamin_b12'   , 'Vitamin B12'                          , 'pmol/L' , 'blood' ),

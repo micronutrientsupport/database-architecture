@@ -8,7 +8,8 @@ CREATE TABLE biomarker_measurement (
     , stfr                    numeric(3,2)
     , rbp                     numeric(3,2)
     , retinol                 numeric(3,2)
-    , folate                  numeric(4,1)
+    , rbc_folate              numeric(4,1)
+    , ps_folate               numeric(3,1)
     , vitamin_b12             numeric(5,1)
     , zinc                    numeric(3,1)
     , crp                     numeric(3,2)
@@ -27,7 +28,8 @@ COMMENT ON COLUMN Biomarker_measurement.ferritin         IS 'The amount of (seru
 COMMENT ON COLUMN Biomarker_measurement.stfr             IS 'The amount of (serum or plasma) Soluble Transferrin Receptors (sTfR) in the blood, in milligrams per litre';
 COMMENT ON COLUMN Biomarker_measurement.rbp              IS 'The amount of (serum or plasma) Retinol Binding Protein (RBP) in the blood, in micromoles per litre';
 COMMENT ON COLUMN Biomarker_measurement.retinol          IS 'The amount of (serum or plasma) Retinol in the blood, in micromoles per litre';
-COMMENT ON COLUMN Biomarker_measurement.folate           IS 'The amount of (serum or plasma or red blood cell) Folate in the blood, in nanomoles per litre';
+COMMENT ON COLUMN Biomarker_measurement.rbc_folate       IS 'The amount of red blood cell Folate in the blood, in nanomoles per litre';
+COMMENT ON COLUMN Biomarker_measurement.ps_folate        IS 'The amount of serum or plasma Folate in the blood, in nanomoles per litre';
 COMMENT ON COLUMN Biomarker_measurement.vitamin_b12      IS 'The amount of (serum or plasma) Vitamin B12 (also known as cobalamin) in the blood, in picomoles per litre';
 COMMENT ON COLUMN Biomarker_measurement.zinc             IS 'The amount of (serum or plasma) zinc, in micrograms per decilitre';
 COMMENT ON COLUMN Biomarker_measurement.crp              IS 'The amount of (serum or plasma) C-reactive protein (CRP) in the blood, in milligrams per litre. A value ≥5 defines inflammation';

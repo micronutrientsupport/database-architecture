@@ -9,7 +9,7 @@ VALUES
     ( 'rbp'           , 'Retinol Binding Protein (RBP)'        , 'µmol/L' , 'blood' ),
     ( 'retinol'       , 'Retinol'                              , 'µmol/L' , 'blood' ),
     ( 'rbc_folate'    , 'RBC Folate'                           , 'nmol/L' , 'blood' ),
-    ( 'serum_folate'  , 'Serum Folate'                         , 'nmol/L' , 'blood' ),
+    ( 'ps_folate'     , 'Plasma or Serum Folate'               , 'nmol/L' , 'blood' ),
     ( 'vitamin_b12'   , 'Vitamin B12'                          , 'pmol/L' , 'blood' ),
     ( 'zinc'          , 'Zinc'                                 , 'µg/dL'  , 'blood' ),
     ( 'crp'           , 'C-reactive Protein (CRP)'             , 'mg/L'   , 'blood' ),

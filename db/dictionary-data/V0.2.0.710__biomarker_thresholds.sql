@@ -326,79 +326,79 @@ Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'PSC', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'PSC', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 6.8, 'lower, deficiency using macrocytic anaemia as a haematological indicato');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'SAC', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'SAC', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 6.8, 'lower, deficiency using macrocytic anaemia as a haematological indicato');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'WRA', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'WRA', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 13.5, 'lower, possible deficiency, using macrocytic anemia as hematological indicator');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'SAC', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'SAC', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 13.5, 'lower, possible deficiency, using macrocytic anemia as hematological indicator');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'MEN', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'MEN', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 13.5, 'lower, possible deficiency, using macrocytic anemia as hematological indicator');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'WRA', NULL, 'excess', 'WHO 2015',
+   ('ps_folate', 'WRA', NULL, 'excess', 'WHO 2015',
     'Plasma or Serum', 45.3, NULL, 'upper');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'PSC', NULL, 'excess', 'WHO 2015',
+   ('ps_folate', 'PSC', NULL, 'excess', 'WHO 2015',
     'Plasma or Serum', 45.3, NULL, 'upper');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'SAC', NULL, 'excess', 'WHO 2015',
+   ('ps_folate', 'SAC', NULL, 'excess', 'WHO 2015',
     'Plasma or Serum', 45.3, NULL, 'upper');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'MEN', NULL, 'excess', 'WHO 2015',
+   ('ps_folate', 'MEN', NULL, 'excess', 'WHO 2015',
     'Plasma or Serum', 45.3, NULL, 'upper');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'WRA', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'WRA', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 10, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'PSC', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'PSC', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 10, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'SAC', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'SAC', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 10, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'MEN', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'MEN', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 10, 'lower, using homocysteine concentrations as metabolic indicator ');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
@@ -587,18 +587,18 @@ Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'WRA', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'WRA', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 6.8, 'lower, deficiency using macrocytic anaemia as a haematological indicato');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'MEN', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'MEN', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 6.8, 'lower, deficiency using macrocytic anaemia as a haematological indicato');
 Insert into BIOMARKER_THRESHOLD
    (BIOMARKER_ID, GROUP_ID, CONDITIONAL_INFO, THRESHOLD_TYPE, SOURCE,
     MATRIX, LOWER_THRESHOLD, UPPER_THRESHOLD, COMMENTS)
  Values
-   ('serum_folate', 'PSC', NULL, 'deficiency', 'WHO 2015',
+   ('ps_folate', 'PSC', NULL, 'deficiency', 'WHO 2015',
     'Plasma or Serum', 0, 13.5, 'lower, possible deficiency, using macrocytic anemia as hematological indicator');
 COMMIT;

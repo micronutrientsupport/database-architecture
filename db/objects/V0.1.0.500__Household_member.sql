@@ -27,7 +27,7 @@ COMMENT on COLUMN household_member.is_smoker        IS 'Whether this person smok
 COMMENT on COLUMN household_member.had_illness      IS 'Whether this person has been ill in the last two weeks';
 COMMENT on COLUMN household_member.had_malaria      IS 'Whether this person has had malaria in the last two weeks';
 COMMENT on COLUMN household_member.had_diarrhoea    IS 'Whether this person has had diarrhoea in the last two weeks';
-COMMENT on COLUMN household_member.survey_cluster   IS 'The surveying cluster used for selecting this individual';
-COMMENT on COLUMN household_member.survey_strata    IS 'The surveying strata used for selecting this individual';
-COMMENT on COLUMN household_member.survey_weight    IS 'The surveying weight used for selecting this individual';
+COMMENT on COLUMN household_member.survey_cluster   IS 'The surveying cluster used for selecting this individual'; -- TODO: more info
+COMMENT on COLUMN household_member.survey_strata    IS 'The surveying strata used for selecting this individual';  -- TODO: more info
+COMMENT on COLUMN household_member.survey_weight    IS 'The surveying weight used for selecting this individual';  -- TODO: more info
 

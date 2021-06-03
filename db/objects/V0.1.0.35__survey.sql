@@ -17,6 +17,6 @@ COMMENT ON COLUMN survey.surveying_date_start  IS 'The date when surveying and i
 COMMENT ON COLUMN survey.surveying_date_end    IS 'The date when no further interviews took place';
 COMMENT ON COLUMN survey.geometry              IS 'The area covered by the survey; all households interviewed by the survey should fall into this area';
 COMMENT ON COLUMN survey.geonetwork_uuid       IS 'a UUID for Geonetwork. See https://geonetwork-opensource.org/ for further info';
-COMMENT ON COLUMN survey.survey_weight_factor  IS 'The factor survey weightings have been scaled by'
+COMMENT ON COLUMN survey.survey_weight_factor  IS 'The factor survey weightings have been scaled by';
 COMMENT ON COLUMN survey.notes                 IS 'a generic text field for notes about a survey. Can include such as: Whether biomarker measurements were taken from blood plasma or blood serum';
 

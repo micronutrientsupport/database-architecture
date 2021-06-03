@@ -7,7 +7,7 @@ COMMENT ON TABLE food_genus_confidence IS 'Dictionary table of possible values u
 
 INSERT INTO food_genus_confidence (id)
 VALUES
-    ('High')
-    , ('Medium')
-    , ('Low')
+    ('high')
+    , ('medium')
+    , ('low')
 

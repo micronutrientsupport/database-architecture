@@ -3,7 +3,7 @@ CREATE TABLE household_member (
     , household_id         bigint  references household (id)
     , original_id          text
     , sex                  text CHECK (sex in ('m','f'))
-    , education_level      text CHECK (education_level IN ('primary', 'secondary', 'tertiary'))
+    , education_level      text CHECK (education_level IN ('none', 'primary', 'secondary', 'tertiary'))
     , age_in_months        integer
     , is_breastfed         boolean
     , is_lactating         boolean

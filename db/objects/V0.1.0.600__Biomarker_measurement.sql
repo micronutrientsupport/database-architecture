@@ -32,8 +32,8 @@ COMMENT ON COLUMN Biomarker_measurement.rbc_folate          IS 'The amount of re
 COMMENT ON COLUMN Biomarker_measurement.ps_folate           IS 'The amount of serum or plasma Folate in the blood, in nanomoles per litre';
 COMMENT ON COLUMN Biomarker_measurement.vitamin_b12         IS 'The amount of (serum or plasma) Vitamin B12 (also known as cobalamin) in the blood, in picomoles per litre';
 COMMENT ON COLUMN Biomarker_measurement.zinc                IS 'The amount of (serum or plasma) zinc, in micrograms per decilitre';
-COMMENT ON COLUMN Biomarker_measurement.crp                 IS 'The amount of (serum or plasma) C-reactive protein (CRP) in the blood, in milligrams per litre. A value ≥5 defines inflammation';
-COMMENT ON COLUMN Biomarker_measurement.agp                 IS 'The amount of (serum or plasma) Alpha 1 acid GlycoProtein (AGP) in the blood, in grams per litre. A value ≥1 defines inflammation';
+COMMENT ON COLUMN Biomarker_measurement.crp                 IS 'The amount of (serum or plasma) C-reactive protein (CRP) in the blood, in milligrams per litre. A value >=5 defines inflammation';
+COMMENT ON COLUMN Biomarker_measurement.agp                 IS 'The amount of (serum or plasma) Alpha 1 acid GlycoProtein (AGP) in the blood, in grams per litre. A value >=1 defines inflammation';
 COMMENT ON COLUMN Biomarker_measurement.iodine              IS 'The amount of Urinary Iodine, in micrograms per litre. ';
 COMMENT ON COLUMN Biomarker_measurement.time_of_day_sampled IS 'Whether the measurement was taken in the morning or afternoon (pre or post noon local time)';
 COMMENT ON COLUMN Biomarker_measurement.was_fasting         IS 'Whether the sample was taken while the patient was fasting';

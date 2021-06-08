@@ -17,7 +17,7 @@ CREATE TABLE FOODITEM (
 	, MonounsaturatedFA_in_g         numeric(20,10)
 	, PolyunsaturatedFA_in_g         numeric(20,10)
 	, Cholesterol_in_mg              numeric(20,10)
-	, Carbohydrateavailable_in_g     numeric(20,10)
+	, carbohydrate_in_g              numeric(20,10)
 	, Fibre_in_g                     numeric(20,10)
 	, Ash_in_g                       numeric(20,10)
 	, Ca_in_mg                       numeric(20,10)

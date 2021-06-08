@@ -30,7 +30,7 @@ VALUES
     -- ('Starch'       , 'Starch'        , 'other'   , 'g'     , 'Description for Starch'                      , 'Starch_in_g'                , '0' , NULL          , '1' , '0') ,
     ('Ash'          , 'Ash'           , 'other'   , 'g'     , 'Description for Ash'                         , 'Ash_in_g'                   , '0' , NULL          , '1' , '0') ,
     ('Fibre'        , 'Fibre'         , 'other'   , 'g'     , 'Description for Fibre'                       , 'Fibre_in_g'                 , '0' , NULL          , '1' , '0') ,
-    ('Carbohydrate' , 'Carbhohydrate' , 'other'   , 'g'     , 'Description for Carbohydrate'                , 'Carbohydrateavailable_in_g' , '0' , NULL          , '1' , '0') ,
+    ('Carbohydrate' , 'Carbhohydrate' , 'other'   , 'g'     , 'Description for Carbohydrate'                , 'carbohydrate_in_g'          , '0' , NULL          , '1' , '0') ,
     ('Cholesterol'  , 'Cholestorol'   , 'other'   , 'mg'    , 'Description for Cholestorol'                 , 'Cholesterol_in_mg'          , '0' , NULL          , '1' , '0') ,
     ('Protein'      , 'Total Protein' , 'other'   , 'g'     , 'Description for Protetin'                    , 'TotalProtein_in_g'          , '1' , 'protein'     , '1' , '0') ,
     ('Fat'          , 'Total Fats'    , 'other'   , 'g'     , 'Description for Fats'                        , 'TotalFats_in_g'             , '0' , NULL          , '1' , '0') ,

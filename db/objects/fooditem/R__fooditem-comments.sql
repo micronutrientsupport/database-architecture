@@ -15,7 +15,7 @@ COMMENT ON COLUMN FOODITEM.SaturatedFA_in_g               IS 'Saturated Fatty Ac
 COMMENT ON COLUMN FOODITEM.MonounsaturatedFA_in_g         IS 'Monounsaturated Fatty Acids, in grams per 100g dry matter';
 COMMENT ON COLUMN FOODITEM.PolyunsaturatedFA_in_g         IS 'Polyunsaturated Fatty Acids, in grams per 100g dry matter';
 COMMENT ON COLUMN FOODITEM.Cholesterol_in_mg              IS 'The Cholesterol content of this food item, in milligrams per 100g dry matter';
-COMMENT ON COLUMN FOODITEM.Carbohydrateavailable_in_g     IS ' ';
+COMMENT ON COLUMN FOODITEM.carbohydrate_in_g              IS ' ';
 COMMENT ON COLUMN FOODITEM.Fibre_in_g                     IS 'The total dietary fibre content of this food item (determined by multiple methods), in grams per 100g dry matter';
 COMMENT ON COLUMN FOODITEM.Ash_in_g                       IS '';
 COMMENT ON COLUMN FOODITEM.Ca_in_mg                       IS 'The Calcium (Ca) content of this food item, in milligrams per 100g dry matter';

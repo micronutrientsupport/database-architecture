@@ -13,7 +13,7 @@ SELECT
     , avg(monounsaturatedfa_in_g     )  as monounsaturatedfa_in_g
     , avg(polyunsaturatedfa_in_g     )  as polyunsaturatedfa_in_g
     , avg(cholesterol_in_mg          )  as cholesterol_in_mg
-    , avg(carbohydrate_in_g          )  as carbohydrate_in_g
+    , avg(carbohydrates_in_g         )  as carbohydrates_in_g
     , avg(fibre_in_g                 )  as fibre_in_g
     , avg(ash_in_g                   )  as ash_in_g
     , avg(ca_in_mg                   )  as ca_in_mg

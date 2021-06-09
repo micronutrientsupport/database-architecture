@@ -14,7 +14,7 @@ SELECT
         , sum(MonounsaturatedFA_in_g         / 100 * amount_consumed_in_g) as MonounsaturatedFA_in_g
         , sum(PolyunsaturatedFA_in_g         / 100 * amount_consumed_in_g) as PolyunsaturatedFA_in_g
         , sum(Cholesterol_in_mg              / 100 * amount_consumed_in_g) as Cholesterol_in_mg
-        , sum(carbohydrate_in_g              / 100 * amount_consumed_in_g) as carbohydrate_in_g
+        , sum(carbohydrates_in_g             / 100 * amount_consumed_in_g) as carbohydrates_in_g
         , sum(Fibre_in_g                     / 100 * amount_consumed_in_g) as Fibre_in_g
         , sum(Ash_in_g                       / 100 * amount_consumed_in_g) as Ash_in_g
         , sum(Ca_in_mg                       / 100 * amount_consumed_in_g) as Ca_in_mg

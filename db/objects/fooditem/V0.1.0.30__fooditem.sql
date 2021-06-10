@@ -6,7 +6,7 @@ CREATE TABLE FOODITEM (
 	, food_genus_id                  text REFERENCEs food_genus (id)
 	, food_genus_confidence          text REFERENCES food_genus_confidence (id)
     , FCT_SOURCE_ID                  integer REFERENCES FCT_SOURCE (ID)
-	, DATA_REFERENCE_ID              text
+	, citation_id                    text
 	, Moisture_in_g                  numeric(20,10)
 	, Energy_in_kCal                 numeric(20,10)
 	, Energy_in_kJ                   numeric(20,10)
@@ -17,7 +17,7 @@ CREATE TABLE FOODITEM (
 	, MonounsaturatedFA_in_g         numeric(20,10)
 	, PolyunsaturatedFA_in_g         numeric(20,10)
 	, Cholesterol_in_mg              numeric(20,10)
-	, Carbohydrateavailable_in_g     numeric(20,10)
+	, carbohydrates_in_g             numeric(20,10)
 	, Fibre_in_g                     numeric(20,10)
 	, Ash_in_g                       numeric(20,10)
 	, Ca_in_mg                       numeric(20,10)

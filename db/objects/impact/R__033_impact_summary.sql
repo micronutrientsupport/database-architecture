@@ -4,7 +4,7 @@ SELECT
 	country.id as country
     , micronutrient.id as micronutrient
    	, impact_scenario.id as scenario
-    , intake_threshold.rda as recommeded
+    , intake_threshold.rda as recommended
     , interpolate_impact_year.reference_val / 365 as daily_reference_val
     , interpolate_impact_year.reference_year
     , interpolate_impact_year.intersect_year

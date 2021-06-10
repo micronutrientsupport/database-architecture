@@ -12,12 +12,12 @@ food_subgroup              |    The food subgroup for this food genus.          
 food_genus_confidence      |    How confident we are in the matching. Mediums will show a warning to the user, low confidence fooditems won't be used in any calculations at all. Possible values: [ 'High' , 'Medium', 'Low']                |
 fct_name                   |    The name (citation text?) for the food composition table from which this fooditem came. For example, 'Gambia Prynand Paul'.                                                                                   |
 ~~fct_pub_date~~           |    ~~The publication date of the FCT, if known~~                                                                                                                                                                    |
-data_reference_name        |  The name of this citation                                                                                                                                                                                       |
-data_reference_original_id |  the original id of this citation                                                                                                                                                                                |
-data_reference_author      |  The author of the publication from where the nutrient values were derived                                                                                                                                     |
-data_reference_publication |   The publication in which the micronutrient contents of this food were found.                                                                                                                                  |
-data_reference_isbn        |                                                                                                                                                                                                                  |
-data_reference_notes       |                                                                                                                                                                                                                  |
+citation_name        |  The name of this citation                                                                                                                                                                                       |
+citation_original_id |  the original id of this citation                                                                                                                                                                                |
+citation_author      |  The author of the publication from where the nutrient values were derived                                                                                                                                     |
+citation_publication |   The publication in which the micronutrient contents of this food were found.                                                                                                                                  |
+citation_isbn        |                                                                                                                                                                                                                  |
+citation_notes       |                                                                                                                                                                                                                  |
 moisture_in_g              |    The moisture content of this food item, in grams per 100g                                                                                                                                                     |
 energy_in_kcal             |                                                                                                                                                                                                                  |
 energy_in_kj               |                                                                                                                                                                                                                  |
@@ -28,7 +28,7 @@ saturatedfa_in_g           |    Saturated Fatty Acids, in grams per 100g        
 monounsaturatedfa_in_g     |    Monounsaturated Fatty Acids, in grams per 100g                                                                                                                                                                |
 polyunsaturatedfa_in_g     |    Polyunsaturated Fatty Acids, in grams per 100g                                                                                                                                                                |
 cholesterol_in_mg          |    The Cholesterol content of this food item, in milligrams per 100g                                                                                                                                             |
-carbohydrates_in_g         |     Carbohydrates in g per 100g                                                                                                                                                                                  |
+carbohydrates_in_g         |     carbohydrates in g per 100g                                                                                                                                                                                  |
 fibre_in_g                 |    The total dietary fibre content of this food item (determined by multiple methods), in grams per 100g                                                                                                         |
 ash_in_g                   |   (I don't think we really need the ash content of the food? candidate for deletion from the system)                                                                                                             |
 ca_in_mg                   |    The Calcium content of this food item, in milligrams per 100g                                                                                                                                                 |
@@ -127,9 +127,9 @@ phyticacid_in_mg           |    The Phytic Acid content of this food item, in mi
 
 | field                      |           description   |
 |----------------------------|-------------------------|
-| data_reference_name        |                         |
-| data_reference_original_id |                         |
-| data_reference_author      |                         |
-| data_reference_publication |                         |
-| data_reference_isbn        |                         |
-| data_reference_notes       |                         |
+| citation_name        |                         |
+| citation_original_id |                         |
+| citation_author      |                         |
+| citation_publication |                         |
+| citation_isbn        |                         |
+| citation_notes       |                         |

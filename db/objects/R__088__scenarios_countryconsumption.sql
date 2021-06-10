@@ -46,9 +46,9 @@ BEGIN
         , sum(VitaminE_in_mg                 / 100 * amount_consumed_in_g) as VitaminE_in_mg
         , sum(PhyticAcid_in_mg               / 100 * amount_consumed_in_g) as PhyticAcid_in_mg
     FROM
-        "andan-scenario".create_scenario_fct(_fct_source_id, _food_genus, _field, _new_value) as fooditem
-        JOIN "andan-scenario".food_genus ON food_genus.id = fooditem.food_genus_id
-        JOIN "andan-scenario".COUNTRY_CONSUMPTION as cc ON cc.food_genus_id = food_genus.id
+        create_scenario_fct(_fct_source_id, _food_genus, _field, _new_value) as fooditem
+        JOIN food_genus ON food_genus.id = fooditem.food_genus_id
+        JOIN COUNTRY_CONSUMPTION as cc ON cc.food_genus_id = food_genus.id
         --JOIN survey on household.survey_id = survey.id
     GROUP BY data_source_id, fooditem.fct_source_id, cc.country_id;
 END

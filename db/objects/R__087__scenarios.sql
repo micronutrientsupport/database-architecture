@@ -4,7 +4,7 @@ returns setof fooditem as
 $$
 DECLARE
   schema text := current_schema();
-  mn_field text := (SELECT LOWER(fooditem_column) FROM "andan-scenario".micronutrient WHERE id=_field);
+  mn_field text := (SELECT LOWER(fooditem_column) FROM micronutrient WHERE id=_field);
 BEGIN
 
 	return QUERY EXECUTE

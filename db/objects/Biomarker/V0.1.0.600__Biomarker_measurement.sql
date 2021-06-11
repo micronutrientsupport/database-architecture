@@ -8,7 +8,7 @@ CREATE TABLE biomarker_measurement (
     , stfr                    numeric(4,2)
     , rbp                     numeric(4,2)
     , retinol                 numeric(4,2)
-    , rbc_folate              numeric(4,1)
+    , rbc_folate              numeric(5,1)
     , ps_folate               numeric(3,1)
     , vitamin_b12             numeric(5,1)
     , zinc                    numeric(4,1)

@@ -12,7 +12,7 @@ CREATE TABLE household_member (
     , had_illness          boolean
     , had_malaria          boolean
     , had_diarrhoea        boolean
-    , survey_cluster       integer
+    , survey_cluster       text
     , survey_strata        integer
     , survey_weight        integer
 );

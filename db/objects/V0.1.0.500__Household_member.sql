@@ -36,6 +36,7 @@ COMMENT on COLUMN household_member.had_diarrhoea    IS 'Whether this person has 
 COMMENT on COLUMN household_member.survey_cluster   IS 'The surveying cluster used for selecting this individual'; -- TODO: more info
 COMMENT on COLUMN household_member.survey_strata    IS 'The surveying strata used for selecting this individual';  -- TODO: more info
 COMMENT on COLUMN household_member.survey_weight    IS 'The surveying weight used for selecting this individual';  -- TODO: more info
+COMMENT on COLUMN household_member.literacy         IS 'The level of literacy the person has attained';
 COMMENT on COLUMN household_member.weight_in_kg     IS 'The weight of the person in kilograms';
 COMMENT on COLUMN household_member.height_in_cm     IS 'The height of the person in centimetres';
 COMMENT on COLUMN household_member.bmi				IS 'The body mass index of the person calculated from weight and height as weight in kg/height in metres squared';

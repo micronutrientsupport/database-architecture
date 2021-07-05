@@ -15,6 +15,10 @@ CREATE TABLE household_member (
     , survey_cluster       text
     , survey_strata        integer
     , survey_weight        integer
+	, literacy             text
+	, weight_in_kg         numeric
+	, height_in_cm         numeric
+	, bmi                  numeric GENERATED ALWAYS AS (weight_in_kg/((height_in_cm/100)*(height_in_cm/100))) STORED
 );
 COMMENT ON TABLE household_member IS 'The people living in a household and their biological characteristics';
 COMMENT ON COLUMN household_member.household_id     IS 'The ID number of the household that this person belongs to';
@@ -32,4 +36,7 @@ COMMENT on COLUMN household_member.had_diarrhoea    IS 'Whether this person has 
 COMMENT on COLUMN household_member.survey_cluster   IS 'The surveying cluster used for selecting this individual'; -- TODO: more info
 COMMENT on COLUMN household_member.survey_strata    IS 'The surveying strata used for selecting this individual';  -- TODO: more info
 COMMENT on COLUMN household_member.survey_weight    IS 'The surveying weight used for selecting this individual';  -- TODO: more info
+COMMENT on COLUMN household_member.weight_in_kg     IS 'The weight of the person in kilograms';
+COMMENT on COLUMN household_member.height_in_cm     IS 'The height of the person in centimetres';
+COMMENT on COLUMN household_member.bmi				IS 'The body mass index of the person calculated from weight and height as weight in kg/height in metres squared';
 

@@ -7,7 +7,6 @@ CREATE TABLE household (
 	, household_expenditure       NUMERIC(20,6)
 	, wealth_quintile             integer
 	, survey_id                   integer NOT NULL REFERENCES survey(id)
-	, interview_date              date
 	, altitude_in_metres		  numeric
 );
 
@@ -17,5 +16,4 @@ COMMENT on column household.urbanity              IS 'Whether this household is 
 COMMENT on column household.household_expenditure IS 'How much money this household spends per month, in local currency';
 COMMENT on column household.wealth_quintile       IS 'In what quintile of househol wealth this household is (5=richest, 1=poorest)';
 COMMENT on column household.survey_id             IS 'In which survey this household was interviewed';
-COMMENT on column household.interview_date        IS 'The date on which this household was interviewed';
 comment on column household.altitude_in_metres    is 'The altitude of the household above sealevel in metres. Used to adjust hemoglobin levels when assessing deficiency.';

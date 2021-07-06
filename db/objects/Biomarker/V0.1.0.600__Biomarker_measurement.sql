@@ -13,7 +13,7 @@ CREATE TABLE biomarker_measurement (
     , vitamin_b12             numeric(5,1)
     , zinc                    numeric(4,1)
     , crp                     numeric(5,2)
-    , agp                     numeric(3,2)
+    , agp                     numeric(5,2)
     , iodine                  numeric(5,2)
     , time_of_day_sampled     text check (time_of_day_sampled in ('am','pm') )
     , was_fasting             boolean

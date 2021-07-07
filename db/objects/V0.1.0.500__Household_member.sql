@@ -40,6 +40,6 @@ COMMENT on COLUMN household_member.survey_weight    IS 'The surveying weight use
 COMMENT on COLUMN household_member.literacy         IS 'The level of literacy the person has attained';
 COMMENT on COLUMN household_member.weight_in_kg     IS 'The weight of the person in kilograms';
 COMMENT on COLUMN household_member.height_in_cm     IS 'The height of the person in centimetres';
-COMMENT on COLUMN household_member.bmi				IS 'The body mass index of the person calculated from weight and height as weight in kg/height in metres squared';
+COMMENT on COLUMN household_member.bmi              IS 'The body mass index of the person calculated from weight and height as weight in kg/height in metres squared';
 COMMENT on column household_member.interview_date   IS 'The date on which this person was interviewed';
 

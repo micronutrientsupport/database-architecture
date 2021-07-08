@@ -8,6 +8,7 @@ CREATE TABLE survey (
     , geonetwork_uuid         text
     , survey_weight_factor    integer
     , notes                   text
+	, survey_type             text CHECK (survey_type IN ('biomarker', 'food consumption'))
 );
 
 COMMENT ON TABLE survey IS 'Surveys that have been carried out and collected data from households on things including the households (or the individuals therein) food consumption';

@@ -1,5 +1,5 @@
 CREATE TABLE COUNTRY (
-	id         text primary key ---ISO 3166  two letter codes
+	id         text primary key ---ISO 3166  three letter codes
 	, name     text
 	, region   integer  REFERENCES region (id)
 	, geometry geometry(MultiPolygon,4326)

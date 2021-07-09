@@ -3,7 +3,7 @@ CREATE TABLE household_member (
     , household_id         bigint  references household (id)
     , original_id          text
     , sex                  text CHECK (sex in ('m','f'))
-    , education_level      text CHECK (education_level IN ('none', 'primary', 'secondary', 'tertiary'))
+    , education_level      text CHECK (education_level IN ('none', 'primary', 'secondary', 'tertiary','higher'))
     , age_in_months        integer
     , is_breastfed         boolean
     , is_lactating         boolean
@@ -15,6 +15,11 @@ CREATE TABLE household_member (
     , survey_cluster       text
     , survey_strata        integer
     , survey_weight        integer
+	, literacy             text
+	, weight_in_kg         numeric
+	, height_in_cm         numeric
+	, bmi                  numeric
+	, interview_date       date
 );
 COMMENT ON TABLE household_member IS 'The people living in a household and their biological characteristics';
 COMMENT ON COLUMN household_member.household_id     IS 'The ID number of the household that this person belongs to';
@@ -32,4 +37,9 @@ COMMENT on COLUMN household_member.had_diarrhoea    IS 'Whether this person has 
 COMMENT on COLUMN household_member.survey_cluster   IS 'The surveying cluster used for selecting this individual'; -- TODO: more info
 COMMENT on COLUMN household_member.survey_strata    IS 'The surveying strata used for selecting this individual';  -- TODO: more info
 COMMENT on COLUMN household_member.survey_weight    IS 'The surveying weight used for selecting this individual';  -- TODO: more info
+COMMENT on COLUMN household_member.literacy         IS 'The level of literacy the person has attained';
+COMMENT on COLUMN household_member.weight_in_kg     IS 'The weight of the person in kilograms';
+COMMENT on COLUMN household_member.height_in_cm     IS 'The height of the person in centimetres';
+COMMENT on COLUMN household_member.bmi              IS 'The body mass index of the person calculated from weight and height as weight in kg/height in metres squared';
+COMMENT on column household_member.interview_date   IS 'The date on which this person was interviewed';
 

@@ -7,8 +7,9 @@ CREATE TABLE household (
 	, household_expenditure       NUMERIC(20,6)
 	, wealth_quintile             integer
 	, survey_id                   integer NOT NULL REFERENCES survey(id)
-	, interview_date              date
 	, altitude_in_metres		  numeric
+	, region                      text 
+	, interview_date              date
 );
 
 COMMENT ON TABLE Household IS 'A household is a grouping of people that live together and can be treated as a unit for certain pruposes. For example, we may have data on what foods a household as a whole consumed, rather than for individual people who live in that household';
@@ -17,5 +18,6 @@ COMMENT on column household.urbanity              IS 'Whether this household is 
 COMMENT on column household.household_expenditure IS 'How much money this household spends per month, in local currency';
 COMMENT on column household.wealth_quintile       IS 'In what quintile of househol wealth this household is (5=richest, 1=poorest)';
 COMMENT on column household.survey_id             IS 'In which survey this household was interviewed';
-COMMENT on column household.interview_date        IS 'The date on which this household was interviewed';
-comment on column household.altitude_in_metres    is 'The altitude of the household above sealevel in metres. Used to adjust hemoglobin levels when assessing deficiency.';
+comment on column household.altitude_in_metres    is 'The altitude of the household above sealevel in metres. Used to adjust hemoglobin levels when assessing deficiency';
+comment on column household.region                is 'The region in which the household is located';
+COMMENT on column household.interview_date        IS 'The date on which this household was interviewed about food consumption.';

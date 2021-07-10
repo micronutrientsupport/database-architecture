@@ -1,5 +1,5 @@
 create
-or replace view household_deficiency_aggregation as
+or replace materialized view household_deficiency_aggregation as
 select
     survey_id,
     fct_source_id,

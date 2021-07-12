@@ -4,8 +4,8 @@ CREATE OR REPLACE VIEW household_intake AS
         household.id as household_id
         , household.survey_id
         , fooditem.fct_source_id as fct_source_id
-        , subregion.id as subregion_id
-        , subregion.name as subregion_name
+        , aggregation_area.id as aggregation_area_id
+        , aggregation_area.name as aggregation_area_name
         , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as Moisture_in_g
         , sum(Energy_in_kCal                 / 100 * amount_consumed_in_g) as Energy_in_kCal
         , sum(Energy_in_kJ                   / 100 * amount_consumed_in_g) as Energy_in_kJ
@@ -51,16 +51,16 @@ CREATE OR REPLACE VIEW household_intake AS
         JOIN HOUSEHOLD_MEMBER as hhm ON hhm.id = hhc.HOUSEHOLD_id
         JOIN household ON hhm.household_id = household.id
         JOIN survey on household.survey_id = survey.id
-        JOIN subregion on ST_Contains(subregion.geometry,  household.location)
-    GROUP BY subregion.id, household.id, fooditem.fct_source_id
+        JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location)
+    GROUP BY aggregation_area.id, household.id, fooditem.fct_source_id
     --ORDER BY household.id
 UNION ALL
     SELECT
         household.id as household_id
         , household.survey_id
         , individual_intake.fct_source_id as fct_source_id
-        , subregion.id as subregion_id
-        , subregion.name as subregion_name
+        , aggregation_area.id as aggregation_area_id
+        , aggregation_area.name as aggregation_area_name
         , sum(Moisture_in_g              ) as  Moisture_in_g
         , sum(Energy_in_kCal             ) as  Energy_in_kCal
         , sum(Energy_in_kJ               ) as  Energy_in_kJ
@@ -102,8 +102,8 @@ UNION ALL
     FROM individual_intake
     JOIN household on individual_intake.household_id = household.id
     JOIN survey on household.survey_id = survey.id
-    JOIN subregion on ST_Contains(subregion.geometry,  household.location)
-    GROUP BY subregion.id, household.id, individual_intake.fct_source_id
+    JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location)
+    GROUP BY aggregation_area.id, household.id, individual_intake.fct_source_id
 ;
 
 COMMENT ON VIEW household_intake IS 'View of amount of micronutrients consumed in total by individual households ';

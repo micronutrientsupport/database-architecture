@@ -6,7 +6,7 @@ CREATE TABLE survey (
     , surveying_date_end      text
     , geometry                geometry(MultiPolygon,4326)
     , geonetwork_uuid         text
-    , survey_weight_factor    integer
+    , survey_weight_factor    numeric
     , notes                   text
 	, survey_type             text CHECK (survey_type IN ('biomarker', 'food consumption'))
 );

@@ -57,3 +57,5 @@ from
             ) AS mn("micronutrient_id", "micronutrient_supply")
     ) as household_supply
     join afe_ear_threshold on afe_ear_threshold.micronutrient_id = household_supply.micronutrient_id;
+
+COMMENT ON VIEW household_intake_deficiency_pivot IS 'View to extract the household intake, Estimated Average Requirement (EAR) and deficency status for a household pivoted by Micronutrient';

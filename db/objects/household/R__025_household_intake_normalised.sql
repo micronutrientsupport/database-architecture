@@ -47,4 +47,4 @@ select
 
 from household_intake hi join household_normalisation hn on hi.household_id=hn.household_id;
 
-COMMENT ON VIEW household_intake_normalised IS 'View of amount of micronutrients consumed in total by individual households normalised to AFE';
+COMMENT ON VIEW household_intake_normalised IS 'View of amount of micronutrients consumed in total by individual households normalised to Adult Female Equivalent (AFE)';

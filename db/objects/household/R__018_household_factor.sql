@@ -38,4 +38,6 @@ select
 from
     factors
 group by
-    household_id
+    household_id;
+
+COMMENT ON VIEW afe_ear_threshold IS 'View to calculate the Adult Female Equivalent (AFE) factor for a household as the sum of household members AFE factor;

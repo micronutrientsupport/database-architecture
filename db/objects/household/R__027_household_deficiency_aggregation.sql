@@ -4,6 +4,7 @@ create materialized view household_deficiency_aggregation as
 select
     survey_id,
     fct_source_id,
+    country,
     subregion_id,
     subregion_name,
     ST_AsGeoJSON(geometry) as geometry,
@@ -33,8 +34,11 @@ from
 group by
     survey_id,
     fct_source_id,
+    country,
     subregion_id,
     subregion_name,
     geometry,
     micronutrient_id,
-    m.unit
+    m.unit;
+
+COMMENT ON materialized VIEW household_deficiency_aggregation IS 'View to aggregate the household_intake_deficiency_pivot view to provide the median dietary supply and percentage of deficient households per subregion';

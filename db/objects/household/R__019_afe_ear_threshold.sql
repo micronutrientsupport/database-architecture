@@ -15,4 +15,6 @@ where
     and age_upper <= 29
 group by
     it.nutrient_name,
-    m.id
+    m.id;
+
+COMMENT ON VIEW afe_ear_threshold IS 'View to extract the Estimated Average Requirement (EAR) for an Adult Female Equivalent (AFE) from the thresholds table';

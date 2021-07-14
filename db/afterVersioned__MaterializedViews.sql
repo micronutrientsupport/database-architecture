@@ -11,4 +11,4 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS monthly_food                  AS SELECT '
 CREATE MATERIALIZED VIEW IF NOT EXISTS impact_summary                AS SELECT 'x'; REFRESH MATERIALIZED VIEW impact_summary;
 CREATE MATERIALIZED VIEW IF NOT EXISTS impact_commodity_aggregation  AS SELECT 'x'; REFRESH MATERIALIZED VIEW impact_commodity_aggregation;
 CREATE MATERIALIZED VIEW IF NOT EXISTS impact_food_group_aggregation AS SELECT 'x'; REFRESH MATERIALIZED VIEW impact_food_group_aggregation;
-CREATE MATERIALIZED VIEW IF NOT EXISTS household_deficiency_aggregation AS SELECT 'x'; REFRESH MATERIALIZED VIEW household_deficiency_aggregation;
+CREATE MATERIALIZED VIEW IF NOT EXISTS household_deficiency_afe_aggregation AS SELECT 'x'; REFRESH MATERIALIZED VIEW household_deficiency_afe_aggregation;

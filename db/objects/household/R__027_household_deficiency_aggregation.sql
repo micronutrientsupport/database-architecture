@@ -1,6 +1,6 @@
 DROP MATERIALIZED VIEW IF EXISTS household_deficiency_afe_aggregation;
 
-CREATE materialized view household_deficiency_aggregation AS
+CREATE materialized view household_deficiency_afe_aggregation AS
 SELECT
     survey_id,
     fct_source_id,

@@ -14,14 +14,14 @@ SELECT
     count(household_id) AS household_count,
     count(household_id) FILTER (
         WHERE
-            deficient
+            is_deficient
     ) AS deficient_count,
     round(
         (
             (
                 count(household_id) FILTER (
                     WHERE
-                        deficient
+                        is_deficient
                 )
             ) :: numeric /(count(household_id))
         ) * 100,

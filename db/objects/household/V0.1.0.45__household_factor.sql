@@ -1,8 +1,7 @@
 CREATE TABLE household_normalisation_factor (
 	age_in_months                 integer
-	, energy_requirement_m        integer
-	, energy_requirement_f        integer
     , sex                         text CHECK (sex in ('m','f'))
+	, energy_requirement          integer
 	, afe                         numeric(3,2)
 	, ame                         numeric(3,2)
 );

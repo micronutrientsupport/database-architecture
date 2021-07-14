@@ -4,8 +4,8 @@ WITH factors AS (
     -- AFE/AME for females
     SELECT
         hm.household_id,
-        sum(hnf.afe_f) AS afe_factor,
-        sum(hnf.ame_f) AS ame_factor,
+        sum(hnf.afe) AS afe_factor,
+        sum(hnf.ame) AS ame_factor,
         count(hm.id)
     FROM
         household_member hm

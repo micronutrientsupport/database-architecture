@@ -5,8 +5,8 @@ SELECT
     survey_id,
     fct_source_id,
     country,
-    subregion_id,
-    subregion_name,
+    aggregation_area_id,
+    aggregation_area_name,
     ST_AsGeoJSON(geometry) AS geometry,
     micronutrient_id,
     unit,
@@ -30,15 +30,15 @@ SELECT
 FROM
     household_intake_afe_deficiency_pivot hidp
     JOIN micronutrient m ON hidp.micronutrient_id = m.id
-    JOIN subregion s ON s.id = hidp.subregion_id
+    JOIN aggregation_area s ON s.id = hidp.aggregation_area_id WHERE s.type='admin' AND s.admin_level=2
 GROUP BY
     survey_id,
     fct_source_id,
     country,
-    subregion_id,
-    subregion_name,
+    aggregation_area_id,
+    aggregation_area_name,
     geometry,
     micronutrient_id,
     m.unit;
 
-COMMENT ON materialized VIEW household_deficiency_afe_aggregation IS 'View to aggregate the household_intake_deficiency_pivot view to provide the median dietary supply and percentage of deficient households per subregion';
+COMMENT ON materialized VIEW household_deficiency_afe_aggregation IS 'View to aggregate the household_intake_deficiency_pivot view to provide the median dietary supply and percentage of deficient households per subregion aggregation area';

@@ -12,8 +12,8 @@ FROM
             hin.survey_id,
             hin.household_id,
             hin.fct_source_id,
-            hin.subregion_id,
-            subregion_name,
+            hin.aggregation_area_id,
+            hin.aggregation_area_name,
             mn.micronutrient_id,
             mn.micronutrient_supply
         FROM

@@ -3,8 +3,8 @@ SELECT
         hi.household_id
         , hi.survey_id
         , hi.fct_source_id
-        , hi.subregion_id
-        , hi.subregion_name
+        , hi.aggregation_area_id
+        , hi.aggregation_area_name
         , (hi.Moisture_in_g/hn.afe_factor              ) AS  Moisture_in_g
         , (hi.Energy_in_kCal/hn.afe_factor             ) AS  Energy_in_kCal
         , (hi.Energy_in_kJ/hn.afe_factor               ) AS  Energy_in_kJ

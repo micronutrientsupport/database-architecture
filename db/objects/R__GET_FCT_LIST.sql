@@ -7,43 +7,21 @@ $BODY$
 BEGIN
 	-- list Food Composition Tables that overlap, sort them by priority, then area, then publication date
 	RETURN query
-		SELECT
-			id
+	select a.id from 
+		(SELECT
+			id, 0 as "distance", ST_AREA(geometry) as "area", publication_date
 		FROM
 			fct_source
 		WHERE
-			ST_Contains(geometry, $1)
-		ORDER BY
-			--priority asc
-			ST_AREA(geometry) ASC
-			, publication_date DESC
-		;
-
-	IF NOT FOUND THEN-- special postgres variable, set depending on if the previous query returns results
-		RETURN QUERY
-		-- Find several close bounding boxes first, before measuring accurate distance from the search point to the nearest FCT-area border
-		WITH closest_candidates AS (
-			SELECT
-				id,
-				publication_date,
-				geometry
-			FROM FCT_SOURCE
-			ORDER BY
-				FCT_SOURCE.geometry <#> $1 -- <#> is an operator that find the distance to the nearest bounding-box edge
-			LIMIT 10
-		)
-		SELECT
-			id
-		FROM
-			closest_candidates
-		ORDER BY
-			--priority asc
-			ST_DISTANCE($1, closest_candidates.geometry)
-			-- We do not sort by smallest to largest, because smaller FCTs are likely to be more specific to their own area and less likely to be applicable to elsewhere
-			--ST_AREA(geometry) ASC,
-			, publication_date DESC
-		;
-	END IF;
+			ST_Contains(geometry, $1) OR ST_Overlaps(geometry, $1)
+		UNION
+		select id, ST_DISTANCE($1, geometry) as "distance", ST_AREA(geometry) as "area", publication_date
+		FROM fct_source) a
+	ORDER BY
+	--priority asc
+	a.distance asc,
+	a."area" asc,
+	a.publication_date desc;
 
 	RETURN;
 

@@ -1,19 +1,19 @@
-create or replace view afe_ear_threshold as
+CREATE OR REPLACE VIEW afe_ear_threshold AS
 
-select
-    m.id as micronutrient_id
-    , nutrient_name as micronutrient_name
-    , avg(ear) as afe_ear
-from
+SELECT
+    m.id AS micronutrient_id
+    , nutrient_name AS micronutrient_name
+    , avg(ear) AS afe_ear
+FROM
     intake_threshold it
-join
+JOIN
     micronutrient m
-    on m."name" = it.nutrient_name
-where
+    ON m."name" = it.nutrient_name
+WHERE
     sex = 'Female'
     AND age_lower >= 18
-    and age_upper <= 29
-group by
+    AND age_upper <= 29
+GROUP BY
     it.nutrient_name,
     m.id;
 

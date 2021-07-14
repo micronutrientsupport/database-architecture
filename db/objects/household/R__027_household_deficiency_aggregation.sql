@@ -1,37 +1,37 @@
-drop MATERIALIZED VIEW if exists household_deficiency_aggregation;
+DROP MATERIALIZED VIEW IF EXISTS household_deficiency_aggregation;
 
-create materialized view household_deficiency_aggregation as
-select
+CREATE materialized view household_deficiency_aggregation AS
+SELECT
     survey_id,
     fct_source_id,
     country,
     subregion_id,
     subregion_name,
-    ST_AsGeoJSON(geometry) as geometry,
+    ST_AsGeoJSON(geometry) AS geometry,
     micronutrient_id,
     unit,
-    median(micronutrient_supply) as median_supply,
-    count(household_id) as household_count,
-    count(household_id) filter (
-        where
+    median(micronutrient_supply) AS median_supply,
+    count(household_id) AS household_count,
+    count(household_id) FILTER (
+        WHERE
             deficient
-    ) as deficient_count,
+    ) AS deficient_count,
     round(
         (
             (
-                count(household_id) filter (
-                    where
+                count(household_id) FILTER (
+                    WHERE
                         deficient
                 )
             ) :: numeric /(count(household_id))
         ) * 100,
         2
-    ) as deficient_percentage
-from
-    household_intake_deficiency_pivot hidp
-    join micronutrient m on hidp.micronutrient_id = m.id
-    join subregion s on s.id = hidp.subregion_id
-group by
+    ) AS deficient_percentage
+FROM
+    household_intake_afe_deficiency_pivot hidp
+    JOIN micronutrient m ON hidp.micronutrient_id = m.id
+    JOIN subregion s ON s.id = hidp.subregion_id
+GROUP BY
     survey_id,
     fct_source_id,
     country,

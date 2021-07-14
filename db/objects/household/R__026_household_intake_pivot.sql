@@ -1,12 +1,12 @@
-create
-or replace view household_intake_deficiency_pivot as
-select
+CREATE
+OR replace view household_intake_afe_deficiency_pivot AS
+SELECT
     household_supply.*,
     afe_ear_threshold.afe_ear,
     (
         household_supply.micronutrient_supply < afe_ear_threshold.afe_ear
-    ) as deficient
-from
+    ) AS is_deficient
+FROM
     (
         SELECT
             hin.survey_id,
@@ -17,7 +17,7 @@ from
             mn.micronutrient_id,
             mn.micronutrient_supply
         FROM
-            household_intake_normalised hin
+            household_intake_afe_normalised hin
             CROSS JOIN LATERAL (
                 VALUES
                     ('A', VitaminA_in_RAE_in_mcg),
@@ -55,7 +55,7 @@ from
                     ('Energy', Energy_in_kCal),
                     ('Moisture', Moisture_in_g)
             ) AS mn("micronutrient_id", "micronutrient_supply")
-    ) as household_supply
-    join afe_ear_threshold on afe_ear_threshold.micronutrient_id = household_supply.micronutrient_id;
+    ) AS household_supply
+    JOIN afe_ear_threshold ON afe_ear_threshold.micronutrient_id = household_supply.micronutrient_id;
 
 COMMENT ON VIEW household_intake_deficiency_pivot IS 'View to extract the household intake, Estimated Average Requirement (EAR) and deficency status for a household pivoted by Micronutrient';

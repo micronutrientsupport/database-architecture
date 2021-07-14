@@ -9,24 +9,9 @@ WITH factors AS (
         count(hm.id)
     FROM
         household_member hm
-        JOIN household_normalisation_factor hnf ON hm.age_in_months = hnf.age_in_months
-    WHERE
-        hm.sex = 'f'
-    GROUP BY
-        hm.household_id,
-        hm.sex
-    UNION
-    -- AFE/AME for males
-    SELECT
-        hm.household_id,
-        sum(hnf.afe_m) AS afe_factor,
-        sum(hnf.ame_f) AS ame_factor,
-        count(hm.id)
-    FROM
-        household_member hm
-        JOIN household_normalisation_factor hnf ON hm.age_in_months = hnf.age_in_months
-    WHERE
-        hm.sex = 'm'
+        JOIN household_normalisation_factor hnf 
+        ON hm.age_in_months = hnf.age_in_months
+        AND hm.sex = hnf.sex
     GROUP BY
         hm.household_id,
         hm.sex
@@ -41,4 +26,4 @@ FROM
 GROUP BY
     household_id;
 
-COMMENT ON VIEW afe_ear_threshold IS 'View to calculate the Adult Female Equivalent (AFE) factor for a household as the sum of household members AFE factor';
+COMMENT ON VIEW household_normalisation IS 'View to calculate the Adult Female Equivalent (AFE) factor for a household as the sum of household members AFE factor';

@@ -58,4 +58,4 @@ FROM
     ) AS household_supply
     JOIN afe_ear_threshold ON afe_ear_threshold.micronutrient_id = household_supply.micronutrient_id;
 
-COMMENT ON VIEW household_intake_deficiency_pivot IS 'View to extract the household intake, Estimated Average Requirement (EAR) and deficency status for a household pivoted by Micronutrient';
+COMMENT ON VIEW household_intake_afe_deficiency_pivot IS 'View to extract the household intake, Estimated Average Requirement (EAR) and deficency status for a household pivoted by Micronutrient';

@@ -1,4 +1,4 @@
-DROP MATERIALIZED VIEW IF EXISTS household_deficiency_aggregation;
+DROP MATERIALIZED VIEW IF EXISTS household_deficiency_afe_aggregation;
 
 CREATE materialized view household_deficiency_aggregation AS
 SELECT
@@ -41,4 +41,4 @@ GROUP BY
     micronutrient_id,
     m.unit;
 
-COMMENT ON materialized VIEW household_deficiency_aggregation IS 'View to aggregate the household_intake_deficiency_pivot view to provide the median dietary supply and percentage of deficient households per subregion';
+COMMENT ON materialized VIEW household_deficiency_afe_aggregation IS 'View to aggregate the household_intake_deficiency_pivot view to provide the median dietary supply and percentage of deficient households per subregion';

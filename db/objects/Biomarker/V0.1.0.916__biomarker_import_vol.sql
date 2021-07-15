@@ -54,4 +54,4 @@ CREATE TABLE biomarker_import_vol(
    , was_fasting            text
 );
 
-COMMENT ON TABLE biomarker_import_vol IS 'Temporary holding table for importing biomarker data in order to process it into the correct database tables. Data will be short-lived.'
+COMMENT ON TABLE biomarker_import_vol IS 'Holding table for importing biomarker data in order to process it into the correct database tables. Also used by a view for checking for bad values.'

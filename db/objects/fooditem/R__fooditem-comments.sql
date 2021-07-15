@@ -17,7 +17,7 @@ COMMENT ON COLUMN FOODITEM.PolyunsaturatedFA_in_g         IS 'Polyunsaturated Fa
 COMMENT ON COLUMN FOODITEM.Cholesterol_in_mg              IS 'The Cholesterol content of this food item, in milligrams per 100g edible portion';
 COMMENT ON COLUMN FOODITEM.carbohydrates_in_g             IS 'The carbohydrate content of this food item, in grams per 100g edible portion';
 COMMENT ON COLUMN FOODITEM.Fibre_in_g                     IS 'The total dietary fibre content of this food item (determined by multiple methods), in grams per 100g edible portion';
-COMMENT ON COLUMN FOODITEM.Ash_in_g                       IS '';
+COMMENT ON COLUMN FOODITEM.Ash_in_g                       IS 'The amount of "Ash" proximate in this food item, in grams per 100 grams edible portion. This values should be approximately equal to the some of individual minerals';
 COMMENT ON COLUMN FOODITEM.Ca_in_mg                       IS 'The Calcium (Ca) content of this food item, in milligrams per 100g edible portion';
 COMMENT ON COLUMN FOODITEM.Fe_in_mg                       IS 'The Iron (Fe) content of this food item, in milligrams per 100g edible portion';
 COMMENT ON COLUMN FOODITEM.Mg_in_mg                       IS 'The Magnesium (Mg) content of this food item, in milligrams per 100g edible portion';

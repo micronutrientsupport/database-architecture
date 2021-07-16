@@ -14,7 +14,7 @@ CREATE TABLE household_member (
     , had_diarrhoea        boolean
     , survey_cluster       text
     , survey_strata        integer
-    , survey_weight        integer
+    , survey_weight        numeric
 	, literacy             text
 	, weight_in_kg         numeric
 	, height_in_cm         numeric

@@ -3,18 +3,18 @@ CREATE TABLE biomarker_measurement (
     , household_member_id     integer REFERENCES household_member (id)
     , date_sampled            date
     , sample_type             text
-    , haemoglobin             numeric(5,2)
-    , ferritin                numeric(5,2)
-    , stfr                    numeric(4,2)
-    , rbp                     numeric(4,2)
-    , retinol                 numeric(4,2)
-    , rbc_folate              numeric(5,1)
-    , ps_folate               numeric(3,1)
-    , vitamin_b12             numeric(5,1)
-    , zinc                    numeric(4,1)
-    , crp                     numeric(5,2)
-    , agp                     numeric(5,2)
-    , iodine                  numeric(5,2)
+    , haemoglobin             numeric
+    , ferritin                numeric
+    , stfr                    numeric
+    , rbp                     numeric
+    , retinol                 numeric
+    , rbc_folate              numeric
+    , ps_folate               numeric
+    , vitamin_b12             numeric
+    , zinc                    numeric
+    , crp                     numeric
+    , agp                     numeric
+    , iodine                  numeric
     , time_of_day_sampled     text check (time_of_day_sampled in ('am','pm') )
     , was_fasting             boolean
 

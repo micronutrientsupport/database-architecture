@@ -8,16 +8,17 @@ CREATE TABLE household (
 	, wealth_quintile             integer
 	, survey_id                   integer NOT NULL REFERENCES survey(id)
 	, altitude_in_metres		  numeric
-	, region                      text 
+	, region                      text
 	, interview_date              date
 );
 
 COMMENT ON TABLE Household IS 'A household is a grouping of people that live together and can be treated as a unit for certain pruposes. For example, we may have data on what foods a household as a whole consumed, rather than for individual people who live in that household';
-COMMENT on column household.location              IS 'geospatial point indicating where this household is located. Note that will not be accurate, due to privacy concerns';
+COMMENT on column household.original_id           IS 'The id of this household as used in the original survey';
+COMMENT on column household.location              IS 'Geospatial point indicating where this household is located. Note that will not be accurate, due to privacy concerns. For some datasets, household locations will be clustered before being displaced (see e.g. 2.1.3.DHS geographic data in https://dhsprogram.com/pubs/pdf/SAR10/SAR10.pdf';
 COMMENT on column household.urbanity              IS 'Whether this household is located in an urban or rural area';
 COMMENT on column household.household_expenditure IS 'How much money this household spends per month, in local currency';
 COMMENT on column household.wealth_quintile       IS 'In what quintile of househol wealth this household is (5=richest, 1=poorest)';
 COMMENT on column household.survey_id             IS 'In which survey this household was interviewed';
 comment on column household.altitude_in_metres    is 'The altitude of the household above sealevel in metres. Used to adjust hemoglobin levels when assessing deficiency';
 comment on column household.region                is 'The region in which the household is located';
-COMMENT on column household.interview_date        IS 'The date on which this household was interviewed about food consumption.';
+COMMENT on column household.interview_date        IS 'The date on which this household was interviewed';

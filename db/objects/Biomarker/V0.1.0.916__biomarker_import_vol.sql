@@ -1,0 +1,57 @@
+CREATE TABLE biomarker_import_vol(
+     filename               text
+   , survey_name            text
+   , publication_date       text
+   , surveying_date_start   text
+   , surveying_date_end     text
+   , geometry               text
+   , geonetwork_uuid        text
+   , survey_weight_factor   text
+   , notes                  text
+   , survey_type            text
+   , household_id           text
+   , latitude               text
+   , longitude              text
+   , urbanity               text
+   , household_expenditure  text
+   , wealth_quintile        text
+   , altitude_in_metres		text
+   , region                 text
+   , person_id              text
+   , sex                    text
+   , education_level        text
+   , age_in_months          text
+   , is_breastfed           text
+   , is_lactating           text
+   , is_pregnant            text
+   , is_smoker              text
+   , had_illness            text
+   , had_malaria            text
+   , had_diarrhoea          text
+   , survey_cluster         text
+   , survey_strata          text
+   , survey_weight          text
+   , literacy               text
+   , weight_in_kg           text
+   , height_in_cm           text
+   , bmi                    text
+   , interview_date         text
+   , date_sampled           text
+   , sample_type            text
+   , haemoglobin            text
+   , ferritin               text
+   , stfr                   text
+   , rbp                    text
+   , retinol                text
+   , rbc_folate             text
+   , ps_folate              text
+   , vitamin_b12            text
+   , zinc                   text
+   , crp                    text
+   , agp                    text
+   , iodine                 text
+   , time_of_day_sampled    text
+   , was_fasting            text
+);
+
+COMMENT ON TABLE biomarker_import_vol IS 'Holding table for importing biomarker data in order to process it into the correct database tables. Also used by a view for checking for bad values.'

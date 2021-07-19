@@ -1,4 +1,9 @@
-CREATE FUNCTION get_fct_data(geometry(Point, 4326),text)
+CREATE OR REPLACE FUNCTION get_fct_data(geometry(Point, 4326),text)
+/*
+    returns a single row of composition data for a given food genus.
+    It uses view food_genus_composition and function get_fct_list to use values from the highest priority FCT source for the given location.
+    Where the values for micronutrients are NULL, it will use the value from the next highest priority FCT.
+*/
 RETURNS TABLE(
 	moisture_in_g numeric,
 	energy_in_kcal numeric,

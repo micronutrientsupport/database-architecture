@@ -1,4 +1,13 @@
 CREATE OR REPLACE view food_genus_composition AS
+/*
+    view food_genus_composition returns composition data for each food genus
+    (rather than by food item, which is how it is stored in the fooditem table).
+    The micronutrient values are averaged because sometimes there are many
+    fooditems within the same fct_source which have the same food genus.
+    This is only a temporary problem as we are going to sort out the
+    original data so no food genus is repeated for a fct_source. This view
+    sorts that for now anyway.
+*/
 SELECT food_genus_id,fct_source_id,
 	AVG(moisture_in_g)               AS moisture_in_g,
 	AVG(energy_in_kcal)              AS energy_in_kcal,

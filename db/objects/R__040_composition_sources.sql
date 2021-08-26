@@ -10,7 +10,7 @@ with fcts as (
 			, publication_date desc) 
             as rank
 
-from country left join fct_source on ST_COVERS(ST_ENVELOPE(fct_source.geometry), country.geometry)
+from country join fct_source on ST_COVERS(ST_ENVELOPE(fct_source.geometry), country.geometry)
 )
 select composition_data_id, composition_data_name, country_id from fcts where fcts.rank=1;
 

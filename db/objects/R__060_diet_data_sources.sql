@@ -1,6 +1,7 @@
 create or replace view diet_data_sources as 
 
 select comds.country_id
+, micronutrient_id
 , consumption_data_type
 , consumption_data_id
 , composition_data_id

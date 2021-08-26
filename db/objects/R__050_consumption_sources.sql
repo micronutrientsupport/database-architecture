@@ -12,7 +12,7 @@ with country_consumption as (
 			, publication_date desc) 
             as rank
 
-from country left join country_consumption_source on ST_COVERS(ST_ENVELOPE(country_consumption_source.geometry), country.geometry)
+from country join country_consumption_source on ST_COVERS(ST_ENVELOPE(country_consumption_source.geometry), country.geometry)
 )
 , household_consumption as (
     select 
@@ -27,6 +27,7 @@ from country left join country_consumption_source on ST_COVERS(ST_ENVELOPE(count
             as rank
 
 from country join survey on ST_COVERS(ST_ENVELOPE(survey.geometry), country.geometry)
+where survey.survey_type = 'food consumption' 
 ),
 combined as (
 select * from household_consumption where rank=-1

@@ -17,7 +17,7 @@ join fct_source on ST_COVERS(ST_ENVELOPE(fct_source.geometry), country.geometry)
 join fct_reported_micronutrients frm on fct_source.id=frm.fct_source_id 
 CROSS  JOIN unnest (frm.reported_micronutrients) micronutrient_id
 )
-select rank, micronutrient_id, composition_data_id, composition_data_name, country_id from fcts
+select country_id, micronutrient_id, composition_data_id, composition_data_name from fcts
 where rank = 1;
 
 COMMENT ON VIEW composition_data_sources IS 'View of simplified algorithm for "best" FCT for a given country';

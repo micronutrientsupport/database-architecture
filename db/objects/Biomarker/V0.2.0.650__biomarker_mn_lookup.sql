@@ -9,11 +9,11 @@ COMMENT ON COLUMN biomarker_micronutrient_mapping.micronutrient_id IS 'ID of the
 
 INSERT INTO biomarker_micronutrient_mapping (biomarker_name, micronutrient_id)
 VALUES
- ('haemoglobin'), 'Fe')
+ ('haemoglobin', 'Fe')
 ,('ferritin', 'Fe' )
 ,('stfr', 'Fe' )
 ,('rbp', null )
-,('retinol'), null )
+,('retinol', null )
 ,('rbc_folate', 'B9' )
 ,('ps_folate', 'B9' )
 ,('vitamin_b12', 'B12' )

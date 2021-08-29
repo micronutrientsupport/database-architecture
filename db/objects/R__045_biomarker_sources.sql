@@ -22,4 +22,4 @@ where survey.survey_type = 'biomarker'
 select country_id, biomarker_name, micronutrient_id, survey_id, survey_name from surveys
 where rank = 1;
 
-COMMENT ON VIEW composition_data_sources IS 'View of simplified algorithm for "best" biomarker data source for a given country';
+COMMENT ON VIEW biomarker_data_sources IS 'View of simplified algorithm for "best" biomarker data source for a given country';

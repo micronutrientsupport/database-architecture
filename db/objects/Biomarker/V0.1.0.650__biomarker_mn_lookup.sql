@@ -4,8 +4,8 @@ CREATE TABLE biomarker_micronutrient_mapping (
 );
 
 COMMENT ON TABLE biomarker_micronutrient_mapping IS 'Mapping between biomarker measurement fields and micronutrient IDs';
-COMMENT ON COLUMN biomarker_name IS 'Name of the biomarker';
-COMMENT ON COLUMN micronutrient_id IS 'ID of the corresponding micronutrient from the micronutrients table';
+COMMENT ON COLUMN biomarker_micronutrient_mapping.biomarker_name IS 'Name of the biomarker';
+COMMENT ON COLUMN biomarker_micronutrient_mapping.micronutrient_id IS 'ID of the corresponding micronutrient from the micronutrients table';
 
 INSERT INTO biomarker_micronutrient_mapping (biomarker_name, micronutrient_id)
 VALUES

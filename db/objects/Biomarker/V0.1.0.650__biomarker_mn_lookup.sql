@@ -1,6 +1,7 @@
 CREATE TABLE biomarker_micronutrient_mapping (
 	biomarker_name               text primary key
-    , micronutrient_id           text REFERENCES micronutrient (id);
+    , micronutrient_id           text REFERENCES micronutrient (id)
+);
 
 COMMENT ON TABLE  biomarker_name IS 'Name of the biomarker';
 COMMENT ON COLUMN micronutrient_id IS 'ID of the corresponding micronutrient from the micronutrients table';

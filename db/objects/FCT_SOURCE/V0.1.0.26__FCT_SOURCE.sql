@@ -3,6 +3,7 @@ CREATE TABLE FCT_SOURCE (
 	, name                        text
 	, description                 text
 	, geometry                    geometry(MultiPolygon,4326)
+    , geonetwork_uuid             text
 	, publication_date            date
 	, notes                       text
 );

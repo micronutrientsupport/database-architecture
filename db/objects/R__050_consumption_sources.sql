@@ -41,7 +41,12 @@ select * from country_consumption where rank=1
 
 -- select minimum means -1 will be selected for household where it exists
 -- otherwise rank 1 will be country level
-select country_id, consumption_data_id, consumption_data_name, consumption_data_type
+select country_id,
+ consumption_data_id, 
+ consumption_data_name, 
+ consumption_data_description, 
+ consumption_data_metadata_id, 
+ consumption_data_type
 from (
   select country_id, 
   		 rank,

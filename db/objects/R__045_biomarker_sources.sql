@@ -5,6 +5,8 @@ with surveys as (
         , the_biomarker_name as biomarker_name
         , micronutrient_id
         , survey.name as survey_name
+        , survey.description as survey_description
+        , survey.geonetwork_uuid as survey_metadata_id
         , country.id as country_id
         , ROW_NUMBER() over                    --negate rank
           (partition by country.id, the_biomarker_name order BY			
@@ -19,7 +21,7 @@ CROSS  JOIN unnest (srb.reported_biomarkers) as the_biomarker_name
 join biomarker_micronutrient_mapping bmm on the_biomarker_name=bmm.biomarker_name
 where survey.survey_type = 'biomarker' 
 )
-select country_id, biomarker_name, micronutrient_id, survey_id, survey_name from surveys
+select country_id, biomarker_name, micronutrient_id, survey_id, survey_name, survey_description, survey_metadata_id from surveys
 where rank = 1;
 
 COMMENT ON VIEW biomarker_data_sources IS 'View of simplified algorithm for "best" biomarker data source for a given country';

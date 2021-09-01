@@ -19,6 +19,7 @@ case when ferritin::numeric > 999 then ferritin::text || ' GREATER THAN 999' els
 ,case when  iodine::numeric > 999 then iodine::text || ' GREATER THAN 999' else iodine::text end as iodine
 ,case when  height_in_cm::numeric > 300 or height_in_cm::numeric < 30 then height_in_cm || 'UNLIKELY VALUE' else height_in_cm end as height_in_cm
 ,case when  weight_in_kg::numeric > 200 or weight_in_kg::numeric < 3 then weight_in_kg || 'UNLIKELY VALUE' else weight_in_kg end as weight_in_kg
+,case when  selenium::numeric > 9999 then selenium || 'UNLIKELY VALUE' else selenium end as selenium
 /*
  , ferritin                numeric(5,2)
     , stfr                    numeric(4,2)
@@ -46,5 +47,6 @@ crp::numeric > 999 or
 agp::numeric > 999 or
 iodine::numeric > 999 or
 (height_in_cm::numeric > 300 or height_in_cm::numeric < 30) or
-(weight_in_kg::numeric > 200 or weight_in_kg::numeric < 3)
+(weight_in_kg::numeric > 200 or weight_in_kg::numeric < 3) or
+(selenium::numeric > 9999)
 ;

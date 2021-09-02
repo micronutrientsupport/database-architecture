@@ -10,7 +10,7 @@ case when ferritin::numeric > 999 then ferritin::text || ' GREATER THAN 999' els
 ,case when  stfr::numeric > 99 then stfr::text || ' GREATER THAN 999' else stfr::text end as stfr
 ,case when  rbp::numeric > 99 then rbp::text || ' GREATER THAN 999' else rbp::text end as rbp
 ,case when  retinol::numeric > 99 then retinol::text || ' GREATER THAN 999' else retinol::text end as retinol
-,case when  rbc_folate::numeric > 999 then rbc_folate::text || ' GREATER THAN 999' else rbc_folate::text end as rbc_folate
+,case when  rbc_folate::numeric > 1999 then rbc_folate::text || ' GREATER THAN 1999' else rbc_folate::text end as rbc_folate
 ,case when  ps_folate::numeric > 999 then ps_folate::text || ' GREATER THAN 999' else ps_folate::text end as ps_folate
 ,case when  vitamin_b12::numeric > 9999 then vitamin_b12::text || ' GREATER THAN 999' else vitamin_b12::text end as vitamin_b12
 ,case when  zinc::numeric > 999 then zinc::text || ' GREATER THAN 999' else zinc::text end as zinc
@@ -39,7 +39,7 @@ ferritin::numeric > 999 or
 stfr::numeric > 99 or
 rbp::numeric > 99 or
 retinol::numeric > 99 or
-rbc_folate::numeric > 999 or
+rbc_folate::numeric > 1999 or
 ps_folate::numeric > 999 or
 vitamin_b12::numeric > 9999 or
 zinc::numeric > 999 or

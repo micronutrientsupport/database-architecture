@@ -1,3 +1,5 @@
+DROP MATERIALIZED VIEW IF EXISTS household_intake_afe;
+
 create materialized view household_intake_afe as
 select 
     fct_source_id as composition_data_id,

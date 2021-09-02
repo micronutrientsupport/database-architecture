@@ -1,3 +1,4 @@
+ DROP MATERIALIZED VIEW IF EXISTS country_deficiency_afe;
 CREATE materialized view country_deficiency_afe AS
 with country_intake_pivot as
 (

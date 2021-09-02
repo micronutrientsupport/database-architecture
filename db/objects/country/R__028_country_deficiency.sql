@@ -62,7 +62,7 @@ select
 	, cip.dietary_supply
 	, m.unit
 	, aet.afe_ear as deficient_value
-	, CASE WHEN cip.ditary_supply >= aet.afe_ear THEN '0'
+	, CASE WHEN cip.dietary_supply >= aet.afe_ear THEN '0'
             ELSE '100' 
 	  END as deficient_percentage
 

@@ -1,7 +1,8 @@
 CREATE TABLE population_source (
 	id                          integer primary key,
-	"name" text,
-	description text
+	"name"                      text,
+	description                 text,
+    geonetwork_uuid             text
 );
 COMMENT ON TABLE population_source IS 'The names of the data sources for population data';
 

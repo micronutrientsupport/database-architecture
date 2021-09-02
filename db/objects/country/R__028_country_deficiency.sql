@@ -1,5 +1,4 @@
 CREATE materialized view country_deficiency_afe AS
-SELECT
 with country_intake_pivot as
 (
 	select 

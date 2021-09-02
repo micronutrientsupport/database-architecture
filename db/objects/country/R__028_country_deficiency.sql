@@ -63,7 +63,9 @@ select
 	, m.unit
 	, aet.afe_ear as deficient_value
 	, CASE WHEN cip.ditary_supply >= aet.afe_ear THEN '0'
-            ELSE '100' as deficient_percentage
+            ELSE '100' 
+	  END as deficient_percentage
+
 from country_intake_pivot cip
 join micronutrient m on cip.micronutrient_id = m.id
 join afe_ear_threshold aet on aet.micronutrient_id = m.id;

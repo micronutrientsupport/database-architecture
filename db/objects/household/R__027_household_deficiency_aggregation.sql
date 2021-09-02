@@ -41,6 +41,7 @@ GROUP BY
     aggregation_area_name,
     geometry,
     micronutrient_id,
+    hidp.afe_ear,
     m.unit;
 
 COMMENT ON materialized VIEW household_deficiency_afe_aggregation IS 'View to aggregate the household_intake_deficiency_pivot view to provide the median dietary supply and percentage of deficient households per subregion aggregation area';

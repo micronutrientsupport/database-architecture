@@ -7,10 +7,11 @@ SELECT
     country,
     aggregation_area_id,
     aggregation_area_name,
+    'district' as aggregation_area_type,
     ST_AsGeoJSON(geometry) AS geometry,
     micronutrient_id,
     unit,
-    median(micronutrient_supply) AS median_supply,
+    median(micronutrient_supply) AS dietary_supply,
     count(household_id) AS household_count,
     count(household_id) FILTER (
         WHERE
@@ -26,7 +27,8 @@ SELECT
             ) :: numeric /(count(household_id))
         ) * 100,
         2
-    ) AS deficient_percentage
+    ) AS deficient_percentage,
+    hidp.afe_ear as deficient_value
 FROM
     household_intake_afe_deficiency_pivot hidp
     JOIN micronutrient m ON hidp.micronutrient_id = m.id

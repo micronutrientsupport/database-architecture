@@ -7,5 +7,5 @@ select
     micronutrient_id,
 	micronutrient_supply as dietary_supply,
 	is_deficient,
-	afe_ear as deficient_value,
+	afe_ear as deficient_value
 from household_intake_afe_deficiency_pivot hiadp 

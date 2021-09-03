@@ -17,8 +17,8 @@ CREATE TABLE biomarker_measurement (
     , iodine                  numeric
     , time_of_day_sampled     text check (time_of_day_sampled in ('am','pm') )
     , was_fasting             boolean
+    , selenium                numeric
 	, source_file_name        text references source_file (file_name)
-
 );
 COMMENT ON TABLE  Biomarker_measurement IS 'Levels of various biomarkers as measured by sampling blood, urine, or breastmilk from a household member';
 COMMENT ON COLUMN Biomarker_measurement.household_member_id IS 'The id of the household member from which the blood, urine, or breastmilk sample was taken';
@@ -38,3 +38,4 @@ COMMENT ON COLUMN Biomarker_measurement.agp                 IS 'The amount of (s
 COMMENT ON COLUMN Biomarker_measurement.iodine              IS 'The amount of Urinary Iodine, in micrograms per litre. ';
 COMMENT ON COLUMN Biomarker_measurement.time_of_day_sampled IS 'Whether the measurement was taken in the morning or afternoon (pre or post noon local time)';
 COMMENT ON COLUMN Biomarker_measurement.was_fasting         IS 'Whether the sample was taken while the patient was fasting';
+COMMENT ON COLUMN Biomarker_measurement.selenium            IS 'The amount of selenium in the blood, measured in nanograms per millilitre.';

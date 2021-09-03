@@ -18,6 +18,7 @@ CREATE TABLE biomarker_import_vol(
    , altitude_in_metres		text
    , region                 text
    , person_id              text
+   , group_id               text
    , sex                    text
    , education_level        text
    , age_in_months          text

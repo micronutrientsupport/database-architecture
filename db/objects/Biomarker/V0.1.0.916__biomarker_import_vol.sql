@@ -53,6 +53,9 @@ CREATE TABLE biomarker_import_vol(
    , time_of_day_sampled    text
    , was_fasting            text
    , selenium               text
+   , created_by             text
+   , created_date           text
+   , file_notes             text
 );
 
 COMMENT ON TABLE biomarker_import_vol IS 'Holding table for importing biomarker data in order to process it into the correct database tables. Also used by a view for checking for bad values.'

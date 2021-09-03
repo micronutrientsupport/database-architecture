@@ -20,6 +20,7 @@ CREATE TABLE household_member (
 	, height_in_cm         numeric
 	, bmi                  numeric
 	, interview_date       date
+	, source_file_name     text references source_file (file_name)
 );
 COMMENT ON TABLE household_member IS 'The people living in a household and their biological characteristics';
 COMMENT ON COLUMN household_member.household_id     IS 'The ID number of the household that this person belongs to';

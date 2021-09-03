@@ -17,6 +17,7 @@ CREATE TABLE biomarker_measurement (
     , iodine                  numeric
     , time_of_day_sampled     text check (time_of_day_sampled in ('am','pm') )
     , was_fasting             boolean
+	, source_file_name        text references source_file (file_name)
 
 );
 COMMENT ON TABLE  Biomarker_measurement IS 'Levels of various biomarkers as measured by sampling blood, urine, or breastmilk from a household member';

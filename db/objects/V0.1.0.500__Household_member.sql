@@ -43,5 +43,5 @@ COMMENT on COLUMN household_member.weight_in_kg     IS 'The weight of the person
 COMMENT on COLUMN household_member.height_in_cm     IS 'The height of the person in centimetres';
 COMMENT on COLUMN household_member.bmi              IS 'The body mass index of the person calculated from weight and height as weight in kg/height in metres squared';
 COMMENT on column household_member.interview_date   IS 'The date on which this person was interviewed';
-COMMENT on column household_member.group_id         IS 'The id of the group to whcih this person belonged when the survey was conducted';
+COMMENT on column household_member.group_id         IS 'The id of the group to which this person belonged when the survey was conducted';
 

@@ -3,8 +3,7 @@
 --
 
 CREATE TABLE intervention_type(
-    type_id              text    NOT NULL,
-    intervention_type    text,
-    CONSTRAINT "intervention_type_pk" PRIMARY KEY (type_id)
+    id                   text  PRIMARY KEY  NOT NULL,
+    intervention_type    text
 )
 ;

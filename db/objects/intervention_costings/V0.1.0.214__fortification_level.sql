@@ -20,7 +20,7 @@ CREATE TABLE fortification_level(
 
 ALTER TABLE fortification_level ADD CONSTRAINT "Refmicronutrient111"
     FOREIGN KEY (micronutrient_id)
-    REFERENCES micronutrient(micronutrient_id)
+    REFERENCES micronutrient(id)
 ;
 
 ALTER TABLE fortification_level ADD CONSTRAINT "Reffortification_compound121"

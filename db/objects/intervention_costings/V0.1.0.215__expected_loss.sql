@@ -17,7 +17,7 @@ CREATE TABLE expected_loss(
 
 ALTER TABLE expected_loss ADD CONSTRAINT "Refmicronutrient151"
     FOREIGN KEY (micronutrient_id)
-    REFERENCES micronutrient(micronutrient_id)
+    REFERENCES micronutrient(id)
 ;
 
 ALTER TABLE expected_loss ADD CONSTRAINT "Refintervention161"

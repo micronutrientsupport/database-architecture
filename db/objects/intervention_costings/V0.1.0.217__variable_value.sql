@@ -8,7 +8,7 @@ CREATE TABLE variable_value(
     units                text,
     variable_id          integer    NOT NULL,
     year                 integer    NOT NULL,
-    data_source_id       integer,
+    intervention_source_id       integer,
     CONSTRAINT "variable_value_pk" PRIMARY KEY (variable_value_id)
 )
 ;
@@ -28,7 +28,7 @@ ALTER TABLE variable_value ADD CONSTRAINT "Refyear211"
 ;
 
 ALTER TABLE variable_value ADD CONSTRAINT "Refdata_source231"
-    FOREIGN KEY (data_source_id)
-    REFERENCES data_source(data_source_id)
+    FOREIGN KEY (intervention_source_id)
+    REFERENCES intervention_source(id)
 ;
 

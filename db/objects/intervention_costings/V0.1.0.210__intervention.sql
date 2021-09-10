@@ -7,7 +7,7 @@ CREATE TABLE intervention(
     intervention_name    text,
     country_id           text,
     user_id              text    REFERENCES country(id),
-    data_source_id       integer,
+    intervention_source_id       integer,
     vehicle_id           text,
     status               text,
     type_id              text,
@@ -28,8 +28,8 @@ ALTER TABLE intervention ADD CONSTRAINT "Refuser21"
 ;
 
 ALTER TABLE intervention ADD CONSTRAINT "Refdata_source171"
-    FOREIGN KEY (data_source_id)
-    REFERENCES data_source(data_source_id)
+    FOREIGN KEY (intervention_source_id)
+    REFERENCES intervention_source(id)
 ;
 
 ALTER TABLE intervention ADD CONSTRAINT "Reffood_vehicle181"

@@ -7,7 +7,7 @@ join household_member hm
 on bm.household_member_id=hm.id
 join household h 
 on hm.household_id = h.id
-where education_level notnull
+where group_id notnull
 group by survey_id, group_id
 )
 

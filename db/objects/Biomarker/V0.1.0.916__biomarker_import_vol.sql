@@ -18,6 +18,7 @@ CREATE TABLE biomarker_import_vol(
    , altitude_in_metres		text
    , region                 text
    , person_id              text
+   , group_id               text
    , sex                    text
    , education_level        text
    , age_in_months          text
@@ -52,6 +53,10 @@ CREATE TABLE biomarker_import_vol(
    , iodine                 text
    , time_of_day_sampled    text
    , was_fasting            text
+   , selenium               text
+   , created_by             text
+   , created_date           text
+   , file_notes             text
 );
 
 COMMENT ON TABLE biomarker_import_vol IS 'Holding table for importing biomarker data in order to process it into the correct database tables. Also used by a view for checking for bad values.'

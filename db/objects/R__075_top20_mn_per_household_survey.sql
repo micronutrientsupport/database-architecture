@@ -2,6 +2,8 @@ DROP MATERIALIZED VIEW IF EXISTS top20_mn_per_hhsurvey;
 CREATE MATERIALIZED VIEW top20_mn_per_hhsurvey AS
 
 SELECT b.* , food_genus.food_name
+	, food_group.id as food_group_id
+	, food_group.name as food_group_name
 FROM (
 	SELECT
 		*
@@ -71,6 +73,7 @@ FROM (
 	) a
 ) b
 JOIN food_genus ON b.food_genus_id = food_genus.id
+JOIN food_group ON food_genus.food_group_id = food_group.id
 WHERE ranking <= 20
 ORDER BY survey_id, mn_name, ranking asc
 ;

@@ -58,7 +58,7 @@ select
 	, cip.composition_data_id
 	, cip.consumption_data_id
 	, cip.country_id
-	, cip.geometry
+	, ST_AsGeoJSON(cip.geometry) as geometry
 	, cip.dietary_supply
 	, m.unit
 	, aet.afe_ear as deficient_value

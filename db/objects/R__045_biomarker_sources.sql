@@ -10,7 +10,7 @@ with surveys as (
         , survey.geonetwork_uuid as survey_metadata_id
         , country.id as country_id
         , ROW_NUMBER() over                    --negate rank
-          (partition by country.id, the_biomarker_name order BY			
+          (partition by country.id, the_biomarker_name, the_biomarker_groups order BY			
 			ST_AREA(survey.geometry) ASC
 			, publication_date desc
 			) 

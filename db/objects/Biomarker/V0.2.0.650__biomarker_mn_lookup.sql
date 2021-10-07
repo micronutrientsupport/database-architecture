@@ -13,7 +13,7 @@ VALUES
 ,('ferritin', 'Fe' )
 ,('stfr', 'Fe' )
 ,('rbp', null )
-,('retinol', null )
+,('retinol', 'A' )
 ,('rbc_folate', 'B9' )
 ,('ps_folate', 'B9' )
 ,('vitamin_b12', 'B12' )

@@ -29,7 +29,7 @@ select
 from biomarker_measurement bm	-- Biomarker measurement data
 join household_member hm on bm.id = hm.id -- Details of the individual e.g. age, pregnancy
 join household hh on hm.household_id = hh.id -- Details of the household e.g. location, wealth
-left join aggregation_area sr on st_contains(sr.geometry, hh.location) WHERE s.type='admin' AND s.admin_level=1 -- Which aggregation area the household falls into for aggregation
+left join aggregation_area sr on st_contains(sr.geometry, hh.location) WHERE sr.type='admin' AND sr.admin_level=1 -- Which aggregation area the household falls into for aggregation
 
 
 

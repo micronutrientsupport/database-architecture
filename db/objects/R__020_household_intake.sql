@@ -52,7 +52,7 @@ CREATE OR REPLACE VIEW household_intake AS
         JOIN HOUSEHOLD_MEMBER as hhm ON hhm.id = hhc.HOUSEHOLD_id
         JOIN household ON hhm.household_id = household.id
         JOIN survey on household.survey_id = survey.id
-        JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location)
+        JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location) WHERE s.type='admin' AND s.admin_level=1
     GROUP BY aggregation_area.id, household.id, fooditem.fct_source_id
     --ORDER BY household.id
 UNION ALL
@@ -104,7 +104,7 @@ UNION ALL
     FROM individual_intake
     JOIN household on individual_intake.household_id = household.id
     JOIN survey on household.survey_id = survey.id
-    JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location)
+    JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location) WHERE s.type='admin' AND s.admin_level=1
     GROUP BY aggregation_area.id, household.id, individual_intake.fct_source_id
 ;
 

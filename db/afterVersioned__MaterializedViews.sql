@@ -13,4 +13,9 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS impact_summary                AS SELECT '
 CREATE MATERIALIZED VIEW IF NOT EXISTS impact_commodity_aggregation  AS SELECT 'x'; REFRESH MATERIALIZED VIEW impact_commodity_aggregation;
 CREATE MATERIALIZED VIEW IF NOT EXISTS impact_food_group_aggregation AS SELECT 'x'; REFRESH MATERIALIZED VIEW impact_food_group_aggregation;
 CREATE MATERIALIZED VIEW IF NOT EXISTS household_deficiency_afe_aggregation AS SELECT 'x'; REFRESH MATERIALIZED VIEW household_deficiency_afe_aggregation;
+CREATE MATERIALIZED VIEW IF NOT EXISTS houshold_intake_afe AS SELECT 'x'; REFRESH MATERIALIZED VIEW houshold_intake_afe;
 CREATE MATERIALIZED VIEW IF NOT EXISTS country_deficiency_afe AS SELECT 'x'; REFRESH MATERIALIZED VIEW country_deficiency_afe;
+
+
+--with mwi as (select geometry from survey where id = 2)
+--update survey set geometry = mwi.geometry from mwi where survey.id=1;

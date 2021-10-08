@@ -39,6 +39,7 @@ GROUP BY
     country,
     aggregation_area_id,
     aggregation_area_name,
+    aggregation_area_type,
     geometry,
     micronutrient_id,
     hidp.afe_ear,

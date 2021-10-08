@@ -54,7 +54,7 @@ with country_intake_pivot as
 select 
 	cip.country_id as aggregation_area_id
 	, cip.country_name as aggregation_area_name
-	, 'country' as aggregation_area_type,
+	, 'country' as aggregation_area_type
 	, cip.micronutrient_id
 	, cip.composition_data_id
 	, cip.consumption_data_id

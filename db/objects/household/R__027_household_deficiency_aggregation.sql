@@ -7,7 +7,7 @@ SELECT
     country,
     aggregation_area_id,
     aggregation_area_name,
-    'district' as aggregation_area_type,
+    aggregation_area_type
     ST_AsGeoJSON(geometry) AS geometry,
     micronutrient_id,
     unit,

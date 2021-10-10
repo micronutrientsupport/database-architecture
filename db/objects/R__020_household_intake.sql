@@ -6,6 +6,7 @@ CREATE OR REPLACE VIEW household_intake AS
         , fooditem.fct_source_id as fct_source_id
         , aggregation_area.id as aggregation_area_id
         , aggregation_area.name as aggregation_area_name
+        , aggregation_area.type as aggregation_area_type
         , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as Moisture_in_g
         , sum(Energy_in_kCal                 / 100 * amount_consumed_in_g) as Energy_in_kCal
         , sum(Energy_in_kJ                   / 100 * amount_consumed_in_g) as Energy_in_kJ
@@ -51,7 +52,7 @@ CREATE OR REPLACE VIEW household_intake AS
         JOIN HOUSEHOLD_MEMBER as hhm ON hhm.id = hhc.HOUSEHOLD_id
         JOIN household ON hhm.household_id = household.id
         JOIN survey on household.survey_id = survey.id
-        JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location)
+        JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location) WHERE aggregation_area.type='admin' AND aggregation_area.admin_level=1
     GROUP BY aggregation_area.id, household.id, fooditem.fct_source_id
     --ORDER BY household.id
 UNION ALL
@@ -61,6 +62,7 @@ UNION ALL
         , individual_intake.fct_source_id as fct_source_id
         , aggregation_area.id as aggregation_area_id
         , aggregation_area.name as aggregation_area_name
+        , aggregation_area.type as aggregation_area_type
         , sum(Moisture_in_g              ) as  Moisture_in_g
         , sum(Energy_in_kCal             ) as  Energy_in_kCal
         , sum(Energy_in_kJ               ) as  Energy_in_kJ
@@ -102,7 +104,7 @@ UNION ALL
     FROM individual_intake
     JOIN household on individual_intake.household_id = household.id
     JOIN survey on household.survey_id = survey.id
-    JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location)
+    JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location) WHERE aggregation_area.type='admin' AND aggregation_area.admin_level=1
     GROUP BY aggregation_area.id, household.id, individual_intake.fct_source_id
 ;
 

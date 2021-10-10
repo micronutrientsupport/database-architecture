@@ -7,7 +7,7 @@ SELECT
     country,
     aggregation_area_id,
     aggregation_area_name,
-    'district' as aggregation_area_type,
+    aggregation_area_type,
     ST_AsGeoJSON(geometry) AS geometry,
     micronutrient_id,
     unit,
@@ -32,13 +32,14 @@ SELECT
 FROM
     household_intake_afe_deficiency_pivot hidp
     JOIN micronutrient m ON hidp.micronutrient_id = m.id
-    JOIN aggregation_area s ON s.id = hidp.aggregation_area_id WHERE s.type='admin' AND s.admin_level=2
+    JOIN aggregation_area s ON s.id = hidp.aggregation_area_id WHERE s.type='admin' AND s.admin_level=1
 GROUP BY
     survey_id,
     fct_source_id,
     country,
     aggregation_area_id,
     aggregation_area_name,
+    aggregation_area_type,
     geometry,
     micronutrient_id,
     hidp.afe_ear,

@@ -14,6 +14,7 @@ FROM
             hin.fct_source_id,
             hin.aggregation_area_id,
             hin.aggregation_area_name,
+            hin.aggregation_area_type,
             mn.micronutrient_id,
             mn.micronutrient_supply
         FROM

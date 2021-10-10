@@ -55,10 +55,11 @@ select
 	cip.country_id as aggregation_area_id
 	, cip.country_name as aggregation_area_name
 	, 'country' as aggregation_area_type
+	, cip.micronutrient_id
 	, cip.composition_data_id
 	, cip.consumption_data_id
 	, cip.country_id
-	, cip.geometry
+	, ST_AsGeoJSON(cip.geometry) as geometry
 	, cip.dietary_supply
 	, m.unit
 	, aet.afe_ear as deficient_value

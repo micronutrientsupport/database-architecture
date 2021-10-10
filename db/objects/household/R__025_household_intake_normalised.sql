@@ -5,6 +5,7 @@ SELECT
         , hi.fct_source_id
         , hi.aggregation_area_id
         , hi.aggregation_area_name
+        , hi.aggregation_area_type
         , (hi.Moisture_in_g/hn.afe_factor              ) AS  Moisture_in_g
         , (hi.Energy_in_kCal/hn.afe_factor             ) AS  Energy_in_kCal
         , (hi.Energy_in_kJ/hn.afe_factor               ) AS  Energy_in_kJ

@@ -59,3 +59,13 @@ VALUES
 (1, 'A'   , 1     , 1     , 2022 , 98, 20),
 (1, 'B12' , 0.02  , 0.02  , 2022 , 98, 20)
 ;
+
+INSERT INTO expected_loss (
+    micronutrient_id
+    , intervention_id
+    , expected_loss_percentage
+)
+VALUES
+('A'  , 1, 0),
+('B12', 1, 0)
+;

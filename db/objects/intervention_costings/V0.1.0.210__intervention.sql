@@ -11,7 +11,7 @@ CREATE TABLE intervention(
     food_vehicle_id              text    REFERENCES food_vehicle(id),
     status                       text,
     intervention_type_id         text    REFERENCES intervention_type(id),
-    program_status_id            text
+    program_status_id            text    REFERENCES program_status(id)
 )
 ;
 

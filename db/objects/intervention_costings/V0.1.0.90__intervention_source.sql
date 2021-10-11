@@ -5,3 +5,5 @@ CREATE TABLE intervention_source(
 )
 ;
 
+COMMENT ON table intervention_source IS 'The citation data of the data that the default data is based on
+e.g. Bobson et al used this many milliliters of vitamin water to pour into the wheat flour milling pds. This table contains the name of the ';

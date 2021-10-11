@@ -1,6 +1,6 @@
 
 CREATE TABLE food_vehicle(
-    id              text   PRIMARY KEY ,
+    id              numeric   PRIMARY KEY ,
     vehicle_name    text
 )
 ;

@@ -8,7 +8,7 @@ CREATE TABLE intervention(
     country_id                   text    REFERENCES country(id),
     app_user_id                  text    REFERENCES app_user(id),
     intervention_source_id       integer REFERENCES intervention_source(id),
-    food_vehicle_id              text    REFERENCES food_vehicle(id),
+    food_vehicle_id              numeric    REFERENCES food_vehicle(id),
     status                       text,
     intervention_type_id         text    REFERENCES intervention_type(id),
     program_status_id            text    REFERENCES program_status(id)

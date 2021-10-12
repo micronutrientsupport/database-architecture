@@ -1,8 +1,8 @@
 CREATE TABLE biomarker_group (
 group_id text primary key,
 supra_group text CHECK (supra_group IN ('Adult','Children')),
-group_name text),
-is_default	    boolean;
+group_name text,
+is_default	    boolean);
 
 COMMENT ON TABLE biomarker_group IS 'Table of groups used to define sections of a sampled population based on age and other criteria for use in selecting thresholds for assessingbiomarker deficiency.';
 COMMENT on column biomarker_group.group_id is 'The group primary key identifier';

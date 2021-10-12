@@ -1,4 +1,4 @@
-create or replace function create_country_scenario(_fct_source_id numeric, _food_genus text, _field text, _new_value numeric)
+create or replace function create_country_intake_scenario(_fct_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
 returns setof country_intake as
 $$
 BEGIN
@@ -17,7 +17,7 @@ BEGIN
         , sum(MonounsaturatedFA_in_g         / 100 * amount_consumed_in_g) as MonounsaturatedFA_in_g
         , sum(PolyunsaturatedFA_in_g         / 100 * amount_consumed_in_g) as PolyunsaturatedFA_in_g
         , sum(Cholesterol_in_mg              / 100 * amount_consumed_in_g) as Cholesterol_in_mg
-        , sum(Carbohydrateavailable_in_g     / 100 * amount_consumed_in_g) as Carbohydrateavailable_in_g
+        , sum(Carbohydrates_in_g             / 100 * amount_consumed_in_g) as Carbohydrates_in_g
         , sum(Fibre_in_g                     / 100 * amount_consumed_in_g) as Fibre_in_g
         , sum(Ash_in_g                       / 100 * amount_consumed_in_g) as Ash_in_g
         , sum(Ca_in_mg                       / 100 * amount_consumed_in_g) as Ca_in_mg
@@ -54,3 +54,5 @@ BEGIN
 END
 $$
 language plpgsql;
+
+select bmgf.create_country_intake_scenario(24, ARRAY['1341.01', '1594.01', '1312.01'], 'Mg'::text, ARRAY[5000, 75, 20]::numeric[]);

@@ -46,22 +46,49 @@ VALUES (
 -- expected loss doesn't seem to be recorded in spreadsheet
 -- INSERT INTO expected_loss (intervention_id, micronutrient_id, expected_loss_percentage) VALUES (1, )
 
+INSERT INTO fortificant (
+    id,
+    name,
+    micronutrient_id,
+    mn_percent,
+    price
+)
+VALUES (
+    1,
+    'Retinyl Palmitate- 250,000 IU/g (dry)'
+    , 'A'
+    , 51
+    , 117
+
+),
+(
+    2,
+    'Vit. B-12 0.1% WS'
+    , 'B12'
+    , 0.1
+    , 42
+
+)
+;
 
 
 INSERT INTO fortification_level (
     intervention_id
-    , micronutrient_id
+    -- , micronutrient_id
     , target_level
     , actual_level
     , year
     , fortifiable_percentage
     , fortified_percentage
+
+    , fortificant_id
+    , fortificant_proportion
 )
 VALUES
-(1, 'A'   , 1     , 1     , 2021 , 98, 20),
-(1, 'B12' , 0.02  , 0.02  , 2021 , 98, 20),
-(1, 'A'   , 1     , 1     , 2022 , 98, 20),
-(1, 'B12' , 0.02  , 0.02  , 2022 , 98, 20)
+(1, 1     , 1     , 2021 , 98, 20, 1, 0.02),
+(1, 0.02  , 0.02  , 2021 , 98, 20, 2, 0.04),
+(1, 1     , 1     , 2022 , 98, 20, 1, 0.02),
+(1, 0.02  , 0.02  , 2022 , 98, 20, 2, 0.04)
 ;
 
 INSERT INTO expected_loss (

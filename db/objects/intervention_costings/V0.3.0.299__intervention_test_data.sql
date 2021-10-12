@@ -26,7 +26,6 @@ INSERT INTO intervention (
     , app_user_id
     , intervention_source_id
     , food_vehicle_id
-    , status
     , intervention_type_id
     , program_status_id
 )
@@ -36,7 +35,6 @@ VALUES (
     , 1
     , 1
     , 1
-    , '???? what does this status refer to?'
     , 1
     , 1
 
@@ -72,24 +70,16 @@ VALUES (
 ;
 
 
-INSERT INTO fortification_level (
-    intervention_id
-    -- , micronutrient_id
-    , target_level
-    , actual_level
-    , year
-    , fortifiable_percentage
-    , fortified_percentage
-
-    , fortificant_id
-    , fortificant_proportion
-)
+INSERT INTO fortification_level
+(intervention_id , target_level , actual_level , year , fortificant_id , fortificant_proportion)
 VALUES
-(1, 1     , 1     , 2021 , 98, 20, 1, 0.02),
-(1, 0.02  , 0.02  , 2021 , 98, 20, 2, 0.04),
-(1, 1     , 1     , 2022 , 98, 20, 1, 0.02),
-(1, 0.02  , 0.02  , 2022 , 98, 20, 2, 0.04)
+(1               , 1            , 1            , 2021 , 1              , 0.02) ,
+(1               , 0.02         , 0.02         , 2021 , 2              , 0.04) ,
+(1               , 1            , 1            , 2022 , 1              , 0.02) ,
+(1               , 0.02         , 0.02         , 2022 , 2              , 0.04)
 ;
+
+
 
 INSERT INTO expected_loss (
     micronutrient_id
@@ -103,6 +93,7 @@ VALUES
 
 insert into display_heading (id, display_heading_text) VALUES (1, 'Industry Information');
 insert into display_heading (id, display_heading_text) VALUES (2, 'Industry Startup Scale up cost summary');
+insert into display_heading (id, display_heading_text) VALUES (3, 'program assumptions');
 
 
 insert into display_sub_heading (id, display_sub_heading_text) VALUES (1, 'Equipment');
@@ -162,19 +153,64 @@ VALUES (
     , 1
     , 1
     , 37
-)
+),
+(7, 1, 'Fortifiable/industrially processed food vehicle in the food system (%)', 3, NULL, 'percent_food_vehicle_in_system'           ),
+(8, 1, 'Fortifiable food vehicle that is fortified (%)'                        , 3, NULL, 'percent_fortifiable_food_that_is_fotified')
 ;
 
-INSERT INTO factor_value (
-    intervention_id
-    , intervention_factor_id
-    , value
-    , year
-)
+
+INSERT INTO factor_value
+(intervention_id , intervention_factor_id , value , year)
 VALUES
-(
-    1
+(1               , 1                      , 3     , 2021),
+(1               , 7                      , 98    , 2021),
+(1               , 8                      , 20    , 2021)
+;
+
+
+
+
+
+-------  Biofortification test data - VitA Maize
+
+
+insert into food_vehicle (id, vehicle_name) VALUES (3, 'Vitamin A Maize');
+
+-- INSERT INTO intervention_type (id, name) VALUES (1, 'Industrial Fortification');
+-- INSERT INTO intervention_type (id, name) VALUES (2, 'Biofortification');
+-- INSERT INTO intervention_type (id, name) VALUES (3, 'Agro-Fortification');
+INSERT INTO program_status (id, description) VALUES (2, '10 varieties have been released');
+
+
+INSERT INTO intervention (
+    intervention_name
+    , country_id
+    , app_user_id
+    , intervention_source_id
+    , food_vehicle_id
+    , intervention_type_id
+    , program_status_id
+)
+VALUES (
+    'malawi Vitamin A Maize fortification'
+    , 'MWI'
+    , 1
     , 1
     , 3
-    , 2021
-)
+    , 2
+    , 2
+
+);
+
+INSERT INTO INTERVENTION_FACTOR
+( id  , label                                                                                                             , food_vehicle_id , formula_index          , notes , display_heading_id , display_sub_heading_id )
+VALUES
+(   9 , 'Farmer adoption rate, local (% of all area of renewed local maize cultivation replaced with vitamin A maize)'    , 3               , 'farmer_adoption_rate' , NULL  , NULL               , NULL)
+;
+
+INSERT INTO factor_value
+(intervention_id , intervention_factor_id , value , year)
+VALUES
+(2               , 9                      , 5     , 2021),
+(2               , 9                      , 5     , 2022)
+;

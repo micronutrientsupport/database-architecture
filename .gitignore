@@ -6,3 +6,4 @@ node_modules/
 /built/
 /logs/
 *.orig
+/flyway.conf

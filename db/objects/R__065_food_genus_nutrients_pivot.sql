@@ -36,7 +36,7 @@ CROSS JOIN LATERAL (
         ('Se'          , Se_in_mcg                  ),
         ('Ash'         , Ash_in_g                   ),
         ('Fibre'       , Fibre_in_g                 ),
-        ('Carbohydrate', Carbohydrateavailable_in_g ),
+        ('Carbohydrates', carbohydrates_in_g         ),
         ('Cholesterol' , Cholesterol_in_mg          ),
         ('Protein'     , TotalProtein_in_g          ),
         ('Fat'         , TotalFats_in_g             ),

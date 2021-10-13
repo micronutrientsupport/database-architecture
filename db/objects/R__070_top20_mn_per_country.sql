@@ -1,7 +1,10 @@
 DROP MATERIALIZED VIEW IF EXISTS top20_mn_per_country;
 CREATE MATERIALIZED VIEW top20_mn_per_country AS
 
-SELECT b.* , food_genus.food_name
+SELECT b.* 
+    , food_genus.food_name
+	, food_group.id as food_group_id
+	, food_group.name as food_group_name
 FROM (
 	SELECT
 		*
@@ -52,7 +55,7 @@ FROM (
 				('Se'          , Se_in_mcg                  ),
 				('Ash'         , Ash_in_g                   ),
 				('Fibre'       , Fibre_in_g                 ),
-				('Carbohydrate', Carbohydrateavailable_in_g ),
+				('Carbohydrates', carbohydrates_in_g         ),
 				('Cholesterol' , Cholesterol_in_mg          ),
 				('Protein'     , TotalProtein_in_g          ),
 				('Fat'         , TotalFats_in_g             ),
@@ -70,6 +73,7 @@ FROM (
 	) a
 ) b
 JOIN food_genus ON b.food_genus_id = food_genus.id
+JOIN food_group ON food_genus.food_group_id = food_group.id
 WHERE ranking <= 20
 ORDER BY country_id, mn_name, ranking asc
 ;

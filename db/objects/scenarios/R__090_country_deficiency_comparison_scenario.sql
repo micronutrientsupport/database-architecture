@@ -1,4 +1,4 @@
-create or replace function create_country_deficiency_afe_scenario(_fct_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
+create or replace function create_country_deficiency_afe_comparison_scenario(_fct_source_id numeric, _food_genus text[], _field text, _new_food_genus text[])
 returns setof country_deficiency_afe as
 $$
 BEGIN
@@ -13,7 +13,7 @@ BEGIN
             , c.geometry as geometry
             , ci.fct_source_id as composition_data_id
             , ci.data_source_id as consumption_data_id
-        from bmgf.create_country_scenario(_fct_source_id, _food_genus, _field, _new_value) ci
+        from create_country_intake_comparison_scenario(_fct_source_id, _food_genus, _field, _new_food_genus) ci
         join country_consumption_source ccs on ci.data_source_id = ccs.id 
         join country c on ST_EQUALS(ccs.geometry, c.geometry)
         CROSS JOIN LATERAL (
@@ -80,4 +80,4 @@ END
 $$
 language plpgsql;
 
---select * from bmgf.create_country_deficiency_afe_scenario(24, ARRAY['1341.01', '1594.01', '1312.01'], 'Mg'::text, ARRAY[5000000, 75, 20]::numeric[]);
+--select * from create_country_deficiency_afe_comparison_scenario(1, ARRAY ['23110.02'], 'Mg'::text, ARRAY ['1594.01']);

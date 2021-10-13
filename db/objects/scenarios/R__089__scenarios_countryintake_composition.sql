@@ -1,4 +1,4 @@
-create or replace function create_country_intake_scenario(_fct_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
+create or replace function create_country_intake_composition_scenario(_fct_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
 returns setof country_intake as
 $$
 BEGIN
@@ -55,4 +55,4 @@ END
 $$
 language plpgsql;
 
-select bmgf.create_country_intake_scenario(24, ARRAY['1341.01', '1594.01', '1312.01'], 'Mg'::text, ARRAY[5000, 75, 20]::numeric[]);
+--select * from create_country_intake_composition_scenario(24, ARRAY['1341.01', '1594.01', '1312.01'], 'Mg'::text, ARRAY[5000, 75, 20]::numeric[]);

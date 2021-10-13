@@ -1,4 +1,4 @@
-create or replace function create_scenario_fct(_fct_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
+create or replace function create_scenario_fct(_country_consumption_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
 
 returns setof fooditem as
 $$
@@ -10,7 +10,7 @@ BEGIN
 	
    FOR i IN 1 .. array_upper(_food_genus, 1)
    loop
-      RAISE NOTICE 'Replacing % in food genus % to %', _field, _food_genus[i], _new_value[i];
+      RAISE NOTICE 'Replacing % in consumption of food genus % to %', _field, _food_genus[i], _new_value[i];
      	
       if i != 1 then
         the_query := the_query || 'UNION ';
@@ -44,7 +44,5 @@ BEGIN
 END
 $$
 language plpgsql;
-
---select * from create_scenario_fct(10, 'andy94'::text, 'Ca'::text, 5000);
 
 --select * from create_scenario_fct(24, ARRAY ['1341.01', '1594.01', '1312.01'], 'Mg'::text, ARRAY [5000, 75, 20]);

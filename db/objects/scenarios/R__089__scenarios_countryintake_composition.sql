@@ -1,4 +1,4 @@
-create or replace function create_country_intake_composition_scenario(_fct_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
+create or replace function create_country_intake_composition_scenario(_compositionDataId numeric, _consumptionDataId numeric, _food_genus text[], _field text, _new_value numeric[])
 returns setof country_intake as
 $$
 BEGIN
@@ -46,13 +46,13 @@ BEGIN
         , sum(VitaminE_in_mg                 / 100 * amount_consumed_in_g) as VitaminE_in_mg
         , sum(PhyticAcid_in_mg               / 100 * amount_consumed_in_g) as PhyticAcid_in_mg
     FROM
-        create_scenario_fct(_fct_source_id, _food_genus, _field, _new_value) as fooditem
+        create_scenario_fct(_compositionDataId, _food_genus, _field, _new_value) as fooditem
         JOIN food_genus ON food_genus.id = fooditem.food_genus_id
-        JOIN COUNTRY_CONSUMPTION as cc ON cc.food_genus_id = food_genus.id
+        JOIN COUNTRY_CONSUMPTION as cc ON cc.food_genus_id = food_genus.id WHERE data_source_id = _consumptionDataId
         --JOIN survey on household.survey_id = survey.id
     GROUP BY data_source_id, fooditem.fct_source_id, cc.country_id;
 END
 $$
 language plpgsql;
 
---select * from create_country_intake_composition_scenario(24, ARRAY['1341.01', '1594.01', '1312.01'], 'Mg'::text, ARRAY[5000, 75, 20]::numeric[]);
+--select * from create_country_intake_composition_scenario(24, 1, ARRAY['1341.01', '1594.01', '1312.01'], 'Mg'::text, ARRAY[5000, 75, 20]::numeric[]);

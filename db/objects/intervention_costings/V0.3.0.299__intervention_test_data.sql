@@ -92,74 +92,74 @@ insert into display_heading (id, display_heading_text) VALUES (3, 'program assum
 
 insert into display_sub_heading (id, display_sub_heading_text) VALUES (1, 'Equipment');
 
-INSERT INTO intervention_factor (
-    id
-    , food_vehicle_id
-    , label
-    , display_heading_id
-    , display_sub_heading_id
-    , formula_index
-)
-VALUES (
-    1
-    , 1 --wheat flour
-    , 'Number of domestic industrial Mills (capacity > 20 metric ton /day)'
-    , 1
-    , NULL
-    , 1
-),
-(
-    2
-    , 1 --wheat flour
-    , 'Imputed number of domestic mills fortifying food vehicle'
-    , 1
-    , NULL
-    , 2
-),
-(
-    3
-    , 2 --oil
-    , 'Number of domestic industrial edible oil refineries (capacity of > 5 MT/day)'
-    , 1
-    , NULL
-    , 1
-),
-(
-    4
-    , 2 --oil
-    , 'Imputed number of domestic industrial refineries fortifying food vehicle'
-    , 1
-    , NULL
-    , 2
-),
-(
-    5
-    , 1 --wheat flour
-    , 'Feeder/dosifier (unit cost) and installation'
-    , 1
-    , NULL
-    ,37
-),
-(
-    6
-    , 2 -- oil
-    , 'Stainless steel mixing tank (unit cost)'
-    , 1
-    , 1
-    , 37
-),
-(7, 1, 'Fortifiable/industrially processed food vehicle in the food system (%)', 3, NULL, 'percent_food_vehicle_in_system'           ),
-(8, 1, 'Fortifiable food vehicle that is fortified (%)'                        , 3, NULL, 'percent_fortifiable_food_that_is_fotified')
-;
+-- INSERT INTO intervention_factor (
+--     id
+--     , food_vehicle_id
+--     , label
+--     , display_heading_id
+--     , display_sub_heading_id
+--     , formula_index
+-- )
+-- VALUES (
+--     1
+--     , 1 --wheat flour
+--     , 'Number of domestic industrial Mills (capacity > 20 metric ton /day)'
+--     , 1
+--     , NULL
+--     , 1
+-- ),
+-- (
+--     2
+--     , 1 --wheat flour
+--     , 'Imputed number of domestic mills fortifying food vehicle'
+--     , 1
+--     , NULL
+--     , 2
+-- ),
+-- (
+--     3
+--     , 2 --oil
+--     , 'Number of domestic industrial edible oil refineries (capacity of > 5 MT/day)'
+--     , 1
+--     , NULL
+--     , 1
+-- ),
+-- (
+--     4
+--     , 2 --oil
+--     , 'Imputed number of domestic industrial refineries fortifying food vehicle'
+--     , 1
+--     , NULL
+--     , 2
+-- ),
+-- (
+--     5
+--     , 1 --wheat flour
+--     , 'Feeder/dosifier (unit cost) and installation'
+--     , 1
+--     , NULL
+--     ,37
+-- ),
+-- (
+--     6
+--     , 2 -- oil
+--     , 'Stainless steel mixing tank (unit cost)'
+--     , 1
+--     , 1
+--     , 37
+-- ),
+-- (7, 1, 'Fortifiable/industrially processed food vehicle in the food system (%)', 3, NULL, 'percent_food_vehicle_in_system'           ),
+-- (8, 1, 'Fortifiable food vehicle that is fortified (%)'                        , 3, NULL, 'percent_fortifiable_food_that_is_fotified')
+-- ;
 
 
-INSERT INTO factor_value
-(intervention_id , intervention_factor_id , value , year)
-VALUES
-(1               , 1                      , 3     , 2021),
-(1               , 7                      , 98    , 2021),
-(1               , 8                      , 20    , 2021)
-;
+-- INSERT INTO factor_value
+-- (intervention_id , intervention_factor_id , value , year)
+-- VALUES
+-- (1               , 1                      , 3     , 2021),
+-- (1               , 7                      , 98    , 2021),
+-- (1               , 8                      , 20    , 2021)
+-- ;
 
 
 
@@ -192,15 +192,15 @@ VALUES (
 
 );
 
-INSERT INTO INTERVENTION_FACTOR
-( id  , label                                                                                                             , food_vehicle_id , formula_index          , notes , display_heading_id , display_sub_heading_id )
-VALUES
-(   9 , 'Farmer adoption rate, local (% of all area of renewed local maize cultivation replaced with vitamin A maize)'    , 3               , 'farmer_adoption_rate' , NULL  , NULL               , NULL)
-;
+-- INSERT INTO INTERVENTION_FACTOR
+-- ( id  , label                                                                                                             , food_vehicle_id , formula_index          , notes , display_heading_id , display_sub_heading_id )
+-- VALUES
+-- (   9 , 'Farmer adoption rate, local (% of all area of renewed local maize cultivation replaced with vitamin A maize)'    , 3               , 'farmer_adoption_rate' , NULL  , NULL               , NULL)
+-- ;
 
-INSERT INTO factor_value
-(intervention_id , intervention_factor_id , value , year)
-VALUES
-(2               , 9                      , 5     , 2021),
-(2               , 9                      , 5     , 2022)
-;
+-- INSERT INTO factor_value
+-- (intervention_id , intervention_factor_id , value , year)
+-- VALUES
+-- (2               , 9                      , 5     , 2021),
+-- (2               , 9                      , 5     , 2022)
+-- ;

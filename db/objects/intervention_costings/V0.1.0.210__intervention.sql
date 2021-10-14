@@ -10,7 +10,7 @@ CREATE TABLE intervention(
     intervention_source_id       integer    REFERENCES intervention_source(id),
     food_vehicle_id              numeric    REFERENCES food_vehicle(id),
     intervention_type_id         text       REFERENCES intervention_type(id),
-    program_status_id            text       REFERENCES program_status(id),
+    program_status               text,
     is_premade                   boolean
 )
 ;

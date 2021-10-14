@@ -1,11 +1,7 @@
---
--- TABLE: intervention_type
---
-
-CREATE TABLE intervention_type(
+CREATE TABLE fortification_type(
     id                   text  PRIMARY KEY  NOT NULL,
     name                 text
 )
 ;
 
-comment on table intervention_type IS 'whether the intervention is industrial fortificaion, biofortification, or agro-fortification';
+comment on table fortification_type IS 'whether the intervention is Large-Scale fortificaion, biofortification, or agro-fortification';

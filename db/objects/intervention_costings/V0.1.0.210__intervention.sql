@@ -9,11 +9,12 @@ CREATE TABLE intervention(
     app_user_id                  text       REFERENCES app_user(id),
     intervention_source_id       integer    REFERENCES intervention_source(id),
     food_vehicle_id              numeric    REFERENCES food_vehicle(id),
-    intervention_type_id         text       REFERENCES intervention_type(id),
+    fortification_type_id         text       REFERENCES fortification_type(id),
     program_status               text,
     is_premade                   boolean
 )
 ;
 
 COMMENT on column intervention.is_premade is 'Whether this intervention is pre-created by professionals, or whether this is an intervention where an end-user has customised some values';
+COMMENT on column intervention.fortification_type_id is 'Whether this intervention is pre-created by professionals, or whether this is an intervention where an end-user has customised some values';
 

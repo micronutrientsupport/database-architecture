@@ -7,9 +7,9 @@ insert into food_vehicle (id, vehicle_name) VALUES (1, 'wheat flour');
 insert into food_vehicle (id, vehicle_name) VALUES (2, 'oil');
 insert into food_vehicle (id, vehicle_name) VALUES (4, 'maize flour');
 
-INSERT INTO intervention_type (id, name) VALUES (1, 'Industrial Fortification');
-INSERT INTO intervention_type (id, name) VALUES (2, 'Biofortification');
-INSERT INTO intervention_type (id, name) VALUES (3, 'Agro-Fortification');
+INSERT INTO fortification_type (id, name) VALUES ('LSF', 'Industrial Fortification');
+INSERT INTO fortification_type (id, name) VALUES ('BF' , 'Biofortification');
+INSERT INTO fortification_type (id, name) VALUES ('AF' , 'Agro-Fortification');
 
 
 
@@ -20,7 +20,7 @@ INSERT INTO intervention (
     , app_user_id
     , intervention_source_id
     , food_vehicle_id
-    , intervention_type_id
+    , fortification_type_id
     , program_status
 )
 VALUES (
@@ -29,7 +29,7 @@ VALUES (
     , 1
     , 1
     , 1
-    , 1
+    , 'LSF'
     , 'the status of the program is: going well'
 
 );
@@ -178,7 +178,7 @@ INSERT INTO intervention (
     , app_user_id
     , intervention_source_id
     , food_vehicle_id
-    , intervention_type_id
+    , fortification_type_id
     , program_status
 )
 VALUES (
@@ -187,7 +187,7 @@ VALUES (
     , 1
     , 1
     , 3
-    , 2
+    , 'BF'
     , 'a ststus about the program'
 
 );

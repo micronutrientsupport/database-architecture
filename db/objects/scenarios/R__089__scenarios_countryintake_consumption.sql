@@ -46,10 +46,11 @@ BEGIN
         , sum(VitaminE_in_mg                 / 100 * amount_consumed_in_g) as VitaminE_in_mg
         , sum(PhyticAcid_in_mg               / 100 * amount_consumed_in_g) as PhyticAcid_in_mg
     FROM
-        fooditem WHERE fct_source_id = _compositionDataId
+        fooditem
         JOIN food_genus ON food_genus.id = fooditem.food_genus_id
         JOIN create_scenario_fbs(_compositionDataId, _food_genus, _field, _new_value) as cc ON cc.food_genus_id = food_genus.id
         --JOIN survey on household.survey_id = survey.id
+         WHERE fct_source_id = _compositionDataId
     GROUP BY data_source_id, fooditem.fct_source_id, cc.country_id;
 END
 $$

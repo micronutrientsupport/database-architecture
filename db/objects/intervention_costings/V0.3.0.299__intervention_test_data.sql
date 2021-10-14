@@ -5,18 +5,12 @@ INSERT INTO intervention_source (id, short_text, citation_text) VALUES (1, 'GFDx
 
 insert into food_vehicle (id, vehicle_name) VALUES (1, 'wheat flour');
 insert into food_vehicle (id, vehicle_name) VALUES (2, 'oil');
+insert into food_vehicle (id, vehicle_name) VALUES (4, 'maize flour');
 
 INSERT INTO intervention_type (id, name) VALUES (1, 'Industrial Fortification');
 INSERT INTO intervention_type (id, name) VALUES (2, 'Biofortification');
 INSERT INTO intervention_type (id, name) VALUES (3, 'Agro-Fortification');
 
-
-
-
-INSERT INTO program_status (id, description) VALUES (1, 'voluntary, transitioning to mandatory');
-
--- INSERT INTO fortificant (id, name) VALUES (1, 'Folic Acid');
--- INSERT INTO fortificant (id, name) VALUES (1, 'Folic Acid');
 
 
 
@@ -27,7 +21,7 @@ INSERT INTO intervention (
     , intervention_source_id
     , food_vehicle_id
     , intervention_type_id
-    , program_status_id
+    , program_status
 )
 VALUES (
     'malawi industrial wheat fortification'
@@ -36,7 +30,7 @@ VALUES (
     , 1
     , 1
     , 1
-    , 1
+    , 'the status of the program is: going well'
 
 );
 
@@ -176,10 +170,6 @@ VALUES
 
 insert into food_vehicle (id, vehicle_name) VALUES (3, 'Vitamin A Maize');
 
--- INSERT INTO intervention_type (id, name) VALUES (1, 'Industrial Fortification');
--- INSERT INTO intervention_type (id, name) VALUES (2, 'Biofortification');
--- INSERT INTO intervention_type (id, name) VALUES (3, 'Agro-Fortification');
-INSERT INTO program_status (id, description) VALUES (2, '10 varieties have been released');
 
 
 INSERT INTO intervention (
@@ -189,7 +179,7 @@ INSERT INTO intervention (
     , intervention_source_id
     , food_vehicle_id
     , intervention_type_id
-    , program_status_id
+    , program_status
 )
 VALUES (
     'malawi Vitamin A Maize fortification'
@@ -198,7 +188,7 @@ VALUES (
     , 1
     , 3
     , 2
-    , 2
+    , 'a ststus about the program'
 
 );
 

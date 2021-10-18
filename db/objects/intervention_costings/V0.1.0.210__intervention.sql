@@ -7,11 +7,12 @@ CREATE TABLE intervention(
     intervention_name            text,
     country_id                   text       REFERENCES country(id),
     app_user_id                  text       REFERENCES app_user(id),
-    intervention_source_id       integer    REFERENCES intervention_source(id),
-    food_vehicle_id              numeric    REFERENCES food_vehicle(id),
-    fortification_type_id         text       REFERENCES fortification_type(id),
+    data_citation_id             integer    REFERENCES data_citation(id),
+    food_vehicle_id              integer    REFERENCES food_vehicle(id),
+    fortification_type_id        text       REFERENCES fortification_type(id),
     program_status               text,
-    is_premade                   boolean
+    is_premade                   boolean,
+	file_name                    text
 )
 ;
 

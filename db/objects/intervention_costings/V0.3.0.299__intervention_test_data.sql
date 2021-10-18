@@ -31,7 +31,18 @@ insert into intervention
     'LSF',
     'mandatory, ongoing',
     True,
+	'MAPS Malawi Cost Models 9Sept2021.xlsx'),
+    (2,
+    'Malawi Biofortification of Vitamin A Maize',
+    'MWI',
+    1,
+    3,
+    'BF',
+    '10 varieties have been released',
+    True,
 	'MAPS Malawi Cost Models 9Sept2021.xlsx');
+    
+ 
 
 SELECT pg_catalog.setval(pg_get_serial_sequence('intervention', 'id'), (SELECT MAX(id) FROM intervention)+1);
 

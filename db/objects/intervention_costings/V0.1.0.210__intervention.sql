@@ -11,6 +11,7 @@ CREATE TABLE intervention(
     food_vehicle_id              integer    REFERENCES food_vehicle(id),
     fortification_type_id        text       REFERENCES fortification_type(id),
     program_status               text,
+    base_year                    integer,
     is_premade                   boolean,
 	file_name                    text
 )
@@ -18,4 +19,5 @@ CREATE TABLE intervention(
 
 COMMENT on column intervention.is_premade is 'Whether this intervention is pre-created by professionals, or whether this is an intervention where an end-user has customised some values';
 COMMENT on column intervention.fortification_type_id is 'Whether this intervention is pre-created by professionals, or whether this is an intervention where an end-user has customised some values';
+COMMENT on column intervention.baes_year is 'the actual year (Common Era) from when the intervention program is to start its calculations, e.g. 2026. As opposed to "year 3".';
 

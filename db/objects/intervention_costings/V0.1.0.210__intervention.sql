@@ -11,9 +11,10 @@ CREATE TABLE intervention(
     food_vehicle_id              integer    REFERENCES food_vehicle(id),
     fortification_type_id        text       REFERENCES fortification_type(id),
     program_status               text,
+	file_name                    text,
     base_year                    integer,
     is_premade                   boolean,
-	file_name                    text
+    parent_intervention          integer    REFERENCES intervention(id)
 )
 ;
 

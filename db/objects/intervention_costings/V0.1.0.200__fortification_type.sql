@@ -4,4 +4,4 @@ CREATE TABLE fortification_type(
 )
 ;
 
-comment on table fortification_type IS 'whether the intervention is Large-Scale fortificaion, biofortification, or agro-fortification';
+comment on table fortification_type IS 'whether the intervention is Large-Scale Food Fortificaion, biofortification, or agro-fortification';

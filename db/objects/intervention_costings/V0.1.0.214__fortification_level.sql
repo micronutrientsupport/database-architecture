@@ -8,8 +8,6 @@ CREATE TABLE fortification_level(
     , fortificant_price           numeric
     , target_level                numeric
     , actual_level                numeric
-    -- , fortifiable_percentage      numeric,
-    -- , fortified_percentage        numeric
 )
 ;
 

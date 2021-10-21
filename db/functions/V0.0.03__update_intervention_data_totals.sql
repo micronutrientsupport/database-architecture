@@ -21,14 +21,13 @@ data_cur cursor for
 select * from intervention_data
 where intervention_id = int_id;
 
-
-
 begin
 	
-	cells_all := '{"foo":null}';
+	cells_all := '{"foo":null}'; -- this is required because if the variable is null, appending it to anything else reults in null
 
 	for data_rec in data_cur loop
 			
+		-- null in postgres and null in json are slightly differnt so need precise handling. Coelesce didn't work.
 		if data_rec.year_0 is null then
 			cell_0 := '{"' || data_rec.row_index || '_0":null}';
 		else

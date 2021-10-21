@@ -139,6 +139,22 @@ begin
 	and intervention_id = int_id;
 
 -- 	C34	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),3,0)
+
+	UPDATE intervention_data 
+	SET 
+	year_0 = case when (cells_all->>'6_0')::numeric > 0 or (cells_all->>'7_0')::numeric > 0 or (cells_all->>'8_0')::numeric > 0 or (cells_all->>'9_0')::numeric > 0 then 3 else 0 end
+	,year_1 = case when (cells_all->>'6_1')::numeric > 0 or (cells_all->>'7_1')::numeric > 0 or (cells_all->>'8_1')::numeric > 0 or (cells_all->>'9_1')::numeric > 0 then 3 else 0 end
+	,year_2 = case when (cells_all->>'6_2')::numeric > 0 or (cells_all->>'7_2')::numeric > 0 or (cells_all->>'8_2')::numeric > 0 or (cells_all->>'9_2')::numeric > 0 then 3 else 0 end
+	,year_3 = case when (cells_all->>'6_3')::numeric > 0 or (cells_all->>'7_3')::numeric > 0 or (cells_all->>'8_3')::numeric > 0 or (cells_all->>'9_3')::numeric > 0 then 3 else 0 end
+	,year_4 = case when (cells_all->>'6_4')::numeric > 0 or (cells_all->>'7_4')::numeric > 0 or (cells_all->>'8_4')::numeric > 0 or (cells_all->>'9_4')::numeric > 0 then 3 else 0 end
+	,year_5 = case when (cells_all->>'6_5')::numeric > 0 or (cells_all->>'7_5')::numeric > 0 or (cells_all->>'8_5')::numeric > 0 or (cells_all->>'9_5')::numeric > 0 then 3 else 0 end
+	,year_6 = case when (cells_all->>'6_6')::numeric > 0 or (cells_all->>'7_6')::numeric > 0 or (cells_all->>'8_6')::numeric > 0 or (cells_all->>'9_6')::numeric > 0 then 3 else 0 end
+	,year_7 = case when (cells_all->>'6_7')::numeric > 0 or (cells_all->>'7_7')::numeric > 0 or (cells_all->>'8_7')::numeric > 0 or (cells_all->>'9_7')::numeric > 0 then 3 else 0 end
+	,year_8 = case when (cells_all->>'6_8')::numeric > 0 or (cells_all->>'7_8')::numeric > 0 or (cells_all->>'8_8')::numeric > 0 or (cells_all->>'9_8')::numeric > 0 then 3 else 0 end
+	,year_9 = case when (cells_all->>'6_9')::numeric > 0 or (cells_all->>'7_9')::numeric > 0 or (cells_all->>'8_9')::numeric > 0 or (cells_all->>'9_9')::numeric > 0 then 3 else 0 end
+	WHERE row_index = 34
+	and intervention_id = int_id;
+
 -- 	C37	=1-C36
 -- 	C40	=IF(C$27=0,0,IF(AND(C$27>0,C$27<0.25),1,IF(AND(C$27>=0.25,C$27<0.5),2,IF(AND(C$27>=0.5,C$27<0.75),3,4))))
 -- 	C41	=IF(OR(C13>0, C14>0),3,0)

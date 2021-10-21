@@ -112,7 +112,15 @@ begin
 	UPDATE intervention_data 
 	SET 
 	year_0 = round((cells_all->>'27_0')::numeric * (cells_all->>'30_0')::numeric)
-	
+	,year_1 = round((cells_all->>'27_1')::numeric * (cells_all->>'30_1')::numeric)
+	,year_2 = round((cells_all->>'27_2')::numeric * (cells_all->>'30_2')::numeric)
+	,year_3 = round((cells_all->>'27_3')::numeric * (cells_all->>'30_3')::numeric)
+	,year_4 = round((cells_all->>'27_4')::numeric * (cells_all->>'30_4')::numeric)
+	,year_5 = round((cells_all->>'27_5')::numeric * (cells_all->>'30_5')::numeric)
+	,year_6 = round((cells_all->>'27_6')::numeric * (cells_all->>'30_6')::numeric)
+	,year_7 = round((cells_all->>'27_7')::numeric * (cells_all->>'30_7')::numeric)
+	,year_8 = round((cells_all->>'27_8')::numeric * (cells_all->>'30_8')::numeric)
+	,year_9 = round((cells_all->>'27_9')::numeric * (cells_all->>'30_9')::numeric)
 	WHERE row_index = 31
 	and intervention_id = int_id;
 

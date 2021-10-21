@@ -156,7 +156,79 @@ begin
 	and intervention_id = int_id;
 
 -- 	C37	=1-C36
+
+	UPDATE intervention_data 
+	SET 
+	year_0 = 1 - (cells_all->>'36_0')::numeric
+	,year_1 = 1 - (cells_all->>'36_1')::numeric
+	,year_2 = 1 - (cells_all->>'36_2')::numeric
+	,year_3 = 1 - (cells_all->>'36_3')::numeric
+	,year_4 = 1 - (cells_all->>'36_4')::numeric
+	,year_5 = 1 - (cells_all->>'36_5')::numeric
+	,year_6 = 1 - (cells_all->>'36_6')::numeric
+	,year_7 = 1 - (cells_all->>'36_7')::numeric
+	,year_8 = 1 - (cells_all->>'36_8')::numeric
+	,year_9 = 1 - (cells_all->>'36_9')::numeric
+	WHERE row_index = 37
+	and intervention_id = int_id;
+
 -- 	C40	=IF(C$27=0,0,IF(AND(C$27>0,C$27<0.25),1,IF(AND(C$27>=0.25,C$27<0.5),2,IF(AND(C$27>=0.5,C$27<0.75),3,4))))
+
+	UPDATE intervention_data 
+	SET 
+		year_0 = case when (cells_all->>'27_0')::numeric = 0 then 1
+					when (cells_all->>'27_0')::numeric > 0 and (cells_all->>'27_0')::numeric < 0.25 then 1 
+					when (cells_all->>'27_0')::numeric >= 0.25 and (cells_all->>'27_0')::numeric < 0.5 then 2
+					when (cells_all->>'27_0')::numeric >= 0.5 and (cells_all->>'27_0')::numeric < 0.75 then 3
+					else 4 end
+	,year_1 = case when (cells_all->>'27_1')::numeric = 0 then 1
+					when (cells_all->>'27_1')::numeric > 0 and (cells_all->>'27_1')::numeric < 0.25 then 1 
+					when (cells_all->>'27_1')::numeric >= 0.25 and (cells_all->>'27_1')::numeric < 0.5 then 2
+					when (cells_all->>'27_1')::numeric >= 0.5 and (cells_all->>'27_1')::numeric < 0.75 then 3
+					else 4 end
+	,year_2 = case when (cells_all->>'27_2')::numeric = 0 then 1
+					when (cells_all->>'27_2')::numeric > 0 and (cells_all->>'27_2')::numeric < 0.25 then 1 
+					when (cells_all->>'27_2')::numeric >= 0.25 and (cells_all->>'27_2')::numeric < 0.5 then 2
+					when (cells_all->>'27_2')::numeric >= 0.5 and (cells_all->>'27_2')::numeric < 0.75 then 3
+					else 4 end
+	,year_3 = case when (cells_all->>'27_3')::numeric = 0 then 1
+					when (cells_all->>'27_3')::numeric > 0 and (cells_all->>'27_3')::numeric < 0.25 then 1 
+					when (cells_all->>'27_3')::numeric >= 0.25 and (cells_all->>'27_3')::numeric < 0.5 then 2
+					when (cells_all->>'27_3')::numeric >= 0.5 and (cells_all->>'27_3')::numeric < 0.75 then 3
+					else 4 end
+	,year_4 = case when (cells_all->>'27_4')::numeric = 0 then 1
+					when (cells_all->>'27_4')::numeric > 0 and (cells_all->>'27_4')::numeric < 0.25 then 1 
+					when (cells_all->>'27_4')::numeric >= 0.25 and (cells_all->>'27_4')::numeric < 0.5 then 2
+					when (cells_all->>'27_4')::numeric >= 0.5 and (cells_all->>'27_4')::numeric < 0.75 then 3
+					else 4 end
+	,year_5 = case when (cells_all->>'27_5')::numeric = 0 then 1
+					when (cells_all->>'27_5')::numeric > 0 and (cells_all->>'27_5')::numeric < 0.25 then 1 
+					when (cells_all->>'27_5')::numeric >= 0.25 and (cells_all->>'27_5')::numeric < 0.5 then 2
+					when (cells_all->>'27_5')::numeric >= 0.5 and (cells_all->>'27_5')::numeric < 0.75 then 3
+					else 4 end
+	,year_6 = case when (cells_all->>'27_6')::numeric = 0 then 1
+					when (cells_all->>'27_6')::numeric > 0 and (cells_all->>'27_6')::numeric < 0.25 then 1 
+					when (cells_all->>'27_6')::numeric >= 0.25 and (cells_all->>'27_6')::numeric < 0.5 then 2
+					when (cells_all->>'27_6')::numeric >= 0.5 and (cells_all->>'27_6')::numeric < 0.75 then 3
+					else 4 end
+	,year_7 = case when (cells_all->>'27_7')::numeric = 0 then 1
+					when (cells_all->>'27_7')::numeric > 0 and (cells_all->>'27_7')::numeric < 0.25 then 1 
+					when (cells_all->>'27_7')::numeric >= 0.25 and (cells_all->>'27_7')::numeric < 0.5 then 2
+					when (cells_all->>'27_7')::numeric >= 0.5 and (cells_all->>'27_7')::numeric < 0.75 then 3
+					else 4 end
+	,year_8 = case when (cells_all->>'27_8')::numeric = 0 then 1
+					when (cells_all->>'27_8')::numeric > 0 and (cells_all->>'27_8')::numeric < 0.25 then 1 
+					when (cells_all->>'27_8')::numeric >= 0.25 and (cells_all->>'27_8')::numeric < 0.5 then 2
+					when (cells_all->>'27_8')::numeric >= 0.5 and (cells_all->>'27_8')::numeric < 0.75 then 3
+					else 4 end
+	,year_9 = case when (cells_all->>'27_9')::numeric = 0 then 1
+					when (cells_all->>'27_9')::numeric > 0 and (cells_all->>'27_9')::numeric < 0.25 then 1 
+					when (cells_all->>'27_9')::numeric >= 0.25 and (cells_all->>'27_9')::numeric < 0.5 then 2
+					when (cells_all->>'27_9')::numeric >= 0.5 and (cells_all->>'27_9')::numeric < 0.75 then 3
+					else 4 end
+	WHERE row_index = 40
+	and intervention_id = int_id;
+
 -- 	C41	=IF(OR(C13>0, C14>0),3,0)
 -- 	C42	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),3,0)
 -- 	C44	=IF(C$27=0,0,IF(AND(C$27>0,C$27<0.25),6,IF(AND(C$27>=0.25,C$27<0.5),12,IF(AND(C$27>=0.5,C$27<0.75),18,24))))

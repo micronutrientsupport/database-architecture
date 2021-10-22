@@ -24,3 +24,4 @@ year_9              numeric,
 notes               text
 );
 
+COMMENT on table intervention_data is 'Table to store data directly loaded from excel spreadsheet costing models';

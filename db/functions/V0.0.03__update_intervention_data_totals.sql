@@ -496,32 +496,186 @@ cells_all := get_intervention_data_as_json(int_id);
 
     UPDATE intervention_data 
 	SET 
-	 year_0 = ( ( (cells_all->>'124_0')::numeric + (cells_all->>'125_0')::numeric + (cells_all->>'126_0')::numeric) ) * 365) / 1000000
-	,year_1 = ( ( (cells_all->>'124_1')::numeric + (cells_all->>'125_1')::numeric + (cells_all->>'126_1')::numeric) ) * 365) / 1000000
-	,year_2 = ( ( (cells_all->>'124_2')::numeric + (cells_all->>'125_2')::numeric + (cells_all->>'126_2')::numeric) ) * 365) / 1000000
-	,year_3 = ( ( (cells_all->>'124_3')::numeric + (cells_all->>'125_3')::numeric + (cells_all->>'126_3')::numeric) ) * 365) / 1000000
-	,year_4 = ( ( (cells_all->>'124_4')::numeric + (cells_all->>'125_4')::numeric + (cells_all->>'126_4')::numeric) ) * 365) / 1000000
-	,year_5 = ( ( (cells_all->>'124_5')::numeric + (cells_all->>'125_5')::numeric + (cells_all->>'126_5')::numeric) ) * 365) / 1000000
-	,year_6 = ( ( (cells_all->>'124_6')::numeric + (cells_all->>'125_6')::numeric + (cells_all->>'126_6')::numeric) ) * 365) / 1000000
-	,year_7 = ( ( (cells_all->>'124_7')::numeric + (cells_all->>'125_7')::numeric + (cells_all->>'126_7')::numeric) ) * 365) / 1000000
-	,year_8 = ( ( (cells_all->>'124_8')::numeric + (cells_all->>'125_8')::numeric + (cells_all->>'126_8')::numeric) ) * 365) / 1000000
-	,year_9 = ( ( (cells_all->>'124_9')::numeric + (cells_all->>'125_9')::numeric + (cells_all->>'126_9')::numeric) ) * 365) / 1000000
+	 year_0 = ((cells_all->>'124_0')::numeric * (cells_all->>'125_0')::numeric * (cells_all->>'126_0')::numeric * 365) / 1000000
+	,year_1 = ((cells_all->>'124_1')::numeric * (cells_all->>'125_1')::numeric * (cells_all->>'126_1')::numeric * 365) / 1000000
+	,year_2 = ((cells_all->>'124_2')::numeric * (cells_all->>'125_2')::numeric * (cells_all->>'126_2')::numeric * 365) / 1000000
+	,year_3 = ((cells_all->>'124_3')::numeric * (cells_all->>'125_3')::numeric * (cells_all->>'126_3')::numeric * 365) / 1000000
+	,year_4 = ((cells_all->>'124_4')::numeric * (cells_all->>'125_4')::numeric * (cells_all->>'126_4')::numeric * 365) / 1000000
+	,year_5 = ((cells_all->>'124_5')::numeric * (cells_all->>'125_5')::numeric * (cells_all->>'126_5')::numeric * 365) / 1000000
+	,year_6 = ((cells_all->>'124_6')::numeric * (cells_all->>'125_6')::numeric * (cells_all->>'126_6')::numeric * 365) / 1000000
+	,year_7 = ((cells_all->>'124_7')::numeric * (cells_all->>'125_7')::numeric * (cells_all->>'126_7')::numeric * 365) / 1000000
+	,year_8 = ((cells_all->>'124_8')::numeric * (cells_all->>'125_8')::numeric * (cells_all->>'126_8')::numeric * 365) / 1000000
+	,year_9 = ((cells_all->>'124_9')::numeric * (cells_all->>'125_9')::numeric * (cells_all->>'126_9')::numeric * 365) / 1000000
 	WHERE row_index = 127
 	and intervention_id = int_id;
 
 -- 	C128	=C36
+
 -- 	C129	=IF(C128=0,0,C27)
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'128_0')::numeric = 0 then 0 else (cells_all->>'27_0')::numeric end
+	,year_1 = case when (cells_all->>'128_1')::numeric = 0 then 0 else (cells_all->>'27_1')::numeric end
+	,year_2 = case when (cells_all->>'128_2')::numeric = 0 then 0 else (cells_all->>'27_2')::numeric end
+	,year_3 = case when (cells_all->>'128_3')::numeric = 0 then 0 else (cells_all->>'27_3')::numeric end
+	,year_4 = case when (cells_all->>'128_4')::numeric = 0 then 0 else (cells_all->>'27_4')::numeric end
+	,year_5 = case when (cells_all->>'128_5')::numeric = 0 then 0 else (cells_all->>'27_5')::numeric end
+	,year_6 = case when (cells_all->>'128_6')::numeric = 0 then 0 else (cells_all->>'27_6')::numeric end
+	,year_7 = case when (cells_all->>'128_7')::numeric = 0 then 0 else (cells_all->>'27_7')::numeric end
+	,year_8 = case when (cells_all->>'128_8')::numeric = 0 then 0 else (cells_all->>'27_8')::numeric end
+	,year_9 = case when (cells_all->>'128_9')::numeric = 0 then 0 else (cells_all->>'27_9')::numeric end
+	WHERE row_index = 129
+	and intervention_id = int_id;
+
 -- 	C130	=C127*C129*C128
+
+    cells_all := get_intervention_data_as_json(int_id); -- get the json again with updated values for use in this formula
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'127_0')::numeric * (cells_all->>'129_0')::numeric * (cells_all->>'128_0')::numeric
+	,year_1 = (cells_all->>'127_1')::numeric * (cells_all->>'129_1')::numeric * (cells_all->>'128_1')::numeric
+	,year_2 = (cells_all->>'127_2')::numeric * (cells_all->>'129_2')::numeric * (cells_all->>'128_2')::numeric
+	,year_3 = (cells_all->>'127_3')::numeric * (cells_all->>'129_3')::numeric * (cells_all->>'128_3')::numeric
+	,year_4 = (cells_all->>'127_4')::numeric * (cells_all->>'129_4')::numeric * (cells_all->>'128_4')::numeric
+	,year_5 = (cells_all->>'127_5')::numeric * (cells_all->>'129_5')::numeric * (cells_all->>'128_5')::numeric
+	,year_6 = (cells_all->>'127_6')::numeric * (cells_all->>'129_6')::numeric * (cells_all->>'128_6')::numeric
+	,year_7 = (cells_all->>'127_7')::numeric * (cells_all->>'129_7')::numeric * (cells_all->>'128_7')::numeric
+	,year_8 = (cells_all->>'127_8')::numeric * (cells_all->>'129_8')::numeric * (cells_all->>'128_8')::numeric
+	,year_9 = (cells_all->>'127_9')::numeric * (cells_all->>'129_9')::numeric * (cells_all->>'128_9')::numeric
+	WHERE row_index = 130
+	and intervention_id = int_id;
+
 -- 	C131	=C123*C130
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'127_0')::numeric * (cells_all->>'129_0')::numeric * (cells_all->>'128_0')::numeric * (cells_all->>'123_0')::numeric
+	,year_1 = (cells_all->>'127_1')::numeric * (cells_all->>'129_1')::numeric * (cells_all->>'128_1')::numeric * (cells_all->>'123_1')::numeric
+	,year_2 = (cells_all->>'127_2')::numeric * (cells_all->>'129_2')::numeric * (cells_all->>'128_2')::numeric * (cells_all->>'123_2')::numeric
+	,year_3 = (cells_all->>'127_3')::numeric * (cells_all->>'129_3')::numeric * (cells_all->>'128_3')::numeric * (cells_all->>'123_3')::numeric
+	,year_4 = (cells_all->>'127_4')::numeric * (cells_all->>'129_4')::numeric * (cells_all->>'128_4')::numeric * (cells_all->>'123_4')::numeric
+	,year_5 = (cells_all->>'127_5')::numeric * (cells_all->>'129_5')::numeric * (cells_all->>'128_5')::numeric * (cells_all->>'123_5')::numeric
+	,year_6 = (cells_all->>'127_6')::numeric * (cells_all->>'129_6')::numeric * (cells_all->>'128_6')::numeric * (cells_all->>'123_6')::numeric
+	,year_7 = (cells_all->>'127_7')::numeric * (cells_all->>'129_7')::numeric * (cells_all->>'128_7')::numeric * (cells_all->>'123_7')::numeric
+	,year_8 = (cells_all->>'127_8')::numeric * (cells_all->>'129_8')::numeric * (cells_all->>'128_8')::numeric * (cells_all->>'123_8')::numeric
+	,year_9 = (cells_all->>'127_9')::numeric * (cells_all->>'129_9')::numeric * (cells_all->>'128_9')::numeric * (cells_all->>'123_9')::numeric
+	WHERE row_index = 131
+	and intervention_id = int_id;
+
 -- 	C132	=C37
+
 -- 	C133	=IF(C132=0,0,C27)
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'132_0')::numeric = 0 then 0 else (cells_all->>'27_0')::numeric end
+	,year_1 = case when (cells_all->>'132_1')::numeric = 0 then 0 else (cells_all->>'27_1')::numeric end
+	,year_2 = case when (cells_all->>'132_2')::numeric = 0 then 0 else (cells_all->>'27_2')::numeric end
+	,year_3 = case when (cells_all->>'132_3')::numeric = 0 then 0 else (cells_all->>'27_3')::numeric end
+	,year_4 = case when (cells_all->>'132_4')::numeric = 0 then 0 else (cells_all->>'27_4')::numeric end
+	,year_5 = case when (cells_all->>'132_5')::numeric = 0 then 0 else (cells_all->>'27_5')::numeric end
+	,year_6 = case when (cells_all->>'132_6')::numeric = 0 then 0 else (cells_all->>'27_6')::numeric end
+	,year_7 = case when (cells_all->>'132_7')::numeric = 0 then 0 else (cells_all->>'27_7')::numeric end
+	,year_8 = case when (cells_all->>'132_8')::numeric = 0 then 0 else (cells_all->>'27_8')::numeric end
+	,year_9 = case when (cells_all->>'132_9')::numeric = 0 then 0 else (cells_all->>'27_9')::numeric end
+	WHERE row_index = 133
+	and intervention_id = int_id;
+
 -- 	C134	=C127*C132*C133
+
+    cells_all := get_intervention_data_as_json(int_id); -- get the json again with updated values for use in this formula
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'127_0')::numeric * (cells_all->>'132_0')::numeric * (cells_all->>'133_0')::numeric
+	,year_1 = (cells_all->>'127_1')::numeric * (cells_all->>'132_1')::numeric * (cells_all->>'133_1')::numeric
+	,year_2 = (cells_all->>'127_2')::numeric * (cells_all->>'132_2')::numeric * (cells_all->>'133_2')::numeric
+	,year_3 = (cells_all->>'127_3')::numeric * (cells_all->>'132_3')::numeric * (cells_all->>'133_3')::numeric
+	,year_4 = (cells_all->>'127_4')::numeric * (cells_all->>'132_4')::numeric * (cells_all->>'133_4')::numeric
+	,year_5 = (cells_all->>'127_5')::numeric * (cells_all->>'132_5')::numeric * (cells_all->>'133_5')::numeric
+	,year_6 = (cells_all->>'127_6')::numeric * (cells_all->>'132_6')::numeric * (cells_all->>'133_6')::numeric
+	,year_7 = (cells_all->>'127_7')::numeric * (cells_all->>'132_7')::numeric * (cells_all->>'133_7')::numeric
+	,year_8 = (cells_all->>'127_8')::numeric * (cells_all->>'132_8')::numeric * (cells_all->>'133_8')::numeric
+	,year_9 = (cells_all->>'127_9')::numeric * (cells_all->>'132_9')::numeric * (cells_all->>'133_9')::numeric
+	WHERE row_index = 134
+	and intervention_id = int_id;
+
 -- 	C135	=C123*C134
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'123_0')::numeric * (cells_all->>'127_0')::numeric * (cells_all->>'132_0')::numeric * (cells_all->>'133_0')::numeric
+	,year_1 = (cells_all->>'123_1')::numeric * (cells_all->>'127_1')::numeric * (cells_all->>'132_1')::numeric * (cells_all->>'133_1')::numeric
+	,year_2 = (cells_all->>'123_2')::numeric * (cells_all->>'127_2')::numeric * (cells_all->>'132_2')::numeric * (cells_all->>'133_2')::numeric
+	,year_3 = (cells_all->>'123_3')::numeric * (cells_all->>'127_3')::numeric * (cells_all->>'132_3')::numeric * (cells_all->>'133_3')::numeric
+	,year_4 = (cells_all->>'123_4')::numeric * (cells_all->>'127_4')::numeric * (cells_all->>'132_4')::numeric * (cells_all->>'133_4')::numeric
+	,year_5 = (cells_all->>'123_5')::numeric * (cells_all->>'127_5')::numeric * (cells_all->>'132_5')::numeric * (cells_all->>'133_5')::numeric
+	,year_6 = (cells_all->>'123_6')::numeric * (cells_all->>'127_6')::numeric * (cells_all->>'132_6')::numeric * (cells_all->>'133_6')::numeric
+	,year_7 = (cells_all->>'123_7')::numeric * (cells_all->>'127_7')::numeric * (cells_all->>'132_7')::numeric * (cells_all->>'133_7')::numeric
+	,year_8 = (cells_all->>'123_8')::numeric * (cells_all->>'127_8')::numeric * (cells_all->>'132_8')::numeric * (cells_all->>'133_8')::numeric
+	,year_9 = (cells_all->>'123_9')::numeric * (cells_all->>'127_9')::numeric * (cells_all->>'132_9')::numeric * (cells_all->>'133_9')::numeric
+	WHERE row_index = 135
+	and intervention_id = int_id;
+
 -- 	C136	=C131+C135
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'131_0')::numeric + ((cells_all->>'123_0')::numeric * (cells_all->>'127_0')::numeric * (cells_all->>'132_0')::numeric * (cells_all->>'133_0')::numeric)
+	,year_1 = (cells_all->>'131_1')::numeric + ((cells_all->>'123_1')::numeric * (cells_all->>'127_1')::numeric * (cells_all->>'132_1')::numeric * (cells_all->>'133_1')::numeric)
+	,year_2 = (cells_all->>'131_2')::numeric + ((cells_all->>'123_2')::numeric * (cells_all->>'127_2')::numeric * (cells_all->>'132_2')::numeric * (cells_all->>'133_2')::numeric)
+	,year_3 = (cells_all->>'131_3')::numeric + ((cells_all->>'123_3')::numeric * (cells_all->>'127_3')::numeric * (cells_all->>'132_3')::numeric * (cells_all->>'133_3')::numeric)
+	,year_4 = (cells_all->>'131_4')::numeric + ((cells_all->>'123_4')::numeric * (cells_all->>'127_4')::numeric * (cells_all->>'132_4')::numeric * (cells_all->>'133_4')::numeric)
+	,year_5 = (cells_all->>'131_5')::numeric + ((cells_all->>'123_5')::numeric * (cells_all->>'127_5')::numeric * (cells_all->>'132_5')::numeric * (cells_all->>'133_5')::numeric)
+	,year_6 = (cells_all->>'131_6')::numeric + ((cells_all->>'123_6')::numeric * (cells_all->>'127_6')::numeric * (cells_all->>'132_6')::numeric * (cells_all->>'133_6')::numeric)
+	,year_7 = (cells_all->>'131_7')::numeric + ((cells_all->>'123_7')::numeric * (cells_all->>'127_7')::numeric * (cells_all->>'132_7')::numeric * (cells_all->>'133_7')::numeric)
+	,year_8 = (cells_all->>'131_8')::numeric + ((cells_all->>'123_8')::numeric * (cells_all->>'127_8')::numeric * (cells_all->>'132_8')::numeric * (cells_all->>'133_8')::numeric)
+	,year_9 = (cells_all->>'131_9')::numeric + ((cells_all->>'123_9')::numeric * (cells_all->>'127_9')::numeric * (cells_all->>'132_9')::numeric * (cells_all->>'133_9')::numeric)
+	WHERE row_index = 136
+	and intervention_id = int_id;
+
 -- 	C137	=C136
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'131_0')::numeric + ((cells_all->>'123_0')::numeric * (cells_all->>'127_0')::numeric * (cells_all->>'132_0')::numeric * (cells_all->>'133_0')::numeric)
+	,year_1 = (cells_all->>'131_1')::numeric + ((cells_all->>'123_1')::numeric * (cells_all->>'127_1')::numeric * (cells_all->>'132_1')::numeric * (cells_all->>'133_1')::numeric)
+	,year_2 = (cells_all->>'131_2')::numeric + ((cells_all->>'123_2')::numeric * (cells_all->>'127_2')::numeric * (cells_all->>'132_2')::numeric * (cells_all->>'133_2')::numeric)
+	,year_3 = (cells_all->>'131_3')::numeric + ((cells_all->>'123_3')::numeric * (cells_all->>'127_3')::numeric * (cells_all->>'132_3')::numeric * (cells_all->>'133_3')::numeric)
+	,year_4 = (cells_all->>'131_4')::numeric + ((cells_all->>'123_4')::numeric * (cells_all->>'127_4')::numeric * (cells_all->>'132_4')::numeric * (cells_all->>'133_4')::numeric)
+	,year_5 = (cells_all->>'131_5')::numeric + ((cells_all->>'123_5')::numeric * (cells_all->>'127_5')::numeric * (cells_all->>'132_5')::numeric * (cells_all->>'133_5')::numeric)
+	,year_6 = (cells_all->>'131_6')::numeric + ((cells_all->>'123_6')::numeric * (cells_all->>'127_6')::numeric * (cells_all->>'132_6')::numeric * (cells_all->>'133_6')::numeric)
+	,year_7 = (cells_all->>'131_7')::numeric + ((cells_all->>'123_7')::numeric * (cells_all->>'127_7')::numeric * (cells_all->>'132_7')::numeric * (cells_all->>'133_7')::numeric)
+	,year_8 = (cells_all->>'131_8')::numeric + ((cells_all->>'123_8')::numeric * (cells_all->>'127_8')::numeric * (cells_all->>'132_8')::numeric * (cells_all->>'133_8')::numeric)
+	,year_9 = (cells_all->>'131_9')::numeric + ((cells_all->>'123_9')::numeric * (cells_all->>'127_9')::numeric * (cells_all->>'132_9')::numeric * (cells_all->>'133_9')::numeric)
+	WHERE row_index = 137
+	and intervention_id = int_id;
+    
 -- 	C142	='National Data'!B6*2
+
 -- 	C143	=C31*C142*C141
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'31_0')::numeric * (cells_all->>'142_0')::numeric * (cells_all->>'141_0')::numeric
+	,year_1 = (cells_all->>'31_1')::numeric * (cells_all->>'142_1')::numeric * (cells_all->>'141_1')::numeric
+	,year_2 = (cells_all->>'31_2')::numeric * (cells_all->>'142_2')::numeric * (cells_all->>'141_2')::numeric
+	,year_3 = (cells_all->>'31_3')::numeric * (cells_all->>'142_3')::numeric * (cells_all->>'141_3')::numeric
+	,year_4 = (cells_all->>'31_4')::numeric * (cells_all->>'142_4')::numeric * (cells_all->>'141_4')::numeric
+	,year_5 = (cells_all->>'31_5')::numeric * (cells_all->>'142_5')::numeric * (cells_all->>'141_5')::numeric
+	,year_6 = (cells_all->>'31_6')::numeric * (cells_all->>'142_6')::numeric * (cells_all->>'141_6')::numeric
+	,year_7 = (cells_all->>'31_7')::numeric * (cells_all->>'142_7')::numeric * (cells_all->>'141_7')::numeric
+	,year_8 = (cells_all->>'31_8')::numeric * (cells_all->>'142_8')::numeric * (cells_all->>'141_8')::numeric
+	,year_9 = (cells_all->>'31_9')::numeric * (cells_all->>'142_9')::numeric * (cells_all->>'141_9')::numeric
+	WHERE row_index = 143
+	and intervention_id = int_id;
+
 -- 	C145	=C31*C144*($D$54)
+
+    
+
 -- 	C146	=C143+C145
 -- 	C148	=816.62/100
 -- 	C150	='National Data'!B16

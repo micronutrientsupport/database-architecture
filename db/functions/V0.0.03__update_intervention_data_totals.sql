@@ -19,6 +19,9 @@ cells_all jsonb;
 
 calc_val numeric;
 
+
+update_str text;
+
 data_cur cursor for
 select * from intervention_data
 where intervention_id = int_id;
@@ -230,12 +233,204 @@ begin
 	and intervention_id = int_id;
 
 -- 	C41	=IF(OR(C13>0, C14>0),3,0)
+
+	UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'13_0')::numeric > 0 or (cells_all->>'14_0')::numeric > 0 then 3 else 0 end
+	,year_1 = case when (cells_all->>'13_1')::numeric > 0 or (cells_all->>'14_1')::numeric > 0 then 3 else 0 end
+	,year_2 = case when (cells_all->>'13_2')::numeric > 0 or (cells_all->>'14_2')::numeric > 0 then 3 else 0 end
+	,year_3 = case when (cells_all->>'13_3')::numeric > 0 or (cells_all->>'14_3')::numeric > 0 then 3 else 0 end
+	,year_4 = case when (cells_all->>'13_4')::numeric > 0 or (cells_all->>'14_4')::numeric > 0 then 3 else 0 end
+	,year_5 = case when (cells_all->>'13_5')::numeric > 0 or (cells_all->>'14_5')::numeric > 0 then 3 else 0 end
+	,year_6 = case when (cells_all->>'13_6')::numeric > 0 or (cells_all->>'14_6')::numeric > 0 then 3 else 0 end
+	,year_7 = case when (cells_all->>'13_7')::numeric > 0 or (cells_all->>'14_7')::numeric > 0 then 3 else 0 end
+	,year_8 = case when (cells_all->>'13_8')::numeric > 0 or (cells_all->>'14_8')::numeric > 0 then 3 else 0 end
+	,year_9 = case when (cells_all->>'13_9')::numeric > 0 or (cells_all->>'14_9')::numeric > 0 then 3 else 0 end
+	WHERE row_index = 41
+	and intervention_id = int_id;
+
 -- 	C42	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),3,0)
+
+    UPDATE intervention_data 
+	SET 
+	year_0 = case when (cells_all->>'6_0')::numeric > 0 or (cells_all->>'7_0')::numeric > 0 or (cells_all->>'8_0')::numeric > 0 or (cells_all->>'9_0')::numeric > 0 then 3 else 0 end
+	,year_1 = case when (cells_all->>'6_1')::numeric > 0 or (cells_all->>'7_1')::numeric > 0 or (cells_all->>'8_1')::numeric > 0 or (cells_all->>'9_1')::numeric > 0 then 3 else 0 end
+	,year_2 = case when (cells_all->>'6_2')::numeric > 0 or (cells_all->>'7_2')::numeric > 0 or (cells_all->>'8_2')::numeric > 0 or (cells_all->>'9_2')::numeric > 0 then 3 else 0 end
+	,year_3 = case when (cells_all->>'6_3')::numeric > 0 or (cells_all->>'7_3')::numeric > 0 or (cells_all->>'8_3')::numeric > 0 or (cells_all->>'9_3')::numeric > 0 then 3 else 0 end
+	,year_4 = case when (cells_all->>'6_4')::numeric > 0 or (cells_all->>'7_4')::numeric > 0 or (cells_all->>'8_4')::numeric > 0 or (cells_all->>'9_4')::numeric > 0 then 3 else 0 end
+	,year_5 = case when (cells_all->>'6_5')::numeric > 0 or (cells_all->>'7_5')::numeric > 0 or (cells_all->>'8_5')::numeric > 0 or (cells_all->>'9_5')::numeric > 0 then 3 else 0 end
+	,year_6 = case when (cells_all->>'6_6')::numeric > 0 or (cells_all->>'7_6')::numeric > 0 or (cells_all->>'8_6')::numeric > 0 or (cells_all->>'9_6')::numeric > 0 then 3 else 0 end
+	,year_7 = case when (cells_all->>'6_7')::numeric > 0 or (cells_all->>'7_7')::numeric > 0 or (cells_all->>'8_7')::numeric > 0 or (cells_all->>'9_7')::numeric > 0 then 3 else 0 end
+	,year_8 = case when (cells_all->>'6_8')::numeric > 0 or (cells_all->>'7_8')::numeric > 0 or (cells_all->>'8_8')::numeric > 0 or (cells_all->>'9_8')::numeric > 0 then 3 else 0 end
+	,year_9 = case when (cells_all->>'6_9')::numeric > 0 or (cells_all->>'7_9')::numeric > 0 or (cells_all->>'8_9')::numeric > 0 or (cells_all->>'9_9')::numeric > 0 then 3 else 0 end
+	WHERE row_index = 42
+	and intervention_id = int_id;
+
 -- 	C44	=IF(C$27=0,0,IF(AND(C$27>0,C$27<0.25),6,IF(AND(C$27>=0.25,C$27<0.5),12,IF(AND(C$27>=0.5,C$27<0.75),18,24))))
+
+   UPDATE intervention_data 
+	SET 
+		year_0 = case when (cells_all->>'27_0')::numeric = 0 then 0
+					when (cells_all->>'27_0')::numeric > 0 and (cells_all->>'27_0')::numeric < 0.25 then 6 
+					when (cells_all->>'27_0')::numeric >= 0.25 and (cells_all->>'27_0')::numeric < 0.5 then 12
+					when (cells_all->>'27_0')::numeric >= 0.5 and (cells_all->>'27_0')::numeric < 0.75 then 18
+					else 24 end
+	,year_1 = case when (cells_all->>'27_1')::numeric = 0 then 0
+					when (cells_all->>'27_1')::numeric > 0 and (cells_all->>'27_1')::numeric < 0.25 then 6 
+					when (cells_all->>'27_1')::numeric >= 0.25 and (cells_all->>'27_1')::numeric < 0.5 then 12
+					when (cells_all->>'27_1')::numeric >= 0.5 and (cells_all->>'27_1')::numeric < 0.75 then 18
+					else 24 end
+	,year_2 = case when (cells_all->>'27_2')::numeric = 0 then 0
+					when (cells_all->>'27_2')::numeric > 0 and (cells_all->>'27_2')::numeric < 0.25 then 6 
+					when (cells_all->>'27_2')::numeric >= 0.25 and (cells_all->>'27_2')::numeric < 0.5 then 12
+					when (cells_all->>'27_2')::numeric >= 0.5 and (cells_all->>'27_2')::numeric < 0.75 then 18
+					else 24 end
+	,year_3 = case when (cells_all->>'27_3')::numeric = 0 then 0
+					when (cells_all->>'27_3')::numeric > 0 and (cells_all->>'27_3')::numeric < 0.25 then 6 
+					when (cells_all->>'27_3')::numeric >= 0.25 and (cells_all->>'27_3')::numeric < 0.5 then 12
+					when (cells_all->>'27_3')::numeric >= 0.5 and (cells_all->>'27_3')::numeric < 0.75 then 18
+					else 24 end
+	,year_4 = case when (cells_all->>'27_4')::numeric = 0 then 0
+					when (cells_all->>'27_4')::numeric > 0 and (cells_all->>'27_4')::numeric < 0.25 then 6 
+					when (cells_all->>'27_4')::numeric >= 0.25 and (cells_all->>'27_4')::numeric < 0.5 then 12
+					when (cells_all->>'27_4')::numeric >= 0.5 and (cells_all->>'27_4')::numeric < 0.75 then 18
+					else 24 end
+	,year_5 = case when (cells_all->>'27_5')::numeric = 0 then 0
+					when (cells_all->>'27_5')::numeric > 0 and (cells_all->>'27_5')::numeric < 0.25 then 6 
+					when (cells_all->>'27_5')::numeric >= 0.25 and (cells_all->>'27_5')::numeric < 0.5 then 12
+					when (cells_all->>'27_5')::numeric >= 0.5 and (cells_all->>'27_5')::numeric < 0.75 then 18
+					else 24 end
+	,year_6 = case when (cells_all->>'27_6')::numeric = 0 then 0
+					when (cells_all->>'27_6')::numeric > 0 and (cells_all->>'27_6')::numeric < 0.25 then 6 
+					when (cells_all->>'27_6')::numeric >= 0.25 and (cells_all->>'27_6')::numeric < 0.5 then 12
+					when (cells_all->>'27_6')::numeric >= 0.5 and (cells_all->>'27_6')::numeric < 0.75 then 18
+					else 24 end
+	,year_7 = case when (cells_all->>'27_7')::numeric = 0 then 0
+					when (cells_all->>'27_7')::numeric > 0 and (cells_all->>'27_7')::numeric < 0.25 then 6 
+					when (cells_all->>'27_7')::numeric >= 0.25 and (cells_all->>'27_7')::numeric < 0.5 then 12
+					when (cells_all->>'27_7')::numeric >= 0.5 and (cells_all->>'27_7')::numeric < 0.75 then 18
+					else 24 end
+	,year_8 = case when (cells_all->>'27_8')::numeric = 0 then 0
+					when (cells_all->>'27_8')::numeric > 0 and (cells_all->>'27_8')::numeric < 0.25 then 6 
+					when (cells_all->>'27_8')::numeric >= 0.25 and (cells_all->>'27_8')::numeric < 0.5 then 12
+					when (cells_all->>'27_8')::numeric >= 0.5 and (cells_all->>'27_8')::numeric < 0.75 then 18
+					else 24 end
+	,year_9 = case when (cells_all->>'27_9')::numeric = 0 then 0
+					when (cells_all->>'27_9')::numeric > 0 and (cells_all->>'27_9')::numeric < 0.25 then 6 
+					when (cells_all->>'27_9')::numeric >= 0.25 and (cells_all->>'27_9')::numeric < 0.5 then 12
+					when (cells_all->>'27_9')::numeric >= 0.5 and (cells_all->>'27_9')::numeric < 0.75 then 18
+					else 24 end
+	WHERE row_index = 44
+	and intervention_id = int_id;
+
 -- 	C45	=IF(OR(C13>0,C14>0),2,0)
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'13_0')::numeric > 0 or (cells_all->>'14_0')::numeric > 0 then 2 else 0 end
+	,year_1 = case when (cells_all->>'13_1')::numeric > 0 or (cells_all->>'14_1')::numeric > 0 then 2 else 0 end
+	,year_2 = case when (cells_all->>'13_2')::numeric > 0 or (cells_all->>'14_2')::numeric > 0 then 2 else 0 end
+	,year_3 = case when (cells_all->>'13_3')::numeric > 0 or (cells_all->>'14_3')::numeric > 0 then 2 else 0 end
+	,year_4 = case when (cells_all->>'13_4')::numeric > 0 or (cells_all->>'14_4')::numeric > 0 then 2 else 0 end
+	,year_5 = case when (cells_all->>'13_5')::numeric > 0 or (cells_all->>'14_5')::numeric > 0 then 2 else 0 end
+	,year_6 = case when (cells_all->>'13_6')::numeric > 0 or (cells_all->>'14_6')::numeric > 0 then 2 else 0 end
+	,year_7 = case when (cells_all->>'13_7')::numeric > 0 or (cells_all->>'14_7')::numeric > 0 then 2 else 0 end
+	,year_8 = case when (cells_all->>'13_8')::numeric > 0 or (cells_all->>'14_8')::numeric > 0 then 2 else 0 end
+	,year_9 = case when (cells_all->>'13_9')::numeric > 0 or (cells_all->>'14_9')::numeric > 0 then 2 else 0 end
+	WHERE row_index = 45
+	and intervention_id = int_id;
+
 -- 	C46	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),2,0)
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'6_0')::numeric > 0 or (cells_all->>'7_0')::numeric > 0 or (cells_all->>'8_0')::numeric > 0 or (cells_all->>'9_0')::numeric > 0 then 2 else 0 end
+	,year_1 = case when (cells_all->>'6_1')::numeric > 0 or (cells_all->>'7_1')::numeric > 0 or (cells_all->>'8_1')::numeric > 0 or (cells_all->>'9_1')::numeric > 0 then 2 else 0 end
+	,year_2 = case when (cells_all->>'6_2')::numeric > 0 or (cells_all->>'7_2')::numeric > 0 or (cells_all->>'8_2')::numeric > 0 or (cells_all->>'9_2')::numeric > 0 then 2 else 0 end
+	,year_3 = case when (cells_all->>'6_3')::numeric > 0 or (cells_all->>'7_3')::numeric > 0 or (cells_all->>'8_3')::numeric > 0 or (cells_all->>'9_3')::numeric > 0 then 2 else 0 end
+	,year_4 = case when (cells_all->>'6_4')::numeric > 0 or (cells_all->>'7_4')::numeric > 0 or (cells_all->>'8_4')::numeric > 0 or (cells_all->>'9_4')::numeric > 0 then 2 else 0 end
+	,year_5 = case when (cells_all->>'6_5')::numeric > 0 or (cells_all->>'7_5')::numeric > 0 or (cells_all->>'8_5')::numeric > 0 or (cells_all->>'9_5')::numeric > 0 then 2 else 0 end
+	,year_6 = case when (cells_all->>'6_6')::numeric > 0 or (cells_all->>'7_6')::numeric > 0 or (cells_all->>'8_6')::numeric > 0 or (cells_all->>'9_6')::numeric > 0 then 2 else 0 end
+	,year_7 = case when (cells_all->>'6_7')::numeric > 0 or (cells_all->>'7_7')::numeric > 0 or (cells_all->>'8_7')::numeric > 0 or (cells_all->>'9_7')::numeric > 0 then 2 else 0 end
+	,year_8 = case when (cells_all->>'6_8')::numeric > 0 or (cells_all->>'7_8')::numeric > 0 or (cells_all->>'8_8')::numeric > 0 or (cells_all->>'9_8')::numeric > 0 then 2 else 0 end
+	,year_9 = case when (cells_all->>'6_9')::numeric > 0 or (cells_all->>'7_9')::numeric > 0 or (cells_all->>'8_9')::numeric > 0 or (cells_all->>'9_9')::numeric > 0 then 2 else 0 end
+	WHERE row_index = 46
+	and intervention_id = int_id;
+
 -- 	C48	=IF(C$27=0,0,IF(AND(C$27>0,C$27<0.25),1,IF(AND(C$27>=0.25,C$27<0.5),2,IF(AND(C$27>=0.5,C$27<0.75),3,4))))
+
+    UPDATE intervention_data 
+	SET 
+		year_0 = case when (cells_all->>'27_0')::numeric = 0 then 1
+					when (cells_all->>'27_0')::numeric > 0 and (cells_all->>'27_0')::numeric < 0.25 then 1 
+					when (cells_all->>'27_0')::numeric >= 0.25 and (cells_all->>'27_0')::numeric < 0.5 then 2
+					when (cells_all->>'27_0')::numeric >= 0.5 and (cells_all->>'27_0')::numeric < 0.75 then 3
+					else 4 end
+	,year_1 = case when (cells_all->>'27_1')::numeric = 0 then 1
+					when (cells_all->>'27_1')::numeric > 0 and (cells_all->>'27_1')::numeric < 0.25 then 1 
+					when (cells_all->>'27_1')::numeric >= 0.25 and (cells_all->>'27_1')::numeric < 0.5 then 2
+					when (cells_all->>'27_1')::numeric >= 0.5 and (cells_all->>'27_1')::numeric < 0.75 then 3
+					else 4 end
+	,year_2 = case when (cells_all->>'27_2')::numeric = 0 then 1
+					when (cells_all->>'27_2')::numeric > 0 and (cells_all->>'27_2')::numeric < 0.25 then 1 
+					when (cells_all->>'27_2')::numeric >= 0.25 and (cells_all->>'27_2')::numeric < 0.5 then 2
+					when (cells_all->>'27_2')::numeric >= 0.5 and (cells_all->>'27_2')::numeric < 0.75 then 3
+					else 4 end
+	,year_3 = case when (cells_all->>'27_3')::numeric = 0 then 1
+					when (cells_all->>'27_3')::numeric > 0 and (cells_all->>'27_3')::numeric < 0.25 then 1 
+					when (cells_all->>'27_3')::numeric >= 0.25 and (cells_all->>'27_3')::numeric < 0.5 then 2
+					when (cells_all->>'27_3')::numeric >= 0.5 and (cells_all->>'27_3')::numeric < 0.75 then 3
+					else 4 end
+	,year_4 = case when (cells_all->>'27_4')::numeric = 0 then 1
+					when (cells_all->>'27_4')::numeric > 0 and (cells_all->>'27_4')::numeric < 0.25 then 1 
+					when (cells_all->>'27_4')::numeric >= 0.25 and (cells_all->>'27_4')::numeric < 0.5 then 2
+					when (cells_all->>'27_4')::numeric >= 0.5 and (cells_all->>'27_4')::numeric < 0.75 then 3
+					else 4 end
+	,year_5 = case when (cells_all->>'27_5')::numeric = 0 then 1
+					when (cells_all->>'27_5')::numeric > 0 and (cells_all->>'27_5')::numeric < 0.25 then 1 
+					when (cells_all->>'27_5')::numeric >= 0.25 and (cells_all->>'27_5')::numeric < 0.5 then 2
+					when (cells_all->>'27_5')::numeric >= 0.5 and (cells_all->>'27_5')::numeric < 0.75 then 3
+					else 4 end
+	,year_6 = case when (cells_all->>'27_6')::numeric = 0 then 1
+					when (cells_all->>'27_6')::numeric > 0 and (cells_all->>'27_6')::numeric < 0.25 then 1 
+					when (cells_all->>'27_6')::numeric >= 0.25 and (cells_all->>'27_6')::numeric < 0.5 then 2
+					when (cells_all->>'27_6')::numeric >= 0.5 and (cells_all->>'27_6')::numeric < 0.75 then 3
+					else 4 end
+	,year_7 = case when (cells_all->>'27_7')::numeric = 0 then 1
+					when (cells_all->>'27_7')::numeric > 0 and (cells_all->>'27_7')::numeric < 0.25 then 1 
+					when (cells_all->>'27_7')::numeric >= 0.25 and (cells_all->>'27_7')::numeric < 0.5 then 2
+					when (cells_all->>'27_7')::numeric >= 0.5 and (cells_all->>'27_7')::numeric < 0.75 then 3
+					else 4 end
+	,year_8 = case when (cells_all->>'27_8')::numeric = 0 then 1
+					when (cells_all->>'27_8')::numeric > 0 and (cells_all->>'27_8')::numeric < 0.25 then 1 
+					when (cells_all->>'27_8')::numeric >= 0.25 and (cells_all->>'27_8')::numeric < 0.5 then 2
+					when (cells_all->>'27_8')::numeric >= 0.5 and (cells_all->>'27_8')::numeric < 0.75 then 3
+					else 4 end
+	,year_9 = case when (cells_all->>'27_9')::numeric = 0 then 1
+					when (cells_all->>'27_9')::numeric > 0 and (cells_all->>'27_9')::numeric < 0.25 then 1 
+					when (cells_all->>'27_9')::numeric >= 0.25 and (cells_all->>'27_9')::numeric < 0.5 then 2
+					when (cells_all->>'27_9')::numeric >= 0.5 and (cells_all->>'27_9')::numeric < 0.75 then 3
+					else 4 end
+	WHERE row_index = 48
+	and intervention_id = int_id;
+
 -- 	C49	=IF(OR(C13>0,C14>0),5,0)
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'13_0')::numeric > 0 or (cells_all->>'14_0')::numeric > 0 then 5 else 0 end
+	,year_1 = case when (cells_all->>'13_1')::numeric > 0 or (cells_all->>'14_1')::numeric > 0 then 5 else 0 end
+	,year_2 = case when (cells_all->>'13_2')::numeric > 0 or (cells_all->>'14_2')::numeric > 0 then 5 else 0 end
+	,year_3 = case when (cells_all->>'13_3')::numeric > 0 or (cells_all->>'14_3')::numeric > 0 then 5 else 0 end
+	,year_4 = case when (cells_all->>'13_4')::numeric > 0 or (cells_all->>'14_4')::numeric > 0 then 5 else 0 end
+	,year_5 = case when (cells_all->>'13_5')::numeric > 0 or (cells_all->>'14_5')::numeric > 0 then 5 else 0 end
+	,year_6 = case when (cells_all->>'13_6')::numeric > 0 or (cells_all->>'14_6')::numeric > 0 then 5 else 0 end
+	,year_7 = case when (cells_all->>'13_7')::numeric > 0 or (cells_all->>'14_7')::numeric > 0 then 5 else 0 end
+	,year_8 = case when (cells_all->>'13_8')::numeric > 0 or (cells_all->>'14_8')::numeric > 0 then 5 else 0 end
+	,year_9 = case when (cells_all->>'13_9')::numeric > 0 or (cells_all->>'14_9')::numeric > 0 then 5 else 0 end
+	WHERE row_index = 49
+	and intervention_id = int_id;
+
 -- 	C50	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),5,0)
 -- 	C91	=IF(C4="SU",200000*'GDP Deflators'!$G$38,0)
 -- 	C92	=IF(C4="SU",15000,0)

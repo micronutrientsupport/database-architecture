@@ -674,7 +674,20 @@ cells_all := get_intervention_data_as_json(int_id);
 
 -- 	C145	=C31*C144*($D$54)
 
-    
+    UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'31_0')::numeric * (cells_all->>'144_0')::numeric * (cells_all->>'54_1')::numeric
+	,year_1 = (cells_all->>'31_1')::numeric * (cells_all->>'144_1')::numeric * (cells_all->>'54_1')::numeric
+	,year_2 = (cells_all->>'31_2')::numeric * (cells_all->>'144_2')::numeric * (cells_all->>'54_1')::numeric
+	,year_3 = (cells_all->>'31_3')::numeric * (cells_all->>'144_3')::numeric * (cells_all->>'54_1')::numeric
+	,year_4 = (cells_all->>'31_4')::numeric * (cells_all->>'144_4')::numeric * (cells_all->>'54_1')::numeric
+	,year_5 = (cells_all->>'31_5')::numeric * (cells_all->>'144_5')::numeric * (cells_all->>'54_1')::numeric
+	,year_6 = (cells_all->>'31_6')::numeric * (cells_all->>'144_6')::numeric * (cells_all->>'54_1')::numeric
+	,year_7 = (cells_all->>'31_7')::numeric * (cells_all->>'144_7')::numeric * (cells_all->>'54_1')::numeric
+	,year_8 = (cells_all->>'31_8')::numeric * (cells_all->>'144_8')::numeric * (cells_all->>'54_1')::numeric
+	,year_9 = (cells_all->>'31_9')::numeric * (cells_all->>'144_9')::numeric * (cells_all->>'54_1')::numeric
+	WHERE row_index = 145
+	and intervention_id = int_id;
 
 -- 	C146	=C143+C145
 -- 	C148	=816.62/100

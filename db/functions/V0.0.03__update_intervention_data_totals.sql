@@ -5,106 +5,12 @@ AS $$
 
 declare 
 
-cell_0  text;
-cell_1  text;
-cell_2  text;
-cell_3  text;
-cell_4  text;
-cell_5  text;
-cell_6  text;
-cell_7  text;
-cell_8  text;
-cell_9  text;
 cells_all jsonb;
-
-calc_val numeric;
-
-
-update_str text;
-
-data_cur cursor for
-select * from intervention_data
-where intervention_id = int_id;
 
 begin
 	
-	cells_all := '{"foo":null}'; -- this is required because if the variable is null, appending it to anything else reults in null
+cells_all := get_intervention_data_as_json(int_id);
 
-	for data_rec in data_cur loop
-			
-		-- null in postgres and null in json are slightly differnt so need precise handling. Coelesce didn't work.
-		if data_rec.year_0 is null then
-			cell_0 := '{"' || data_rec.row_index || '_0":null}';
-		else
-			cell_0 := '{"' || data_rec.row_index || '_0":' || data_rec.year_0 || '}';
-		end if; 
-		
-		if data_rec.year_1 is null then
-			cell_1 := '{"' || data_rec.row_index || '_1":null}';
-		else
-			cell_1 := '{"' || data_rec.row_index || '_1":' || data_rec.year_1 || '}';
-		end if;
-		
-		if data_rec.year_2 is null then
-			cell_2 := '{"' || data_rec.row_index || '_2":null}';
-		else
-			cell_2 := '{"' || data_rec.row_index || '_2":' || data_rec.year_2 || '}';
-		end if;
-		
-		if data_rec.year_3 is null then
-			cell_3 := '{"' || data_rec.row_index || '_3":null}';
-		else
-			cell_3 := '{"' || data_rec.row_index || '_3":' || data_rec.year_3 || '}';
-		end if;
-		
-		if data_rec.year_4 is null then
-			cell_4 := '{"' || data_rec.row_index || '_4":null}';
-		else
-			cell_4 := '{"' || data_rec.row_index || '_4":' || data_rec.year_4 || '}';
-		end if;
-		
-		if data_rec.year_5 is null then
-			cell_5 := '{"' || data_rec.row_index || '_5":null}';
-		else
-			cell_5 := '{"' || data_rec.row_index || '_5":' || data_rec.year_5 || '}';
-		end if;
-		
-		if data_rec.year_6 is null then
-			cell_6 := '{"' || data_rec.row_index || '_6":null}';
-		else
-			cell_6 := '{"' || data_rec.row_index || '_6":' || data_rec.year_6 || '}';
-		end if;
-		
-		if data_rec.year_7 is null then
-			cell_7 := '{"' || data_rec.row_index || '_7":null}';
-		else
-			cell_7 := '{"' || data_rec.row_index || '_7":' || data_rec.year_7 || '}';
-		end if;
-		
-		if data_rec.year_8 is null then
-			cell_8 := '{"' || data_rec.row_index || '_8":null}';
-		else
-			cell_8 := '{"' || data_rec.row_index || '_8":' || data_rec.year_8 || '}';
-		end if;
-		
-		if data_rec.year_9 is null then
-			cell_9 := '{"' || data_rec.row_index || '_9":null}';
-		else
-			cell_9 := '{"' || data_rec.row_index || '_9":' || data_rec.year_9 || '}';
-		end if;
-		
-		cells_all := cells_all || cell_0::jsonb || cell_1::jsonb || cell_2::jsonb || cell_3::jsonb || cell_4::jsonb
-		|| cell_5::jsonb || cell_6::jsonb || cell_7::jsonb || cell_8::jsonb || cell_9::jsonb;
-		
-	end loop;
-
-	  -- raise notice '%' , cells_all;
-	  /** test fetching specific cell values
-	  raise notice '%' , cells_all -> '4_0';
-	  raise notice '%' , cells_all -> '256_9';
-	  raise notice '%' , cells_all -> '265_0';
-	  */
-	
 -- formulae for intervention_id = 1
 	
 -- 	C31	=ROUNDUP(C27*C30, 0)
@@ -432,11 +338,81 @@ begin
 	and intervention_id = int_id;
 
 -- 	C50	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),5,0)
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'6_0')::numeric > 0 or (cells_all->>'7_0')::numeric > 0 or (cells_all->>'8_0')::numeric > 0 or (cells_all->>'9_0')::numeric > 0 then 5 else 0 end
+	,year_1 = case when (cells_all->>'6_1')::numeric > 0 or (cells_all->>'7_1')::numeric > 0 or (cells_all->>'8_1')::numeric > 0 or (cells_all->>'9_1')::numeric > 0 then 5 else 0 end
+	,year_2 = case when (cells_all->>'6_2')::numeric > 0 or (cells_all->>'7_2')::numeric > 0 or (cells_all->>'8_2')::numeric > 0 or (cells_all->>'9_2')::numeric > 0 then 5 else 0 end
+	,year_3 = case when (cells_all->>'6_3')::numeric > 0 or (cells_all->>'7_3')::numeric > 0 or (cells_all->>'8_3')::numeric > 0 or (cells_all->>'9_3')::numeric > 0 then 5 else 0 end
+	,year_4 = case when (cells_all->>'6_4')::numeric > 0 or (cells_all->>'7_4')::numeric > 0 or (cells_all->>'8_4')::numeric > 0 or (cells_all->>'9_4')::numeric > 0 then 5 else 0 end
+	,year_5 = case when (cells_all->>'6_5')::numeric > 0 or (cells_all->>'7_5')::numeric > 0 or (cells_all->>'8_5')::numeric > 0 or (cells_all->>'9_5')::numeric > 0 then 5 else 0 end
+	,year_6 = case when (cells_all->>'6_6')::numeric > 0 or (cells_all->>'7_6')::numeric > 0 or (cells_all->>'8_6')::numeric > 0 or (cells_all->>'9_6')::numeric > 0 then 5 else 0 end
+	,year_7 = case when (cells_all->>'6_7')::numeric > 0 or (cells_all->>'7_7')::numeric > 0 or (cells_all->>'8_7')::numeric > 0 or (cells_all->>'9_7')::numeric > 0 then 5 else 0 end
+	,year_8 = case when (cells_all->>'6_8')::numeric > 0 or (cells_all->>'7_8')::numeric > 0 or (cells_all->>'8_8')::numeric > 0 or (cells_all->>'9_8')::numeric > 0 then 5 else 0 end
+	,year_9 = case when (cells_all->>'6_9')::numeric > 0 or (cells_all->>'7_9')::numeric > 0 or (cells_all->>'8_9')::numeric > 0 or (cells_all->>'9_9')::numeric > 0 then 5 else 0 end
+	WHERE row_index = 50
+	and intervention_id = int_id;
+
 -- 	C91	=IF(C4="SU",200000*'GDP Deflators'!$G$38,0)
+
+    -- TODO
+
 -- 	C92	=IF(C4="SU",15000,0)
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'4_0')::numeric = 1 then 15000 else 0 end
+	,year_1 = case when (cells_all->>'4_1')::numeric = 1 then 15000 else 0 end
+	,year_2 = case when (cells_all->>'4_2')::numeric = 1 then 15000 else 0 end
+	,year_3 = case when (cells_all->>'4_3')::numeric = 1 then 15000 else 0 end
+	,year_4 = case when (cells_all->>'4_4')::numeric = 1 then 15000 else 0 end
+	,year_5 = case when (cells_all->>'4_5')::numeric = 1 then 15000 else 0 end
+	,year_6 = case when (cells_all->>'4_6')::numeric = 1 then 15000 else 0 end
+	,year_7 = case when (cells_all->>'4_7')::numeric = 1 then 15000 else 0 end
+	,year_8 = case when (cells_all->>'4_8')::numeric = 1 then 15000 else 0 end
+	,year_9 = case when (cells_all->>'4_9')::numeric = 1 then 15000 else 0 end
+	WHERE row_index = 92
+	and intervention_id = int_id;
+
 -- 	C93	=IF(C4="SU",20000,0)
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'4_0')::numeric = 1 then 20000 else 0 end
+	,year_1 = case when (cells_all->>'4_1')::numeric = 1 then 20000 else 0 end
+	,year_2 = case when (cells_all->>'4_2')::numeric = 1 then 20000 else 0 end
+	,year_3 = case when (cells_all->>'4_3')::numeric = 1 then 20000 else 0 end
+	,year_4 = case when (cells_all->>'4_4')::numeric = 1 then 20000 else 0 end
+	,year_5 = case when (cells_all->>'4_5')::numeric = 1 then 20000 else 0 end
+	,year_6 = case when (cells_all->>'4_6')::numeric = 1 then 20000 else 0 end
+	,year_7 = case when (cells_all->>'4_7')::numeric = 1 then 20000 else 0 end
+	,year_8 = case when (cells_all->>'4_8')::numeric = 1 then 20000 else 0 end
+	,year_9 = case when (cells_all->>'4_9')::numeric = 1 then 20000 else 0 end
+	WHERE row_index = 93
+	and intervention_id = int_id;
+
 -- 	C94	=IF(C4="SU", 10000,IF(C4="SC",5000,0))
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'4_0')::numeric = 1 then 10000 when (cells_all->>'4_0')::numeric = 2 then 5000 else 0 end
+	,year_1 = case when (cells_all->>'4_1')::numeric = 1 then 10000 when (cells_all->>'4_1')::numeric = 2 then 5000 else 0 end
+	,year_2 = case when (cells_all->>'4_2')::numeric = 1 then 10000 when (cells_all->>'4_2')::numeric = 2 then 5000 else 0 end
+	,year_3 = case when (cells_all->>'4_3')::numeric = 1 then 10000 when (cells_all->>'4_3')::numeric = 2 then 5000 else 0 end
+	,year_4 = case when (cells_all->>'4_4')::numeric = 1 then 10000 when (cells_all->>'4_4')::numeric = 2 then 5000 else 0 end
+	,year_5 = case when (cells_all->>'4_5')::numeric = 1 then 10000 when (cells_all->>'4_5')::numeric = 2 then 5000 else 0 end
+	,year_6 = case when (cells_all->>'4_6')::numeric = 1 then 10000 when (cells_all->>'4_6')::numeric = 2 then 5000 else 0 end
+	,year_7 = case when (cells_all->>'4_7')::numeric = 1 then 10000 when (cells_all->>'4_7')::numeric = 2 then 5000 else 0 end
+	,year_8 = case when (cells_all->>'4_8')::numeric = 1 then 10000 when (cells_all->>'4_8')::numeric = 2 then 5000 else 0 end
+	,year_9 = case when (cells_all->>'4_9')::numeric = 1 then 10000 when (cells_all->>'4_9')::numeric = 2 then 5000 else 0 end
+	WHERE row_index = 94
+	and intervention_id = int_id;
+
 -- 	C95	=SUM(C91:C94)
+
+    
+
 -- 	C108	=IF(C4="BAU",0,IF(C4="SU",50000,25000))
 -- 	C109	=C108
 -- 	C114	=C95+C106+C109+C113

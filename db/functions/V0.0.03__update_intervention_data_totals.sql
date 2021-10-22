@@ -411,15 +411,69 @@ cells_all := get_intervention_data_as_json(int_id);
 
 -- 	C95	=SUM(C91:C94)
 
+	cells_all := get_intervention_data_as_json(int_id); -- get the json again with updated values for use in this formula
+	
+	UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'91_0')::numeric + (cells_all->>'92_0')::numeric + (cells_all->>'93_0')::numeric + (cells_all->>'94_0')::numeric
+	,year_1 = (cells_all->>'91_1')::numeric + (cells_all->>'92_1')::numeric + (cells_all->>'93_1')::numeric + (cells_all->>'94_1')::numeric
+	,year_2 = (cells_all->>'91_2')::numeric + (cells_all->>'92_2')::numeric + (cells_all->>'93_2')::numeric + (cells_all->>'94_2')::numeric
+	,year_3 = (cells_all->>'91_3')::numeric + (cells_all->>'92_3')::numeric + (cells_all->>'93_3')::numeric + (cells_all->>'94_3')::numeric
+	,year_4 = (cells_all->>'91_4')::numeric + (cells_all->>'92_4')::numeric + (cells_all->>'93_4')::numeric + (cells_all->>'94_4')::numeric
+	,year_5 = (cells_all->>'91_5')::numeric + (cells_all->>'92_5')::numeric + (cells_all->>'93_5')::numeric + (cells_all->>'94_5')::numeric
+	,year_6 = (cells_all->>'91_6')::numeric + (cells_all->>'92_6')::numeric + (cells_all->>'93_6')::numeric + (cells_all->>'94_6')::numeric
+	,year_7 = (cells_all->>'91_7')::numeric + (cells_all->>'92_7')::numeric + (cells_all->>'93_7')::numeric + (cells_all->>'94_7')::numeric
+	,year_8 = (cells_all->>'91_8')::numeric + (cells_all->>'92_8')::numeric + (cells_all->>'93_8')::numeric + (cells_all->>'94_8')::numeric
+	,year_9 = (cells_all->>'91_9')::numeric + (cells_all->>'92_9')::numeric + (cells_all->>'93_9')::numeric + (cells_all->>'94_9')::numeric
+	WHERE row_index = 95
+	and intervention_id = int_id;
     
-
 -- 	C108	=IF(C4="BAU",0,IF(C4="SU",50000,25000))
 -- 	C109	=C108
+
+    UPDATE intervention_data 
+	SET 
+	 year_0 = case when (cells_all->>'4_0')::numeric = 3 then 0 when when (cells_all->>'4_0')::numeric = 1 then  50000 else 25000 end
+	,year_1 = case when (cells_all->>'4_1')::numeric = 3 then 0 when when (cells_all->>'4_1')::numeric = 1 then  50000 else 25000 end
+	,year_2 = case when (cells_all->>'4_2')::numeric = 3 then 0 when when (cells_all->>'4_2')::numeric = 1 then  50000 else 25000 end
+	,year_3 = case when (cells_all->>'4_3')::numeric = 3 then 0 when when (cells_all->>'4_3')::numeric = 1 then  50000 else 25000 end
+	,year_4 = case when (cells_all->>'4_4')::numeric = 3 then 0 when when (cells_all->>'4_4')::numeric = 1 then  50000 else 25000 end
+	,year_5 = case when (cells_all->>'4_5')::numeric = 3 then 0 when when (cells_all->>'4_5')::numeric = 1 then  50000 else 25000 end
+	,year_6 = case when (cells_all->>'4_6')::numeric = 3 then 0 when when (cells_all->>'4_6')::numeric = 1 then  50000 else 25000 end
+	,year_7 = case when (cells_all->>'4_7')::numeric = 3 then 0 when when (cells_all->>'4_7')::numeric = 1 then  50000 else 25000 end
+	,year_8 = case when (cells_all->>'4_8')::numeric = 3 then 0 when when (cells_all->>'4_8')::numeric = 1 then  50000 else 25000 end
+	,year_9 = case when (cells_all->>'4_9')::numeric = 3 then 0 when when (cells_all->>'4_9')::numeric = 1 then  50000 else 25000 end
+	WHERE row_index in (108,109)
+	and intervention_id = int_id;
+
 -- 	C114	=C95+C106+C109+C113
+
+	cells_all := get_intervention_data_as_json(int_id); -- get the json again with updated values for use in this formula
+    
+    UPDATE intervention_data 
+	SET 
+	 year_0 = (cells_all->>'95_0')::numeric + (cells_all->>'106_0')::numeric + (cells_all->>'109_0')::numeric + (cells_all->>'113_0')::numeric
+	,year_1 = (cells_all->>'95_1')::numeric + (cells_all->>'106_1')::numeric + (cells_all->>'109_1')::numeric + (cells_all->>'113_1')::numeric
+	,year_2 = (cells_all->>'95_2')::numeric + (cells_all->>'106_2')::numeric + (cells_all->>'109_2')::numeric + (cells_all->>'113_2')::numeric
+	,year_3 = (cells_all->>'95_3')::numeric + (cells_all->>'106_3')::numeric + (cells_all->>'109_3')::numeric + (cells_all->>'113_3')::numeric
+	,year_4 = (cells_all->>'95_4')::numeric + (cells_all->>'106_4')::numeric + (cells_all->>'109_4')::numeric + (cells_all->>'113_4')::numeric
+	,year_5 = (cells_all->>'95_5')::numeric + (cells_all->>'106_5')::numeric + (cells_all->>'109_5')::numeric + (cells_all->>'113_5')::numeric
+	,year_6 = (cells_all->>'95_6')::numeric + (cells_all->>'106_6')::numeric + (cells_all->>'109_6')::numeric + (cells_all->>'113_6')::numeric
+	,year_7 = (cells_all->>'95_7')::numeric + (cells_all->>'106_7')::numeric + (cells_all->>'109_7')::numeric + (cells_all->>'113_7')::numeric
+	,year_8 = (cells_all->>'95_8')::numeric + (cells_all->>'106_8')::numeric + (cells_all->>'109_8')::numeric + (cells_all->>'113_8')::numeric
+	,year_9 = (cells_all->>'95_9')::numeric + (cells_all->>'106_9')::numeric + (cells_all->>'109_9')::numeric + (cells_all->>'113_9')::numeric
+	WHERE row_index = 114
+	and intervention_id = int_id;
+
+
 -- 	C118	='Premix - wheat flour'!I35
--- 	C120	='National Data'!B17
+-- 	C120	='National Data'!B17                    TODO
 -- 	C121	='National Data'!B12
+
 -- 	C123	=C118*(1+C119+C120+C121)+C122
+
+    
+
 -- 	C125	=C26
 -- 	C126	=Demographics!D3
 -- 	C127	=((C124*C125*C126)*365)/1000000

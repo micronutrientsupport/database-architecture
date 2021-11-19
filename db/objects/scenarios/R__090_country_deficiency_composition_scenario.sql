@@ -1,4 +1,4 @@
-create or replace function create_country_deficiency_afe_composition_scenario(_fct_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
+create or replace function create_country_deficiency_afe_composition_scenario(_compositionDataId numeric, _consumptionDataId numeric, _food_genus text[], _field text, _new_value numeric[])
 returns setof country_deficiency_afe as
 $$
 BEGIN
@@ -13,7 +13,7 @@ BEGIN
             , c.geometry as geometry
             , ci.fct_source_id as composition_data_id
             , ci.data_source_id as consumption_data_id
-        from create_country_intake_composition_scenario(_fct_source_id, _food_genus, _field, _new_value) ci
+        from create_country_intake_composition_scenario(_compositionDataId, _consumptionDataId, _food_genus, _field, _new_value) ci
         join country_consumption_source ccs on ci.data_source_id = ccs.id 
         join country c on ST_EQUALS(ccs.geometry, c.geometry)
         CROSS JOIN LATERAL (

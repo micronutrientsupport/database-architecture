@@ -1,4 +1,4 @@
-create or replace function create_scenario_fct(_country_consumption_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
+create or replace function create_scenario_fct(_fct_source_id numeric, _food_genus text[], _field text, _new_value numeric[])
 
 returns setof fooditem as
 $$

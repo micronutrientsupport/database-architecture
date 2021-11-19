@@ -48,7 +48,7 @@ BEGIN
     FROM
         fooditem
         JOIN food_genus ON food_genus.id = fooditem.food_genus_id
-        JOIN create_scenario_fbs(_compositionDataId, _food_genus, _field, _new_value) as cc ON cc.food_genus_id = food_genus.id
+        JOIN create_scenario_fbs(_consumptionDataId, _food_genus, _field, _new_value) as cc ON cc.food_genus_id = food_genus.id
         --JOIN survey on household.survey_id = survey.id
          WHERE fct_source_id = _compositionDataId
     GROUP BY data_source_id, fooditem.fct_source_id, cc.country_id;

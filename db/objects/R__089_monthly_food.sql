@@ -1,3 +1,6 @@
+ DROP MATERIALIZED VIEW IF EXISTS monthly_food;
+ CREATE MATERIALIZED VIEW monthly_food AS
+
 SELECT
 	round( (mn_consumed / sum(mn_consumed) OVER (PARTITION BY mn_name, month_consumed, fct_source_id, survey_id)) * 100 , 1) AS percentage_mn_consumed
 	, *

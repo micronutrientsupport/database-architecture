@@ -14,6 +14,8 @@ intervention_id = int_id
 order by row_index;
 
 begin
+	
+	execute update_intervention_data_totals(1);
 
     -- loop through json object updating table columns
     for r in c loop
@@ -37,7 +39,7 @@ begin
                         and a.row_index = ' || r.row_index
                         ;
                         
-        Raise Notice'sql string:  %',update_sql;
+        --Raise Notice'sql string:  %',update_sql;
                         
         EXECUTE update_sql;
 

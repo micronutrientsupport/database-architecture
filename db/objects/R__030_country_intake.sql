@@ -1,7 +1,7 @@
 CREATE OR REPLACE VIEW country_intake AS
 
 SELECT
-        cc.country_id
+        c.id as country_id
         , fooditem.fct_source_id
         , data_source_id
         , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as Moisture_in_g
@@ -14,7 +14,7 @@ SELECT
         , sum(MonounsaturatedFA_in_g         / 100 * amount_consumed_in_g) as MonounsaturatedFA_in_g
         , sum(PolyunsaturatedFA_in_g         / 100 * amount_consumed_in_g) as PolyunsaturatedFA_in_g
         , sum(Cholesterol_in_mg              / 100 * amount_consumed_in_g) as Cholesterol_in_mg
-        , sum(Carbohydrateavailable_in_g     / 100 * amount_consumed_in_g) as Carbohydrateavailable_in_g
+        , sum(carbohydrates_in_g             / 100 * amount_consumed_in_g) as carbohydrates_in_g
         , sum(Fibre_in_g                     / 100 * amount_consumed_in_g) as Fibre_in_g
         , sum(Ash_in_g                       / 100 * amount_consumed_in_g) as Ash_in_g
         , sum(Ca_in_mg                       / 100 * amount_consumed_in_g) as Ca_in_mg
@@ -46,7 +46,9 @@ SELECT
         fooditem
         JOIN food_genus ON food_genus.id = fooditem.food_genus_id
         JOIN COUNTRY_CONSUMPTION as cc ON cc.food_genus_id = food_genus.id
+        JOIN country_consumption_source ccs on ccs.id = cc.data_source_id 
+        JOIN country c ON ST_EQUALS(ccs.geometry, c.geometry)
         --JOIN survey on household.survey_id = survey.id
-    GROUP BY data_source_id, fooditem.fct_source_id, cc.country_id;
-
+    GROUP BY data_source_id, fooditem.fct_source_id, c.id;
+    
 COMMENT ON VIEW country_intake IS 'View of amount of micronutrients consumed per capita per year by country';

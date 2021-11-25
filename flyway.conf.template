@@ -1,0 +1,12 @@
+# see https://flywaydb.org/documentation/configuration/configfile.html
+# and https://flywaydb.org/documentation/configuration/parameters/
+# for details
+
+flyway.url=
+flyway.user=
+flyway.password=
+flyway.schemas=
+flyway.locations=
+flyway.installedBy=
+
+flyway.target=

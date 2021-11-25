@@ -4,6 +4,9 @@ CREATE OR REPLACE VIEW household_intake AS
         household.id as household_id
         , household.survey_id
         , fooditem.fct_source_id as fct_source_id
+        , aggregation_area.id as aggregation_area_id
+        , aggregation_area.name as aggregation_area_name
+        , aggregation_area.type as aggregation_area_type
         , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as Moisture_in_g
         , sum(Energy_in_kCal                 / 100 * amount_consumed_in_g) as Energy_in_kCal
         , sum(Energy_in_kJ                   / 100 * amount_consumed_in_g) as Energy_in_kJ
@@ -14,7 +17,7 @@ CREATE OR REPLACE VIEW household_intake AS
         , sum(MonounsaturatedFA_in_g         / 100 * amount_consumed_in_g) as MonounsaturatedFA_in_g
         , sum(PolyunsaturatedFA_in_g         / 100 * amount_consumed_in_g) as PolyunsaturatedFA_in_g
         , sum(Cholesterol_in_mg              / 100 * amount_consumed_in_g) as Cholesterol_in_mg
-        , sum(Carbohydrateavailable_in_g     / 100 * amount_consumed_in_g) as Carbohydrateavailable_in_g
+        , sum(carbohydrates_in_g             / 100 * amount_consumed_in_g) as carbohydrates_in_g
         , sum(Fibre_in_g                     / 100 * amount_consumed_in_g) as Fibre_in_g
         , sum(Ash_in_g                       / 100 * amount_consumed_in_g) as Ash_in_g
         , sum(Ca_in_mg                       / 100 * amount_consumed_in_g) as Ca_in_mg
@@ -49,13 +52,17 @@ CREATE OR REPLACE VIEW household_intake AS
         JOIN HOUSEHOLD_MEMBER as hhm ON hhm.id = hhc.HOUSEHOLD_id
         JOIN household ON hhm.household_id = household.id
         JOIN survey on household.survey_id = survey.id
-    GROUP BY household.id, fooditem.fct_source_id
+        JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location) WHERE aggregation_area.type='admin' AND aggregation_area.admin_level=1
+    GROUP BY aggregation_area.id, household.id, fooditem.fct_source_id
     --ORDER BY household.id
 UNION ALL
     SELECT
         household.id as household_id
         , household.survey_id
         , individual_intake.fct_source_id as fct_source_id
+        , aggregation_area.id as aggregation_area_id
+        , aggregation_area.name as aggregation_area_name
+        , aggregation_area.type as aggregation_area_type
         , sum(Moisture_in_g              ) as  Moisture_in_g
         , sum(Energy_in_kCal             ) as  Energy_in_kCal
         , sum(Energy_in_kJ               ) as  Energy_in_kJ
@@ -66,7 +73,7 @@ UNION ALL
         , sum(MonounsaturatedFA_in_g     ) as  MonounsaturatedFA_in_g
         , sum(PolyunsaturatedFA_in_g     ) as  PolyunsaturatedFA_in_g
         , sum(Cholesterol_in_mg          ) as  Cholesterol_in_mg
-        , sum(Carbohydrateavailable_in_g ) as  Carbohydrateavailable_in_g
+        , sum(carbohydrates_in_g         ) as  carbohydrates_in_g
         , sum(Fibre_in_g                 ) as  Fibre_in_g
         , sum(Ash_in_g                   ) as  Ash_in_g
         , sum(Ca_in_mg                   ) as  Ca_in_mg
@@ -97,7 +104,8 @@ UNION ALL
     FROM individual_intake
     JOIN household on individual_intake.household_id = household.id
     JOIN survey on household.survey_id = survey.id
-    GROUP BY household.id, individual_intake.fct_source_id
+    JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location) WHERE aggregation_area.type='admin' AND aggregation_area.admin_level=1
+    GROUP BY aggregation_area.id, household.id, individual_intake.fct_source_id
 ;
 
 COMMENT ON VIEW household_intake IS 'View of amount of micronutrients consumed in total by individual households ';

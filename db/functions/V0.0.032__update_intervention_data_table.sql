@@ -15,7 +15,7 @@ order by row_index;
 
 begin
 	
-	execute update_intervention_data_totals(1);
+	execute update_intervention_data_totals(int_id);
 
     -- loop through json object updating table columns
     for r in c loop

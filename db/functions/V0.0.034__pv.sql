@@ -1,6 +1,7 @@
 
+-- drop function pv;
 
-CREATE FUNCTION PV (rate numeric, nper numeric, pmt numeric, fv numeric, thetype integer) 
+CREATE or replace FUNCTION pv(rate numeric, nper numeric, fv numeric) 
 RETURNS numeric 
 AS 
 $$
@@ -11,21 +12,11 @@ pv numeric;
 
 begin
 	
-    pv :=
-    Case 
-    WHEN thetype = 0 THEN 
-	    pmt *(Power(rate,nper) -1) / 
-	    (rate * Power(rate,nper))
-	    + fv * Power(rate,nper)
- 
-    WHEN thetype = 1 THEN 
-	    pmt * (Power(1 + rate,nper) -1) /
-	    (rate * Power(rate,nper))
-	    * (1 + rate)
-	    + fv * Power(1 + rate,nper)
-    end;
+    pv := fv * (1 / power((1+rate),nper));
    
-    RETURN pv *-1;
+    RETURN pv;
    
 end;
 $$ LANGUAGE plpgsql;
+
+

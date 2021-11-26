@@ -19,297 +19,311 @@ cells_all := get_intervention_data_as_json(int_id);
 	
 -- 	C31	=ROUNDUP(C27*C30, 0)
 
-    cells_all := cells_all || to_json_null('31_0'::text,round((cells_all->>'27_0')::numeric * (cells_all->>'30_0')::numeric));
-    cells_all := cells_all || to_json_null('31_1'::text,round((cells_all->>'27_1')::numeric * (cells_all->>'30_1')::numeric));
-	cells_all := cells_all || to_json_null('31_2'::text,round((cells_all->>'27_2')::numeric * (cells_all->>'30_2')::numeric));
-	cells_all := cells_all || to_json_null('31_3'::text,round((cells_all->>'27_3')::numeric * (cells_all->>'30_3')::numeric));
-	cells_all := cells_all || to_json_null('31_4'::text,round((cells_all->>'27_4')::numeric * (cells_all->>'30_4')::numeric));
-	cells_all := cells_all || to_json_null('31_5'::text,round((cells_all->>'27_5')::numeric * (cells_all->>'30_5')::numeric));
-	cells_all := cells_all || to_json_null('31_6'::text,round((cells_all->>'27_6')::numeric * (cells_all->>'30_6')::numeric));
-	cells_all := cells_all || to_json_null('31_7'::text,round((cells_all->>'27_7')::numeric * (cells_all->>'30_7')::numeric));
-	cells_all := cells_all || to_json_null('31_8'::text,round((cells_all->>'27_8')::numeric * (cells_all->>'30_8')::numeric));
-	cells_all := cells_all || to_json_null('31_9'::text,round((cells_all->>'27_9')::numeric * (cells_all->>'30_9')::numeric));
+    for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('31_' || i::text,round((cells_all->>'27_' || i)::numeric * (cells_all->>'30_' || i )::numeric));
+    
+    end loop;
+
 
 -- 	C33	=IF(OR(C13>0,C14>0),3,0)
+
+    for i in 1 .. 9 loop
     
-     cells_all := cells_all || ('{"33_0":' || case when (cells_all->>'13_0')::numeric > 0 or (cells_all->>'14_0')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	 cells_all := cells_all || ('{"33_1":' || case when (cells_all->>'13_1')::numeric > 0 or (cells_all->>'14_1')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	 cells_all := cells_all || ('{"33_2":' || case when (cells_all->>'13_2')::numeric > 0 or (cells_all->>'14_2')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	 cells_all := cells_all || ('{"33_3":' || case when (cells_all->>'13_3')::numeric > 0 or (cells_all->>'14_3')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	 cells_all := cells_all || ('{"33_4":' || case when (cells_all->>'13_4')::numeric > 0 or (cells_all->>'14_4')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	 cells_all := cells_all || ('{"33_5":' || case when (cells_all->>'13_5')::numeric > 0 or (cells_all->>'14_5')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	 cells_all := cells_all || ('{"33_6":' || case when (cells_all->>'13_6')::numeric > 0 or (cells_all->>'14_6')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	 cells_all := cells_all || ('{"33_7":' || case when (cells_all->>'13_7')::numeric > 0 or (cells_all->>'14_7')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	 cells_all := cells_all || ('{"33_8":' || case when (cells_all->>'13_8')::numeric > 0 or (cells_all->>'14_8')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	 cells_all := cells_all || ('{"33_9":' || case when (cells_all->>'13_9')::numeric > 0 or (cells_all->>'14_9')::numeric > 0 then 3 else 0 end || '}')::jsonb;
+        cells_all := cells_all || to_json_null('33__' || i::text, case when (cells_all->>'13_' || i)::numeric > 0 or (cells_all->>'14_' || i)::numeric > 0 then 3 else 0 end);
     
+    end loop;
 
 -- 	C34	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),3,0)
- 
-	cells_all := cells_all || ('{"34_0":' || case when (cells_all->>'6_0')::numeric > 0 or (cells_all->>'7_0')::numeric > 0 or (cells_all->>'8_0')::numeric > 0 or (cells_all->>'9_0')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"34_1":' || case when (cells_all->>'6_1')::numeric > 0 or (cells_all->>'7_1')::numeric > 0 or (cells_all->>'8_1')::numeric > 0 or (cells_all->>'9_1')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"34_2":' || case when (cells_all->>'6_2')::numeric > 0 or (cells_all->>'7_2')::numeric > 0 or (cells_all->>'8_2')::numeric > 0 or (cells_all->>'9_2')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"34_3":' || case when (cells_all->>'6_3')::numeric > 0 or (cells_all->>'7_3')::numeric > 0 or (cells_all->>'8_3')::numeric > 0 or (cells_all->>'9_3')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"34_4":' || case when (cells_all->>'6_4')::numeric > 0 or (cells_all->>'7_4')::numeric > 0 or (cells_all->>'8_4')::numeric > 0 or (cells_all->>'9_4')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"34_5":' || case when (cells_all->>'6_5')::numeric > 0 or (cells_all->>'7_5')::numeric > 0 or (cells_all->>'8_5')::numeric > 0 or (cells_all->>'9_5')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"34_6":' || case when (cells_all->>'6_6')::numeric > 0 or (cells_all->>'7_6')::numeric > 0 or (cells_all->>'8_6')::numeric > 0 or (cells_all->>'9_6')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"34_7":' || case when (cells_all->>'6_7')::numeric > 0 or (cells_all->>'7_7')::numeric > 0 or (cells_all->>'8_7')::numeric > 0 or (cells_all->>'9_7')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"34_8":' || case when (cells_all->>'6_8')::numeric > 0 or (cells_all->>'7_8')::numeric > 0 or (cells_all->>'8_8')::numeric > 0 or (cells_all->>'9_8')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"34_9":' || case when (cells_all->>'6_9')::numeric > 0 or (cells_all->>'7_9')::numeric > 0 or (cells_all->>'8_9')::numeric > 0 or (cells_all->>'9_9')::numeric > 0 then 3 else 0 end || '}')::jsonb;
 
+    for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('34__' || i::text, case when 
+        (cells_all->>'6_' || i)::numeric > 0 or 
+        (cells_all->>'7_' || i)::numeric > 0 or
+        (cells_all->>'8_' || i)::numeric > 0 or
+        (cells_all->>'9_' || i)::numeric > 0
+      	then 3 else 0 end);
+    
+    end loop;  
+ 
 -- 	C37	=1-C36
 
- 
-	cells_all := cells_all || ('{"37_0":' ||  1 - (cells_all->>'36_0')::numeric || '}')::jsonb;
-	cells_all := cells_all || ('{"37_1":' ||  1 - (cells_all->>'36_1')::numeric || '}')::jsonb;
-	cells_all := cells_all || ('{"37_2":' ||  1 - (cells_all->>'36_2')::numeric || '}')::jsonb;
-	cells_all := cells_all || ('{"37_3":' ||  1 - (cells_all->>'36_3')::numeric || '}')::jsonb;
-	cells_all := cells_all || ('{"37_4":' ||  1 - (cells_all->>'36_4')::numeric || '}')::jsonb;
-	cells_all := cells_all || ('{"37_5":' ||  1 - (cells_all->>'36_5')::numeric || '}')::jsonb;
-	cells_all := cells_all || ('{"37_6":' ||  1 - (cells_all->>'36_6')::numeric || '}')::jsonb;
-	cells_all := cells_all || ('{"37_7":' ||  1 - (cells_all->>'36_7')::numeric || '}')::jsonb;
-	cells_all := cells_all || ('{"37_8":' ||  1 - (cells_all->>'36_8')::numeric || '}')::jsonb;
-	cells_all := cells_all || ('{"37_9":' ||  1 - (cells_all->>'36_9')::numeric || '}')::jsonb;
-
+ 	for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('37__' || i::text, 1 - (cells_all->>'36_' || i)::numeric);
+    
+    end loop;
 
 -- 	C40	=IF(C$27=0,0,IF(AND(C$27>0,C$27<0.25),1,IF(AND(C$27>=0.25,C$27<0.5),2,IF(AND(C$27>=0.5,C$27<0.75),3,4))))
 
-
-	cells_all := cells_all || ('{"40_0":' || case when (cells_all->>'27_0')::numeric = 0 then 1
-					when (cells_all->>'27_0')::numeric > 0 and (cells_all->>'27_0')::numeric < 0.25 then 1 
-					when (cells_all->>'27_0')::numeric >= 0.25 and (cells_all->>'27_0')::numeric < 0.5 then 2
-					when (cells_all->>'27_0')::numeric >= 0.5 and (cells_all->>'27_0')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"40_1":' || case when (cells_all->>'27_1')::numeric = 0 then 1
-					when (cells_all->>'27_1')::numeric > 0 and (cells_all->>'27_1')::numeric < 0.25 then 1 
-					when (cells_all->>'27_1')::numeric >= 0.25 and (cells_all->>'27_1')::numeric < 0.5 then 2
-					when (cells_all->>'27_1')::numeric >= 0.5 and (cells_all->>'27_1')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"40_2":' || case when (cells_all->>'27_2')::numeric = 0 then 1
-					when (cells_all->>'27_2')::numeric > 0 and (cells_all->>'27_2')::numeric < 0.25 then 1 
-					when (cells_all->>'27_2')::numeric >= 0.25 and (cells_all->>'27_2')::numeric < 0.5 then 2
-					when (cells_all->>'27_2')::numeric >= 0.5 and (cells_all->>'27_2')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"40_3":' || case when (cells_all->>'27_3')::numeric = 0 then 1
-					when (cells_all->>'27_3')::numeric > 0 and (cells_all->>'27_3')::numeric < 0.25 then 1 
-					when (cells_all->>'27_3')::numeric >= 0.25 and (cells_all->>'27_3')::numeric < 0.5 then 2
-					when (cells_all->>'27_3')::numeric >= 0.5 and (cells_all->>'27_3')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"40_4":' || case when (cells_all->>'27_4')::numeric = 0 then 1
-					when (cells_all->>'27_4')::numeric > 0 and (cells_all->>'27_4')::numeric < 0.25 then 1 
-					when (cells_all->>'27_4')::numeric >= 0.25 and (cells_all->>'27_4')::numeric < 0.5 then 2
-					when (cells_all->>'27_4')::numeric >= 0.5 and (cells_all->>'27_4')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"40_5":' || case when (cells_all->>'27_5')::numeric = 0 then 1
-					when (cells_all->>'27_5')::numeric > 0 and (cells_all->>'27_5')::numeric < 0.25 then 1 
-					when (cells_all->>'27_5')::numeric >= 0.25 and (cells_all->>'27_5')::numeric < 0.5 then 2
-					when (cells_all->>'27_5')::numeric >= 0.5 and (cells_all->>'27_5')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"40_6":' || case when (cells_all->>'27_6')::numeric = 0 then 1
-					when (cells_all->>'27_6')::numeric > 0 and (cells_all->>'27_6')::numeric < 0.25 then 1 
-					when (cells_all->>'27_6')::numeric >= 0.25 and (cells_all->>'27_6')::numeric < 0.5 then 2
-					when (cells_all->>'27_6')::numeric >= 0.5 and (cells_all->>'27_6')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"40_7":' || case when (cells_all->>'27_7')::numeric = 0 then 1
-					when (cells_all->>'27_7')::numeric > 0 and (cells_all->>'27_7')::numeric < 0.25 then 1 
-					when (cells_all->>'27_7')::numeric >= 0.25 and (cells_all->>'27_7')::numeric < 0.5 then 2
-					when (cells_all->>'27_7')::numeric >= 0.5 and (cells_all->>'27_7')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"40_8":' || case when (cells_all->>'27_8')::numeric = 0 then 1
-					when (cells_all->>'27_8')::numeric > 0 and (cells_all->>'27_8')::numeric < 0.25 then 1 
-					when (cells_all->>'27_8')::numeric >= 0.25 and (cells_all->>'27_8')::numeric < 0.5 then 2
-					when (cells_all->>'27_8')::numeric >= 0.5 and (cells_all->>'27_8')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"40_9":' || case when (cells_all->>'27_9')::numeric = 0 then 1
-					when (cells_all->>'27_9')::numeric > 0 and (cells_all->>'27_9')::numeric < 0.25 then 1 
-					when (cells_all->>'27_9')::numeric >= 0.25 and (cells_all->>'27_9')::numeric < 0.5 then 2
-					when (cells_all->>'27_9')::numeric >= 0.5 and (cells_all->>'27_9')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
+ 	for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('40__' || i::text, 
+		case when (cells_all->>'27_' || i)::numeric = 0 then 1
+			when (cells_all->>'27_' || i)::numeric > 0 and (cells_all->>'27_' || i)::numeric < 0.25 then 1 
+			when (cells_all->>'27_' || i)::numeric >= 0.25 and (cells_all->>'27_' || i)::numeric < 0.5 then 2
+			when (cells_all->>'27_' || i)::numeric >= 0.5 and (cells_all->>'27_' || i)::numeric < 0.75 then 3
+					else 4 end
+        );
+    
+    end loop;
+   
+   
+	
 
 -- 	C41	=IF(OR(C13>0, C14>0),3,0)
-	 
-	cells_all := cells_all || ('{"41_0":' || case when (cells_all->>'13_0')::numeric > 0 or (cells_all->>'14_0')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"41_1":' || case when (cells_all->>'13_1')::numeric > 0 or (cells_all->>'14_1')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"41_2":' || case when (cells_all->>'13_2')::numeric > 0 or (cells_all->>'14_2')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"41_3":' || case when (cells_all->>'13_3')::numeric > 0 or (cells_all->>'14_3')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"41_4":' || case when (cells_all->>'13_4')::numeric > 0 or (cells_all->>'14_4')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"41_5":' || case when (cells_all->>'13_5')::numeric > 0 or (cells_all->>'14_5')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"41_6":' || case when (cells_all->>'13_6')::numeric > 0 or (cells_all->>'14_6')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"41_7":' || case when (cells_all->>'13_7')::numeric > 0 or (cells_all->>'14_7')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"41_8":' || case when (cells_all->>'13_8')::numeric > 0 or (cells_all->>'14_8')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"41_9":' || case when (cells_all->>'13_9')::numeric > 0 or (cells_all->>'14_9')::numeric > 0 then 3 else 0 end || '}')::jsonb;
+
+ 	for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('41_' || i::text, case when (cells_all->>'13_' || i::text)::numeric > 0 or (cells_all->>'14_' || i::text)::numeric > 0 then 3 else 0 end);
+    
+    end loop;
 
 
 -- 	C42	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),3,0)
 
-	cells_all := cells_all || ('{"42_0":' || case when (cells_all->>'6_0')::numeric > 0 or (cells_all->>'7_0')::numeric > 0 or (cells_all->>'8_0')::numeric > 0 or (cells_all->>'9_0')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"42_1":' || case when (cells_all->>'6_1')::numeric > 0 or (cells_all->>'7_1')::numeric > 0 or (cells_all->>'8_1')::numeric > 0 or (cells_all->>'9_1')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"42_2":' || case when (cells_all->>'6_2')::numeric > 0 or (cells_all->>'7_2')::numeric > 0 or (cells_all->>'8_2')::numeric > 0 or (cells_all->>'9_2')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"42_3":' || case when (cells_all->>'6_3')::numeric > 0 or (cells_all->>'7_3')::numeric > 0 or (cells_all->>'8_3')::numeric > 0 or (cells_all->>'9_3')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"42_4":' || case when (cells_all->>'6_4')::numeric > 0 or (cells_all->>'7_4')::numeric > 0 or (cells_all->>'8_4')::numeric > 0 or (cells_all->>'9_4')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"42_5":' || case when (cells_all->>'6_5')::numeric > 0 or (cells_all->>'7_5')::numeric > 0 or (cells_all->>'8_5')::numeric > 0 or (cells_all->>'9_5')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"42_6":' || case when (cells_all->>'6_6')::numeric > 0 or (cells_all->>'7_6')::numeric > 0 or (cells_all->>'8_6')::numeric > 0 or (cells_all->>'9_6')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"42_7":' || case when (cells_all->>'6_7')::numeric > 0 or (cells_all->>'7_7')::numeric > 0 or (cells_all->>'8_7')::numeric > 0 or (cells_all->>'9_7')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"42_8":' || case when (cells_all->>'6_8')::numeric > 0 or (cells_all->>'7_8')::numeric > 0 or (cells_all->>'8_8')::numeric > 0 or (cells_all->>'9_8')::numeric > 0 then 3 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"42_9":' || case when (cells_all->>'6_9')::numeric > 0 or (cells_all->>'7_9')::numeric > 0 or (cells_all->>'8_9')::numeric > 0 or (cells_all->>'9_9')::numeric > 0 then 3 else 0 end || '}')::jsonb;
+ 	for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('42_' || i::text, case when 
+        (cells_all->>'6_' || i)::numeric > 0 or 
+        (cells_all->>'7_' || i)::numeric > 0 or 
+        (cells_all->>'8_' || i)::numeric > 0 or 
+        (cells_all->>'9_' || i)::numeric > 0 then 3 else 0 end);
+    
+    end loop;
 
 -- 	C44	=IF(C$27=0,0,IF(AND(C$27>0,C$27<0.25),6,IF(AND(C$27>=0.25,C$27<0.5),12,IF(AND(C$27>=0.5,C$27<0.75),18,24))))
 
-	cells_all := cells_all || ('{"44_0":' || case when (cells_all->>'27_0')::numeric = 0 then 0
-					when (cells_all->>'27_0')::numeric > 0 and (cells_all->>'27_0')::numeric < 0.25 then 6 
-					when (cells_all->>'27_0')::numeric >= 0.25 and (cells_all->>'27_0')::numeric < 0.5 then 12
-					when (cells_all->>'27_0')::numeric >= 0.5 and (cells_all->>'27_0')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
-	cells_all := cells_all || ('{"44_1":' || case when (cells_all->>'27_1')::numeric = 0 then 0
-					when (cells_all->>'27_1')::numeric > 0 and (cells_all->>'27_1')::numeric < 0.25 then 6 
-					when (cells_all->>'27_1')::numeric >= 0.25 and (cells_all->>'27_1')::numeric < 0.5 then 12
-					when (cells_all->>'27_1')::numeric >= 0.5 and (cells_all->>'27_1')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
-	cells_all := cells_all || ('{"44_2":' || case when (cells_all->>'27_2')::numeric = 0 then 0
-					when (cells_all->>'27_2')::numeric > 0 and (cells_all->>'27_2')::numeric < 0.25 then 6 
-					when (cells_all->>'27_2')::numeric >= 0.25 and (cells_all->>'27_2')::numeric < 0.5 then 12
-					when (cells_all->>'27_2')::numeric >= 0.5 and (cells_all->>'27_2')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
-	cells_all := cells_all || ('{"44_3":' || case when (cells_all->>'27_3')::numeric = 0 then 0
-					when (cells_all->>'27_3')::numeric > 0 and (cells_all->>'27_3')::numeric < 0.25 then 6 
-					when (cells_all->>'27_3')::numeric >= 0.25 and (cells_all->>'27_3')::numeric < 0.5 then 12
-					when (cells_all->>'27_3')::numeric >= 0.5 and (cells_all->>'27_3')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
-	cells_all := cells_all || ('{"44_4":' || case when (cells_all->>'27_4')::numeric = 0 then 0
-					when (cells_all->>'27_4')::numeric > 0 and (cells_all->>'27_4')::numeric < 0.25 then 6 
-					when (cells_all->>'27_4')::numeric >= 0.25 and (cells_all->>'27_4')::numeric < 0.5 then 12
-					when (cells_all->>'27_4')::numeric >= 0.5 and (cells_all->>'27_4')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
-	cells_all := cells_all || ('{"44_5":' || case when (cells_all->>'27_5')::numeric = 0 then 0
-					when (cells_all->>'27_5')::numeric > 0 and (cells_all->>'27_5')::numeric < 0.25 then 6 
-					when (cells_all->>'27_5')::numeric >= 0.25 and (cells_all->>'27_5')::numeric < 0.5 then 12
-					when (cells_all->>'27_5')::numeric >= 0.5 and (cells_all->>'27_5')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
-	cells_all := cells_all || ('{"44_6":' || case when (cells_all->>'27_6')::numeric = 0 then 0
-					when (cells_all->>'27_6')::numeric > 0 and (cells_all->>'27_6')::numeric < 0.25 then 6 
-					when (cells_all->>'27_6')::numeric >= 0.25 and (cells_all->>'27_6')::numeric < 0.5 then 12
-					when (cells_all->>'27_6')::numeric >= 0.5 and (cells_all->>'27_6')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
-	cells_all := cells_all || ('{"44_7":' || case when (cells_all->>'27_7')::numeric = 0 then 0
-					when (cells_all->>'27_7')::numeric > 0 and (cells_all->>'27_7')::numeric < 0.25 then 6 
-					when (cells_all->>'27_7')::numeric >= 0.25 and (cells_all->>'27_7')::numeric < 0.5 then 12
-					when (cells_all->>'27_7')::numeric >= 0.5 and (cells_all->>'27_7')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
-	cells_all := cells_all || ('{"44_8":' || case when (cells_all->>'27_8')::numeric = 0 then 0
-					when (cells_all->>'27_8')::numeric > 0 and (cells_all->>'27_8')::numeric < 0.25 then 6 
-					when (cells_all->>'27_8')::numeric >= 0.25 and (cells_all->>'27_8')::numeric < 0.5 then 12
-					when (cells_all->>'27_8')::numeric >= 0.5 and (cells_all->>'27_8')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
-	cells_all := cells_all || ('{"44_9":' || case when (cells_all->>'27_9')::numeric = 0 then 0
-					when (cells_all->>'27_9')::numeric > 0 and (cells_all->>'27_9')::numeric < 0.25 then 6 
-					when (cells_all->>'27_9')::numeric >= 0.25 and (cells_all->>'27_9')::numeric < 0.5 then 12
-					when (cells_all->>'27_9')::numeric >= 0.5 and (cells_all->>'27_9')::numeric < 0.75 then 18
-					else 24 end || '}')::jsonb;
+ 	for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('44_' || i::text, case when (cells_all->>'27_0')::numeric = 0 then 0
+					when (cells_all->>'27_' || i)::numeric > 0 and (cells_all->>'27_' || i)::numeric < 0.25 then 6 
+					when (cells_all->>'27_' || i)::numeric >= 0.25 and (cells_all->>'27_' || i)::numeric < 0.5 then 12
+					when (cells_all->>'27_' || i)::numeric >= 0.5 and (cells_all->>'27_' || i)::numeric < 0.75 then 18
+					else 24 end);
+    
+    end loop;
 
 -- 	C45	=IF(OR(C13>0,C14>0),2,0)
 
-	cells_all := cells_all || ('{"45_0":' || case when (cells_all->>'13_0')::numeric > 0 or (cells_all->>'14_0')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"45_1":' || case when (cells_all->>'13_1')::numeric > 0 or (cells_all->>'14_1')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"45_2":' || case when (cells_all->>'13_2')::numeric > 0 or (cells_all->>'14_2')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"45_3":' || case when (cells_all->>'13_3')::numeric > 0 or (cells_all->>'14_3')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"45_4":' || case when (cells_all->>'13_4')::numeric > 0 or (cells_all->>'14_4')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"45_5":' || case when (cells_all->>'13_5')::numeric > 0 or (cells_all->>'14_5')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"45_6":' || case when (cells_all->>'13_6')::numeric > 0 or (cells_all->>'14_6')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"45_7":' || case when (cells_all->>'13_7')::numeric > 0 or (cells_all->>'14_7')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"45_8":' || case when (cells_all->>'13_8')::numeric > 0 or (cells_all->>'14_8')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"45_9":' || case when (cells_all->>'13_9')::numeric > 0 or (cells_all->>'14_9')::numeric > 0 then 2 else 0 end || '}')::jsonb;
+    for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('45_' || i::text, case when (cells_all->>'13_' || i)::numeric > 0 or (cells_all->>'14_' || i)::numeric > 0 then 2 else 0 end );
+    
+    end loop;
+
 
 -- 	C46	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),2,0)
 
-	cells_all := cells_all || ('{"46_0":' || case when (cells_all->>'6_0')::numeric > 0 or (cells_all->>'7_0')::numeric > 0 or (cells_all->>'8_0')::numeric > 0 or (cells_all->>'9_0')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"46_1":' || case when (cells_all->>'6_1')::numeric > 0 or (cells_all->>'7_1')::numeric > 0 or (cells_all->>'8_1')::numeric > 0 or (cells_all->>'9_1')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"46_2":' || case when (cells_all->>'6_2')::numeric > 0 or (cells_all->>'7_2')::numeric > 0 or (cells_all->>'8_2')::numeric > 0 or (cells_all->>'9_2')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"46_3":' || case when (cells_all->>'6_3')::numeric > 0 or (cells_all->>'7_3')::numeric > 0 or (cells_all->>'8_3')::numeric > 0 or (cells_all->>'9_3')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"46_4":' || case when (cells_all->>'6_4')::numeric > 0 or (cells_all->>'7_4')::numeric > 0 or (cells_all->>'8_4')::numeric > 0 or (cells_all->>'9_4')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"46_5":' || case when (cells_all->>'6_5')::numeric > 0 or (cells_all->>'7_5')::numeric > 0 or (cells_all->>'8_5')::numeric > 0 or (cells_all->>'9_5')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"46_6":' || case when (cells_all->>'6_6')::numeric > 0 or (cells_all->>'7_6')::numeric > 0 or (cells_all->>'8_6')::numeric > 0 or (cells_all->>'9_6')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"46_7":' || case when (cells_all->>'6_7')::numeric > 0 or (cells_all->>'7_7')::numeric > 0 or (cells_all->>'8_7')::numeric > 0 or (cells_all->>'9_7')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"46_8":' || case when (cells_all->>'6_8')::numeric > 0 or (cells_all->>'7_8')::numeric > 0 or (cells_all->>'8_8')::numeric > 0 or (cells_all->>'9_8')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"46_9":' || case when (cells_all->>'6_9')::numeric > 0 or (cells_all->>'7_9')::numeric > 0 or (cells_all->>'8_9')::numeric > 0 or (cells_all->>'9_9')::numeric > 0 then 2 else 0 end || '}')::jsonb;
-
+   for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('46_' || i::text, case when 
+        (cells_all->>'6_' || i)::numeric > 0 or 
+        (cells_all->>'7_' || i)::numeric > 0 or 
+        (cells_all->>'8_' || i)::numeric > 0 or 
+        (cells_all->>'9_' || i)::numeric > 0 then 2 else 0 end );
+    
+    end loop;
+    
 -- 	C48	=IF(C$27=0,0,IF(AND(C$27>0,C$27<0.25),1,IF(AND(C$27>=0.25,C$27<0.5),2,IF(AND(C$27>=0.5,C$27<0.75),3,4))))
 
-	 cells_all := cells_all || ('{"48_0":' || case when (cells_all->>'27_0')::numeric = 0 then 1 					
-                    when (cells_all->>'27_0')::numeric > 0 and (cells_all->>'27_0')::numeric < 0.25 then 1 					
-                    when (cells_all->>'27_0')::numeric >= 0.25 and (cells_all->>'27_0')::numeric < 0.5 then 2 					
-                    when (cells_all->>'27_0')::numeric >= 0.5 and (cells_all->>'27_0')::numeric < 0.75 then 3 					
-                    else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"48_1":' || case when (cells_all->>'27_1')::numeric = 0 then 1
-					when (cells_all->>'27_1')::numeric > 0 and (cells_all->>'27_1')::numeric < 0.25 then 1 
-					when (cells_all->>'27_1')::numeric >= 0.25 and (cells_all->>'27_1')::numeric < 0.5 then 2
-					when (cells_all->>'27_1')::numeric >= 0.5 and (cells_all->>'27_1')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"48_2":' || case when (cells_all->>'27_2')::numeric = 0 then 1
-					when (cells_all->>'27_2')::numeric > 0 and (cells_all->>'27_2')::numeric < 0.25 then 1 
-					when (cells_all->>'27_2')::numeric >= 0.25 and (cells_all->>'27_2')::numeric < 0.5 then 2
-					when (cells_all->>'27_2')::numeric >= 0.5 and (cells_all->>'27_2')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"48_3":' || case when (cells_all->>'27_3')::numeric = 0 then 1
-					when (cells_all->>'27_3')::numeric > 0 and (cells_all->>'27_3')::numeric < 0.25 then 1 
-					when (cells_all->>'27_3')::numeric >= 0.25 and (cells_all->>'27_3')::numeric < 0.5 then 2
-					when (cells_all->>'27_3')::numeric >= 0.5 and (cells_all->>'27_3')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"48_4":' || case when (cells_all->>'27_4')::numeric = 0 then 1
-					when (cells_all->>'27_4')::numeric > 0 and (cells_all->>'27_4')::numeric < 0.25 then 1 
-					when (cells_all->>'27_4')::numeric >= 0.25 and (cells_all->>'27_4')::numeric < 0.5 then 2
-					when (cells_all->>'27_4')::numeric >= 0.5 and (cells_all->>'27_4')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"48_5":' || case when (cells_all->>'27_5')::numeric = 0 then 1
-					when (cells_all->>'27_5')::numeric > 0 and (cells_all->>'27_5')::numeric < 0.25 then 1 
-					when (cells_all->>'27_5')::numeric >= 0.25 and (cells_all->>'27_5')::numeric < 0.5 then 2
-					when (cells_all->>'27_5')::numeric >= 0.5 and (cells_all->>'27_5')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"48_6":' || case when (cells_all->>'27_6')::numeric = 0 then 1
-					when (cells_all->>'27_6')::numeric > 0 and (cells_all->>'27_6')::numeric < 0.25 then 1 
-					when (cells_all->>'27_6')::numeric >= 0.25 and (cells_all->>'27_6')::numeric < 0.5 then 2
-					when (cells_all->>'27_6')::numeric >= 0.5 and (cells_all->>'27_6')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"48_7":' || case when (cells_all->>'27_7')::numeric = 0 then 1
-					when (cells_all->>'27_7')::numeric > 0 and (cells_all->>'27_7')::numeric < 0.25 then 1 
-					when (cells_all->>'27_7')::numeric >= 0.25 and (cells_all->>'27_7')::numeric < 0.5 then 2
-					when (cells_all->>'27_7')::numeric >= 0.5 and (cells_all->>'27_7')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"48_8":' || case when (cells_all->>'27_8')::numeric = 0 then 1
-					when (cells_all->>'27_8')::numeric > 0 and (cells_all->>'27_8')::numeric < 0.25 then 1 
-					when (cells_all->>'27_8')::numeric >= 0.25 and (cells_all->>'27_8')::numeric < 0.5 then 2
-					when (cells_all->>'27_8')::numeric >= 0.5 and (cells_all->>'27_8')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
-	cells_all := cells_all || ('{"48_9":' || case when (cells_all->>'27_9')::numeric = 0 then 1
-					when (cells_all->>'27_9')::numeric > 0 and (cells_all->>'27_9')::numeric < 0.25 then 1 
-					when (cells_all->>'27_9')::numeric >= 0.25 and (cells_all->>'27_9')::numeric < 0.5 then 2
-					when (cells_all->>'27_9')::numeric >= 0.5 and (cells_all->>'27_9')::numeric < 0.75 then 3
-					else 4 end || '}')::jsonb;
+   for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('48_' || i::text, case when (cells_all->>'27_0')::numeric = 0 then 1 					
+                    when (cells_all->>'27_' || i)::numeric > 0 
+                     and (cells_all->>'27_' || i)::numeric < 0.25 then 1 					
+                    when (cells_all->>'27_' || i)::numeric >= 0.25 
+                     and (cells_all->>'27_' || i)::numeric < 0.5 then 2 					
+                    when (cells_all->>'27_' || i)::numeric >= 0.5 
+                     and (cells_all->>'27_' || i)::numeric < 0.75 then 3 					
+                    else 4 end );
+    
+    end loop;
 
 -- 	C49	=IF(OR(C13>0,C14>0),5,0)
 
-	cells_all := cells_all || ('{"49_0":' || case when (cells_all->>'13_0')::numeric > 0 or (cells_all->>'14_0')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"49_1":' || case when (cells_all->>'13_1')::numeric > 0 or (cells_all->>'14_1')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"49_2":' || case when (cells_all->>'13_2')::numeric > 0 or (cells_all->>'14_2')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"49_3":' || case when (cells_all->>'13_3')::numeric > 0 or (cells_all->>'14_3')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"49_4":' || case when (cells_all->>'13_4')::numeric > 0 or (cells_all->>'14_4')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"49_5":' || case when (cells_all->>'13_5')::numeric > 0 or (cells_all->>'14_5')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"49_6":' || case when (cells_all->>'13_6')::numeric > 0 or (cells_all->>'14_6')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"49_7":' || case when (cells_all->>'13_7')::numeric > 0 or (cells_all->>'14_7')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"49_8":' || case when (cells_all->>'13_8')::numeric > 0 or (cells_all->>'14_8')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"49_9":' || case when (cells_all->>'13_9')::numeric > 0 or (cells_all->>'14_9')::numeric > 0 then 5 else 0 end || '}')::jsonb;
+   for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('49_' || i::text, case when 
+        (cells_all->>'13_' || i)::numeric > 0 or 
+        (cells_all->>'14_' || i)::numeric > 0 then 5 else 0 end );
+    
+    end loop;
 
 -- 	C50	=IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),5,0)
 
-	cells_all := cells_all || ('{"50_0":' || case when (cells_all->>'6_0')::numeric > 0 or (cells_all->>'7_0')::numeric > 0 or (cells_all->>'8_0')::numeric > 0 or (cells_all->>'9_0')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"50_1":' || case when (cells_all->>'6_1')::numeric > 0 or (cells_all->>'7_1')::numeric > 0 or (cells_all->>'8_1')::numeric > 0 or (cells_all->>'9_1')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"50_2":' || case when (cells_all->>'6_2')::numeric > 0 or (cells_all->>'7_2')::numeric > 0 or (cells_all->>'8_2')::numeric > 0 or (cells_all->>'9_2')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"50_3":' || case when (cells_all->>'6_3')::numeric > 0 or (cells_all->>'7_3')::numeric > 0 or (cells_all->>'8_3')::numeric > 0 or (cells_all->>'9_3')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"50_4":' || case when (cells_all->>'6_4')::numeric > 0 or (cells_all->>'7_4')::numeric > 0 or (cells_all->>'8_4')::numeric > 0 or (cells_all->>'9_4')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"50_5":' || case when (cells_all->>'6_5')::numeric > 0 or (cells_all->>'7_5')::numeric > 0 or (cells_all->>'8_5')::numeric > 0 or (cells_all->>'9_5')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"50_6":' || case when (cells_all->>'6_6')::numeric > 0 or (cells_all->>'7_6')::numeric > 0 or (cells_all->>'8_6')::numeric > 0 or (cells_all->>'9_6')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"50_7":' || case when (cells_all->>'6_7')::numeric > 0 or (cells_all->>'7_7')::numeric > 0 or (cells_all->>'8_7')::numeric > 0 or (cells_all->>'9_7')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"50_8":' || case when (cells_all->>'6_8')::numeric > 0 or (cells_all->>'7_8')::numeric > 0 or (cells_all->>'8_8')::numeric > 0 or (cells_all->>'9_8')::numeric > 0 then 5 else 0 end || '}')::jsonb;
-	cells_all := cells_all || ('{"50_9":' || case when (cells_all->>'6_9')::numeric > 0 or (cells_all->>'7_9')::numeric > 0 or (cells_all->>'8_9')::numeric > 0 or (cells_all->>'9_9')::numeric > 0 then 5 else 0 end || '}')::jsonb;
+   for i in 1 .. 9 loop
+    
+        cells_all := cells_all || to_json_null('50_' || i::text, case when 
+        (cells_all->>'6_' || i)::numeric > 0 or 
+        (cells_all->>'7_' || i)::numeric > 0 or 
+        (cells_all->>'8_' || i)::numeric > 0 or 
+        (cells_all->>'9_' || i)::numeric > 0 then 5 else 0 end );
+    
+    end loop;
+
+-- D54 =10000+0.15*10000	
+
+-- D55 =MAX(C31:L31)-C31
+
+   cells_all := cells_all || to_json_null('55_1'::text, 
+   greatest((cells_all->>'31_0')::numeric, 
+       (cells_all->>'31_1')::numeric,
+       (cells_all->>'31_2')::numeric,
+       (cells_all->>'31_3')::numeric,
+       (cells_all->>'31_4')::numeric,
+       (cells_all->>'31_5')::numeric,
+       (cells_all->>'31_6')::numeric,
+       (cells_all->>'31_7')::numeric,
+       (cells_all->>'31_8')::numeric,
+       (cells_all->>'31_9')::numeric) - (cells_all->>'31_0')::numeric);
+
+-- D56 =D54*D55
+
+   cells_all := cells_all || to_json_null('56_1'::text, (cells_all->>'54_1')::numeric *(cells_all->>'55_1')::numeric);
+
+-- D57 =500*'GDP Deflators'!$H$38
+-- D58 =200*'GDP Deflators'!$H$38
+-- D59 =850*'GDP Deflators'!$H$38
+
+-- D61 =SUM(D57:D59)*D60
+
+   cells_all := cells_all || to_json_null('61_1'::text, ((cells_all->>'57_1')::numeric + (cells_all->>'57_8')::numeric + (cells_all->>'59_1')::numeric) * (cells_all->>'60_1')::numeric );
+
+-- D63 =IF(C13>0,MAX(C31:L31)-C31,0)
+
+    cells_all := cells_all || to_json_null('63_1'::text, case when (cells_all->>'13_0')::numeric > 0 then 
+    greatest((cells_all->>'31_0')::numeric, 
+       (cells_all->>'31_1')::numeric,
+       (cells_all->>'31_2')::numeric,
+       (cells_all->>'31_3')::numeric,
+       (cells_all->>'31_4')::numeric,
+       (cells_all->>'31_5')::numeric,
+       (cells_all->>'31_6')::numeric,
+       (cells_all->>'31_7')::numeric,
+       (cells_all->>'31_8')::numeric,
+       (cells_all->>'31_9')::numeric) - (cells_all->>'31_0')::numeric else 0 end );
+
+-- D65 =IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),MAX(C31:L31)-C31,0)
+
+    cells_all := cells_all || to_json_null('65_1'::text, case when 
+    (cells_all->>'6_0')::numeric > 0 or   
+    (cells_all->>'7_0')::numeric > 0 or 
+    (cells_all->>'8_0')::numeric > 0 or 
+    (cells_all->>'9_0')::numeric > 0 
+    then 
+    greatest((cells_all->>'31_0')::numeric, 
+       (cells_all->>'31_1')::numeric,
+       (cells_all->>'31_2')::numeric,
+       (cells_all->>'31_3')::numeric,
+       (cells_all->>'31_4')::numeric,
+       (cells_all->>'31_5')::numeric,
+       (cells_all->>'31_6')::numeric,
+       (cells_all->>'31_7')::numeric,
+       (cells_all->>'31_8')::numeric,
+       (cells_all->>'31_9')::numeric) - (cells_all->>'31_0')::numeric else 0 end ); 
+
+-- D67 =D65
+
+    cells_all := cells_all || to_json_null('67_1'::text, (cells_all->>'65_1')::numeric);
+
+-- D68 =D62*D63 + D64*D65+D66*D67
+
+    cells_all := cells_all || to_json_null('68_1'::text, (cells_all->>'62_1')::numeric * (cells_all->>'63_1')::numeric + (cells_all->>'64_1')::numeric 
+    * (cells_all->>'65_1')::numeric + (cells_all->>'66_1')::numeric * (cells_all->>'67_1')::numeric );
+
+-- D70 =(D68+D56)*D69
+
+    cells_all := cells_all || to_json_null('70_1'::text, 
+    ((cells_all->>'68_1')::numeric + 
+    (cells_all->>'56_1')::numeric) * 
+    (cells_all->>'69_1')::numeric );
+
+-- D71 ='National Data'!B15
+-- D72 ='National Data'!B16
+
+-- D73 =(D56+D61)*D71+D68*D72
+
+    cells_all := cells_all || to_json_null('73_1'::text, 
+    ((cells_all->>'56_1')::numeric + 
+    (cells_all->>'61_1')::numeric) * 
+    (cells_all->>'71_1')::numeric + 
+    (cells_all->>'68_1')::numeric * 
+    (cells_all->>'72_1')::numeric);
+
+-- D74 ='National Data'!B10
+-- D75 ='National Data'!B11
+
+-- D76 =(D56+D61)*D74+D68*D75
+
+   cells_all := cells_all || to_json_null('76_1'::text, 
+   ((cells_all->>'56_1')::numeric + 
+   (cells_all->>'61_1')::numeric) * 
+   (cells_all->>'74_1')::numeric + 
+   (cells_all->>'68_1')::numeric * 
+   (cells_all->>'75_1')::numeric);
+
+-- D77 =IF(C4="BAU",0,D56+D68+D70+D73+D76)
+
+    cells_all := cells_all || to_json_null('77_1'::text,case when (cells_all->>'4_0')::numeric = 3 then 0 else
+    (cells_all->>'56_1')::numeric +
+    (cells_all->>'68_1')::numeric +
+    (cells_all->>'70_1')::numeric +
+    (cells_all->>'73_1')::numeric +
+    (cells_all->>'76_1')::numeric end );
+
+-- D79 =262.6*'GDP Deflators'!$G$38
+
+-- D80 =MAX(C31:L31)-C31
+
+    cells_all := cells_all || to_json_null('80_1'::text,
+    greatest((cells_all->>'31_0')::numeric, 
+       (cells_all->>'31_1')::numeric,
+       (cells_all->>'31_2')::numeric,
+       (cells_all->>'31_3')::numeric,
+       (cells_all->>'31_4')::numeric,
+       (cells_all->>'31_5')::numeric,
+       (cells_all->>'31_6')::numeric,
+       (cells_all->>'31_7')::numeric,
+       (cells_all->>'31_8')::numeric,
+       (cells_all->>'31_9')::numeric) - (cells_all->>'31_0')::numeric ); 
+
+-- D81 =IF(C4="BAU",0,D79*D80)
+
+    cells_all := cells_all || to_json_null('81_1'::text,case when (cells_all->>'4_0')::numeric = 3 then 0 else
+    (cells_all->>'79_1')::numeric *
+    (cells_all->>'80_1')::numeric end );
+
+-- D83 =400*'GDP Deflators'!$G$38
+
+-- D85 =MAX(C31:L31)-C31
+
+    cells_all := cells_all || to_json_null('85_1'::text,
+    greatest((cells_all->>'31_0')::numeric, 
+       (cells_all->>'31_1')::numeric,
+       (cells_all->>'31_2')::numeric,
+       (cells_all->>'31_3')::numeric,
+       (cells_all->>'31_4')::numeric,
+       (cells_all->>'31_5')::numeric,
+       (cells_all->>'31_6')::numeric,
+       (cells_all->>'31_7')::numeric,
+       (cells_all->>'31_8')::numeric,
+       (cells_all->>'31_9')::numeric) - (cells_all->>'31_0')::numeric ); 
+
+-- D86 =IF(C4="BAU",0,D83*D84*D85)
+
+    cells_all := cells_all || to_json_null('81_1'::text,case when (cells_all->>'4_0')::numeric = 3 then 0 else
+    (cells_all->>'83_1')::numeric *
+    (cells_all->>'84_1')::numeric *
+    (cells_all->>'85_1')::numeric end );
+
+-- D87 =D77+D81+D86 
+
+    cells_all := cells_all || to_json_null('87_1'::text,
+    (cells_all->>'77_1')::numeric +
+    (cells_all->>'81_1')::numeric +
+    (cells_all->>'86_1')::numeric );
 
 -- 	C91	=IF(C4="SU",200000*'GDP Deflators'!$G$38,0)
 
@@ -318,96 +332,92 @@ cells_all := get_intervention_data_as_json(int_id);
 -- 	C92	=IF(C4="SU",15000,0)
 
 	cells_all := cells_all || to_json_null('92_0'::text,case when (cells_all->>'4_0')::numeric = 1 then 15000 else 0 end);
-	cells_all := cells_all || to_json_null('92_1'::text,case when (cells_all->>'4_1')::numeric = 1 then 15000 else 0 end);
-	cells_all := cells_all || to_json_null('92_2'::text,case when (cells_all->>'4_2')::numeric = 1 then 15000 else 0 end);
-	cells_all := cells_all || to_json_null('92_3'::text,case when (cells_all->>'4_3')::numeric = 1 then 15000 else 0 end);
-	cells_all := cells_all || to_json_null('92_4'::text,case when (cells_all->>'4_4')::numeric = 1 then 15000 else 0 end);
-	cells_all := cells_all || to_json_null('92_5'::text,case when (cells_all->>'4_5')::numeric = 1 then 15000 else 0 end);
-	cells_all := cells_all || to_json_null('92_6'::text,case when (cells_all->>'4_6')::numeric = 1 then 15000 else 0 end);
-	cells_all := cells_all || to_json_null('92_7'::text,case when (cells_all->>'4_7')::numeric = 1 then 15000 else 0 end);
-	cells_all := cells_all || to_json_null('92_8'::text,case when (cells_all->>'4_8')::numeric = 1 then 15000 else 0 end);
-	cells_all := cells_all || to_json_null('92_9'::text,case when (cells_all->>'4_9')::numeric = 1 then 15000 else 0 end);
-
+	
 -- 	C93	=IF(C4="SU",20000,0)
 
 	cells_all := cells_all || to_json_null('93_0'::text,case when (cells_all->>'4_0')::numeric = 1 then 20000 else 0 end);
-	cells_all := cells_all || to_json_null('93_1'::text,case when (cells_all->>'4_1')::numeric = 1 then 20000 else 0 end);
-	cells_all := cells_all || to_json_null('93_2'::text,case when (cells_all->>'4_2')::numeric = 1 then 20000 else 0 end);
-	cells_all := cells_all || to_json_null('93_3'::text,case when (cells_all->>'4_3')::numeric = 1 then 20000 else 0 end);
-	cells_all := cells_all || to_json_null('93_4'::text,case when (cells_all->>'4_4')::numeric = 1 then 20000 else 0 end);
-	cells_all := cells_all || to_json_null('93_5'::text,case when (cells_all->>'4_5')::numeric = 1 then 20000 else 0 end);
-	cells_all := cells_all || to_json_null('93_6'::text,case when (cells_all->>'4_6')::numeric = 1 then 20000 else 0 end);
-	cells_all := cells_all || to_json_null('93_7'::text,case when (cells_all->>'4_7')::numeric = 1 then 20000 else 0 end);
-	cells_all := cells_all || to_json_null('93_8'::text,case when (cells_all->>'4_8')::numeric = 1 then 20000 else 0 end);
-	cells_all := cells_all || to_json_null('93_9'::text,case when (cells_all->>'4_9')::numeric = 1 then 20000 else 0 end);
-
+	
 -- 	C94	=IF(C4="SU", 10000,IF(C4="SC",5000,0))
 
 	cells_all := cells_all || to_json_null('94_0'::text,case when (cells_all->>'4_0')::numeric = 1 then 10000 when (cells_all->>'4_0')::numeric = 2 then 5000 else 0 end);
-	cells_all := cells_all || to_json_null('94_1'::text,case when (cells_all->>'4_1')::numeric = 1 then 10000 when (cells_all->>'4_1')::numeric = 2 then 5000 else 0 end);
-	cells_all := cells_all || to_json_null('94_2'::text,case when (cells_all->>'4_2')::numeric = 1 then 10000 when (cells_all->>'4_2')::numeric = 2 then 5000 else 0 end);
-	cells_all := cells_all || to_json_null('94_3'::text,case when (cells_all->>'4_3')::numeric = 1 then 10000 when (cells_all->>'4_3')::numeric = 2 then 5000 else 0 end);
-	cells_all := cells_all || to_json_null('94_4'::text,case when (cells_all->>'4_4')::numeric = 1 then 10000 when (cells_all->>'4_4')::numeric = 2 then 5000 else 0 end);
-	cells_all := cells_all || to_json_null('94_5'::text,case when (cells_all->>'4_5')::numeric = 1 then 10000 when (cells_all->>'4_5')::numeric = 2 then 5000 else 0 end);
-	cells_all := cells_all || to_json_null('94_6'::text,case when (cells_all->>'4_6')::numeric = 1 then 10000 when (cells_all->>'4_6')::numeric = 2 then 5000 else 0 end);
-	cells_all := cells_all || to_json_null('94_7'::text,case when (cells_all->>'4_7')::numeric = 1 then 10000 when (cells_all->>'4_7')::numeric = 2 then 5000 else 0 end);
-	cells_all := cells_all || to_json_null('94_8'::text,case when (cells_all->>'4_8')::numeric = 1 then 10000 when (cells_all->>'4_8')::numeric = 2 then 5000 else 0 end);
-	cells_all := cells_all || to_json_null('94_9'::text,case when (cells_all->>'4_9')::numeric = 1 then 10000 when (cells_all->>'4_9')::numeric = 2 then 5000 else 0 end);
-
+	
 -- 	C95	=SUM(C91:C94)
 
 	cells_all := cells_all || to_json_null('95_0'::text,(cells_all->>'91_0')::numeric + (cells_all->>'92_0')::numeric + (cells_all->>'93_0')::numeric + (cells_all->>'94_0')::numeric);
-	cells_all := cells_all || to_json_null('95_1'::text,(cells_all->>'91_1')::numeric + (cells_all->>'92_1')::numeric + (cells_all->>'93_1')::numeric + (cells_all->>'94_1')::numeric);
-	cells_all := cells_all || to_json_null('95_2'::text,(cells_all->>'91_2')::numeric + (cells_all->>'92_2')::numeric + (cells_all->>'93_2')::numeric + (cells_all->>'94_2')::numeric);
-	cells_all := cells_all || to_json_null('95_3'::text,(cells_all->>'91_3')::numeric + (cells_all->>'92_3')::numeric + (cells_all->>'93_3')::numeric + (cells_all->>'94_3')::numeric);
-	cells_all := cells_all || to_json_null('95_4'::text,(cells_all->>'91_4')::numeric + (cells_all->>'92_4')::numeric + (cells_all->>'93_4')::numeric + (cells_all->>'94_4')::numeric);
-	cells_all := cells_all || to_json_null('95_5'::text,(cells_all->>'91_5')::numeric + (cells_all->>'92_5')::numeric + (cells_all->>'93_5')::numeric + (cells_all->>'94_5')::numeric);
-	cells_all := cells_all || to_json_null('95_6'::text,(cells_all->>'91_6')::numeric + (cells_all->>'92_6')::numeric + (cells_all->>'93_6')::numeric + (cells_all->>'94_6')::numeric);
-	cells_all := cells_all || to_json_null('95_7'::text,(cells_all->>'91_7')::numeric + (cells_all->>'92_7')::numeric + (cells_all->>'93_7')::numeric + (cells_all->>'94_7')::numeric);
-	cells_all := cells_all || to_json_null('95_8'::text,(cells_all->>'91_8')::numeric + (cells_all->>'92_8')::numeric + (cells_all->>'93_8')::numeric + (cells_all->>'94_8')::numeric);
-	cells_all := cells_all || to_json_null('95_9'::text,(cells_all->>'91_9')::numeric + (cells_all->>'92_9')::numeric + (cells_all->>'93_9')::numeric + (cells_all->>'94_9')::numeric);
-	
-	
     
+-- D98 =IF(C4="SU",IF(C13>0,D43+1+1,0),0)
+
+    cells_all := cells_all || to_json_null('98_1'::text,
+    case when (cells_all->>'4_0')::numeric = 1 then 
+        case when (cells_all->>'13_0')::numeric > 0 then (cells_all->>'43_1')::numeric + 1 + 1 else 0 end
+    else 0 end);
+
+-- D100 =IF(C4="SU",IF(OR(C6>0,C7>0,C8>0,C8>0,C9>0),D43+1+1,0),0)
+
+    cells_all := cells_all || to_json_null('100_1'::text,
+    case when (cells_all->>'4_0')::numeric = 1 then 
+        case when 
+            (cells_all->>'6_0')::numeric > 0 or   
+            (cells_all->>'7_0')::numeric > 0 or 
+            (cells_all->>'8_0')::numeric > 0 or 
+            (cells_all->>'9_0')::numeric > 0 
+        then (cells_all->>'43_1')::numeric + 1 + 1 else 0 end
+    else 0 end);
+
+-- D102 =D100
+
+    cells_all := cells_all || to_json_null('102_1'::text, (cells_all->>'100_1')::numeric);
+
+-- D103 =D97*D98+D99*D100+D101*D102
+
+    cells_all := cells_all || to_json_null('103_1'::text, 
+   (cells_all->>'97_1')::numeric * 
+   (cells_all->>'98_1')::numeric + 
+   (cells_all->>'99_1')::numeric * 
+   (cells_all->>'100_1')::numeric +
+   (cells_all->>'101_1')::numeric *
+   (cells_all->>'102_1')::numeric   );
+
+-- D105 =D103*D104
+
+    cells_all := cells_all || to_json_null('105_1'::text, 
+   (cells_all->>'103_1')::numeric * 
+   (cells_all->>'104_1')::numeric );
+
+-- D106 =D103+D105   
+
+    cells_all := cells_all || to_json_null('106_1'::text, 
+   (cells_all->>'103_1')::numeric +
+   (cells_all->>'105_1')::numeric );
+
 -- 	C108	=IF(C4="BAU",0,IF(C4="SU",50000,25000))
 
 	cells_all := cells_all || to_json_null('108_0'::text,case when (cells_all->>'4_0')::numeric = 3 then 0 when (cells_all->>'4_0')::numeric = 1 then  50000 else 25000 end);
 	cells_all := cells_all || to_json_null('108_1'::text,case when (cells_all->>'4_1')::numeric = 3 then 0 when (cells_all->>'4_1')::numeric = 1 then  50000 else 25000 end);
-	cells_all := cells_all || to_json_null('108_2'::text,case when (cells_all->>'4_2')::numeric = 3 then 0 when (cells_all->>'4_2')::numeric = 1 then  50000 else 25000 end);
-	cells_all := cells_all || to_json_null('108_3'::text,case when (cells_all->>'4_3')::numeric = 3 then 0 when (cells_all->>'4_3')::numeric = 1 then  50000 else 25000 end);
-	cells_all := cells_all || to_json_null('108_4'::text,case when (cells_all->>'4_4')::numeric = 3 then 0 when (cells_all->>'4_4')::numeric = 1 then  50000 else 25000 end);
-	cells_all := cells_all || to_json_null('108_5'::text,case when (cells_all->>'4_5')::numeric = 3 then 0 when (cells_all->>'4_5')::numeric = 1 then  50000 else 25000 end);
-	cells_all := cells_all || to_json_null('108_6'::text,case when (cells_all->>'4_6')::numeric = 3 then 0 when (cells_all->>'4_6')::numeric = 1 then  50000 else 25000 end);
-	cells_all := cells_all || to_json_null('108_7'::text,case when (cells_all->>'4_7')::numeric = 3 then 0 when (cells_all->>'4_7')::numeric = 1 then  50000 else 25000 end);
-	cells_all := cells_all || to_json_null('108_8'::text,case when (cells_all->>'4_8')::numeric = 3 then 0 when (cells_all->>'4_8')::numeric = 1 then  50000 else 25000 end);
-	cells_all := cells_all || to_json_null('108_9'::text,case when (cells_all->>'4_9')::numeric = 3 then 0 when (cells_all->>'4_9')::numeric = 1 then  50000 else 25000 end);
+	
 
 -- 	C109	=C108
 
     cells_all := cells_all || to_json_null('109_0'::text,(cells_all->>'108_0')::numeric);
 	cells_all := cells_all || to_json_null('109_1'::text,(cells_all->>'108_1')::numeric);
-	cells_all := cells_all || to_json_null('109_2'::text,(cells_all->>'108_2')::numeric);
-	cells_all := cells_all || to_json_null('109_3'::text,(cells_all->>'108_3')::numeric);
-	cells_all := cells_all || to_json_null('109_4'::text,(cells_all->>'108_4')::numeric);
-	cells_all := cells_all || to_json_null('109_5'::text,(cells_all->>'108_5')::numeric);
-	cells_all := cells_all || to_json_null('109_6'::text,(cells_all->>'108_6')::numeric);
-	cells_all := cells_all || to_json_null('109_7'::text,(cells_all->>'108_7')::numeric);
-	cells_all := cells_all || to_json_null('109_8'::text,(cells_all->>'108_8')::numeric);
-	cells_all := cells_all || to_json_null('109_9'::text,(cells_all->>'108_9')::numeric);
+    
+-- D111 =4000*'GDP Deflators'!$G$38
+
+-- D112 =IF(C4="BAU",0,4)
+
+    cells_all := cells_all || to_json_null('112_1'::text,case when (cells_all->>'4_0')::numeric = 3 then 0 else 4 end);
+
+-- D113 =D111*D112
+
+    cells_all := cells_all || to_json_null('113_1'::text, 
+   (cells_all->>'111_1')::numeric *
+   (cells_all->>'112_1')::numeric );
 
 -- 	C114	=C95+C106+C109+C113
 
 	cells_all := cells_all || to_json_null('114_0'::text,(cells_all->>'95_0')::numeric + (cells_all->>'106_0')::numeric + (cells_all->>'109_0')::numeric + (cells_all->>'113_0')::numeric);
 	cells_all := cells_all || to_json_null('114_1'::text,(cells_all->>'95_1')::numeric + (cells_all->>'106_1')::numeric + (cells_all->>'109_1')::numeric + (cells_all->>'113_1')::numeric);
-	cells_all := cells_all || to_json_null('114_2'::text,(cells_all->>'95_2')::numeric + (cells_all->>'106_2')::numeric + (cells_all->>'109_2')::numeric + (cells_all->>'113_2')::numeric);
-	cells_all := cells_all || to_json_null('114_3'::text,(cells_all->>'95_3')::numeric + (cells_all->>'106_3')::numeric + (cells_all->>'109_3')::numeric + (cells_all->>'113_3')::numeric);
-	cells_all := cells_all || to_json_null('114_4'::text,(cells_all->>'95_4')::numeric + (cells_all->>'106_4')::numeric + (cells_all->>'109_4')::numeric + (cells_all->>'113_4')::numeric);
-	cells_all := cells_all || to_json_null('114_5'::text,(cells_all->>'95_5')::numeric + (cells_all->>'106_5')::numeric + (cells_all->>'109_5')::numeric + (cells_all->>'113_5')::numeric);
-	cells_all := cells_all || to_json_null('114_6'::text,(cells_all->>'95_6')::numeric + (cells_all->>'106_6')::numeric + (cells_all->>'109_6')::numeric + (cells_all->>'113_6')::numeric);
-	cells_all := cells_all || to_json_null('114_7'::text,(cells_all->>'95_7')::numeric + (cells_all->>'106_7')::numeric + (cells_all->>'109_7')::numeric + (cells_all->>'113_7')::numeric);
-	cells_all := cells_all || to_json_null('114_8'::text,(cells_all->>'95_8')::numeric + (cells_all->>'106_8')::numeric + (cells_all->>'109_8')::numeric + (cells_all->>'113_8')::numeric);
-	cells_all := cells_all || to_json_null('114_9'::text,(cells_all->>'95_9')::numeric + (cells_all->>'106_9')::numeric + (cells_all->>'109_9')::numeric + (cells_all->>'113_9')::numeric);
-
+	
 -- 	C118	='Premix - wheat flour'!I35
 -- 	C120	='National Data'!B17                    TODO
 -- 	C121	='National Data'!B12
@@ -1068,18 +1078,19 @@ cells_all := get_intervention_data_as_json(int_id);
 	cells_all := cells_all || to_json_null('227_8'::text,case when (cells_all->>'4_8')::numeric = 3 then (cells_all->>'226_8')::numeric else 0 end);
 	cells_all := cells_all || to_json_null('227_9'::text,case when (cells_all->>'4_9')::numeric = 3 then (cells_all->>'226_9')::numeric else 0 end);
 
--- 	C231	=IF(C4="BAU",C229*C230,0)
+-- 	C231 =IF(C4="BAU",C229*C230,0)	D231 =IF(D4="BAU",D229*D230,0)	E231 =E229*E230	F231 =F229*F230	G231 =G229*G230
 
 	cells_all := cells_all || to_json_null('231_0'::text,case when (cells_all->>'4_0')::numeric = 3 then (cells_all->>'229_0')::numeric * (cells_all->>'230_0')::numeric else 0 end);
 	cells_all := cells_all || to_json_null('231_1'::text,case when (cells_all->>'4_1')::numeric = 3 then (cells_all->>'229_1')::numeric * (cells_all->>'230_1')::numeric else 0 end);
-	cells_all := cells_all || to_json_null('231_2'::text,case when (cells_all->>'4_2')::numeric = 3 then (cells_all->>'229_2')::numeric * (cells_all->>'230_2')::numeric else 0 end);
-	cells_all := cells_all || to_json_null('231_3'::text,case when (cells_all->>'4_3')::numeric = 3 then (cells_all->>'229_3')::numeric * (cells_all->>'230_3')::numeric else 0 end);
-	cells_all := cells_all || to_json_null('231_4'::text,case when (cells_all->>'4_4')::numeric = 3 then (cells_all->>'229_4')::numeric * (cells_all->>'230_4')::numeric else 0 end);
-	cells_all := cells_all || to_json_null('231_5'::text,case when (cells_all->>'4_5')::numeric = 3 then (cells_all->>'229_5')::numeric * (cells_all->>'230_5')::numeric else 0 end);
-	cells_all := cells_all || to_json_null('231_6'::text,case when (cells_all->>'4_6')::numeric = 3 then (cells_all->>'229_6')::numeric * (cells_all->>'230_6')::numeric else 0 end);
-	cells_all := cells_all || to_json_null('231_7'::text,case when (cells_all->>'4_7')::numeric = 3 then (cells_all->>'229_7')::numeric * (cells_all->>'230_7')::numeric else 0 end);
-	cells_all := cells_all || to_json_null('231_8'::text,case when (cells_all->>'4_8')::numeric = 3 then (cells_all->>'229_8')::numeric * (cells_all->>'230_8')::numeric else 0 end);
-	cells_all := cells_all || to_json_null('231_9'::text,case when (cells_all->>'4_9')::numeric = 3 then (cells_all->>'229_9')::numeric * (cells_all->>'230_9')::numeric else 0 end);
+    
+	cells_all := cells_all || to_json_null('231_2'::text, (cells_all->>'229_2')::numeric * (cells_all->>'230_2')::numeric);
+	cells_all := cells_all || to_json_null('231_3'::text, (cells_all->>'229_3')::numeric * (cells_all->>'230_3')::numeric);
+	cells_all := cells_all || to_json_null('231_4'::text, (cells_all->>'229_4')::numeric * (cells_all->>'230_4')::numeric);
+	cells_all := cells_all || to_json_null('231_5'::text, (cells_all->>'229_5')::numeric * (cells_all->>'230_5')::numeric);
+	cells_all := cells_all || to_json_null('231_6'::text, (cells_all->>'229_6')::numeric * (cells_all->>'230_6')::numeric);
+	cells_all := cells_all || to_json_null('231_7'::text, (cells_all->>'229_7')::numeric * (cells_all->>'230_7')::numeric);
+	cells_all := cells_all || to_json_null('231_8'::text, (cells_all->>'229_8')::numeric * (cells_all->>'230_8')::numeric);
+	cells_all := cells_all || to_json_null('231_9'::text, (cells_all->>'229_9')::numeric * (cells_all->>'230_9')::numeric);
 
 -- 	C234	=C233*(C192+C206+C220+C224)
 
@@ -1124,40 +1135,17 @@ cells_all := get_intervention_data_as_json(int_id);
 
 	cells_all := cells_all || to_json_null('246_0'::text, (cells_all->>'87_0')::numeric);
 	cells_all := cells_all || to_json_null('246_1'::text, (cells_all->>'87_1')::numeric);
-	cells_all := cells_all || to_json_null('246_2'::text, (cells_all->>'87_2')::numeric);
-	cells_all := cells_all || to_json_null('246_3'::text, (cells_all->>'87_3')::numeric);
-	cells_all := cells_all || to_json_null('246_4'::text, (cells_all->>'87_4')::numeric);
-	cells_all := cells_all || to_json_null('246_5'::text, (cells_all->>'87_5')::numeric);
-	cells_all := cells_all || to_json_null('246_6'::text, (cells_all->>'87_6')::numeric);
-	cells_all := cells_all || to_json_null('246_7'::text, (cells_all->>'87_7')::numeric);
-	cells_all := cells_all || to_json_null('246_8'::text, (cells_all->>'87_8')::numeric);
-	cells_all := cells_all || to_json_null('246_9'::text, (cells_all->>'87_9')::numeric);
 
 -- 	C247	=C114
 
 	cells_all := cells_all || to_json_null('247_0'::text, (cells_all->>'114_0')::numeric);
 	cells_all := cells_all || to_json_null('247_1'::text, (cells_all->>'114_1')::numeric);
-	cells_all := cells_all || to_json_null('247_2'::text, (cells_all->>'114_2')::numeric);
-	cells_all := cells_all || to_json_null('247_3'::text, (cells_all->>'114_3')::numeric);
-	cells_all := cells_all || to_json_null('247_4'::text, (cells_all->>'114_4')::numeric);
-	cells_all := cells_all || to_json_null('247_5'::text, (cells_all->>'114_5')::numeric);
-	cells_all := cells_all || to_json_null('247_6'::text, (cells_all->>'114_6')::numeric);
-	cells_all := cells_all || to_json_null('247_7'::text, (cells_all->>'114_7')::numeric);
-	cells_all := cells_all || to_json_null('247_8'::text, (cells_all->>'114_8')::numeric);
-	cells_all := cells_all || to_json_null('247_9'::text, (cells_all->>'114_9')::numeric);
+	
 
 -- 	C248	=C246+C247
 
     cells_all := cells_all || to_json_null('248_0'::text, (cells_all->>'246_0')::numeric + (cells_all->>'247_0')::numeric);
 	cells_all := cells_all || to_json_null('248_1'::text, (cells_all->>'246_1')::numeric + (cells_all->>'247_1')::numeric);
-	cells_all := cells_all || to_json_null('248_2'::text, (cells_all->>'246_2')::numeric + (cells_all->>'247_2')::numeric);
-	cells_all := cells_all || to_json_null('248_3'::text, (cells_all->>'246_3')::numeric + (cells_all->>'247_3')::numeric);
-	cells_all := cells_all || to_json_null('248_4'::text, (cells_all->>'246_4')::numeric + (cells_all->>'247_4')::numeric);
-	cells_all := cells_all || to_json_null('248_5'::text, (cells_all->>'246_5')::numeric + (cells_all->>'247_5')::numeric);
-	cells_all := cells_all || to_json_null('248_6'::text, (cells_all->>'246_6')::numeric + (cells_all->>'247_6')::numeric);
-	cells_all := cells_all || to_json_null('248_7'::text, (cells_all->>'246_7')::numeric + (cells_all->>'247_7')::numeric);
-	cells_all := cells_all || to_json_null('248_8'::text, (cells_all->>'246_8')::numeric + (cells_all->>'247_8')::numeric);
-	cells_all := cells_all || to_json_null('248_9'::text, (cells_all->>'246_9')::numeric + (cells_all->>'247_9')::numeric);
 
 -- 	C250	=C137
 
@@ -1243,7 +1231,7 @@ cells_all := get_intervention_data_as_json(int_id);
     cells_all := cells_all || to_json_null('259_0'::text, (cells_all->>'256_0')::numeric + (cells_all->>'256_1')::numeric + (cells_all->>'256_2')::numeric + (cells_all->>'256_3')::numeric
                      + (cells_all->>'256_4')::numeric + (cells_all->>'256_5')::numeric + (cells_all->>'256_6')::numeric + (cells_all->>'256_7')::numeric
                      + (cells_all->>'256_8')::numeric + (cells_all->>'256_9')::numeric);
-
+                    
 -- 	C260	='National Data'!B9
 
 -- 	C263	=PV($C$260,C$262,0,C256)*-1
@@ -1268,6 +1256,8 @@ cells_all := get_intervention_data_as_json(int_id);
                      + (cells_all->>'263_8')::numeric + (cells_all->>'263_9')::numeric);
 
 -- Raise Notice'2.cells_all: %',cells_all;
+
+-- 259, 263, 265
 
 delete from intervention_data_json
 where intervention_id = int_id;

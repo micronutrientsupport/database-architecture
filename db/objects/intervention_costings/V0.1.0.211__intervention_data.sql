@@ -23,7 +23,7 @@ year_9              numeric,
 notes               text
 );
 
-COMMENT on table intervention_data is 'Table to store data directly loaded from excel spreadsheet intervetnion costing models';
+COMMENT on table intervention_data is 'Table to store data directly loaded from excel spreadsheet intervention costing models';
 
 COMMENT ON COLUMN intervention_data.row_index     IS 'The row number of the data as it was in the excel spreadsheet e.g. cell B11 would have row_index = 11';
 COMMENT ON COLUMN intervention_data.row_name      IS 'a script-friendly name for a row that is the same for all food vehicles of a given intervetnion type e.g. Large-Scale Food Fortification (LSFF) will have "number_domestic_factories" for both wheat flour interventions and oil interventions, even though the factor_text is different ("Number of domestic industrial mills (capacity of > 20 MT/day)" vs. "Number of domstic industrial edible oil refineries (capacity of > 5 MT/day)") ';

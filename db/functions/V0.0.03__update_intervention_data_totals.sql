@@ -14,6 +14,8 @@ cells_all jsonb;
 
 test1 integer;
 
+num_var numeric;
+
 begin
 	
 cells_all := get_intervention_data_as_json(int_id);
@@ -495,14 +497,26 @@ cells_all := cells_all || to_json_null('87_1'::text,
 		
 -- C120	D120 ='Premix - wheat flour'!I34	E120 =D120	F120 =E120	G120 =F120	H120 =G120
 
+	select "Total cost per MT of fortified food vehicle" into num_var from fortificant_amount_totals where intervention_id = int_id;
+
+	for i in 0 .. 9 loop -- ' || i
+    
+        cells_all := cells_all || to_json_null('120_' || i::text,
+        num_var);
+    
+    end loop;
+
+
 -- C121		E121 =D121	F121 =E121	G121 =F121	H121 =G121
 -- C122	D122 ='National Data'!B17	E122 =D122	F122 =E122	G122 =F122	H122 =G122
 -- C123	D123 ='National Data'!B12	E123 =D123	F123 =E123	G123 =F123	H123 =G123
 -- C124		E124 =D124	F124 =E124	G124 =F124	H124 =G124
 
 -- C125	D125 =D120*(1+D121+D122+D123)+(D124*'Premix - wheat flour'!$F$30)/100	E125 =E120*(1+E121+E122+E123)+(E124*'Premix - wheat flour'!$F$30)/100	F125 =F120*(1+F121+F122+F123)+(F124*'Premix - wheat flour'!$F$30)/100	G125 =G120*(1+G121+G122+G123)+(G124*'Premix - wheat flour'!$F$30)/100	H125 =H120*(1+H121+H122+H123)+(H124*'Premix - wheat flour'!$F$30)/100
-/*
-    for i in 0 .. 9 loop -- ' || i
+
+	select "Addition Rate" into num_var from fortificant_amount_totals where intervention_id = int_id;
+
+	for i in 0 .. 9 loop -- ' || i
     
         cells_all := cells_all || to_json_null('125_' || i::text,
       		(cells_all->>('120_' || i)::text)::numeric * 
@@ -510,11 +524,9 @@ cells_all := cells_all || to_json_null('87_1'::text,
             (cells_all->>('122_' || i)::text)::numeric + 
             (cells_all->>('123_' || i)::text)::numeric) + 
             ((cells_all->>('124_' || i)::text)::numeric *
-            --'Premix - wheat flour'!$F$30)/100
+            num_var)
             );
-    
     end loop;
-*/
 
 -- C126		E126 =D126	F126 =E126	G126 =F126	H126 =G126
 -- C127	D127 =D27	E127 =E27	F127 =F27	G127 =G27	H127 =H27

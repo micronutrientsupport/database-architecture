@@ -4,9 +4,13 @@ AS $$
 
 declare 
 
-cells_all jsonb;
+/*
+This funtion takes the intervention costing data from the table columns and 
+converts them into a single json object of key-value pairs
+for easier reference by the next function which recalculates the values.
+*/
 
-calc_val numeric;
+cells_all jsonb;
 
 data_cur cursor for
 select * from intervention_data
@@ -19,7 +23,7 @@ begin
 	for data_rec in data_cur loop
 			
 		-- null in postgres and null in json are slightly differnt so need precise handling. Coelesce didn't work.
-
+   
 			cells_all := cells_all || to_json_null(data_rec.row_index || '_0', data_rec.year_0);
 			cells_all := cells_all || to_json_null(data_rec.row_index || '_1', data_rec.year_1);
 			cells_all := cells_all || to_json_null(data_rec.row_index || '_2', data_rec.year_2);

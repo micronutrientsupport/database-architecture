@@ -7,6 +7,14 @@ AS
 $$
 declare 
 
+/* 
+This function takes a json key name and proposed value
+and if the value is null, converts it into a proper json null
+otherwise it returns the value
+both as json in a key-value pair, ready to append to
+another json object without rendering the whole thing null.
+*/
+
 test_jsonb text;
 
 begin

@@ -25,5 +25,6 @@ VALUES
     (0.3   , 'D'          , 'D-3  100 , 000 IU/g (dry)'),
     (23.0  , 'E'          , 'all rac-a-tocopheryl acetate (dry)'),
     (59.0  , 'I'          , 'Potassium iodate'),
-    (76.0  , 'I'          , 'Potassium iodide (for refined salt)')
+    (76.0  , 'I'          , 'Potassium iodide (for refined salt)'),
+    (null  , null         , 'Excipient/filler')
 

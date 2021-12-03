@@ -5,11 +5,11 @@ SELECT
     , micronutrient.id as micronutrient
    	, impact_scenario.id as scenario
     , intake_threshold.rda as recommended
-    , interpolate_impact_year.reference_val / 365 as daily_reference_val
+    , interpolate_impact_year.reference_val as daily_reference_val
     , interpolate_impact_year.reference_year
     , interpolate_impact_year.intersect_year
 	, -1 * round(
-			((intake_threshold.rda - (interpolate_impact_year.reference_val / 365)) / intake_threshold.rda) * 100,
+			((intake_threshold.rda - (interpolate_impact_year.reference_val)) / intake_threshold.rda) * 100,
 		2
 	) as difference
 FROM

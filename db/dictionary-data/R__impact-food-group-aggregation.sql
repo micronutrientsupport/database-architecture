@@ -8,7 +8,7 @@ CREATE MATERIALIZED VIEW impact_food_group_aggregation as
         , scenario
         , food_group
         , year
-        , calcium AS value
+        , calcium / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(calcium) as calcium, row_number() OVER (
@@ -27,7 +27,7 @@ CREATE MATERIALIZED VIEW impact_food_group_aggregation as
         , scenario
         , 'Other' as food_group
         , year
-        , sum(calcium) AS value
+        , sum(calcium) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(calcium) as calcium, row_number() OVER (
@@ -48,7 +48,7 @@ UNION
         , scenario
         , food_group
         , year
-        , folate AS value
+        , folate / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(folate) as folate, row_number() OVER (
@@ -67,7 +67,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(folate) AS value
+        , sum(folate) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(folate) as folate, row_number() OVER (
@@ -88,7 +88,7 @@ UNION
         , scenario
         , food_group
         , year
-        , iron AS value
+        , iron / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(iron) as iron, row_number() OVER (
@@ -107,7 +107,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(iron) AS value
+        , sum(iron) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(iron) as iron, row_number() OVER (
@@ -128,7 +128,7 @@ UNION
         , scenario
         , food_group
         , year
-        , magnesium AS value
+        , magnesium / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(magnesium) as magnesium, row_number() OVER (
@@ -147,7 +147,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(magnesium) AS value
+        , sum(magnesium) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(magnesium) as magnesium, row_number() OVER (
@@ -168,7 +168,7 @@ UNION
         , scenario
         , food_group
         , year
-        , niacin AS value
+        , niacin / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(niacin) as niacin, row_number() OVER (
@@ -187,7 +187,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(niacin) AS value
+        , sum(niacin) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(niacin) as niacin, row_number() OVER (
@@ -208,7 +208,7 @@ UNION
         , scenario
         , food_group
         , year
-        , phosphorus AS value
+        , phosphorus / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(phosphorus) as phosphorus, row_number() OVER (
@@ -227,7 +227,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(phosphorus) AS value
+        , sum(phosphorus) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(phosphorus) as phosphorus, row_number() OVER (
@@ -248,7 +248,7 @@ UNION
         , scenario
         , food_group
         , year
-        , potassium AS value
+        , potassium / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(potassium) as potassium, row_number() OVER (
@@ -267,7 +267,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(potassium) AS value
+        , sum(potassium) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(potassium) as potassium, row_number() OVER (
@@ -288,7 +288,7 @@ UNION
         , scenario
         , food_group
         , year
-        , protein AS value
+        , protein / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(protein) as protein, row_number() OVER (
@@ -307,7 +307,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(protein) AS value
+        , sum(protein) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(protein) as protein, row_number() OVER (
@@ -328,7 +328,7 @@ UNION
         , scenario
         , food_group
         , year
-        , riboflavin AS value
+        , riboflavin / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(riboflavin) as riboflavin, row_number() OVER (
@@ -347,7 +347,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(riboflavin) AS value
+        , sum(riboflavin) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(riboflavin) as riboflavin, row_number() OVER (
@@ -368,7 +368,7 @@ UNION
         , scenario
         , food_group
         , year
-        , thiamin AS value
+        , thiamin / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(thiamin) as thiamin, row_number() OVER (
@@ -387,7 +387,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(thiamin) AS value
+        , sum(thiamin) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(thiamin) as thiamin, row_number() OVER (
@@ -408,7 +408,7 @@ UNION
         , scenario
         , food_group
         , year
-        , vit_a AS value
+        , vit_a / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(vit_a) as vit_a, row_number() OVER (
@@ -427,7 +427,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(vit_a) AS value
+        , sum(vit_a) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(vit_a) as vit_a, row_number() OVER (
@@ -448,7 +448,7 @@ UNION
         , scenario
         , food_group
         , year
-        , vit_b6 AS value
+        , vit_b6 / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(vit_b6) as vit_b6, row_number() OVER (
@@ -467,7 +467,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(vit_b6) AS value
+        , sum(vit_b6) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(vit_b6) as vit_b6, row_number() OVER (
@@ -488,7 +488,7 @@ UNION
         , scenario
         , food_group
         , year
-        , vit_c AS value
+        , vit_c / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(vit_c) as vit_c, row_number() OVER (
@@ -507,7 +507,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(vit_c) AS value
+        , sum(vit_c) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(vit_c) as vit_c, row_number() OVER (
@@ -528,7 +528,7 @@ UNION
         , scenario
         , food_group
         , year
-        , zinc AS value
+        , zinc / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(zinc) as zinc, row_number() OVER (
@@ -547,7 +547,7 @@ UNION
         , scenario
         , 'Other' as food_group
         , year
-        , sum(zinc) AS value
+        , sum(zinc) / 365 AS value
         , 6 as rank 
         FROM (
             SELECT year, scenario, food_group.name as food_group, country, sum(zinc) as zinc, row_number() OVER (

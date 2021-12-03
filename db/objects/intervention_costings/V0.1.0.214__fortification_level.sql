@@ -12,10 +12,13 @@ CREATE TABLE fortification_level(
 )
 ;
 
-COMMENT ON TABLE fortification_level IS '';
-COMMENT ON COLUMN fortification_level.fortificant_proportion IS 'What percentage of the premix this fortificant makes up';
-COMMENT ON COLUMN fortification_level.fortificant_amount is 'in mg/kg of food vehicle';
--- COMMENT ON COLUMN fortification_level.fortifiable_percentage IS 'The percentage of the food vehicle (e.g. wheat flour, oil, etc) that is in the food system i.e. commercially produced and transported and thus available for monitoring and modification, as opposed to e.g. homegrown. The percent of e.g. wheat flour that is milled on and insdustrial scale.';
--- COMMENT ON COLUMN fortification_level.fortified_percentage IS 'The percentage of the food vehicle (e.g. wheat flour, oil, etc.) out of the potentially fortifiable food vehicle (see fortifiable_percentage) that is actually fortified';
+COMMENT ON TABLE fortification_level IS 'Stores fortification levels, costs and amounts per intervention';
 
-
+COMMENT ON COLUMN fortification_level.intervention_id         IS 'For which intervention these fortification levels apply';
+COMMENT ON COLUMN fortification_level.fortificant_id          IS 'Which fortificant this is';
+COMMENT ON COLUMN fortification_level.year                    IS 'For which year these fortification levels apply';
+COMMENT ON COLUMN fortification_level.fortificant_amount      IS 'in mg/kg of food vehicle';
+COMMENT ON COLUMN fortification_level.fortificant_proportion  IS 'What proprotion of the premix this fortificant makes up';
+COMMENT ON COLUMN fortification_level.fortificant_price       IS 'The price of the fortificant, in US Dollars per kilogram';
+COMMENT ON COLUMN fortification_level.target_level            IS 'The target micronutrient level (or government standard) in milligrams per kilogram';
+COMMENT ON COLUMN fortification_level.actual_level            IS 'The actual micronutrient level as measured empirically, if substantially different from the target micronutrient level. This could be the case e.g. if fortification at the factories is not carried out effectively.';

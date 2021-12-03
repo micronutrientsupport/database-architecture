@@ -496,8 +496,10 @@ cells_all := cells_all || to_json_null('87_1'::text,
 (cells_all->>'115_1')::numeric);
 		
 -- C120	D120 ='Premix - wheat flour'!I34	E120 =D120	F120 =E120	G120 =F120	H120 =G120
+-- I33=I31 +I32 (which is just 1)
+-- I34=(I33*F30)/1000
 
-	select "Total cost per MT of fortified food vehicle" into num_var from fortificant_amount_totals where intervention_id = int_id;
+	select (("Premix cost" + 1) * "Addition Rate") /1000  into num_var from fortificant_amount_totals where intervention_id =  int_id;
 
 	for i in 0 .. 9 loop -- ' || i
     
@@ -524,7 +526,7 @@ cells_all := cells_all || to_json_null('87_1'::text,
             (cells_all->>('122_' || i)::text)::numeric + 
             (cells_all->>('123_' || i)::text)::numeric) + 
             ((cells_all->>('124_' || i)::text)::numeric *
-            num_var)
+            num_var)/100
             );
     end loop;
 
@@ -1196,10 +1198,16 @@ cells_all := cells_all || to_json_null('87_1'::text,
 
 -- C258	D258 =D250+D256	E258 =E250+E256	F258 =F250+F256	G258 =G250+G256	H258 =H250+H256
 
-    for i in 0 .. 9 loop -- ' || i
+    for i in 0 .. 1 loop -- ' || i
     
       cells_all := cells_all || to_json_null('258_' || i::text, 
       (cells_all->>('250_' || i)::text)::numeric + 
+      (cells_all->>('256_' || i)::text)::numeric);
+	
+    end loop;
+    for i in 2 .. 9 loop -- ' || i
+    
+      cells_all := cells_all || to_json_null('258_' || i::text, 
       (cells_all->>('256_' || i)::text)::numeric);
 	
     end loop;

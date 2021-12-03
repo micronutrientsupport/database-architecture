@@ -30,12 +30,12 @@ cells_all := get_intervention_data_as_json(int_id);
  	from intervention_data_json
  	where intervention_id = int_id;
   
- 	if (round(i.value::numeric,2) <> round(value_2::numeric,2))
+ 	if (round(i.value::numeric) <> round(value_2::numeric))
  	or (i.value is null and value_2 is not null)
  	or (i.value is not null and value_2 is null) then
 	    RAISE NOTICE 'key %', i.key;
-	    RAISE NOTICE 'value 1: %', i.value;
-	   	RAISE NOTICE 'value 2: %', value_2;
+	    RAISE NOTICE 'Original value: %', i.value;
+	   	RAISE NOTICE 'Calculated value: %', value_2;
 	end if;
 
   END LOOP;

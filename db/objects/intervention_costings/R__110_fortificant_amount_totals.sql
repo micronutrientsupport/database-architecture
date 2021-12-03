@@ -18,12 +18,9 @@ b.fortificant_price as "Excipient/filler price", -- H28
 ((ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50) - sum(fortificant_amount)) *(1/(ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50)) * b.fortificant_price as "Excipient/filler cost", -- I28
 --
 sum(a.fortificant_proportion * a.fortificant_price) + 
-(((ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50) - sum(fortificant_amount)) *(1/(ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50)) * b.fortificant_price) as "Premix cost", -- I31
+(((ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50) - sum(fortificant_amount)) *(1/(ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50)) * b.fortificant_price) as "Premix cost" -- I31
 -- I33=I31 +I32 (which is just 1)
 -- I34=(I33*F30)/1000
-(sum(a.fortificant_proportion * a.fortificant_price) + 
-((((ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50) - sum(fortificant_amount)) *(1/(ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50)) * b.fortificant_price)) +1
-* ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50) /1000 as "Total cost per MT of fortified food vehicle" -- I34
 
 from fortification_level a,
 (select fortificant_price, intervention_id from fortification_level where fortificant_id = 22) b 

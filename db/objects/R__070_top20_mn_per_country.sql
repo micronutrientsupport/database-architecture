@@ -23,7 +23,7 @@ FROM (
 			, cc.data_source_id
 			, mn.mn_name
 			, fi.food_genus_id
-			, sum( (mn.mn_value / 100 * amount_consumed_in_g) ) / 365  AS mn_consumed_per_day
+			, sum( (mn.mn_value / 100 * amount_consumed_in_g) )  AS mn_consumed_per_day
 		FROM food_genus_nutrients fi
 		CROSS JOIN LATERAL (
 			VALUES

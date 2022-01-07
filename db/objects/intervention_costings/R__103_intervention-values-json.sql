@@ -40,7 +40,7 @@ SELECT
             intervention_data.row_index
     ) AS data
 FROM
-    bmgf.intervention_data
+    intervention_data
 WHERE
     intervention_data.header1 IS NOT NULL
 GROUP BY

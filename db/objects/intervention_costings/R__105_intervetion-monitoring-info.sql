@@ -6,7 +6,7 @@ or replace AGGREGATE jsonb_object_aggregate(jsonb) (
 );
 
 CREATE
-OR REPLACE view intervention_industry_information AS with h2_agg as (
+OR REPLACE view intervention_monitoring_information AS with h2_agg as (
     select
         intervention_id,
         header1,
@@ -41,4 +41,4 @@ from
 where
     section = 'Program monitoring information';
 
-comment ON view intervention_baseline_assumptions IS 'Extract industry information rows for a given intervention';
+comment ON view intervention_monitoring_information IS 'Extract industry information rows for a given intervention';

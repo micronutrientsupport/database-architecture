@@ -41,4 +41,4 @@ from
 where
     section = 'Industry information';
 
-comment ON view intervention_baseline_assumptions IS 'Extract industry information rows for a given intervention';
+comment ON view intervention_industry_information IS 'Extract industry information rows for a given intervention';

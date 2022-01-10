@@ -48,4 +48,4 @@ GROUP BY
     intervention_data.header1,
     intervention_data.header2;
 
-comment ON view intervention_baseline_assumptions IS 'Aggregate intervention_data year fields into json object';
+comment ON view intervention_values_json IS 'Aggregate intervention_data year fields into json object';

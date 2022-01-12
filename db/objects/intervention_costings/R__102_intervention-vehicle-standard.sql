@@ -17,24 +17,40 @@ OR REPLACE view intervention_vehicle_standard AS with food_vehicle as (
         and row_name is null
     order by
         row_index asc
+),
+fvs as (
+    select
+        intervention_id,
+        micronutrient,
+        json_agg(
+            json_build_object(
+                'compound',
+                compound,
+                'targetVal',
+                target_val,
+                'rowIndex',
+                row_index
+            )
+        ) as food_vehicle_standard
+    from
+        food_vehicle fv
+    group by
+        intervention_id,
+        micronutrient
 )
 select
     intervention_id,
-    micronutrient,
-    json_agg(
+    array_agg(
         json_build_object(
-            'compound',
-            compound,
-            'targetVal',
-            target_val,
-            'rowIndex',
-            row_index
+            'micronutrient',
+            micronutrient,
+            'compounds',
+            food_vehicle_standard
         )
     ) as food_vehicle_standard
 from
-    food_vehicle fv
+    fvs
 group by
-    intervention_id,
-    micronutrient;
+    intervention_id;
 
 comment ON view intervention_vehicle_standard IS 'Extract intervention vehicle standards rows for a given intervention';

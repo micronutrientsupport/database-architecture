@@ -35,7 +35,7 @@ intervention_data_json_aggregate as (
 )
 select
     intervention_id,
-    data -> 'All'
+    data -> 'All' -> 'data' as industry_information
 from
     intervention_data_json_aggregate
 where

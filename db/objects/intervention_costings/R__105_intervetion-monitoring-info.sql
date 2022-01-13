@@ -1,12 +1,5 @@
-CREATE
-or replace AGGREGATE jsonb_object_aggregate(jsonb) (
-    SFUNC = 'jsonb_concat',
-    STYPE = jsonb,
-    INITCOND = '{}'
-);
-
-CREATE
-OR REPLACE view intervention_monitoring_information AS with h2_agg as (
+CREATE OR REPLACE view intervention_monitoring_information AS 
+with h2_agg as (
     select
         intervention_id,
         header1,

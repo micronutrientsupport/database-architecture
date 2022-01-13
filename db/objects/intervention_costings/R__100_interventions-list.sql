@@ -1,9 +1,8 @@
-create
-or replace view intervention_list as
+create or replace view intervention_list as
 select
     i.id,
     i.intervention_name as name,
-    'No description available' as description,
+    coalesce(i.description, 'No description available') as description,
     i.country_id,
     i.fortification_type_id,
     ft."name" as fortification_type_name,
@@ -27,7 +26,5 @@ from
     intervention i
     join fortification_type ft on ft.id = i.fortification_type_id
     join food_vehicle fv on fv.id = i.food_vehicle_id
-where
-    is_premade = true;
 
-comment on view intervention_list is 'View of premade interventions and summary attributes';
+comment on view intervention_list is 'View of interventions and summary attributes';

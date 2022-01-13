@@ -1,5 +1,5 @@
-CREATE
-OR REPLACE view intervention_vehicle_standard AS with food_vehicle as (
+CREATE OR REPLACE view intervention_vehicle_standard AS 
+with food_vehicle as (
     select
         intervention_id,
         split_part(
@@ -11,7 +11,7 @@ OR REPLACE view intervention_vehicle_standard AS with food_vehicle as (
         year_0 as target_val,
         row_index
     from
-        intervention_data id
+        intervention_data
     where
         header1 = 'Program assumptions'
         and row_name is null

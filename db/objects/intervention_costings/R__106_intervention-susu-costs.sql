@@ -1,12 +1,5 @@
-CREATE
-or replace AGGREGATE jsonb_object_aggregate(jsonb) (
-    SFUNC = 'jsonb_concat',
-    STYPE = jsonb,
-    INITCOND = '{}'
-);
-
-CREATE
-OR REPLACE view intervention_startup_scaleup_costs AS with totalfields as (
+CREATE OR REPLACE view intervention_startup_scaleup_costs AS 
+with totalfields as (
     select
         '{
 		"Industry start-up/scale-up costs": {

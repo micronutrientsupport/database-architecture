@@ -1,11 +1,10 @@
-CREATE
-OR REPLACE VIEW intervention_values_json AS
+CREATE OR REPLACE VIEW intervention_values_json AS
 SELECT
     intervention_data.intervention_id,
     intervention_data.header1,
     COALESCE(
-        NULLIF(intervention_data.header2, '' :: text),
-        'All' :: text
+        NULLIF(intervention_data.header2, ''),
+        'All'
     ) AS header2,
     json_agg(
         json_build_object(

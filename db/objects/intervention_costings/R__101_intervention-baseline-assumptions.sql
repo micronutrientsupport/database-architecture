@@ -1,5 +1,5 @@
-CREATE
-OR REPLACE view intervention_baseline_assumptions AS WITH fortifiable AS (
+CREATE OR REPLACE view intervention_baseline_assumptions AS 
+WITH fortifiable AS (
     select
         intervention_id,
         json_build_object(

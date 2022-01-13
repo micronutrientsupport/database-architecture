@@ -24,6 +24,7 @@ insert into intervention (
 	, file_name 
 	, base_year 
 	, is_premade 
+	, is_locked
 	, parent_intervention 
 )
 select 
@@ -37,10 +38,14 @@ select
 	, 'User Defined' as file_name
 	, base_year
 	, false as is_premade 
+	, false as is_locked
 	, _parent_id as parent_intervention
 from intervention where id = _parent_id
 returning id INTO _new_id
 ;
+
+-- Lock the parent intervention
+update intervention set is_locked = '1' where id = _parent_id;
 
 -- Duplicate intervention_data rows from
 -- parent intervention with the new intervention_id

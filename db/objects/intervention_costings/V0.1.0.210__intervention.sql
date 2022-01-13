@@ -11,6 +11,7 @@ CREATE TABLE intervention(
 	file_name                    text,
     base_year                    integer,
     is_premade                   boolean,
+    is_locked                    boolean,
     parent_intervention          integer    REFERENCES intervention(id)
 )
 ;
@@ -26,6 +27,7 @@ COMMENT ON COLUMN intervention.program_status IS 'A description of the stage the
 COMMENT ON COLUMN intervention.file_name IS 'If the data is imported, what the name of the imported file is';
 COMMENT ON COLUMN intervention.base_year is 'the actual year (Common Era) from when the intervention program is to start its calculations, e.g. 2026. As opposed to "year 3".';
 COMMENT ON COLUMN intervention.is_premade is 'Whether this intervention is pre-created by professionals, or whether this is an intervention where an end-user has customised some values';
+COMMENT ON COLUMN intervention.is_locked is 'Whether this intervention is locked against editing (read-only)';
 COMMENT ON COLUMN intervention.parent_intervention IS 'If this intervention has been created by a user, this shows the id of the intervetnion used as a template.';
 
 

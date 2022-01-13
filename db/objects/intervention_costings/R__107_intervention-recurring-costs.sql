@@ -55,7 +55,7 @@ gov_su as (
             year_9
         ) as data
     from
-        intervention_data id --where header1 = 'Government-related start-up/scale-up costs' --and header2 = 'Planning'
+        intervention_data id
 ),
 gov_su_agg as (
     select

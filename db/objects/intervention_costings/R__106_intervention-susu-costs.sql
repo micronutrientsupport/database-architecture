@@ -100,9 +100,7 @@ su_agg2 as (
     select
         intervention_id,
         header1,
-        json_build_object('category', header1, 'costs', array_agg(d)) as startup_scaleup_costs --header1,
-        --header2,	
-        --array_agg(d),
+        json_build_object('category', header1, 'costs', array_agg(d)) as startup_scaleup_costs
     from
         gov_su_agg
     where

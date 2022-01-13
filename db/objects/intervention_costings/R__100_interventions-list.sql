@@ -25,6 +25,6 @@ select
 from
     intervention i
     join fortification_type ft on ft.id = i.fortification_type_id
-    join food_vehicle fv on fv.id = i.food_vehicle_id
+    join food_vehicle fv on fv.id = i.food_vehicle_id;
 
 comment on view intervention_list is 'View of interventions and summary attributes';

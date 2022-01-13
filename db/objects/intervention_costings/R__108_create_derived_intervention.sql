@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION create_derived_intervention(_parent_id numeric, _user_id numeric)
-RETURNS integer AS
+RETURNS setof intervention_list AS
 
 -- Creates a new record in the intervention table with data copied from the provided
 -- intervention id
@@ -85,7 +85,7 @@ from intervention_data
 where intervention_id = _parent_id;
 
 
-return _new_id;
+return query select * from intervention_list where id = _new_id;
 
 END
 $$

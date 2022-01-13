@@ -125,7 +125,7 @@ su_agg2 as (
 )
 select
     intervention_id,
-    array_agg(startup_scaleup_costs)
+    array_agg(startup_scaleup_costs) as startup_scaleup_costs
 from
     su_agg2
 group by

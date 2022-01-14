@@ -3,7 +3,7 @@ create or replace view biomarker_summary as
 select
     hh.survey_id
     , hm.group_id
-    , sr.name as region_name
+    , aggregation_area.name as region_name
     , hh.wealth_quintile
     , hh.urbanity
 	, hm.age_in_months
@@ -29,6 +29,7 @@ select
 from biomarker_measurement bm	-- Biomarker measurement data
 join household_member hm on bm.household_member_id = hm.id -- Details of the individual e.g. age, pregnancy
 join household hh on hm.household_id = hh.id -- Details of the household e.g. location, wealth
-left join aggregation_area sr on st_contains(sr.geometry, hh.location) WHERE sr.id IS NULL OR (sr.type='admin' AND sr.admin_level=1) -- Which aggregation area the household falls into for aggregation
+left join aggregation_area on st_contains(aggregation_area.geometry, hh.location) 
+WHERE aggregation_area.id IS NULL OR (aggregation_area.type='admin' AND aggregation_area.admin_level=1) -- Which aggregation area the household falls into for aggregation
 
 order by hh.survey_id, hm.group_id ASC;

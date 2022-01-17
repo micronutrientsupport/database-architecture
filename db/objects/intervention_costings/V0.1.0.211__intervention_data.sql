@@ -20,7 +20,8 @@ year_6              numeric,
 year_7              numeric,
 year_8              numeric,
 year_9              numeric,
-notes               text
+notes               text,
+units               text
 );
 
 COMMENT on table intervention_data is 'Table to store data directly loaded from excel spreadsheet intervention costing models';
@@ -32,3 +33,4 @@ COMMENT ON COLUMN intervention_data.header2       IS 'The subheader/subsection t
 COMMENT ON COLUMN intervention_data.factor_text   IS 'The full text for this factor, as written in the excel sheet. Will be displayed like this in the UI';
 COMMENT ON COLUMN intervention_data.year_0        IS 'year_0 through year_9 contain the data values for the 10 years for this factor.';
 COMMENT ON COLUMN intervention_data.notes         IS 'Additional notes about the data e.g. assumptions and citation sources. Imported for completeness, will not be displayed in the UI';
+COMMENT ON COLUMN intervention_data.units         IS 'The units applicable to the values in the year columns, whether percentages, units of measure or counts of items.';

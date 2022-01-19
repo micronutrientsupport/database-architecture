@@ -8,7 +8,7 @@ CREATE MATERIALIZED VIEW impact_commodity_aggregation as
         , scenario
         , commodity
         , year
-        , calcium AS value
+        , calcium / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, calcium, row_number() OVER (
@@ -25,7 +25,7 @@ CREATE MATERIALIZED VIEW impact_commodity_aggregation as
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(calcium) AS value
+        , sum(calcium) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, calcium, row_number() OVER (
@@ -43,7 +43,7 @@ UNION
         , scenario
         , commodity
         , year
-        , folate AS value
+        , folate / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, folate, row_number() OVER (
@@ -60,7 +60,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(folate) AS value
+        , sum(folate) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, folate, row_number() OVER (
@@ -78,7 +78,7 @@ UNION
         , scenario
         , commodity
         , year
-        , iron AS value
+        , iron / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, iron, row_number() OVER (
@@ -95,7 +95,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(iron) AS value
+        , sum(iron) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, iron, row_number() OVER (
@@ -113,7 +113,7 @@ UNION
         , scenario
         , commodity
         , year
-        , magnesium AS value
+        , magnesium / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, magnesium, row_number() OVER (
@@ -130,7 +130,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(magnesium) AS value
+        , sum(magnesium) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, magnesium, row_number() OVER (
@@ -148,7 +148,7 @@ UNION
         , scenario
         , commodity
         , year
-        , niacin AS value
+        , niacin / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, niacin, row_number() OVER (
@@ -165,7 +165,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(niacin) AS value
+        , sum(niacin) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, niacin, row_number() OVER (
@@ -183,7 +183,7 @@ UNION
         , scenario
         , commodity
         , year
-        , phosphorus AS value
+        , phosphorus / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, phosphorus, row_number() OVER (
@@ -200,7 +200,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(phosphorus) AS value
+        , sum(phosphorus) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, phosphorus, row_number() OVER (
@@ -218,7 +218,7 @@ UNION
         , scenario
         , commodity
         , year
-        , potassium AS value
+        , potassium / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, potassium, row_number() OVER (
@@ -235,7 +235,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(potassium) AS value
+        , sum(potassium) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, potassium, row_number() OVER (
@@ -253,7 +253,7 @@ UNION
         , scenario
         , commodity
         , year
-        , protein AS value
+        , protein / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, protein, row_number() OVER (
@@ -270,7 +270,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(protein) AS value
+        , sum(protein) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, protein, row_number() OVER (
@@ -288,7 +288,7 @@ UNION
         , scenario
         , commodity
         , year
-        , riboflavin AS value
+        , riboflavin / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, riboflavin, row_number() OVER (
@@ -305,7 +305,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(riboflavin) AS value
+        , sum(riboflavin) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, riboflavin, row_number() OVER (
@@ -323,7 +323,7 @@ UNION
         , scenario
         , commodity
         , year
-        , thiamin AS value
+        , thiamin / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, thiamin, row_number() OVER (
@@ -340,7 +340,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(thiamin) AS value
+        , sum(thiamin) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, thiamin, row_number() OVER (
@@ -358,7 +358,7 @@ UNION
         , scenario
         , commodity
         , year
-        , vit_a AS value
+        , vit_a / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, vit_a, row_number() OVER (
@@ -375,7 +375,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(vit_a) AS value
+        , sum(vit_a) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, vit_a, row_number() OVER (
@@ -393,7 +393,7 @@ UNION
         , scenario
         , commodity
         , year
-        , vit_b6 AS value
+        , vit_b6 / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, vit_b6, row_number() OVER (
@@ -410,7 +410,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(vit_b6) AS value
+        , sum(vit_b6) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, vit_b6, row_number() OVER (
@@ -428,7 +428,7 @@ UNION
         , scenario
         , commodity
         , year
-        , vit_c AS value
+        , vit_c / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, vit_c, row_number() OVER (
@@ -445,7 +445,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(vit_c) AS value
+        , sum(vit_c) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, vit_c, row_number() OVER (
@@ -463,7 +463,7 @@ UNION
         , scenario
         , commodity
         , year
-        , zinc AS value
+        , zinc / 365 AS value
         , rank 
         FROM (
             SELECT year, scenario, impact_commodity.name AS commodity, country, zinc, row_number() OVER (
@@ -480,7 +480,7 @@ UNION
         , scenario
         , 'Other' AS commodity
         , year
-        , sum(zinc) AS value
+        , sum(zinc) / 365 AS value
         , 6 AS rank 
         FROM (
             SELECT year, scenario, commodity, country, zinc, row_number() OVER (

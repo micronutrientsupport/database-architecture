@@ -49,8 +49,8 @@ CREATE OR REPLACE VIEW household_intake AS
         fooditem
         JOIN food_genus ON food_genus.id = fooditem.food_genus_id
         JOIN HOUSEHOLD_CONSUMPTION as hhc ON hhc.food_genus_id = food_genus.id
-        JOIN HOUSEHOLD_MEMBER as hhm ON hhm.id = hhc.HOUSEHOLD_id
-        JOIN household ON hhm.household_id = household.id
+        --JOIN HOUSEHOLD_MEMBER as hhm ON hhm.id = hhc.HOUSEHOLD_id
+        JOIN household ON hhc.household_id = household.id
         JOIN survey on household.survey_id = survey.id
         JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location) WHERE aggregation_area.type='admin' AND aggregation_area.admin_level=1
     GROUP BY aggregation_area.id, household.id, fooditem.fct_source_id

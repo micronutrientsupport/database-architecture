@@ -960,7 +960,7 @@ cells_all := cells_all || to_json_null('87_1'::text,
     end loop;
 
 -- C206	D206 =D47	E206 =E47	F206 =F47	G206 =G47	H206 =H47
--- 17Jan2022 no foirmula
+-- 17Jan2022 no formula
 /*
     for i in 0 .. 9 loop -- ' || i
     
@@ -969,7 +969,8 @@ cells_all := cells_all || to_json_null('87_1'::text,
     end loop;
 */
 -- C207	D207 =(D201*D202+D205*D206)*D44*D45	        E207 =(E201*E202+E205*E206)*E44*E45	F207 =(F201*F202+F205*F206)*F44*F45	G207 =(G201*G202+G205*G206)*G44*G45	H207 =(H201*H202+H205*H206)*H44*H45
-
+-- 17Jan2022 no formula
+/* 
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('207_' || i::text, 
@@ -981,14 +982,14 @@ cells_all := cells_all || to_json_null('87_1'::text,
       (cells_all->>('45_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C208	D208 =D198+D207	E208 =E198+E207	F208 =F198+F207	G208 =G198+G207	H208 =H198+H207
-
+-- 17Jan2022 D208 =D206*(1+D207)
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('208_' || i::text, 
-      (cells_all->>('198_' || i)::text)::numeric + 
-      (cells_all->>('207_' || i)::text)::numeric);
+      (cells_all->>('206_' || i)::text)::numeric * 
+      (1+(cells_all->>('207_' || i)::text)::numeric));
 	
     end loop;
 
@@ -1008,46 +1009,58 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C214		E214 =D214	F214 =E214	G214 =F214	H214 =G214
 
 -- C215	D215 =D213*(1+D214)	E215 =E213*(1+E214)	F215 =F213*(1+F214)	G215 =G213*(1+G214)	H215 =H213*(1+H214)
-
-    for i in 0 .. 9 loop -- ' || i
+-- 17Jan2022 D215 =IF(D4="SU",0,D213*D214)
+   
+    for i in 0 .. 1 loop -- ' || i
+    
+      cells_all := cells_all || to_json_null('215_' || i::text, 
+      case when (cells_all->>('4_' || i)::text)::numeric = 1 then 0 else
+      (cells_all->>('213_' || i)::text)::numeric * 
+      (cells_all->>('214_' || i)::text)::numeric end);
+	
+    end loop;   
+   
+    for i in 2 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('215_' || i::text, 
       (cells_all->>('213_' || i)::text)::numeric * 
-      (1 + (cells_all->>('214_' || i)::text)::numeric));
+      (cells_all->>('214_' || i)::text)::numeric);
 	
     end loop;
 
 -- C216	D216 =D50	E216 =E50	F216 =F50	G216 =G50	H216 =H50
-
+-- 17Jan2022 no formula
+  /*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('216_' || i::text, (cells_all->>('50_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C217	D217 =673.19/100	E217 =D217	F217 =E217	G217 =F217	H217 =G217
 -- C218		E218 =D218	F218 =E218	G218 =F218	H218 =G218
 
 -- C219	D219 =D217*(1+D218)	    E219 =E217*(1+E218)	F219 =F217*(1+F218)	G219 =G217*(1+G218)	H219 =H217*(1+H218)
-
+-- 17Jan2022 = D50
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('219_' || i::text, 
-      (cells_all->>('217_' || i)::text)::numeric * 
-      (1 + (cells_all->>('218_' || i)::text)::numeric));
+      (cells_all->>('50_' || i)::text)::numeric);
 	
     end loop;
 
 -- C220	D220 =D51	E220 =E51	F220 =F51	G220 =G51	H220 =H51
-
+-- 17Jan2022 no formula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('220_' || i::text, (cells_all->>('51_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C221	D221 =(D215*D216+D219*D220)*(D48*D49)	E221 =(E215*E216+E219*E220)*(E48*E49)	F221 =(F215*F216+F219*F220)*(F48*F49)	G221 =(G215*G216+G219*G220)*(G48*G49)	H221 =(H215*H216+H219*H220)*(H48*H49)
-
+-- 17Jan2022 no formula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('221_' || i::text, 
@@ -1059,14 +1072,14 @@ cells_all := cells_all || to_json_null('87_1'::text,
       (cells_all->>('49_' || i)::text)::numeric));
 	
     end loop;
-
+*/
 -- C222	D222 =D212+D221	E222 =E212+E221	F222 =F212+F221	G222 =G212+G221	H222 =H212+H221
-
+-- 17Jan2022 D222 =D220*(1+D221)
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('222_' || i::text, 
-      (cells_all->>('212_' || i)::text)::numeric + 
-      (cells_all->>('221_' || i)::text)::numeric);
+      (cells_all->>('220_' || i)::text)::numeric * 
+     (1+(cells_all->>('221_' || i)::text)::numeric));
 	
     end loop;
 
@@ -1110,15 +1123,22 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C235		E235 =D235	F235 =E235	G235 =F235	H235 =G235
 
 -- C236	D236 =D235*(D194+D208+D222+D226)	    E236 =E235*(E194+E208+E222+E226)	F236 =F235*(F194+F208+F222+F226)	G236 =G235*(G194+G208+G222+G226)	H236 =H235*(H194+H208+H222+H226)
-
-    for i in 0 .. 9 loop -- ' || i
+-- 17Jan2022 D236 =IF(D4="BAU",D234*D235,0)
+   for i in 0 .. 1 loop -- ' || i
     
       cells_all := cells_all || to_json_null('236_' || i::text, 
-      (cells_all->>('235_' || i)::text)::numeric * 
-      ((cells_all->>('194_' || i)::text)::numeric + 
-      (cells_all->>('208_' || i)::text)::numeric + 
-      (cells_all->>('222_' || i)::text)::numeric + 
-      (cells_all->>('226_' || i)::text)::numeric));
+      case when (cells_all->>('4_' || i)::text)::numeric = 3 then
+      (cells_all->>('234_' || i)::text)::numeric * 
+      (cells_all->>('235_' || i)::text)::numeric
+      else 0 end);
+	
+    end loop;
+   
+    for i in 2 .. 9 loop -- ' || i
+    
+      cells_all := cells_all || to_json_null('236_' || i::text, 
+      (cells_all->>('234_' || i)::text)::numeric * 
+      (cells_all->>('235_' || i)::text)::numeric);
 	
     end loop;
 
@@ -1141,13 +1161,14 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C242		E242 =D242	F242 =E242	G242 =F242	H242 =G242
 
 -- C244	D244 =D243	    E244 =E243	F244 =F243	G244 =G243	H244 =H243
-
+-- 17Jan2022 no formula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('244_' || i::text, (cells_all->>('243_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C248	D248 =D89	E248 =E89	F248 =F89	
 
     for i in 0 .. 2 loop -- ' || i
@@ -1175,18 +1196,21 @@ cells_all := cells_all || to_json_null('87_1'::text,
     end loop;
 	
 -- C252	D252 =D139	E252 =E139	F252 =F139	G252 =G139	H252 =H139
-
-    for i in 0 .. 9 loop -- ' || i
+-- 17Jan2022 D252 = D116
+    for i in 0 .. 1 loop -- ' || i
     
-      cells_all := cells_all || to_json_null('252_' || i::text, (cells_all->>('139_' || i)::text)::numeric);
+      cells_all := cells_all || to_json_null('252_' || i::text, (cells_all->>('116_' || i)::text)::numeric);
 	
     end loop;
 
 -- C253	D253 =D178	E253 =E178	F253 =F178	G253 =G178	H253 =H178
+-- 17Jan2022 D253 =  =D251+D252
 
-    for i in 0 .. 9 loop -- ' || i
+    for i in 0 .. 1 loop -- ' || i
     
-      cells_all := cells_all || to_json_null('253_' || i::text, (cells_all->>('178_' || i)::text)::numeric);
+      cells_all := cells_all || to_json_null('253_' || i::text, 
+     (cells_all->>('251_' || i)::text)::numeric + 
+     (cells_all->>('252_' || i)::text)::numeric);
 	
     end loop;
 
@@ -1199,54 +1223,79 @@ cells_all := cells_all || to_json_null('87_1'::text,
     end loop;
 
 -- C255	D255 =D244	E255 =E244	F255 =F244	G255 =G244	H255 =H244
-
+-- 17Jan2022 = D139
     for i in 0 .. 9 loop -- ' || i
     
-      cells_all := cells_all || to_json_null('255_' || i::text, (cells_all->>('244_' || i)::text)::numeric);
+      cells_all := cells_all || to_json_null('255_' || i::text, (cells_all->>('139_' || i)::text)::numeric);
 	
     end loop;
 
 -- C256	D256 =SUM(D252:D255)	E256 =SUM(E252:E255)	F256 =SUM(F252:F255)	G256 =SUM(G252:G255)	H256 =SUM(H252:H255)
-
+-- 17Jan2022 = D181
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('256_' || i::text, 
-      (cells_all->>('252_' || i)::text)::numeric + 
-      (cells_all->>('253_' || i)::text)::numeric + 
-      (cells_all->>('254_' || i)::text)::numeric + 
-      (cells_all->>('255_' || i)::text)::numeric);
+      (cells_all->>('181_' || i)::text)::numeric);
 	
     end loop;
 
 -- C258	D258 =D250+D256	E258 =E250+E256	F258 =F250+F256	G258 =G250+G256	H258 =H250+H256
+-- 17Jan2022 = D247
 
-    for i in 0 .. 1 loop -- ' || i
+    for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('258_' || i::text, 
-      (cells_all->>('250_' || i)::text)::numeric + 
-      (cells_all->>('256_' || i)::text)::numeric);
+      (cells_all->>('247_' || i)::text)::numeric);
 	
     end loop;
-    for i in 2 .. 9 loop -- ' || i
-    
-      cells_all := cells_all || to_json_null('258_' || i::text, 
-      (cells_all->>('256_' || i)::text)::numeric);
-	
-    end loop;
+   
+-- 17Jan2022 = D259 =SUM(D255:D258)
+   for i in 0 .. 9 loop -- ' || i
+   
+      cells_all := cells_all || to_json_null('259_' || i::text, 
+        (cells_all->>('255_' || i)::text)::numeric +
+       (cells_all->>('256_' || i)::text)::numeric +
+       (cells_all->>('257_' || i)::text)::numeric +
+       (cells_all->>('258_' || i)::text)::numeric);
+      
+	end loop;
 
 -- C261	D261 =SUM(D258:M258)
-
-    cells_all := cells_all || to_json_null('261_0'::text, 
-      (cells_all->>'258_0')::numeric + (cells_all->>'258_1')::numeric + 
-      (cells_all->>'258_2')::numeric + (cells_all->>'258_3')::numeric
-    + (cells_all->>'258_4')::numeric + (cells_all->>'258_5')::numeric + 
-      (cells_all->>'258_6')::numeric + (cells_all->>'258_7')::numeric
-    + (cells_all->>'258_8')::numeric + (cells_all->>'258_9')::numeric);
+-- 17Jan2022 D261   =D253+D259
+   for i in 0 .. 1 loop -- ' || i
+    
+      cells_all := cells_all || to_json_null('261_' || i::text, 
+      (cells_all->>('253_' || i)::text)::numeric +
+      (cells_all->>('259_' || i)::text)::numeric);
+	
+    end loop;
+   for i in 2 .. 9 loop -- ' || i
+    
+      cells_all := cells_all || to_json_null('261_' || i::text, 
+      (cells_all->>('259_' || i)::text)::numeric);
+	
+    end loop;
 				
 -- C262	D262 ='National Data'!B9				
 -- C264		E264 =D264+1	F264 =E264+1	G264 =F264+1	H264 =G264+1
--- C265	D265 =PV($D$262,D$264,0,D258)*-1	E265 =PV($D$262,E$264,0,E258)*-1	F265 =PV($D$262,F$264,0,F258)*-1	G265 =PV($D$262,G$264,0,G258)*-1	H265 =PV($D$262,H$264,0,H258)*-1
+-- 17Jan2022 D264 =SUM(D261:M261)
 
+   cells_all := cells_all || to_json_null('264_0', 
+        (cells_all->>'261_0')::numeric +
+        (cells_all->>'261_1')::numeric +
+		(cells_all->>'261_2')::numeric +
+		(cells_all->>'261_3')::numeric +
+		(cells_all->>'261_4')::numeric +
+		(cells_all->>'261_5')::numeric +
+		(cells_all->>'261_6')::numeric +
+		(cells_all->>'261_7')::numeric +
+		(cells_all->>'261_8')::numeric +
+		(cells_all->>'261_9')::numeric);
+   
+   
+-- C265	D265 =PV($D$262,D$264,0,D258)*-1	E265 =PV($D$262,E$264,0,E258)*-1	F265 =PV($D$262,F$264,0,F258)*-1	G265 =PV($D$262,G$264,0,G258)*-1	H265 =PV($D$262,H$264,0,H258)*-1
+-- 17Jan2022 no formula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('265_' || i::text, 
@@ -1255,10 +1304,11 @@ cells_all := cells_all || to_json_null('87_1'::text,
    (cells_all->>('258_' || i)::text)::numeric));
     
     end loop;
+*/
 
-
--- C267	D267 =SUM(D265:M265)				
-
+-- C267	D267 =SUM(D265:M265)
+-- 17Jan2022 no formula				
+/*
    cells_all := cells_all || to_json_null('267_0'::text, 
    (cells_all->>'265_0')::numeric + 
    (cells_all->>'265_1')::numeric + 
@@ -1270,7 +1320,18 @@ cells_all := cells_all || to_json_null('87_1'::text,
    (cells_all->>'265_7')::numeric +
    (cells_all->>'265_8')::numeric + 
    (cells_all->>'265_9')::numeric);
+*/
 
+   -- 17Jan2022 D268 =PV($D$265,D$267,0,D261)*-1
+    for i in 0 .. 9 loop -- ' || i
+    
+      cells_all := cells_all || to_json_null('268_' || i::text, 
+     pv((cells_all->>'265_0')::numeric, 
+    (cells_all->>('267_' || i)::text)::numeric, 
+   (cells_all->>('261_' || i)::text)::numeric));
+    
+    end loop;  
+ 
 
 delete from intervention_data_json
 where intervention_id = int_id;

@@ -1,7 +1,7 @@
-
-CREATE or replace function update_intervention_data_totals(int_id integer) returns void
-
-AS $$
+CREATE OR REPLACE FUNCTION update_intervention_data_totals(int_id integer)
+ RETURNS void
+ LANGUAGE plpgsql
+AS $function$
 
 /*
 This function takes all the intervention costing data as json,from one intervention and recalculates
@@ -94,7 +94,7 @@ cells_all := get_intervention_data_as_json(int_id);
  	for i in 0 .. 9 loop
     
         cells_all := cells_all || to_json_null('41_' || i::text, 
-		case when (cells_all->>('28_' || i)::text)::numeric = 0 then 1
+		case when (cells_all->>('28_' || i)::text)::numeric = 0 then 0
 			when (cells_all->>('28_' || i)::text)::numeric > 0 and (cells_all->>('28_' || i)::text)::numeric < 0.25 then 1 
 			when (cells_all->>('28_' || i)::text)::numeric >= 0.25 and (cells_all->>('28_' || i)::text)::numeric < 0.5 then 2
 			when (cells_all->>('28_' || i)::text)::numeric >= 0.5 and (cells_all->>('28_' || i)::text)::numeric < 0.75 then 3
@@ -130,7 +130,7 @@ cells_all := get_intervention_data_as_json(int_id);
 
  	for i in 0 .. 9 loop
     
-        cells_all := cells_all || to_json_null('45_' || i::text, case when (cells_all->>'28_0')::numeric = 0 then 0
+        cells_all := cells_all || to_json_null('45_' || i::text, case when (cells_all->>('28_' || i)::text)::numeric = 0 then 0
 					when (cells_all->>('28_' || i)::text)::numeric > 0 and (cells_all->>('28_' || i)::text)::numeric < 0.25 then 6 
 					when (cells_all->>('28_' || i)::text)::numeric >= 0.25 and (cells_all->>('28_' || i)::text)::numeric < 0.5 then 12
 					when (cells_all->>('28_' || i)::text)::numeric >= 0.5 and (cells_all->>('28_' || i)::text)::numeric < 0.75 then 18
@@ -166,7 +166,7 @@ cells_all := get_intervention_data_as_json(int_id);
 
    for i in 0 .. 9 loop
     
-        cells_all := cells_all || to_json_null('49_' || i::text, case when (cells_all->>'28_0')::numeric = 0 then 1 					
+        cells_all := cells_all || to_json_null('49_' || i::text, case when (cells_all->>('28_' || i)::text)::numeric = 0 then 0 					
                     when (cells_all->>('28_' || i)::text)::numeric > 0 
                      and (cells_all->>('28_' || i)::text)::numeric < 0.25 then 1 					
                     when (cells_all->>('28_' || i)::text)::numeric >= 0.25 
@@ -498,7 +498,7 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C120	D120 ='Premix - wheat flour'!I34	E120 =D120	F120 =E120	G120 =F120	H120 =G120
 -- I33=I31 +I32 (which is just 1)
 -- I34=(I33*F30)/1000
-
+/*
 	select (("Premix cost" + 1) * "Addition Rate") /1000  into num_var from fortificant_amount_totals where intervention_id =  int_id;
 
 	for i in 0 .. 9 loop -- ' || i
@@ -507,7 +507,7 @@ cells_all := cells_all || to_json_null('87_1'::text,
         num_var);
     
     end loop;
-
+*/
 
 -- C121		E121 =D121	F121 =E121	G121 =F121	H121 =G121
 -- C122	D122 ='National Data'!B17	E122 =D122	F122 =E122	G122 =F122	H122 =G122
@@ -515,7 +515,7 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C124		E124 =D124	F124 =E124	G124 =F124	H124 =G124
 
 -- C125	D125 =D120*(1+D121+D122+D123)+(D124*'Premix - wheat flour'!$F$30)/100	E125 =E120*(1+E121+E122+E123)+(E124*'Premix - wheat flour'!$F$30)/100	F125 =F120*(1+F121+F122+F123)+(F124*'Premix - wheat flour'!$F$30)/100	G125 =G120*(1+G121+G122+G123)+(G124*'Premix - wheat flour'!$F$30)/100	H125 =H120*(1+H121+H122+H123)+(H124*'Premix - wheat flour'!$F$30)/100
-
+/*
 	select "Addition Rate" into num_var from fortificant_amount_totals where intervention_id = int_id;
 
 	for i in 0 .. 9 loop -- ' || i
@@ -529,7 +529,7 @@ cells_all := cells_all || to_json_null('87_1'::text,
             num_var)/100
             );
     end loop;
-
+*/
 -- C126		E126 =D126	F126 =E126	G126 =F126	H126 =G126
 -- C127	D127 =D27	E127 =E27	F127 =F27	G127 =G27	H127 =H27
 -- C128	D128 =Demographics!D3	E128 =Demographics!E3	F128 =Demographics!F3	G128 =Demographics!G3	H128 =Demographics!H3
@@ -641,22 +641,22 @@ cells_all := cells_all || to_json_null('87_1'::text,
 
 -- C146				G146 =F146	H146 =G146
 -- C147	D147 =D32*D146*($E$55)	E147 =E32*E146*($E$55)	F147 =F32*F146*($E$55)	G147 =G32*G146*($E$55)	H147 =H32*H146*($E$55)
+-- 17Jan2022 new formula: D147 =D132*(1000/5)
 
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('147_' || i::text,
-      (cells_all->>('32_' || i)::text)::numeric * 
-      (cells_all->>('146_' || i)::text)::numeric * 
-      (cells_all->>'55_1')::numeric);
+      (cells_all->>('132_' || i)::text)::numeric * (1000/5));
         
     end loop;
 
 -- C148	D148 =D145+D147	E148 =E145+E147	F148 =F145+F147	G148 =G145+G147	H148 =H145+H147
-
+-- 17Jan2022 new formula: D148 =D146*D147
+   
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('148_' || i::text,
-      (cells_all->>('145_' || i)::text)::numeric + (cells_all->>('147_' || i)::text)::numeric);
+      (cells_all->>('146_' || i)::text)::numeric * (cells_all->>('147_' || i)::text)::numeric);
         
     end loop;
 
@@ -666,7 +666,8 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C153	D153 ='National Data'!B11	E153 =D153	F153 =E153	G153 =F153	H153 =G153
 
 -- C154	D154 =D150*(1+D151+D152+D153)	    E154 =E150*(1+E151+E152+E153)	F154 =F150*(1+F151+F152+F153)	G154 =G150*(1+G151+G152+G153)	H154 =H150*(1+H151+H152+H153)
-
+   -- 17Jan2022 no formula
+   /*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('154_' || i::text, 
@@ -676,16 +677,17 @@ cells_all := cells_all || to_json_null('87_1'::text,
       (cells_all->>('153_' || i)::text)::numeric));
         
     end loop;
-
+	*/
 
 -- C155	D155 =D34	E155 =E34	F155 =F34	G155 =G34	H155 =H34
-
+-- 17Jan2022   ='National Data'!B16
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('155_' || i::text, (cells_all->>('34_' || i)::text)::numeric);
         
     end loop;
-
+*/
 -- C156	D156 =673.19/100	E156 =D156	F156 =E156	G156 =F156	H156 =G156
 -- C157		E157 =D157	F157 =E157	G157 =F157	H157 =G157
 -- C158	D158 ='National Data'!B16	E158 =D158	F158 =E158	G158 =F158	H158 =G158
@@ -704,13 +706,14 @@ cells_all := cells_all || to_json_null('87_1'::text,
     end loop;
 
 -- C161	D161 =D35	E161 =E35	F161 =F35	G161 =G35	H161 =H35
-
+-- 17Jan2022   ='National Data'!B16
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('161_' || i::text, (cells_all->>('35_' || i)::text)::numeric);
         
     end loop;
-
+*/
 -- C162	D162 =(D154*D155+D160*D161)*D32*D33	        E162 =(E154*E155+E160*E161)*E32*E33	F162 =(F154*F155+F160*F161)*F32*F33	G162 =(G154*G155+G160*G161)*G32*G33	H162 =(H154*H155+H160*H161)*H32*H33
 
     for i in 0 .. 9 loop -- ' || i
@@ -729,18 +732,23 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C164	D164 ='National Data'!B6*2.5	E164 =D164	F164 =E164	G164 =F164	H164 =G164
 
 -- C165	D165 =D163*D164*D32	E165 =E163*E164*E32	F165 =F163*F164*F32	G165 =G163*G164*G32	H165 =H163*H164*H32
+-- 17Jan2022 D165 =    (D157*D158+D163*D164)*D32*D33
 
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('165_' || i::text,
+      ((cells_all->>('157_' || i)::text)::numeric * 
+      (cells_all->>('158_' || i)::text)::numeric +
       (cells_all->>('163_' || i)::text)::numeric * 
-      (cells_all->>('164_' || i)::text)::numeric * 
-      (cells_all->>('32_' || i)::text)::numeric);
+      (cells_all->>('164_' || i)::text)::numeric) * 
+      (cells_all->>('32_' || i)::text)::numeric *
+      (cells_all->>('33_' || i)::text)::numeric);
         
     end loop;
 
 -- C166	D166 =D162+D165	E166 =E162+E165	F166 =F162+F165	G166 =G162+G165	H166 =H162+H165
-
+-- 17Jan2022 no formula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('166_' || i::text, 
@@ -748,7 +756,7 @@ cells_all := cells_all || to_json_null('87_1'::text,
       (cells_all->>('165_' || i)::text)::numeric);
         
     end loop;
-
+*/
 -- C168	D168 =50*'GDP Deflators'!$G$38	E168 =D168*(1+'National Data'!$B$22)	F168 =E168*(1+'National Data'!$B$22)	G168 =F168*(1+'National Data'!$B$22)	H168 =G168*(1+'National Data'!$B$22)
 -- C169		E169 =D169	F169 =E169	G169 =F169	H169 =G169
 
@@ -779,15 +787,13 @@ cells_all := cells_all || to_json_null('87_1'::text,
 
 -- C176		E176 =D176	F176 =E176	G176 =F176	H176 =G176
 -- C177	D177 =D176*(D148+D166+D170+D174)	E177 =E176*(E148+E166+E170+E174)	F177 =F176*(F148+F166+F170+F174)	G177 =G176*(G148+G166+G170+G174)	H177 =H176*(H148+H166+H170+H174)
-
+-- 17Jan2022  D177 =D175*D176*D32
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('177_' || i::text, 
+      (cells_all->>('175_' || i)::text)::numeric * 
       (cells_all->>('176_' || i)::text)::numeric * 
-      ((cells_all->>('148_' || i)::text)::numeric + 
-      (cells_all->>('166_' || i)::text)::numeric + 
-      (cells_all->>('170_' || i)::text)::numeric + 
-      (cells_all->>('174_' || i)::text)::numeric));
+      (cells_all->>('32_' || i)::text)::numeric);
 	  
     end loop;
 
@@ -828,47 +834,49 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C185	D185 =816.62/100	E185 =D185	F185 =E185	G185 =F185	H185 =G185
 -- C186		E186 =D186	F186 =E186	G186 =F186	H186 =G186
 -- C187	D187 =D185*(1+D186)	    E187 =E185*(1+E186)	F187 =F185*(1+F186)	G187 =G185*(1+G186)	H187 =H185*(1+H186)
-
+-- 17Jan2022 D187 =D185*D186
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('187_' || i::text, 
       (cells_all->>('185_' || i)::text)::numeric * 
-      (1 + (cells_all->>('186_' || i)::text)::numeric));
+      (cells_all->>('186_' || i)::text)::numeric);
 	
     end loop;
 
 -- C188	D188 =D42	E188 =E42	F188 =F42	G188 =G42	H188 =H42
-
+-- 17Jan2022 no formula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('188_' || i::text, (cells_all->>('42_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C189	D189 =673.19/100	E189 =D189	F189 =E189	G189 =F189	H189 =G189
 -- C190		E190 =D190	F190 =E190	G190 =F190	H190 =G190
 
 -- C191	D191 =D189*(1+D190)	    E191 =E189*(1+E190)	F191 =F189*(1+F190)	G191 =G189*(1+G190)	H191 =H189*(1+H190)
-
+-- 17Jan2022 D191 = D42
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('191_' || i::text, 
-      (cells_all->>('189_' || i)::text)::numeric * 
-      (1 + (cells_all->>('190_' || i)::text)::numeric));
+      (cells_all->>('42_' || i)::text)::numeric);
 	
     end loop;
 
 -- C192	D192 =D43	E192 =E43	F192 =F43	G192 =G43	H192 =H43
-
+-- 17Jan2022 no formula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('192_' || i::text, 
       (cells_all->>('43_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C193	D193 =(D187*D188+D191*D192)*D31*D41	        E193 =(E187*E188+E191*E192)*E31*E41	F193 =(F187*F188+F191*F192)*F31*F41	G193 =(G187*G188+G191*G192)*G31*G41	H193 =(H187*H188+H191*H192)*H31*H41
-
+-- 17Jan2022 no formula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('193_' || i::text, 
@@ -880,14 +888,14 @@ cells_all := cells_all || to_json_null('87_1'::text,
       (cells_all->>('41_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C194	D194 =D184+D193	E194 =E184+E193	F194 =F184+F193	G194 =G184+G193	H194 =H184+H193
-
+-- 17Jan2022 D194 =D192*(1+D193)
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('194_' || i::text, 
-      (cells_all->>('184_' || i)::text)::numeric + 
-      (cells_all->>('193_' || i)::text)::numeric);
+      (cells_all->>('192_' || i)::text)::numeric * 
+      ( 1 + (cells_all->>('193_' || i)::text)::numeric));
 	
     end loop;
 
@@ -908,44 +916,58 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C199	D199 =816.62/100	E199 =D199	F199 =E199	G199 =F199	H199 =G199
 -- C200		E200 =D200	F200 =E200	G200 =F200	H200 =G200
 -- C201	D201 =D199*(1+D200)	E201 =E199*(1+E200)	F201 =F199*(1+F200)	G201 =G199*(1+G200)	H201 =H199*(1+H200)
-
-    for i in 0 .. 9 loop -- ' || i
+-- 17Jan2022 D201 = =IF(D4="SU",0,D199*D44*D200)  F201 = =F199*F44*F200
+   
+    for i in 0 .. 1 loop -- ' || i
+    
+      cells_all := cells_all || to_json_null('201_' || i::text, 
+      case when (cells_all->>('4_' || i)::text)::numeric = 1 then 0 else 
+      (cells_all->>('199_' || i)::text)::numeric * 
+      (cells_all->>('44_' || i)::text)::numeric *
+      (cells_all->>('200_' || i)::text)::numeric end);
+   
+    end loop;
+   
+    for i in 2 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('201_' || i::text, 
       (cells_all->>('199_' || i)::text)::numeric * 
-      (1 + (cells_all->>('200_' || i)::text)::numeric));
+      (cells_all->>('44_' || i)::text)::numeric *
+      (cells_all->>('200_' || i)::text)::numeric);
 	
     end loop;
 
 -- C202	D202 =D46	E202 =E46	F202 =F46	G202 =G46	H202 =H46
-
+-- 17Jan2022 no formula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('202_' || i::text, (cells_all->>('46_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C203	D203 =673.19/100	E203 =D203	F203 =E203	G203 =F203	H203 =G203
 -- C204		E204 =D204	F204 =E204	G204 =F204	H204 =G204
 
 -- C205	D205 =D203*(1+D204)	E205 =E203*(1+E204)	F205 =F203*(1+F204)	G205 =G203*(1+G204)	H205 =H203*(1+H204)
-
+-- 17Jan2022 D205 = D46
+   
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('205_' || i::text, 
-      (cells_all->>('203_' || i)::text)::numeric * 
-      (1 + (cells_all->>('204_' || i)::text)::numeric));
+      (cells_all->>('46_' || i)::text)::numeric);
 	
     end loop;
 
 -- C206	D206 =D47	E206 =E47	F206 =F47	G206 =G47	H206 =H47
-
+-- 17Jan2022 no foirmula
+/*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('206_' || i::text, (cells_all->>('47_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C207	D207 =(D201*D202+D205*D206)*D44*D45	        E207 =(E201*E202+E205*E206)*E44*E45	F207 =(F201*F202+F205*F206)*F44*F45	G207 =(G201*G202+G205*G206)*G44*G45	H207 =(H201*H202+H205*H206)*H44*H45
 
     for i in 0 .. 9 loop -- ' || i
@@ -1260,6 +1282,5 @@ values
 
 end;
 
-$$ LANGUAGE plpgsql;
-
--- select update_intervention_data_totals(1);
+$function$
+;

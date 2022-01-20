@@ -1087,17 +1087,14 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C225		E225 =D225	F225 =E225	G225 =F225	H225 =G225
 -- C228		E228 =D228	F228 =E228	G228 =F228	H228 =G228
 -- C229	D229 =IF(D4="BAU",D228,0)	E229 =IF(D4="BAU",E228,0)	F229 =F228	G229 =G228	H229 =H228
+   
+ -- 20Jan2022 D229  =SUM(D227:D228)
 
-    for i in 0 .. 1 loop -- ' || i
+    for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('229_' || i::text,
-     case when (cells_all->>'4_0')::numeric = 3 then (cells_all->>('228_' || i)::text)::numeric else 0 end);
-	
-    end loop;
-   
-    for i in 2 .. 9 loop -- ' || i
-    
-      cells_all := cells_all || to_json_null('229_' || i::text, (cells_all->>('228_' || i)::text)::numeric);
+     (cells_all->>('227_' || i)::text)::numeric + 
+     (cells_all->>('228_' || i)::text)::numeric);
 	
     end loop;
 

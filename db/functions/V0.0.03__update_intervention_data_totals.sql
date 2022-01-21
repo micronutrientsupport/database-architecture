@@ -216,7 +216,11 @@ cells_all := get_intervention_data_as_json(int_id);
 		
 -- C57		E57 =E55*E56
 
-   cells_all := cells_all || to_json_null('57_1'::text, (cells_all->>'55_1')::numeric * (cells_all->>'56_1')::numeric);
+ for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('57_' || i::text, 
+   (cells_all->>('55_' || i)::text)::numeric * 
+   (cells_all->>('56_' || i)::text)::numeric);
+ end loop;
 			
 -- C58		E58 =(2000)*(1+0.05)			
 -- C59		E59 =MAX(D32:M32)-D32	
@@ -235,20 +239,24 @@ cells_all := get_intervention_data_as_json(int_id);
 		
 -- C60		E60 =E58*E59	
 
-   cells_all := cells_all || to_json_null('60_1'::text, (cells_all->>'58_1')::numeric * (cells_all->>'59_1')::numeric);
+ for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('60_' || i::text, 
+   (cells_all->>('58_' || i)::text)::numeric * 
+   (cells_all->>('59_' || i)::text)::numeric);
+ end loop;
 		
 -- C61		E61 =850*'GDP Deflators'!$H$38			
--- C63		E63 =SUM(E58:E61)*E62	
-
-   cells_all := cells_all || to_json_null('63_1'::text, 
-  ((cells_all->>'58_1')::numeric + 
-   (cells_all->>'59_1')::numeric + 
-   (cells_all->>'60_1')::numeric + 
-   (cells_all->>'61_1')::numeric) * 
-   (cells_all->>'62_1')::numeric);
+-- C63		E63 =SUM(E58:E61)*E62
+-- 21Jan2022 D63=D61*D62	
+  
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('63_' || i::text, 
+        (cells_all->>('61_' || i)::text)::numeric *
+		(cells_all->>('62_' || i)::text)::numeric);
 		
--- C65		E65 =IF(D14>0,MAX(D32:M32)-D32,0)		
+end loop;
 
+-- C65		E65 =IF(D14>0,MAX(D32:M32)-D32,0)		
 
     cells_all := cells_all || to_json_null('65_1'::text, case when (cells_all->>'14_0')::numeric > 0 then 
     greatest((cells_all->>'32_0')::numeric, 
@@ -287,54 +295,72 @@ cells_all := get_intervention_data_as_json(int_id);
 		
 -- C70		E70 =E64*E65 + E66*E67+E68*E69	
 
-    cells_all := cells_all || to_json_null('70_1'::text, 
-    (cells_all->>'64_1')::numeric * 
-    (cells_all->>'65_1')::numeric + 
-    (cells_all->>'66_1')::numeric * 
-    (cells_all->>'67_1')::numeric + 
-    (cells_all->>'68_1')::numeric * 
-    (cells_all->>'69_1')::numeric );
+ for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('70_' || i::text, 
+   (cells_all->>('64_' || i)::text)::numeric * 
+    (cells_all->>('65_' || i)::text)::numeric + 
+    (cells_all->>('66_' || i)::text)::numeric * 
+    (cells_all->>('67_' || i)::text)::numeric + 
+    (cells_all->>('68_' || i)::text)::numeric * 
+    (cells_all->>('69_' || i)::text)::numeric );
+ end loop;
+    
 		
--- C72		E72 =(E70+E57)*E71		
+-- C72		E72 =(E70+E57)*E71	
+-- 21Jan2022 =(D70+D60+D63+D57)*D71	
 
-    cells_all := cells_all || to_json_null('72_1'::text, 
-    ((cells_all->>'70_1')::numeric + 
-    (cells_all->>'57_1')::numeric) * 
-    (cells_all->>'71_1')::numeric );
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('72_' || i::text, 
+        ((cells_all->>('70_' || i)::text)::numeric +
+        (cells_all->>('60_' || i)::text)::numeric +
+        (cells_all->>('63_' || i)::text)::numeric +
+        (cells_all->>('57_' || i)::text)::numeric) *
+		(cells_all->>('71_' || i)::text)::numeric);
+		
+end loop;
 	
 -- C73		E73 ='National Data'!B15			
 -- C74		E74 ='National Data'!B16			
 -- C75		E75 =(E57+E63)*E73+E70*E74	
+-- 21Jan2022 =(D57+D60+D63)*D73+D70*D74
 
-    cells_all := cells_all || to_json_null('75_1'::text, 
-   ((cells_all->>'57_1')::numeric + 
-    (cells_all->>'63_1')::numeric) * 
-    (cells_all->>'73_1')::numeric + 
-    (cells_all->>'70_1')::numeric * 
-    (cells_all->>'74_1')::numeric);
-		
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('75_' || i::text, 
+   ((cells_all->>('57_' || i)::text)::numeric + 
+    (cells_all->>('60_' || i)::text)::numeric + 
+    (cells_all->>('63_' || i)::text)::numeric) * 
+    (cells_all->>('73_' || i)::text)::numeric + 
+    (cells_all->>('70_' || i)::text)::numeric * 
+    (cells_all->>('74_' || i)::text)::numeric);
+end loop;		
 -- C76		E76 ='National Data'!B10			
 -- C77		E77 ='National Data'!B11			
 -- C78		E78 =(E57+E63)*E76+E70*E77	
+-- 21Jan2022 =(D57+D60+D63)*D76+D70*D77
 
-   cells_all := cells_all || to_json_null('78_1'::text, 
-   ((cells_all->>'57_1')::numeric + 
-   (cells_all->>'63_1')::numeric) * 
-   (cells_all->>'76_1')::numeric + 
-   (cells_all->>'70_1')::numeric * 
-   (cells_all->>'77_1')::numeric);
-		
--- C79		E79 =-E57+E60+E63+E70+E72+E75+E78	
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('78_' || i::text, 
+   ((cells_all->>('57_' || i)::text)::numeric + 
+   (cells_all->>('60_' || i)::text)::numeric + 
+   (cells_all->>('63_' || i)::text)::numeric) * 
+   (cells_all->>('76_' || i)::text)::numeric + 
+   (cells_all->>('70_' || i)::text)::numeric * 
+   (cells_all->>('77_' || i)::text)::numeric);
+end loop;  
+  
+-- C79		E79 =-E57+E60+E63+E70+E72+E75+E78
+-- 21Jan2022 =D57+D60+D63+D70+D72+D75+D78	
 
-    cells_all := cells_all || to_json_null('79_1'::text,
-    -(cells_all->>'57_1')::numeric +
-    (cells_all->>'60_1')::numeric +
-    (cells_all->>'63_1')::numeric +
-    (cells_all->>'70_1')::numeric +
-    (cells_all->>'72_1')::numeric +
-    (cells_all->>'75_1')::numeric +
-    (cells_all->>'78_1')::numeric );
-		
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('79_' || i::text, 
+    (cells_all->>('57_' || i)::text)::numeric +
+    (cells_all->>('60_' || i)::text)::numeric +
+    (cells_all->>('63_' || i)::text)::numeric +
+    (cells_all->>('70_' || i)::text)::numeric +
+    (cells_all->>('72_' || i)::text)::numeric +
+    (cells_all->>('75_' || i)::text)::numeric +
+    (cells_all->>('78_' || i)::text)::numeric );
+end loop;		
 -- C81		E81 =262.6*'GDP Deflators'!$G$38			
 -- C82		E82 =MAX(D32:M32)-D32	
 
@@ -352,10 +378,12 @@ cells_all := cells_all || to_json_null('82_1'::text,
 		
 -- C83		E83 =E81*E82
 
-    cells_all := cells_all || to_json_null('83_1'::text,
-    (cells_all->>'81_1')::numeric *
-    (cells_all->>'82_1')::numeric );
-			
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('83_' || i::text, 
+    (cells_all->>('81_' || i)::text)::numeric *
+    (cells_all->>('82_' || i)::text)::numeric );
+end loop;
+
 -- C85		E85 =400*'GDP Deflators'!$G$38			
 -- C87		E87 =MAX(D32:M32)-D32	
 
@@ -373,23 +401,36 @@ cells_all := cells_all || to_json_null('87_1'::text,
 		
 -- C88		E88 =E85*E86*E87	
 
-    cells_all := cells_all || to_json_null('88_1'::text,
-    (cells_all->>'85_1')::numeric *
-    (cells_all->>'86_1')::numeric *
-    (cells_all->>'87_1')::numeric );
-	
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('88_' || i::text, 
+    (cells_all->>('85_' || i)::text)::numeric *
+    (cells_all->>('86_' || i)::text)::numeric *
+    (cells_all->>('87_' || i)::text)::numeric );
+end loop;	
 -- C89		E89 =E79+E83+E88	
 
-    cells_all := cells_all || to_json_null('89_1'::text,
-    (cells_all->>'79_1')::numeric +
-    (cells_all->>'83_1')::numeric +
-    (cells_all->>'88_1')::numeric );
-		
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('89_' || i::text, 
+    (cells_all->>('79_' || i)::text)::numeric +
+    (cells_all->>('83_' || i)::text)::numeric +
+    (cells_all->>('88_' || i)::text)::numeric );
+end loop;		
 -- C93	D93 =IF(D4="SU",200000*'GDP Deflators'!$G$38,0)	
 			
--- C94	D94 =IF(D4="SU",15000,0)	
+-- C94	D94 =IF(D4="SU",15000,0)
+-- 21Jan2022 D4=IF(D4="SU",20000,IF(D4="SC", 10000,0))	
 
-	cells_all := cells_all || to_json_null('94_0'::text,case when (cells_all->>'4_0')::numeric = 1 then 15000 else 0 end);
+	cells_all := cells_all || to_json_null('94_0'::text,
+	case 
+	when (cells_all->>'4_0')::numeric = 1 then 20000
+	when (cells_all->>'4_0')::numeric = 2 then 10000
+	else 0 end);
+-- 21Jan2022 E94=IF(D4="SU",10000,IF(D4="SC", 10000,0))
+	cells_all := cells_all || to_json_null('94_1'::text,
+	case 
+	when (cells_all->>'4_0')::numeric = 1 then 10000
+	when (cells_all->>'4_0')::numeric = 2 then 10000
+	else 0 end);
 			
 -- C95	D95 =IF(D4="SU",20000,0)
 
@@ -397,17 +438,19 @@ cells_all := cells_all || to_json_null('87_1'::text,
 				
 -- C96	D96 =IF(D4="SU", 10000,IF(D4="SC",5000,0))		
 
-	cells_all := cells_all || to_json_null('94_0'::text,
+	cells_all := cells_all || to_json_null('96_0'::text,
     case when (cells_all->>'4_0')::numeric = 1 then 10000 when (cells_all->>'4_0')::numeric = 2 then 5000 else 0 end);
 		
 -- C97	D97 =SUM(D93:D96)	
 
-	cells_all := cells_all || to_json_null('97_0'::text,
-    (cells_all->>'93_0')::numeric + 
-    (cells_all->>'94_0')::numeric + 
-    (cells_all->>'95_0')::numeric + 
-    (cells_all->>'96_0')::numeric);
- 			
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('97_' || i::text, 
+    (cells_all->>('93_' || i)::text)::numeric + 
+    (cells_all->>('94_' || i)::text)::numeric + 
+    (cells_all->>('95_' || i)::text)::numeric + 
+    (cells_all->>('96_' || i)::text)::numeric);
+end loop; 			
+
 -- C100		E100 =IF(D4="SU",IF(D14>0,E44+1+1,0),0)	
 
     cells_all := cells_all || to_json_null('100_1'::text,
@@ -433,37 +476,42 @@ cells_all := cells_all || to_json_null('87_1'::text,
 		
 -- C105		E105 =E99*E100+E101*E102+E103*E104	
 
-    cells_all := cells_all || to_json_null('105_1'::text, 
-   (cells_all->>'99_1')::numeric * 
-   (cells_all->>'100_1')::numeric + 
-   (cells_all->>'101_1')::numeric * 
-   (cells_all->>'102_1')::numeric +
-   (cells_all->>'103_1')::numeric *
-   (cells_all->>'104_1')::numeric   );
-		
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('105_' || i::text, 
+   (cells_all->>('99_' || i)::text)::numeric * 
+   (cells_all->>('100_' || i)::text)::numeric + 
+   (cells_all->>('101_' || i)::text)::numeric * 
+   (cells_all->>('102_' || i)::text)::numeric +
+   (cells_all->>('103_' || i)::text)::numeric *
+   (cells_all->>('104_' || i)::text)::numeric   );
+end loop;
+
 -- C107		E107 =E105*E106			
 
-   cells_all := cells_all || to_json_null('107_1'::text, 
-   (cells_all->>'105_1')::numeric * 
-   (cells_all->>'106_1')::numeric );
-
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('107_' || i::text, 
+   (cells_all->>('105_' || i)::text)::numeric * 
+   (cells_all->>('106_' || i)::text)::numeric );
+end loop;
 -- C108		E108 =E105+E107	
 
-    cells_all := cells_all || to_json_null('108_1'::text, 
-   (cells_all->>'105_1')::numeric +
-   (cells_all->>'107_1')::numeric );
-		
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('108_' || i::text, 
+   (cells_all->>('105_' || i)::text)::numeric +
+   (cells_all->>('107_' || i)::text)::numeric );
+end loop;
+
 -- C110	D110 =IF(D4="BAU",0,IF(D4="SU",50000,25000))	E110 =IF(D4="BAU",0,IF(D4="SU",50000,25000))	
 
 	cells_all := cells_all || to_json_null('110_0'::text,case 
 	when (cells_all->>'4_0')::numeric = 3 then 0 
-	when (cells_all->>'4_0')::numeric = 1 then  50000 
-	else 25000 end);
+	when (cells_all->>'4_0')::numeric = 1 then  100000 
+	else 30000 end);
 
 	cells_all := cells_all || to_json_null('110_1'::text,case 
 	when (cells_all->>'4_0')::numeric = 3 then 0 
-	when (cells_all->>'4_0')::numeric = 1 then  50000 
-	else 25000 end);
+	when (cells_all->>'4_0')::numeric = 1 then  30000 
+	else 30000 end);
 		
 -- C111	D111 =D110	E111 =E110	
 
@@ -477,24 +525,22 @@ cells_all := cells_all || to_json_null('87_1'::text,
 		
 -- C115		E115 =E113*E114			
 
-    cells_all := cells_all || to_json_null('115_1'::text, 
-   (cells_all->>'113_1')::numeric *
-   (cells_all->>'114_1')::numeric );
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('115_' || i::text, 
+   (cells_all->>('113_' || i)::text)::numeric *
+   (cells_all->>('114_' || i)::text)::numeric );
+end loop;
 
 -- C116	D116 =D97+D108+D111+D115	E116 =E97+E108+E111+E115	
 
-	cells_all := cells_all || to_json_null('116_0'::text,
-(cells_all->>'97_0')::numeric + 
-(cells_all->>'108_0')::numeric + 
-(cells_all->>'111_0')::numeric + 
-(cells_all->>'115_0')::numeric);
+for i in 0 .. 1 loop
+   cells_all := cells_all || to_json_null('116_' || i::text, 
+	(cells_all->>('97_' || i)::text)::numeric + 
+	(cells_all->>('108_' || i)::text)::numeric + 
+	(cells_all->>('111_' || i)::text)::numeric + 
+	(cells_all->>('115_' || i)::text)::numeric);
+end loop;
 
-	cells_all := cells_all || to_json_null('116_1'::text,
-(cells_all->>'97_1')::numeric + 
-(cells_all->>'108_1')::numeric + 
-(cells_all->>'111_1')::numeric + 
-(cells_all->>'115_1')::numeric);
-		
 -- C120	D120 ='Premix - wheat flour'!I34	E120 =D120	F120 =E120	G120 =F120	H120 =G120
 -- I33=I31 +I32 (which is just 1)
 -- I34=(I33*F30)/1000
@@ -694,7 +740,7 @@ cells_all := cells_all || to_json_null('87_1'::text,
 -- C159	D159 ='National Data'!B11	E159 =D159	F159 =E159	G159 =F159	H159 =G159
 
 -- C160	D160 =D156*(1+D157+D158+D159)	E160 =E156*(1+E157+E158+E159)	F160 =F156*(1+F157+F158+F159)	G160 =G156*(1+G157+G158+G159)	H160 =H156*(1+H157+H158+H159)
-
+/* 21Jan2022
    for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('160_' || i::text, 
@@ -704,7 +750,7 @@ cells_all := cells_all || to_json_null('87_1'::text,
   (cells_all->>('159_' || i)::text)::numeric));
         
     end loop;
-
+*/
 -- C161	D161 =D35	E161 =E35	F161 =F35	G161 =G35	H161 =H35
 -- 17Jan2022   ='National Data'!B16
 /*
@@ -715,7 +761,8 @@ cells_all := cells_all || to_json_null('87_1'::text,
     end loop;
 */
 -- C162	D162 =(D154*D155+D160*D161)*D32*D33	        E162 =(E154*E155+E160*E161)*E32*E33	F162 =(F154*F155+F160*F161)*F32*F33	G162 =(G154*G155+G160*G161)*G32*G33	H162 =(H154*H155+H160*H161)*H32*H33
-
+-- ='National Data'!B14
+   /*
     for i in 0 .. 9 loop -- ' || i
     
       cells_all := cells_all || to_json_null('162_' || i::text, 
@@ -727,8 +774,19 @@ cells_all := cells_all || to_json_null('87_1'::text,
       (cells_all->>('33_' || i)::text)::numeric);
 	
     end loop;
-
+*/
 -- C163		E163 =D163	F163 =E163	G163 =F163	H163 =G163
+-- D163 =D159*(1+D160+D161+D162)
+   for i in 0 .. 9 loop -- ' || i
+    
+      cells_all := cells_all || to_json_null('163_' || i::text,
+      (cells_all->>('159_' || i)::text)::numeric * 
+      (1 + (cells_all->>('160_' || i)::text)::numeric +
+      (cells_all->>('161_' || i)::text)::numeric + 
+      (cells_all->>('162_' || i)::text)::numeric)); 
+
+    end loop;
+   
 -- C164	D164 ='National Data'!B6*2.5	E164 =D164	F164 =E164	G164 =F164	H164 =G164
 
 -- C165	D165 =D163*D164*D32	E165 =E163*E164*E32	F165 =F163*F164*F32	G165 =G163*G164*G32	H165 =H163*H164*H32

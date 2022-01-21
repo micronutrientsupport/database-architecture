@@ -544,7 +544,7 @@ end loop;
 -- C120	D120 ='Premix - wheat flour'!I34	E120 =D120	F120 =E120	G120 =F120	H120 =G120
 -- I33=I31 +I32 (which is just 1)
 -- I34=(I33*F30)/1000
-/*
+
 	select (("Premix cost" + 1) * "Addition Rate") /1000  into num_var from fortificant_amount_totals where intervention_id =  int_id;
 
 	for i in 0 .. 9 loop -- ' || i
@@ -553,7 +553,7 @@ end loop;
         num_var);
     
     end loop;
-*/
+
 
 -- C121		E121 =D121	F121 =E121	G121 =F121	H121 =G121
 -- C122	D122 ='National Data'!B17	E122 =D122	F122 =E122	G122 =F122	H122 =G122
@@ -561,7 +561,7 @@ end loop;
 -- C124		E124 =D124	F124 =E124	G124 =F124	H124 =G124
 
 -- C125	D125 =D120*(1+D121+D122+D123)+(D124*'Premix - wheat flour'!$F$30)/100	E125 =E120*(1+E121+E122+E123)+(E124*'Premix - wheat flour'!$F$30)/100	F125 =F120*(1+F121+F122+F123)+(F124*'Premix - wheat flour'!$F$30)/100	G125 =G120*(1+G121+G122+G123)+(G124*'Premix - wheat flour'!$F$30)/100	H125 =H120*(1+H121+H122+H123)+(H124*'Premix - wheat flour'!$F$30)/100
-/*
+
 	select "Addition Rate" into num_var from fortificant_amount_totals where intervention_id = int_id;
 
 	for i in 0 .. 9 loop -- ' || i
@@ -575,7 +575,7 @@ end loop;
             num_var)/100
             );
     end loop;
-*/
+
 -- C126		E126 =D126	F126 =E126	G126 =F126	H126 =G126
 -- C127	D127 =D27	E127 =E27	F127 =F27	G127 =G27	H127 =H27
 -- C128	D128 =Demographics!D3	E128 =Demographics!E3	F128 =Demographics!F3	G128 =Demographics!G3	H128 =Demographics!H3

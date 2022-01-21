@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW IMPACT_TOTAL_FOOD_AVAILABILITY AS
+CREATE OR REPLACE VIEW impact_total_food_availability AS
 
 select
     country

@@ -4,6 +4,7 @@ CREATE TABLE fortification_level(
     , intervention_id             integer   REFERENCES intervention(id)
     , fortificant_id              integer   REFERENCES fortificant(id)
     , year                        integer
+    , fortificant_amount          numeric
     , fortificant_proportion      numeric
     , fortificant_price           numeric
     , target_level                numeric
@@ -11,11 +12,12 @@ CREATE TABLE fortification_level(
 )
 ;
 
-COMMENT ON TABLE fortification_level IS '';
+COMMENT ON TABLE fortification_level IS 'Stores fortification levels, costs and amounts per intervention';
 
 COMMENT ON COLUMN fortification_level.intervention_id         IS 'For which intervention these fortification levels apply';
 COMMENT ON COLUMN fortification_level.fortificant_id          IS 'Which fortificant this is';
 COMMENT ON COLUMN fortification_level.year                    IS 'For which year these fortification levels apply';
+COMMENT ON COLUMN fortification_level.fortificant_amount      IS 'in mg/kg of food vehicle';
 COMMENT ON COLUMN fortification_level.fortificant_proportion  IS 'What proprotion of the premix this fortificant makes up';
 COMMENT ON COLUMN fortification_level.fortificant_price       IS 'The price of the fortificant, in US Dollars per kilogram';
 COMMENT ON COLUMN fortification_level.target_level            IS 'The target micronutrient level (or government standard) in milligrams per kilogram';

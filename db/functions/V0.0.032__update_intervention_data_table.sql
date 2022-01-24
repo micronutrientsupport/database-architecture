@@ -12,11 +12,10 @@ from the table which contains the equivalent json data as recalculated by a prev
 update_sql text;
 
 c cursor for
-select row_index
-from intervention_data
-where
-intervention_id = int_id
-order by row_index;
+    select row_index
+    from intervention_data
+    where intervention_id = int_id
+    order by row_index;
 
 begin
 	

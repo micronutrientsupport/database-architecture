@@ -4,12 +4,6 @@ AS $$
 
 declare 
 
-/*
-This funtion takes the intervention costing data from the table columns and 
-converts them into a single json object of key-value pairs
-for easier reference by the next function which recalculates the values.
-*/
-
 cells_all jsonb;
 
 data_cur cursor for
@@ -42,3 +36,5 @@ begin
 end;
 
 $$ LANGUAGE plpgsql;
+
+comment on function get_intervention_data_as_json is 'This funtion takes the intervention costing data from the table columns and converts them into a single json object of key-value pairs for easier reference by the next function which recalculates the values.';

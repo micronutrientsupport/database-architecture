@@ -3,11 +3,6 @@ CREATE OR REPLACE FUNCTION update_intervention_data_totals(int_id integer)
  LANGUAGE plpgsql
 AS $function$
 
-/*
-This function takes all the intervention costing data as json,from one intervention and recalculates
-all the totals where a formula is applied, as copied and translated from the excel work sheet.
-*/
-
 declare 
 
 cells_all jsonb;
@@ -1400,3 +1395,5 @@ end;
 
 $function$
 ;
+
+comment on function update_intervention_data_totals is 'This function takes all the intervention costing data as json,from one intervention and recalculates all the totals where a formula is applied, as copied and translated from the excel work sheet.';

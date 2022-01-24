@@ -4,14 +4,6 @@ AS $$
 
 declare 
 
-/*
-This function can be used to test the function which recalculates total values
-'update_intervention_data_totals'
-by comparing the original values to the recalculated values.
-It depends on the calculated values not being saved back to the table
-so run the above function but don't run 'update_intervention_data_table' until tested.
-*/
-
 cells_all jsonb;
 
  i record;
@@ -45,3 +37,5 @@ RAISE NOTICE '%', 'checking ended.';
 end;
 
 $$ LANGUAGE plpgsql;
+
+comment on function test_json_vals is 'This function can be used to test the function which recalculates total values ''update_intervention_data_totals'' by comparing the original values to the recalculated values. It depends on the calculated values not being saved back to the table so run the above function but do not run ''update_intervention_data_table'' until tested.';

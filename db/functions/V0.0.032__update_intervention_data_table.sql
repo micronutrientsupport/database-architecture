@@ -4,11 +4,6 @@ AS $$
 
 declare 
 
-/*
-This function updates the intervention costing data values in the table columns named as years 0 to 9
-from the table which contains the equivalent json data as recalculated by a previous function.
-*/
-
 update_sql text;
 
 c cursor for
@@ -52,3 +47,6 @@ begin
 end;
 
 $$ LANGUAGE plpgsql;
+
+
+comment on function update_intervention_data_table is 'This function updates the intervention costing data values in the table columns named as years 0 to 9 from the table which contains the equivalent json data as recalculated by a previous function.';

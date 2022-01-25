@@ -9,7 +9,9 @@ with food_vehicle as (
         ) as micronutrient,
         split_part(split_part(factor_text, '(', 2), ')', 1) as compound,
         year_0 as target_val,
-        row_index
+        row_index,
+        units,
+        is_user_editable 
     from
         intervention_data
     where
@@ -29,7 +31,11 @@ fvs as (
                 'targetVal',
                 target_val,
                 'rowIndex',
-                row_index
+                row_index,
+                'rowUnits',
+                units,
+                'isEditable',
+                is_user_editable
             )
         ) as food_vehicle_standard
     from

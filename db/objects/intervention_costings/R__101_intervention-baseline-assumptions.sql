@@ -26,7 +26,11 @@ WITH fortifiable AS (
             'year9',
             year_9,
             'rowIndex',
-            row_index
+            row_index,
+            'rowUnits',
+            units,
+            'isEditable',
+            is_user_editable
         ) as potentially_fortifiable
     from
         intervention_data d
@@ -61,7 +65,11 @@ fortified as (
             'year9',
             year_9,
             'rowIndex',
-            row_index
+            row_index,
+            'rowUnits',
+            units,
+            'isEditable',
+            is_user_editable
         ) as actually_fortified
     from
         intervention_data d

@@ -17,8 +17,7 @@ select
     -- I28=G28*H28
     ((ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50) - sum(fortificant_amount)) *(1/(ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50)) * b.fortificant_price as "Excipient/filler cost", -- I28
     --
-    sum(a.fortificant_proportion * a.fortificant_price) + 
-    (((ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50) - sum(fortificant_amount)) *(1/(ceil(sum(fortificant_amount) * 1.25 / 50.0) * 50)) * b.fortificant_price) as "Premix cost" -- I31
+    sum(a.fortificant_proportion * a.fortificant_price) as "Premix cost" -- I31
     -- I33=I31 +I32 (which is just 1)
     -- I34=(I33*F30)/1000
 from 

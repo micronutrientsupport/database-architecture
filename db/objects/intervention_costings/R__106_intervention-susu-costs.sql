@@ -39,7 +39,11 @@ gov_su as (
             'year0',
             year_0,
             'year1',
-            year_1
+            year_1,
+            'rowUnits',
+            intervention_data.units,
+            'isEditable',
+            intervention_data.is_user_editable
         ) as data
     from
         intervention_data id

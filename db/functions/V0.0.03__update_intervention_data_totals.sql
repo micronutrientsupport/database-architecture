@@ -11,6 +11,8 @@ test1 integer;
 
 num_var numeric;
 
+ii numeric;
+
 begin
 	
 cells_all := get_intervention_data_as_json(int_id);
@@ -40,7 +42,27 @@ cells_all := get_intervention_data_as_json(int_id);
 -- C25		E25 =D25	F25 =E25	G25 =F25	H25 =G25
 -- C26		E26 =D26	F26 =E26	G26 =F26	H26 =G26
 -- C27		E27 =D27	F27 =E27	G27 =F27	H27 =G27
--- C28		E28 =D28	F28 =E28	G28 =F28	H28 =G28
+-- C28		E28 =D28	F28 =IF($D4="BAU",E28,IF($D4="SU",IF(E28+0.15 <1, E28+0.15,1),IF(E28+0.1<1,E28+0.1,1)))
+
+	for i in 2 .. 9 loop
+    	ii = i-1;
+    
+        cells_all := cells_all || to_json_null('28_' || i::text, 
+        case 
+        when (cells_all->>'4_0')::numeric = 3 then  (cells_all->>('28_' || ii)::text)::numeric      
+       	when (cells_all->>'4_0')::numeric = 1 then 
+        	case 
+        	when (cells_all->>('28_' || ii)::text)::numeric < 0.85 then 
+        		(cells_all->>('28_' || ii)::text)::numeric + 0.15 else 1 end
+	    else  
+	    	case
+        	when (cells_all->>('28_' || ii)::text)::numeric < 0.9 then 
+        		(cells_all->>('28_' || ii)::text)::numeric + 0.1 else 1 end
+        end);
+       
+    end loop;  
+
+
 -- C31		E31 =D31	F31 =E31	G31 =F31	H31 =G31
 
 -- C32	D32 =ROUNDUP(D28*D31, 0)	E32 =ROUNDUP(E28*E31, 0)	F32 =ROUNDUP(F28*F31, 0)	G32 =ROUNDUP(G28*G31, 0)	H32 =ROUNDUP(H28*H31, 0)

@@ -17,12 +17,12 @@ FROM (
 		) as ranking
 	FROM (
 		SELECT
-			household.survey_id
+			hh.survey_id
 			, fi.fct_source_id
 			-- , cc.data_source_id
 			, mn.mn_name
 			, fi.food_genus_id
-			, sum( (mn.mn_value / 100 * amount_consumed_in_g) )  AS mn_consumed_per_day
+			, sum( (mn.mn_value / 100 * amount_consumed_in_g) )/(select afe_total from survey_member_count smc where smc.survey_id = hh.survey_id)  AS mn_consumed_per_day
 		FROM food_genus_nutrients fi
 		CROSS JOIN LATERAL (
 			VALUES
@@ -62,11 +62,11 @@ FROM (
 				('Moisture'    , Moisture_in_g              )
 		) AS mn("mn_name", "mn_value")
 		JOIN household_consumption hc ON hc.food_genus_id = fi.food_genus_id
-        JOIN household ON hc.household_id = household.id
-        JOIN survey ON household.survey_id = survey.id
+        JOIN household hh ON hc.household_id = hh.id
+        JOIN survey ON hh.survey_id = survey.id
 		-- WHERE date_part('year', hc.date_consumed) = 2018
 		GROUP BY
-			household.survey_id
+			hh.survey_id
 			, fi.food_genus_id
 			, fi.fct_source_id
 			, mn_name
@@ -75,8 +75,6 @@ FROM (
 JOIN food_genus ON b.food_genus_id = food_genus.id
 JOIN food_group ON food_genus.food_group_id = food_group.id
 WHERE ranking <= 20
-ORDER BY survey_id, mn_name, ranking asc
-;
-
+ORDER BY survey_id, mn_name, ranking asc;
 
 COMMENT ON MATERIALIZED VIEW top20_mn_per_hhsurvey IS 'View showing the rankings of how much each food genus contributes to a particular micronutrient intake in a particular household consumption survey.'

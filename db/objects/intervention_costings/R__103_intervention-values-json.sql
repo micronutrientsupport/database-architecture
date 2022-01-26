@@ -109,7 +109,7 @@ FROM
     	ON intervention_parent.row_index = intervention_data.row_index 
     	and intervention_parent.intervention_id = intervention.parent_intervention
 WHERE
-    intervention_data.header1 IS NOT null and intervention_data.row_index = 22
+    intervention_data.header1 IS NOT null
 GROUP BY
     intervention_data.intervention_id,
     intervention_data.header1,

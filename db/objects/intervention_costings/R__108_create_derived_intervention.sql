@@ -67,6 +67,8 @@ insert into intervention_data (
 	, year_8 
 	, year_9
 	, notes
+	, units
+	, is_user_editable
 )
 select 
 	_new_id as intervention_id,
@@ -85,7 +87,9 @@ select
 	year_7,
 	year_8,
 	year_9,
-	notes
+	notes,
+	units,
+	is_user_editable
 from intervention_data 
 where intervention_id = _parent_id;
 

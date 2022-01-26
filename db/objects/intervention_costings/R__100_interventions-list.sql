@@ -9,6 +9,8 @@ select
     i.program_status,
     i.food_vehicle_id,
     fv.vehicle_name as food_vehicle_name,
+    i.is_premade,
+    NOT(i.is_premade OR i.is_locked) as is_editable,
     i.base_year,
     round(
         (

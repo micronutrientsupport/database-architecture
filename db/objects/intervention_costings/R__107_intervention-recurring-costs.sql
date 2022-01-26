@@ -119,9 +119,9 @@ gov_su as (
     from
 	    intervention_data intervention_data
 	    join intervention on intervention_data.intervention_id = intervention.id
-	    join data_citation on data_citation.id = intervention.data_citation_id
+	    left join data_citation on data_citation.id = intervention.data_citation_id
 	    -- Re-join intervention_data to get the values for the parent intervention
-	    join intervention_data intervention_parent 
+	    left join intervention_data intervention_parent 
 	    	ON intervention_parent.row_index = intervention_data.row_index 
 	    	and intervention_parent.intervention_id = intervention.parent_intervention
 ),

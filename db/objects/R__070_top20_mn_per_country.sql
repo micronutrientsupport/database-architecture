@@ -62,7 +62,19 @@ FROM (
 				('Energy'      , Energy_in_kCal             ),
 				('Moisture'    , Moisture_in_g              )
 		) AS mn("mn_name", "mn_value")
-		JOIN country_consumption cc ON cc.food_genus_id = fi.food_genus_id
+		JOIN 
+		(select cc1.food_genus_id,
+				cc1.data_source_id, 
+				c1.id as country_id,
+				cc1.amount_consumed_in_g
+			from
+			country_consumption cc1,
+			country_consumption_source ccs1,
+			country c1 
+			where 
+			cc1.data_source_id = ccs1.id 
+			and st_equals(ccs1.geometry, c1.geometry)) cc
+		ON cc.food_genus_id = fi.food_genus_id
 		-- WHERE date_part('year', cc.date_consumed) = 2018
 		GROUP BY
 			cc.data_source_id

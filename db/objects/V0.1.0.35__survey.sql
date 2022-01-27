@@ -23,6 +23,6 @@ COMMENT ON COLUMN survey.geometry                    IS 'The area covered by the
 COMMENT ON COLUMN survey.geonetwork_uuid             IS 'a UUID for Geonetwork. See https://geonetwork-opensource.org/ for further info';
 COMMENT ON COLUMN survey.survey_weight_factor        IS 'The factor survey weightings have been scaled by';
 COMMENT ON COLUMN survey.notes                       IS 'a generic text field for notes about a survey. Can include such as: Whether biomarker measurements were taken from blood plasma or blood serum';
-COMMENT ON COLUMN survey.hb_is_adjusted_for_smoking  IS 'Haemoglobin data is already adjusted per individual to account for whether the individual smokes';
-COMMENT ON COLUMN survey.hb_is_adjusted_for_altitude IS 'Haemoglobin data is already adjusted per individual to account for whether the individual lives at high altitude';
+COMMENT ON COLUMN survey.hb_is_adjusted_for_smoking  IS 'Whether haemoglobin data is already adjusted per individual to account for whether the individual smokes';
+COMMENT ON COLUMN survey.hb_is_adjusted_for_altitude IS 'Whether haemoglobin data is already adjusted per individual to account for whether the individual lives at high altitude';
 

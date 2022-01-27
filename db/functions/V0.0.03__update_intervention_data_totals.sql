@@ -11,6 +11,8 @@ test1 integer;
 
 num_var numeric;
 
+ii numeric;
+
 begin
 	
 cells_all := get_intervention_data_as_json(int_id);
@@ -40,7 +42,27 @@ cells_all := get_intervention_data_as_json(int_id);
 -- C25		E25 =D25	F25 =E25	G25 =F25	H25 =G25
 -- C26		E26 =D26	F26 =E26	G26 =F26	H26 =G26
 -- C27		E27 =D27	F27 =E27	G27 =F27	H27 =G27
--- C28		E28 =D28	F28 =E28	G28 =F28	H28 =G28
+-- C28		E28 =D28	F28 =IF($D4="BAU",E28,IF($D4="SU",IF(E28+0.15 <1, E28+0.15,1),IF(E28+0.1<1,E28+0.1,1)))
+
+	for i in 2 .. 9 loop
+    	ii = i-1;
+    
+        cells_all := cells_all || to_json_null('28_' || i::text, 
+        case 
+        when (cells_all->>'4_0')::numeric = 3 then  (cells_all->>('28_' || ii)::text)::numeric      
+       	when (cells_all->>'4_0')::numeric = 1 then 
+        	case 
+        	when (cells_all->>('28_' || ii)::text)::numeric < 0.85 then 
+        		(cells_all->>('28_' || ii)::text)::numeric + 0.15 else 1 end
+	    else  
+	    	case
+        	when (cells_all->>('28_' || ii)::text)::numeric < 0.9 then 
+        		(cells_all->>('28_' || ii)::text)::numeric + 0.1 else 1 end
+        end);
+       
+    end loop;  
+
+
 -- C31		E31 =D31	F31 =E31	G31 =F31	H31 =G31
 
 -- C32	D32 =ROUNDUP(D28*D31, 0)	E32 =ROUNDUP(E28*E31, 0)	F32 =ROUNDUP(F28*F31, 0)	G32 =ROUNDUP(G28*G31, 0)	H32 =ROUNDUP(H28*H31, 0)
@@ -556,7 +578,7 @@ end loop;
 -- C124		E124 =D124	F124 =E124	G124 =F124	H124 =G124
 
 -- C125	D125 =D120*(1+D121+D122+D123)+(D124*'Premix - wheat flour'!$F$30)/100	E125 =E120*(1+E121+E122+E123)+(E124*'Premix - wheat flour'!$F$30)/100	F125 =F120*(1+F121+F122+F123)+(F124*'Premix - wheat flour'!$F$30)/100	G125 =G120*(1+G121+G122+G123)+(G124*'Premix - wheat flour'!$F$30)/100	H125 =H120*(1+H121+H122+H123)+(H124*'Premix - wheat flour'!$F$30)/100
-
+-- =D120*(1+D121+D122+D123)+(D124*'Premix - wheat flour'!$F$30)/1000
 	select "Addition Rate" into num_var from fortificant_amount_totals where intervention_id = int_id;
 
 	for i in 0 .. 9 loop -- ' || i
@@ -567,7 +589,7 @@ end loop;
             (cells_all->>('122_' || i)::text)::numeric + 
             (cells_all->>('123_' || i)::text)::numeric) + 
             ((cells_all->>('124_' || i)::text)::numeric *
-            num_var)/100
+            num_var)/1000
             );
     end loop;
 

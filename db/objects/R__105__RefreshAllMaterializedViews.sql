@@ -12,7 +12,6 @@ BEGIN
     	SELECT matviewname, schemaname
     	FROM pg_matviews
     	WHERE schemaname = schema_arg
-    	AND matviewname NOT IN ('household_deficiency_afe_aggregation') -- TODO: takes a long time
     	ORDER BY matviewname
     LOOP
         RAISE NOTICE 'Refreshing %.%', schema_arg, r.matviewname;

@@ -6,8 +6,10 @@ select
     , aggregation_area.name as region_name
     , hh.wealth_quintile
     , hh.urbanity
+    , hh.altitude_in_metres
 	, hm.age_in_months
 	, hm.is_pregnant
+	, hm.is_smoker
 	, bm.was_fasting
 	, bm.time_of_day_sampled
 	, hm.survey_cluster

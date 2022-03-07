@@ -3,14 +3,14 @@
 DROP FUNCTION IF exists match_consumption_to_composition();
 CREATE OR REPLACE FUNCTION match_consumption_to_composition()
 RETURNS TABLE (
-    consumption_food_genus_id NUMERIC
-    , fct_source_id NUMERIC
+    consumption_item_id int
+    --consumption_food_genus_id NUMERIC
+    --, fct_source_id NUMERIC
     , mn_id TEXT
-    , mn_name TEXT
+    --, mn_name TEXT
     , mn_value NUMERIC
-    , fct_list int ARRAY
+    , fct_used int
     
-    --
 )
 LANGUAGE plpgsql
 AS
@@ -85,7 +85,9 @@ $code$
                     -- grab the vitamin a values and the fct_id
                     -- TODO: actually grab
                     
---                    the_mn := fct_entry.mn_column 
+--                    SELECT mn_column INTO the_mn
+--                    FROM 
+                --                    the_mn := fct_entry.mn_column; 
                 
                     EXIT WHEN fct_entry.id IS NOT NULL; 
                     
@@ -93,8 +95,13 @@ $code$
                     
             END LOOP;       
                 
-                
-                
+--{
+--vitamin_a: 39,
+--vit_b: 29,
+--list_of fcts_used: {21,24}
+--
+--}
+--                
                 
 --                    FOREACH mn_column IN ARRAY micronutrient_columns LOOP
 --                        IF fct_entry.Zn_in_mg IS NOT NULL THEN
@@ -152,7 +159,7 @@ $code$
 
 
         RETURN QUERY
-            SELECT 1., 2.,'foo','bar', 3., ARRAY[1,2];
+            SELECT 1, 'a vitamin'  3., 21;
 
     END;
 $code$

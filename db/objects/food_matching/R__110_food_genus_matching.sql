@@ -23,14 +23,11 @@ $code$
         household_location geometry;
         fct_entry record;
         fct_entry_id int;
-        micronutrient_columns text[];
-        micronutrient_ids integer[];
-        mn_column TEXT;
         the_mn TEXT;
         the_mn_value NUMERIC;
         used_fct_id int;
     
-        declare
+        
         cur_mn  cursor for 
             select * 
             from micronutrient;
@@ -39,27 +36,7 @@ $code$
     
     BEGIN
         RAISE NOTICE 'running funtion';
-    
---         grab the list of micronutrient columns for the fodoitem table
---        SELECT ARRAY(
---            SELECT fooditem_column INTO micronutrient_columns
---                FROM micronutrient
---                ORDER BY id
---        )
---        ;
---        SELECT ARRAY(
---            SELECT fooditem_column INTO micronutrient_columns
---                FROM micronutrient
---                ORDER BY id
---        )
---        ;
---    
-        
-        
-    
-        RAISE NOTICE 'list of mirconutrients%', micronutrient_columns;
-    
-    
+
         DROP TABLE IF EXISTS consumption_compostion_matching;
         CREATE TABLE consumption_compostion_matching (
         consumption_item_id integer,
@@ -101,14 +78,7 @@ $code$
             RAISE NOTICE 'fct_list for this consumption item(% -- %) %', consumption_item.food_genus_id, consumption_item.original_food_name, fct_list;
         
 --            FOR Micronutrient, loop through the fcts and find the first one with actual data 
-        
-        
-    
-
-        
-        
             FOR mn_record IN cur_mn  LOOP
---            FOREACH mn_column IN ARRAY micronutrient_columns LOOP
 --            VitaminA_in_RAE_in_mcg
                 
                 -- for each fct entry for this fooditem/household, starting with the best:
@@ -118,40 +88,41 @@ $code$
                     FROM fooditem
                     WHERE fooditem.fct_source_id = fct_entry_id
                     AND consumption_item.food_genus_id = fooditem.food_genus_id
-                    AND mn_column IS NOT NULL
                     ;
                     RAISE NOTICE 'mn: % --- fct_id: %', mn_column, fct_entry_id ;
                     RAISE NOTICE 'fct_entry: %', fct_entry;
                     -- grab the vitamin a values and the fct_id
                     -- TODO: actually grab
                     
---                    INSERT INTO consumption_compostion_matching (
---                        consumption_item_id,
---                        mn_id     ,
---                        mn_value  ,
---                        fct_used             
---                    )
---                    VALUES(
---                        consumption_item.id,
+                    INSERT INTO consumption_compostion_matching (
+                        consumption_item_id,
+                        mn_id     ,
+                        mn_value  ,
+                        fct_used             
+                    )
+                    VALUES(
+                        consumption_item.id,
+                        mn_record.id,
+                        fooditem_value -- TODO
                         
                 
-                    SELECT fooditem.mn_column INTO the_mn_value
-                    FROM fooditem 
-                    WHERE mn_column IS NOT NULL;
-                   
-                    RAISE NOTICE 'the_mn_value: %', the_mn_value;
+--                    SELECT fooditem.mn_column INTO the_mn_value
+--                    FROM fooditem 
+--                    WHERE mn_column IS NOT NULL;
+--                   
+--                    RAISE NOTICE 'the_mn_value: %', the_mn_value;
                 
 --                    EXECUTE 
 --                        
 --                        
                         
-                    execute '
-                        select ' || mn_column || ' 
-                        from fooditem
-----        where ' || mn_column || ' is not null
-----        and other criteria' into mn_value;
---
---                        
+--                    execute '
+--                        select ' || mn_column || ' 
+--                        from fooditem
+------        where ' || mn_column || ' is not null
+------        and other criteria' into mn_value;
+----
+----                        
                         
 --        consumption_item_id integer,
 --        mn_id               integer,

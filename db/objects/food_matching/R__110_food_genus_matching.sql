@@ -23,8 +23,19 @@ $code$
         household_location geometry;
         fct_entry record;
         fct_entry_id int;
+        micronutrient_columns text[];
     BEGIN
         RAISE NOTICE 'running funtion';
+    
+        -- grab the list of micronutrient columns for the fodoitem table
+        SELECT ARRAY(
+            SELECT fooditem_column INTO micronutrient_columns
+                FROM micronutrient
+        )
+        ;
+        RAISE NOTICE '%', micronutrient_columns;
+    
+    
         -- initialize the household location - since many food consumption entries share a location, we don't want to re-calculate the best food compositon table for each one
         -- for each consumption item  (household+individual vs country?):
         FOR consumption_item IN

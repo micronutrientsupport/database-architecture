@@ -24,6 +24,9 @@ $code$
         fct_entry record;
         fct_entry_id int;
         micronutrient_columns text[];
+        mn_column TEXT;
+        the_mn TEXT;
+        used_fct_id int;
     BEGIN
         RAISE NOTICE 'running funtion';
     
@@ -33,7 +36,7 @@ $code$
                 FROM micronutrient
         )
         ;
-        RAISE NOTICE '%', micronutrient_columns;
+        RAISE NOTICE 'list of mirconutrients%', micronutrient_columns;
     
     
         -- initialize the household location - since many food consumption entries share a location, we don't want to re-calculate the best food compositon table for each one
@@ -62,23 +65,53 @@ $code$
 
         -- grab fooditem values via food_genus
 
-            -- for each fct entry for this fooditem/household, starting with the best:
-            RAISE NOTICE '%', fct_list;
-            FOREACH fct_entry_id IN ARRAY fct_list LOOP
-                -- match this consumption items' food genus to the matching food genus in this food composition table. If there's no match in tis FCT, try the next one.
-                SELECT  * INTO fct_entry
-                FROM fooditem
-                WHERE fooditem.fct_source_id = fct_entry_id
-                AND consumption_item.food_genus_id = fooditem.food_genus_id
-                ;
-            RAISE NOTICE '%', fct_entry;
---                 FOR EACH OF the muicronutrients:
---                    check if ti has a value; 
---                        if it does, grab; 
---                        if it doesnt, got to the next FCT
+            RAISE NOTICE 'fct_list for this consumption item(% -- %) %', consumption_item.food_genus_id, consumption_item.original_food_name, fct_list;
         
-                EXIT WHEN fct_entry.id IS NOT NULL;
-            END LOOP;
+--            FOR Micronutrient, loop through the fcts and find the first one with actual data 
+            FOREACH mn_column IN ARRAY micronutrient_columns LOOP
+--            VitaminA_in_RAE_in_mcg
+                
+                -- for each fct entry for this fooditem/household, starting with the best:
+                FOREACH fct_entry_id IN ARRAY fct_list LOOP
+                    -- match this consumption items' food genus to the matching food genus in this food composition table. If there's no match in tis FCT, try the next one.
+                    SELECT * INTO fct_entry
+                    FROM fooditem
+                    WHERE fooditem.fct_source_id = fct_entry_id
+                    AND consumption_item.food_genus_id = fooditem.food_genus_id
+                    AND mn_column IS NOT NULL
+                    ;
+                    RAISE NOTICE 'mn: % --- fct_id: %', mn_column, fct_entry_id ;
+                    RAISE NOTICE 'fct_entry: %', fct_entry;
+                    -- grab the vitamin a values and the fct_id
+                    -- TODO: actually grab
+                    
+--                    the_mn := fct_entry.mn_column 
+                
+                    EXIT WHEN fct_entry.id IS NOT NULL; 
+                    
+                END LOOP;
+                    
+            END LOOP;       
+                
+                
+                
+                
+--                    FOREACH mn_column IN ARRAY micronutrient_columns LOOP
+--                        IF fct_entry.Zn_in_mg IS NOT NULL THEN
+--                            RAISE NOTICE 'not null mn %', mn_column;
+--                        END IF;
+    --                 FOR EACH OF the muicronutrients:
+    --                    check if ti has a value; 
+    --                        if it does, grab; 
+    --                        if it doesnt, got to the next FCT
+                    
+--                    table of food composition (all the micronutrients) for each food genus. But with gaps filled. AND(!) a list of FCT ids of where the gap filling comes from
+                    
+--                    END LOOP;
+--                END IF;
+        
+--                EXIT WHEN fct_entry.id IS NOT NULL;
+--            END LOOP;
         
         
         

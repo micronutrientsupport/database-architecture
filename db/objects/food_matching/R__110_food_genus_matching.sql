@@ -63,11 +63,22 @@ $code$
         -- grab fooditem values via food_genus
 
             -- for each fct entry for this fooditem/household, starting with the best:
---            RAISE NOTICE '%', fct_list;
---            FOREACH fct_entry_id IN ARRAY fct_list LOOP
---            
---                RAISE NOTICE 'bla %', fct_entry_id;
---            END LOOP;
+            RAISE NOTICE '%', fct_list;
+            FOREACH fct_entry_id IN ARRAY fct_list LOOP
+                -- match this consumption items' food genus to the matching food genus in this food composition table. If there's no match in tis FCT, try the next one.
+                SELECT  * INTO fct_entry
+                FROM fooditem
+                WHERE fooditem.fct_source_id = fct_entry_id
+                AND consumption_item.food_genus_id = fooditem.food_genus_id
+                ;
+            RAISE NOTICE '%', fct_entry;
+--                 FOR EACH OF the muicronutrients:
+--                    check if ti has a value; 
+--                        if it does, grab; 
+--                        if it doesnt, got to the next FCT
+        
+                EXIT WHEN fct_entry.id IS NOT NULL;
+            END LOOP;
         
         
         
@@ -89,7 +100,7 @@ $code$
 
 --                    IF yes, get that micronutrient from the next best FCT and repeat this check
 
-        RAISE NOTICE 'fct_list %,household_id %,', fct_list[0+1], the_household_id;
+        RAISE NOTICE 'orignal food name: % fct_list %,household_id %,', consumption_item.original_food_name, fct_list[0+1], the_household_id;
 
         END LOOP;
 

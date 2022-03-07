@@ -24,26 +24,59 @@ $code$
         fct_entry record;
         fct_entry_id int;
         micronutrient_columns text[];
+        micronutrient_ids integer[];
         mn_column TEXT;
         the_mn TEXT;
+        the_mn_value NUMERIC;
         used_fct_id int;
+    
+        declare
+        cur_mn  cursor for 
+            select * 
+            from micronutrient;
+        
+    
+    
     BEGIN
         RAISE NOTICE 'running funtion';
     
-        -- grab the list of micronutrient columns for the fodoitem table
-        SELECT ARRAY(
-            SELECT fooditem_column INTO micronutrient_columns
-                FROM micronutrient
-        )
-        ;
+--         grab the list of micronutrient columns for the fodoitem table
+--        SELECT ARRAY(
+--            SELECT fooditem_column INTO micronutrient_columns
+--                FROM micronutrient
+--                ORDER BY id
+--        )
+--        ;
+--        SELECT ARRAY(
+--            SELECT fooditem_column INTO micronutrient_columns
+--                FROM micronutrient
+--                ORDER BY id
+--        )
+--        ;
+--    
+        
+        
+    
         RAISE NOTICE 'list of mirconutrients%', micronutrient_columns;
     
+    
+        DROP TABLE IF EXISTS consumption_compostion_matching;
+        CREATE TABLE consumption_compostion_matching (
+        consumption_item_id integer,
+        mn_id               integer,
+        mn_value            NUMERIC,
+        fct_used            integer
+        );
+
+    
+
     
         -- initialize the household location - since many food consumption entries share a location, we don't want to re-calculate the best food compositon table for each one
         -- for each consumption item  (household+individual vs country?):
         FOR consumption_item IN
             SELECT
-             food_genus_id
+            household_consumption.id
+             , food_genus_id
              , household.id AS household_id
              , LOCATION
              , food_genus_id
@@ -68,7 +101,14 @@ $code$
             RAISE NOTICE 'fct_list for this consumption item(% -- %) %', consumption_item.food_genus_id, consumption_item.original_food_name, fct_list;
         
 --            FOR Micronutrient, loop through the fcts and find the first one with actual data 
-            FOREACH mn_column IN ARRAY micronutrient_columns LOOP
+        
+        
+    
+
+        
+        
+            FOR mn_record IN cur_mn  LOOP
+--            FOREACH mn_column IN ARRAY micronutrient_columns LOOP
 --            VitaminA_in_RAE_in_mcg
                 
                 -- for each fct entry for this fooditem/household, starting with the best:
@@ -85,6 +125,40 @@ $code$
                     -- grab the vitamin a values and the fct_id
                     -- TODO: actually grab
                     
+--                    INSERT INTO consumption_compostion_matching (
+--                        consumption_item_id,
+--                        mn_id     ,
+--                        mn_value  ,
+--                        fct_used             
+--                    )
+--                    VALUES(
+--                        consumption_item.id,
+                        
+                
+                    SELECT fooditem.mn_column INTO the_mn_value
+                    FROM fooditem 
+                    WHERE mn_column IS NOT NULL;
+                   
+                    RAISE NOTICE 'the_mn_value: %', the_mn_value;
+                
+--                    EXECUTE 
+--                        
+--                        
+                        
+                    execute '
+                        select ' || mn_column || ' 
+                        from fooditem
+----        where ' || mn_column || ' is not null
+----        and other criteria' into mn_value;
+--
+--                        
+                        
+--        consumption_item_id integer,
+--        mn_id               integer,
+--        mn_value            NUMERIC,
+--        fct_used            integer                 
+                        
+                        
 --                    SELECT mn_column INTO the_mn
 --                    FROM 
                 --                    the_mn := fct_entry.mn_column; 
@@ -94,14 +168,8 @@ $code$
                 END LOOP;
                     
             END LOOP;       
-                
---{
---vitamin_a: 39,
---vit_b: 29,
---list_of fcts_used: {21,24}
---
---}
---                
+  
+            
                 
 --                    FOREACH mn_column IN ARRAY micronutrient_columns LOOP
 --                        IF fct_entry.Zn_in_mg IS NOT NULL THEN
@@ -116,6 +184,8 @@ $code$
                     
 --                    END LOOP;
 --                END IF;
+        
+
         
 --                EXIT WHEN fct_entry.id IS NOT NULL;
 --            END LOOP;
@@ -159,7 +229,7 @@ $code$
 
 
         RETURN QUERY
-            SELECT 1, 'a vitamin'  3., 21;
+            SELECT 1, 'a vitamin',  3.02 , 21;
 
     END;
 $code$
@@ -167,3 +237,4 @@ $code$
 
  SELECT * FROM 	match_consumption_to_composition();
 
+ 

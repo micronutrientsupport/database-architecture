@@ -1,5 +1,6 @@
 create or replace view biomarker_threshold_list as
-select 
+select
+	threshold_id,
 	biomarker_id,
 	group_id,
 	conditional_info as condition_text,
@@ -11,6 +12,7 @@ select
 		'ageInMonths',
 		condition_age_in_months
 	)) as condition,
+	threshold_type,
 	source,
 	matrix,
 	lower_threshold,

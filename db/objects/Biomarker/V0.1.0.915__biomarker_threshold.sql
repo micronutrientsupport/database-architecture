@@ -25,8 +25,8 @@ COMMENT on column biomarker_threshold.matrix           is 'Biomarker sample matr
 COMMENT on column biomarker_threshold.lower_threshold  is 'Value of the lower threshold for th is biomarker type';
 COMMENT on column biomarker_threshold.upper_threshold  is 'Value of the upper threshold for th is biomarker type';
 COMMENT on column biomarker_threshold.comments         is 'Any additional comments about the threshold';
-COMMENT on column condition_time_of_day_sampled        is 'Required value of the time_of_day_sampled field for the threshold to be applicable';
-COMMENT on column condition_was_fasting                is 'Required value of the was_fasting field for the threshold to be applicable';
-COMMENT on column condition_age_in_months              is 'Required value of the age_in_months field for the threshold to be applicable';
+COMMENT on column biomarker_threshold.condition_time_of_day_sampled        is 'Required value of the time_of_day_sampled field for the threshold to be applicable';
+COMMENT on column biomarker_threshold.condition_was_fasting                is 'Required value of the was_fasting field for the threshold to be applicable';
+COMMENT on column biomarker_threshold.condition_age_in_months              is 'Required value of the age_in_months field for the threshold to be applicable';
 
 

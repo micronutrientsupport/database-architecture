@@ -30,44 +30,53 @@ begin
 
     );
 
-    for consumption_rec in
-        select
-            row_number() over () as id
-            , consumption_items.*
-        from
-        (
-        SELECT
-             hc.food_genus_id
-             , hc.id AS household_consumption_id
-             , NULL AS household_member_consumption_id
-             , h.id AS household_id
-             , h.LOCATION
-             , hc.original_food_name
-             -- , ARRAY(SELECT * FROM get_fct_list(h.location)) as fct_list
-            FROM
-                household_consumption hc
-                join household h
-                on hc.household_id = h.id
-            WHERE
-                household_id =1 -- TODO: remove!!
+    for consumption_rec IN
+    
+        WITH consumption AS (
+            select
+                row_number() over () as consumtpion_item_id
+                , consumption_items.*
+            from
+            (
+            SELECT
+                 hc.food_genus_id
+                 , hc.id AS household_consumption_id
+                 , NULL AS household_member_consumption_id
+                 , h.id AS household_id
+                 , h.LOCATION
+                 , hc.original_food_name
+                 -- , ARRAY(SELECT * FROM get_fct_list(h.location)) as fct_list
+                FROM
+                    household_consumption hc
+                    join household h
+                    on hc.household_id = h.id
+                WHERE 1=1
+    --                AND household_id < 10 -- TODO: remove!!
             union all
-
-        select
-               hmc.food_genus_id
-             , NULL AS household_consumption_id
-             , hmc.id AS household_member_consumption_id
-             , hh.id AS household_id
-             , hh.LOCATION
-             , hmc.original_food_name
-             -- , ARRAY(SELECT * FROM get_fct_list(h.location)) as fct_list
-            FROM
-            household_member_consumption hmc
-            join household_member hhm
-            on hhm.id = hmc.household_member_id
-            join household hh
-            on hhm.household_id = hh.id
-         ) as consumption_items
-         limit 20 -- TODO remove this to get all data
+            select
+                   hmc.food_genus_id
+                 , NULL AS household_consumption_id
+                 , hmc.id AS household_member_consumption_id
+                 , hh.id AS household_id
+                 , hh.LOCATION
+                 , hmc.original_food_name
+                 -- , ARRAY(SELECT * FROM get_fct_list(h.location)) as fct_list
+                FROM
+                household_member_consumption hmc
+                join household_member hhm
+                on hhm.id = hmc.household_member_id
+                join household hh
+                on hhm.household_id = hh.id
+             ) as consumption_items
+             limit 20000 -- TODO remove this to get all DATA
+        ),
+        micronutrient AS (
+            SELECT id AS micronutrient_id, * 
+            FROM micronutrient
+        )
+        SELECT * FROM
+        consumption CROSS JOIN micronutrient
+ 
     loop
 
         -- grab the household - since the location won't change between consumption items, we don't need to look up the best FCt for every item
@@ -80,33 +89,34 @@ begin
                 );
             END IF;
 
-        RAISE NOTICE 'fct_list for consumption item %: %', consumption_rec.id, fct_list;
+--        RAISE NOTICE 'fct_list for consumption item %: %', consumption_rec.id, fct_list;
 
-        for mn_rec in select * from micronutrient loop
+--        for mn_rec in select * from micronutrient loop
         
-            RAISE NOTICE 'micronutrient: %', mn_rec.name;
+--            RAISE NOTICE 'micronutrient: %', mn_rec.name;
 
             FOREACH fct_id IN ARRAY fct_list LOOP
             
             have_found_fct_entry := FALSE;
 
-                RAISE NOTICE 'fct_list item: %', fct_id;
+--                RAISE NOTICE 'fct_list item: %', fct_id;
 
                 -- grabs the food composition data
                 execute '
                     select
                         original_food_name,
-                        ''' || mn_rec.name || ''' as micronutrient_name,
-                        ' || mn_rec.fooditem_column || ' as thevalue
+                        ''' || consumption_rec.name || ''' as micronutrient_name,
+                        ' || consumption_rec.fooditem_column || ' as thevalue
                     from fooditem
                     where
                         fct_source_id = ' || fct_id || '
                         and food_genus_id = ''' || consumption_rec.food_genus_id || '''
-                        and ' || mn_rec.fooditem_column || ' is not null'
+                        and ' || consumption_rec.fooditem_column || ' is not null'
                 into fooditem_rec;
 
-                if fooditem_rec.micronutrient_name is not null then
-                    RAISE NOTICE 'fooditem_rec: %', fooditem_rec;
+                if fooditem_rec.micronutrient_name is not null THEN
+                
+--                    RAISE NOTICE 'fooditem_rec: %', fooditem_rec;
                 
                     have_found_fct_entry := TRUE;
 
@@ -122,8 +132,8 @@ begin
                     )
                     values
                     (
-                        consumption_rec.id,
-                        mn_rec.id,
+                        consumption_rec.consumtpion_item_id,
+                        consumption_rec.micronutrient_id,
                         fooditem_rec.thevalue,
                         fct_id,
                         consumption_rec.household_id,
@@ -138,7 +148,7 @@ begin
                 
                 end if;
 
-            end loop;
+--            end loop;
             
             IF NOT have_found_fct_entry THEN
                
@@ -154,8 +164,8 @@ begin
                 )
                 values
                 (
-                    consumption_rec.id,
-                    mn_rec.id,
+                    consumption_rec.consumtpion_item_id,
+                    consumption_rec.micronutrient_id,
                     NULL,
                     NULL,
                     consumption_rec.household_id,

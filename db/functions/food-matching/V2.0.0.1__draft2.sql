@@ -11,20 +11,7 @@ declare
 fct_id int;
 fooditem_rec record;
 mn_rec record;
-
-consumption_cur  cursor for 
- SELECT
-               hc.id
-             , hc.food_genus_id
-             , h.id AS household_id
-             , h.LOCATION
-             , hc.original_food_name
-             , ARRAY(SELECT * FROM get_fct_list(h.location)) as fct_list
-            FROM 
-            household_consumption hc
-            join household h
-            on hc.household_id = h.id
-            LIMIT 20; --TODO: remove to do all of them
+consumption_rec record;
             
 begin
 	
@@ -36,8 +23,51 @@ begin
     fct_used            integer
     );
 
-    for consumption_rec in consumption_cur loop
+    for consumption_rec in 
+    	    	select 
+    		row_number() over () as rownum
+    		, consumption_items.*
+    	from 
+    	(
+    	SELECT
+             hc.food_genus_id
+             , h.id AS household_id
+             , h.LOCATION
+             , hc.original_food_name
+             -- , ARRAY(SELECT * FROM get_fct_list(h.location)) as fct_list
+            FROM 
+            household_consumption hc
+            join household h
+            on hc.household_id = h.id
+           
+            union all
+            
+        select 
+               hmc.food_genus_id
+             , hmc.id AS household_id
+             , hh.LOCATION
+             , hmc.original_food_name
+             -- , ARRAY(SELECT * FROM get_fct_list(h.location)) as fct_list
+            FROM 
+            household_member_consumption hmc
+            join household_member hhm 
+            on hhm.id = hmc.household_member_id 
+            join household hh
+            on hhm.household_id = hh.id
+         ) as consumption_items
+         limit 200 -- TODO remove this to get all data
+	 loop
     
+	 	-- grab the household - since the location won't change between consumption items, we don't need to look up the best FCt for every item
+            IF the_household_id != consumption_item.household_id OR the_household_id IS NULL THEN
+                the_household_id := consumption_item.household_id;
+                --# grab the best FCT to use for country/region for this food consumption item's household
+                fct_list := ARRAY(
+                    SELECT *
+                    FROM get_fct_list(consumption_item.location)
+                );
+            END IF;
+	
         RAISE NOTICE 'fct_list for consumption item %: %', consumption_rec.id, consumption_rec.fct_list;
        
          for mn_rec in
@@ -94,7 +124,7 @@ $code$
 
 SELECT * FROM 	match_consumption_test();
 
-select count(*) from consumption_compostion_matching; -- 380
+select * from consumption_compostion_matching; -- 3612
          
          
        

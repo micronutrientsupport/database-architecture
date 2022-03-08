@@ -14,52 +14,62 @@ mn_rec record;
 consumption_rec record;
 the_household_id int;
 fct_list integer[];
-            
+have_found_fct_entry boolean;
+
 begin
-    
+    -- TODO: change to a delete and replace instead, so that we can make other objects depend on this table
     DROP TABLE IF EXISTS consumption_compostion_matching;
     CREATE TABLE consumption_compostion_matching (
-    consumption_item_id integer,
-    mn_id               text,
-    mn_value            NUMERIC,
-    fct_used            integer
+        consumption_item_id             integer,
+        mn_id                           text,
+        mn_composition                  NUMERIC,
+        fct_used                        integer,
+        household_id                    integer,
+        household_consumption_id        integer,
+        household_member_consumption_id integer
+
     );
 
-    for consumption_rec in 
-                select 
+    for consumption_rec in
+        select
             row_number() over () as id
             , consumption_items.*
-        from 
+        from
         (
         SELECT
              hc.food_genus_id
+             , hc.id AS household_consumption_id
+             , NULL AS household_member_consumption_id
              , h.id AS household_id
              , h.LOCATION
              , hc.original_food_name
              -- , ARRAY(SELECT * FROM get_fct_list(h.location)) as fct_list
-            FROM 
-            household_consumption hc
-            join household h
-            on hc.household_id = h.id
-           
+            FROM
+                household_consumption hc
+                join household h
+                on hc.household_id = h.id
+            WHERE
+                household_id =1 -- TODO: remove!!
             union all
-            
-        select 
+
+        select
                hmc.food_genus_id
-             , hmc.id AS household_id
+             , NULL AS household_consumption_id
+             , hmc.id AS household_member_consumption_id
+             , hh.id AS household_id
              , hh.LOCATION
              , hmc.original_food_name
              -- , ARRAY(SELECT * FROM get_fct_list(h.location)) as fct_list
-            FROM 
+            FROM
             household_member_consumption hmc
-            join household_member hhm 
-            on hhm.id = hmc.household_member_id 
+            join household_member hhm
+            on hhm.id = hmc.household_member_id
             join household hh
             on hhm.household_id = hh.id
          ) as consumption_items
          limit 20 -- TODO remove this to get all data
-     loop
-    
+    loop
+
         -- grab the household - since the location won't change between consumption items, we don't need to look up the best FCt for every item
             IF the_household_id != consumption_rec.household_id OR the_household_id IS NULL THEN
                 the_household_id := consumption_rec.household_id;
@@ -69,64 +79,103 @@ begin
                     FROM get_fct_list(consumption_rec.location)
                 );
             END IF;
-    
+
         RAISE NOTICE 'fct_list for consumption item %: %', consumption_rec.id, fct_list;
-       
-         for mn_rec in
-            select * from micronutrient loop
+
+        for mn_rec in select * from micronutrient loop
         
             RAISE NOTICE 'micronutrient: %', mn_rec.name;
+
+            FOREACH fct_id IN ARRAY fct_list LOOP
             
-            FOREACH fct_id IN ARRAY fct_list loop
-            
+            have_found_fct_entry := FALSE;
+
                 RAISE NOTICE 'fct_list item: %', fct_id;
-            
-                execute 'select original_food_name, 
-                ''' || mn_rec.name || ''' as micronutrient,
-                ' || mn_rec.fooditem_column || ' as thevalue
-                from fooditem
-                where 
-                fct_source_id = ' || fct_id || '
-                and food_genus_id = ''' || consumption_rec.food_genus_id || '''
-                and ' || mn_rec.fooditem_column || ' is not null'
+
+                -- grabs the food composition data
+                execute '
+                    select
+                        original_food_name,
+                        ''' || mn_rec.name || ''' as micronutrient_name,
+                        ' || mn_rec.fooditem_column || ' as thevalue
+                    from fooditem
+                    where
+                        fct_source_id = ' || fct_id || '
+                        and food_genus_id = ''' || consumption_rec.food_genus_id || '''
+                        and ' || mn_rec.fooditem_column || ' is not null'
                 into fooditem_rec;
+
+                if fooditem_rec.micronutrient_name is not null then
+                    RAISE NOTICE 'fooditem_rec: %', fooditem_rec;
                 
-                if fooditem_rec.micronutrient is not null then
-                    RAISE NOTICE 'fooditem_rec: %', fooditem_rec;   
-                
-                    insert into consumption_compostion_matching 
+                    have_found_fct_entry := TRUE;
+
+                    insert into consumption_compostion_matching
                     (
-                    consumption_item_id,
-                    mn_id, 
-                    mn_value,
-                    fct_used 
+                        consumption_item_id,
+                        mn_id,
+                        mn_composition,
+                        fct_used,
+                        household_id,
+                        household_consumption_id,
+                        household_member_consumption_id
                     )
-                    values 
+                    values
                     (
-                    consumption_rec.id, 
-                    mn_rec.id, 
-                    fooditem_rec.thevalue, 
-                    fct_id 
+                        consumption_rec.id,
+                        mn_rec.id,
+                        fooditem_rec.thevalue,
+                        fct_id,
+                        consumption_rec.household_id,
+                        consumption_rec.household_consumption_id,
+                        consumption_rec.household_member_consumption_id
                     );
-                   
-                   exit;
+                    
+                    -- if we find one, we can exit
+                    exit;
+
+
                 
-                end if; 
-            
+                end if;
+
             end loop;
-        
+            
+            IF NOT have_found_fct_entry THEN
+               
+                insert into consumption_compostion_matching
+                (
+                    consumption_item_id,
+                    mn_id,
+                    mn_composition,
+                    fct_used,
+                    household_id,
+                    household_consumption_id,
+                    household_member_consumption_id
+                )
+                values
+                (
+                    consumption_rec.id,
+                    mn_rec.id,
+                    NULL,
+                    NULL,
+                    consumption_rec.household_id,
+                    consumption_rec.household_consumption_id,
+                    consumption_rec.household_member_consumption_id
+                );
+            END IF;
+            
         end loop;
-    
+        
+
     end loop;
 
-end;       
-         
+end;
+
 $code$
 ;
 
 SELECT * FROM   match_consumption_micronutrients();
 
 select * from consumption_compostion_matching; -- 3612
-         
-         
-       
+
+

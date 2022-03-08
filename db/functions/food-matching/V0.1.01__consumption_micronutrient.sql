@@ -1,6 +1,6 @@
 -- DROP FUNCTION IF exists match_consumption_test();
 
-CREATE OR REPLACE FUNCTION match_consumption_test()
+CREATE OR REPLACE FUNCTION match_consumption_micronutrients()
 RETURNS void
 LANGUAGE plpgsql
 AS
@@ -12,6 +12,8 @@ fct_id int;
 fooditem_rec record;
 mn_rec record;
 consumption_rec record;
+the_household_id int;
+fct_list integer[];
             
 begin
 	
@@ -25,7 +27,7 @@ begin
 
     for consumption_rec in 
     	    	select 
-    		row_number() over () as rownum
+    		row_number() over () as id
     		, consumption_items.*
     	from 
     	(
@@ -55,27 +57,27 @@ begin
             join household hh
             on hhm.household_id = hh.id
          ) as consumption_items
-         limit 200 -- TODO remove this to get all data
+         limit 20 -- TODO remove this to get all data
 	 loop
     
 	 	-- grab the household - since the location won't change between consumption items, we don't need to look up the best FCt for every item
-            IF the_household_id != consumption_item.household_id OR the_household_id IS NULL THEN
-                the_household_id := consumption_item.household_id;
+            IF the_household_id != consumption_rec.household_id OR the_household_id IS NULL THEN
+                the_household_id := consumption_rec.household_id;
                 --# grab the best FCT to use for country/region for this food consumption item's household
                 fct_list := ARRAY(
                     SELECT *
-                    FROM get_fct_list(consumption_item.location)
+                    FROM get_fct_list(consumption_rec.location)
                 );
             END IF;
 	
-        RAISE NOTICE 'fct_list for consumption item %: %', consumption_rec.id, consumption_rec.fct_list;
+        RAISE NOTICE 'fct_list for consumption item %: %', consumption_rec.id, fct_list;
        
          for mn_rec in
         	select * from micronutrient loop
         
         	RAISE NOTICE 'micronutrient: %', mn_rec.name;
         	
-        	FOREACH fct_id IN ARRAY consumption_rec.fct_list loop
+        	FOREACH fct_id IN ARRAY fct_list loop
         	
         		RAISE NOTICE 'fct_list item: %', fct_id;
         	
@@ -122,7 +124,7 @@ end;
 $code$
 ;
 
-SELECT * FROM 	match_consumption_test();
+SELECT * FROM 	match_consumption_micronutrients();
 
 select * from consumption_compostion_matching; -- 3612
          

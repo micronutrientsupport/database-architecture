@@ -10,7 +10,13 @@ select
 		'wasFasting',
 		condition_was_fasting,
 		'ageInMonths',
-		condition_age_in_months
+		condition_age_in_months,
+		'sex',
+		condition_sex,
+		'is_adjusted_for_smoking',
+		condition_is_adjusted_for_smoking,
+		'is_adjusted_for_altitude',
+		condition_is_adjusted_for_altitude
 	)) as condition,
 	threshold_type,
 	source,

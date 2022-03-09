@@ -8,6 +8,7 @@ select
     , hh.urbanity
     , hh.altitude_in_metres
 	, hm.age_in_months
+	, hm.sex
 	, hm.is_pregnant
 	, hm.is_smoker
 	, bm.was_fasting

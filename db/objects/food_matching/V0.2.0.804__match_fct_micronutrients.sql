@@ -55,8 +55,7 @@ BEGIN
 	select 
 		id, 
 		ARRAY(SELECT * FROM get_fct_list(location))
-	from household
-	where id < 10; -- TODO -remove for all data
+	from household; 
 
 	-- create distinct_fct_list table
 	RAISE NOTICE 'Creating distinct_fct_list table...';
@@ -91,13 +90,9 @@ BEGIN
 
 	 loop
 	 
-	 	--RAISE NOTICE 'fct_list_rec: %', fct_list_rec;
-	 
        	have_found_fct_entry := FALSE; 
       
 	 	FOREACH fct_id IN ARRAY fct_list_rec.fct_list::int[] loop
-	 	
-	 			--RAISE NOTICE 'fct_id: %', fct_id;
         	
 	        	execute 'select original_food_name, 
 				''' || fct_list_rec.micronutrient || ''' as micronutrient,
@@ -110,8 +105,6 @@ BEGIN
 				into fooditem_rec;
 	        	
 				if fooditem_rec.micronutrient is not null THEN
-                
-                    --RAISE NOTICE 'fooditem_rec: %', fooditem_rec;
                 
                     have_found_fct_entry := TRUE;
 
@@ -140,8 +133,6 @@ BEGIN
             end loop;
             
             IF NOT have_found_fct_entry THEN
-               
-            	--RAISE NOTICE 'inserting null';
             
                 insert into fct_list_food_composition
                 (
@@ -160,8 +151,6 @@ BEGIN
                         null
                 );
             END IF;
-			
-        	--end loop;
     
     end loop;
    
@@ -172,21 +161,21 @@ BEGIN
 	RAISE NOTICE 'Populating final results table...';
 	
 	INSERT INTO consumption_composition_match
-	(food_genus_id,
-	household_id,
-	household_member_id,
-	fct_list,
-	micronutrient_id,
-	micronutrient_composition,
-	fct_used)
+        (food_genus_id,
+        household_id,
+        household_member_id,
+        fct_list,
+        micronutrient_id,
+        micronutrient_composition,
+        fct_used)
 	select 
-	ci.food_genus_id,
-	ci.household_id,
-	ci.household_member_id,
-	ci.fct_list,
-	ccm.micronutrient_id,
-	ccm.micronutrient_composition,
-	ccm.fct_used
+        ci.food_genus_id,
+        ci.household_id,
+        ci.household_member_id,
+        ci.fct_list,
+        ccm.micronutrient_id,
+        ccm.micronutrient_composition,
+        ccm.fct_used
 	from 
 		(
 		select 
@@ -230,8 +219,6 @@ BEGIN
 RAISE NOTICE 'End.';
 	
 end;   
-
-
          
 $code$
 ;

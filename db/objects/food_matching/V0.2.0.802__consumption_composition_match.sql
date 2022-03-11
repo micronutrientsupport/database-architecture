@@ -18,7 +18,6 @@ COMMENT on column consumption_composition_match.fct_list is 'Prioritised list of
 COMMENT on column consumption_composition_match.food_genus_id is 'Identifier for the food item from fooditem table';
 COMMENT on column consumption_composition_match.micronutrient_id is 'Micronutrient identifier';
 COMMENT on column consumption_composition_match.micronutrient_composition is 'Amount of this micronutrient typically found in this food item';
-COMMENT on column fct_list_food_compostion.fooditem_column is 'Name of food item';
 COMMENT on column consumption_composition_match.fct_used is 'Which FCT is the source of the micronutrient_composition value in this record';  
 
 comment on column consumption_composition_match.household_id is 'Identifier for the household';

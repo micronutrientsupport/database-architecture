@@ -1,9 +1,13 @@
+
+
 -- drop table intervention_cell_formula;
 
 create table intervention_cell_formula
 (
-intervention_id     integer,
-cell_reference      text,
+file_name             text,
+intervention_id       integer,
+row_index 			  integer,
+cell_reference        text,
 cell_formula_0        text,
 cell_formula_1        text,
 cell_formula_2        text,

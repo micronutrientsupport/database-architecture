@@ -27,7 +27,6 @@ VALUES
     ('I'            , 'Iodine'        , 'mineral' , 'mcg'   , 'Description for Iodine'                      , 'I_in_mcg'                   , '0' , NULL          , '1' , '1') ,
     ('N'            , 'Nitrogen'      , 'mineral' , 'g'     , 'Description for Nitrogen'                    , 'Nitrogen_in_g '             , '0' , NULL          , '1' , '0') ,
     ('Se'           , 'Selenium'      , 'mineral' , 'mcg'   , 'Description for Selenium'                    , 'Se_in_mcg'                  , '0' , NULL          , '1' , '0') ,
-    -- ('Starch'       , 'Starch'        , 'other'   , 'g'     , 'Description for Starch'                      , 'Starch_in_g'                , '0' , NULL          , '1' , '0') ,
     ('Ash'          , 'Ash'           , 'other'   , 'g'     , 'Description for Ash'                         , 'Ash_in_g'                   , '0' , NULL          , '1' , '0') ,
     ('Fibre'        , 'Fibre'         , 'other'   , 'g'     , 'Description for Fibre'                       , 'Fibre_in_g'                 , '0' , NULL          , '1' , '0') ,
     ('Carbohydrates', 'Carbhohydrates', 'other'   , 'g'     , 'Description for Carbohydrates'               , 'carbohydrates_in_g'         , '0' , NULL          , '1' , '0') ,

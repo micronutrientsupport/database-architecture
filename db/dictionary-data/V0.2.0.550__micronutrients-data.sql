@@ -35,3 +35,7 @@ VALUES
     ('Fat'                                    , 'Total Fats'                  , 'other'   , 'g'     , 'Description for Fats'                        , 'TotalFats_in_g'             , '0' , NULL          , '1' , '0', '1') ,
     ('Energy'                                 , 'Energy'                      , 'other'   , 'kCal'  , 'Description for Energy'                      , 'Energy_in_kCal'             , '0' , NULL          , '1' , '0', '1') ,
     ('Moisture'                               , 'Moisture'                    , 'other'   , 'g'     , 'Descriptiom for Moisture'                    , 'Moisture_in_g'              , '0' , NULL          , '1' , '0', '1') ,
+    ('Energy_in_kJ'                           , 'Energy in kJ'                , 'other'   , 'kJ'    , ''                                            , 'Energy_in_kJ'               , '0' , NULL          , '1' , '0', '0') ,
+    ('MUFA'                                   , 'Monounsaturated Fatty Acids' , 'other'   , 'g'     , ''                                            , 'MonounsaturatedFA_in_g'     , '0' , NULL          , '1' , '0', '0') ,
+    ('PUFA'                                   , 'Polyunsaturated Fatty Acids' , 'other'   , 'g'     , ''                                            , 'PolyunsaturatedFA_in_g'     , '0' , NULL          , '1' , '0', '0') ,
+    ('SAFA'                                   , 'Saturated Fatty Acids'       , 'other'   , 'g'     , ''                                            , 'SaturatedFA_in_g'           , '0' , NULL          , '1' , '0', '0')

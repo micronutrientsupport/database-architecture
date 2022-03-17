@@ -69,10 +69,10 @@ SELECT
     , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Fat'           ) as TotalFats_in_g
     , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Energy'        ) as Energy_in_kCal
     , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Moisture'      ) as Moisture_in_g
-    , NULL::numeric as Energy_in_kJ           -- TODO: When these are added to the micronutrient table, update this view to forward the data
-    , NULL::numeric as MonounsaturatedFA_in_g -- TODO: When these are added to the micronutrient table, update this view to forward the data
-    , NULL::numeric as PolyunsaturatedFA_in_g -- TODO: When these are added to the micronutrient table, update this view to forward the data
-    , NULL::numeric as SaturatedFA_in_g       -- TODO: When these are added to the micronutrient table, update this view to forward the data
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Energy_in_kJ'  ) as Energy_in_kJ
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'MUFA'          ) as MonounsaturatedFA_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'PUFA'          ) as PolyunsaturatedFA_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'SAFA'          ) as SaturatedFA_in_g
 FROM household
 JOIN consumption_composition_match AS ccm ON ccm.household_id = household.id
 LEFT JOIN consumption_items ci ON household.id = ci.household_id AND ci.food_genus_id = ccm.food_genus_id

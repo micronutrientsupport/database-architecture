@@ -13,9 +13,9 @@ select
 		condition_age_in_months,
 		'sex',
 		condition_sex,
-		'is_adjusted_for_smoking',
+		'isAdjustedForSmoking',
 		condition_is_adjusted_for_smoking,
-		'is_adjusted_for_altitude',
+		'isAdjustedForAltitude',
 		condition_is_adjusted_for_altitude
 	)) as condition,
 	threshold_type,

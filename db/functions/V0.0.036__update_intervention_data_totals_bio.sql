@@ -20,6 +20,9 @@ begin
 	select file_name, food_vehicle_id into f_name, fv_id
 	from intervention where id = int_id;
 
+	RAISE NOTICE 'f_name: %', f_name;
+	RAISE NOTICE 'fv_id: %', fv_id;
+
 
 
 --C1		E1 =D1+1	F1 =E1+1	G1 =F1+1	H1 =G1+1
@@ -35,6 +38,8 @@ begin
 	where file_name = f_name 
 	and food_vehicle_id = fv_id;
 
+	RAISE NOTICE 'num_var: %', num_var;
+
 	for i in 0 .. 9 loop
     
         cells_all := cells_all || to_json_null('11_' || i::text, num_var::numeric);
@@ -47,6 +52,8 @@ begin
 	from fortification_targeting
 	where file_name = f_name 
 	and food_vehicle_id = fv_id;
+
+	RAISE NOTICE 'num_var: %', num_var;
 
 	for i in 0 .. 9 loop
     
@@ -67,7 +74,7 @@ begin
    ip.year_7 * ft.regional_share as year_7,
    ip.year_8 * ft.regional_share as year_8,
    ip.year_9 * ft.regional_share as year_9
-   -- into rec_var
+   into rec_var
    from
    (select *
    from impact_projections
@@ -78,6 +85,8 @@ begin
 	from fortification_targeting
 	where file_name = f_name 
 	and food_vehicle_id = fv_id) ft;
+
+	RAISE NOTICE 'rec_var: %', rec_var;
     
 	cells_all := cells_all || to_json_null('13_0', rec_var.year_0);
 	cells_all := cells_all || to_json_null('13_1', rec_var.year_1);
@@ -104,29 +113,159 @@ begin
 --C17		E17 =D17	F17 =E17	G17 =F17	H17 =G17
 --C18		E18 =D18	F18 =E18	G18 =F18	H18 =G18
 --C19	D19 =1-SUM(D16:D18)	E19 =1-SUM(E16:E18)	F19 =1-SUM(F16:F18)	G19 =1-SUM(G16:G18)	H19 =1-SUM(H16:H18)
+   
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('19_' || i::text, 
+	    1 - ((cells_all->>('16_' || i)::text)::numeric +
+	    (cells_all->>('17_' || i)::text)::numeric +
+	    (cells_all->>('18_' || i)::text)::numeric));
+	end loop;	
+   
 --C20	D20 =D$15*D16	E20 =E$15*E16	F20 =F$15*F16	G20 =G$15*G16	H20 =H$15*H16
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('20_' || i::text, 
+	    (cells_all->>('15_' || i)::text)::numeric *
+	    (cells_all->>('16_' || i)::text)::numeric);
+	end loop;	
+
 --C21	D21 =D$15*D17	E21 =E$15*E17	F21 =F$15*F17	G21 =G$15*G17	H21 =H$15*H17
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('21_' || i::text, 
+	    (cells_all->>('15_' || i)::text)::numeric *
+	    (cells_all->>('17_' || i)::text)::numeric);
+	end loop;
+
 --C22	D22 =D$15*D18	E22 =E$15*E18	F22 =F$15*F18	G22 =G$15*G18	H22 =H$15*H18
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('22_' || i::text, 
+	    (cells_all->>('15_' || i)::text)::numeric *
+	    (cells_all->>('18_' || i)::text)::numeric);
+	end loop;
+
 --C23	D23 =D$15*D19	E23 =E$15*E19	F23 =F$15*F19	G23 =G$15*G19	H23 =H$15*H19
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('23_' || i::text, 
+	    (cells_all->>('15_' || i)::text)::numeric *
+	    (cells_all->>('19_' || i)::text)::numeric);
+	end loop;
+
 --C27	D27 =D20*D5	E27 =E20*E5	F27 =F20*F5	G27 =G20*G5	H27 =H20*H5
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('27_' || i::text, 
+	    (cells_all->>('20_' || i)::text)::numeric *
+	    (cells_all->>('5_' || i)::text)::numeric);
+	end loop;
+
 --C29	D29 =D21*D6	E29 =E21*E6	F29 =F21*F6	G29 =G21*G6	H29 =H21*H6
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('29_' || i::text, 
+	    (cells_all->>('21_' || i)::text)::numeric *
+	    (cells_all->>('6_' || i)::text)::numeric);
+	end loop;
+
 --C31	D31 =D22*D7	E31 =E22*E7	F31 =F22*F7	G31 =G22*G7	H31 =H22*H7
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('31_' || i::text, 
+	    (cells_all->>('22_' || i)::text)::numeric *
+	    (cells_all->>('7_' || i)::text)::numeric);
+	end loop;
+
 --C33	D33 =D23*D8	E33 =E23*E8	F33 =F23*F8	G33 =G23*G8	H33 =H23*H8
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('33_' || i::text, 
+	    (cells_all->>('23_' || i)::text)::numeric *
+	    (cells_all->>('8_' || i)::text)::numeric);
+	end loop;
+
 --C35	D35 =D27+D29+D31+D33	E35 =E27+E29+E31+E33	F35 =F27+F29+F31+F33	G35 =G27+G29+G31+G33	H35 =H27+H29+H31+H33
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('35_' || i::text, 
+	    (cells_all->>('27_' || i)::text)::numeric +
+	    (cells_all->>('29_' || i)::text)::numeric +
+	    (cells_all->>('31_' || i)::text)::numeric +
+	    (cells_all->>('33_' || i)::text)::numeric);
+	end loop;
+
 --C36	D36 =D35/D15	E36 =E35/E15	F36 =F35/F15	G36 =G35/G15	H36 =H35/H15
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('36_' || i::text, 
+	    (cells_all->>('35_' || i)::text)::numeric /
+	    (cells_all->>('15_' || i)::text)::numeric);
+	end loop;
+
 --C39	D39 =301*0.00222	E39 =D39	F39 =E39	G39 =F39	H39 =G39
 --C40	D40 =254*0.00222	E40 =D40	F40 =E40	G40 =F40	H40 =G40
 --C41	D41 =362*0.00222	E41 =D41	F41 =E41	G41 =F41	H41 =G41
 --C42		E42 =D42	F42 =E42	G42 =F42	H42 =G42
 --C43	D43 =D$42-D39	E43 =E$42-E39	F43 =F$42-F39	G43 =G$42-G39	H43 =H$42-H39
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('43_' || i::text, 
+	    (cells_all->>('42_' || i)::text)::numeric -
+	    (cells_all->>('39_' || i)::text)::numeric);
+	end loop;
+
 --C44	D44 =D$42-D40	E44 =E$42-E40	F44 =F$42-F40	G44 =G$42-G40	H44 =H$42-H40
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('44_' || i::text, 
+	    (cells_all->>('42_' || i)::text)::numeric -
+	    (cells_all->>('40_' || i)::text)::numeric);
+	end loop;
+
 --C45	D45 =D$42-D41	E45 =E$42-E41	F45 =F$42-F41	G45 =G$42-G41	H45 =H$42-H41
+
+	for i in 0 .. 9 loop
+	   cells_all := cells_all || to_json_null('45_' || i::text, 
+	    (cells_all->>('42_' || i)::text)::numeric -
+	    (cells_all->>('41_' || i)::text)::numeric);
+	end loop;
+
 --C46	D46 =D$42	E46 =E$42	F46 =F$42	G46 =G$42	H46 =H$42
---C50	D50 =IF(D4="SU",200000*'GDP Deflators'!G62,0)				
---C51	D51 =IF(D4="BAU",0,15000)				
---C52	D52 =IF(D4="BAU",0,10000)				
---C53	D53 =IF(D4="SU", 10000,IF(D4="SC",5000,0))				
---C54	D54 =SUM(D50:D53)	E54 =SUM(E50:E53)	F54 =SUM(F50:F53)		
+--C50	D50 =IF(D4="SU",200000*'GDP Deflators'!G62,0)		
+
+--C51	D51 =IF(D4="BAU",0,15000)		
+
+	cells_all := cells_all || to_json_null('51_0'::text,
+	case 
+	when (cells_all->>'4_0')::numeric = 3 then 0
+	else 15000 end);
+
+--C52	D52 =IF(D4="BAU",0,10000)	
+
+	cells_all := cells_all || to_json_null('52_0'::text,
+	case 
+	when (cells_all->>'4_0')::numeric = 3 then 0
+	else 10000 end);
+
+--C53	D53 =IF(D4="SU", 10000,IF(D4="SC",5000,0))		
+
+	cells_all := cells_all || to_json_null('53_0'::text,
+	case 
+	when (cells_all->>'4_0')::numeric = 1 then 10000
+	when (cells_all->>'4_0')::numeric = 2 then 5000
+	else 0 end);
+
+--C54	D54 =SUM(D50:D53)	E54 =SUM(E50:E53)	F54 =SUM(F50:F53)	
+
+	for i in 0 .. 2 loop
+	   cells_all := cells_all || to_json_null('54_' || i::text, 
+	    (cells_all->>('50_' || i)::text)::numeric +
+	    (cells_all->>('51_' || i)::text)::numeric +
+	    (cells_all->>('52_' || i)::text)::numeric +
+	    (cells_all->>('53_' || i)::text)::numeric);
+	end loop;
+
 --C56		E56 =18460*'GDP Deflators'!L38	F56 =18460*'GDP Deflators'!L38		
 --C57		E57 =IF(D4="BAU",0,3)	F57 =IF(D4="BAU",0,3)		
 --C58	D58 =D56*D57	E58 =E56*E57	F58 =F56*F57		

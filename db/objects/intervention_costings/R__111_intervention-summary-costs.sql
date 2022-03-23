@@ -93,6 +93,6 @@ from
     summary_costs sc
     join summary_costs_discounted scd on sc.intervention_id = scd.intervention_id
     join discount_rate dr on dr.intervention_id = sc.intervention_id
-);
+;
 
 comment ON view intervention_summary_costs IS 'Extract summary cost total rows for a given intervention';

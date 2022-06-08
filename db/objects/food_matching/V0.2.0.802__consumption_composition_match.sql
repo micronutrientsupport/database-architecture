@@ -7,10 +7,13 @@ create table consumption_composition_match
     food_genus_id               text,
     household_id                integer,
     household_member_id         integer,
-    fct_list                    text,
+    fct_list_id                 integer,
     micronutrient_id            text,
     micronutrient_composition   numeric,
-    fct_used                    integer
+    fct_used                    integer,
+    CONSTRAINT consumption_composition_match_fk1
+    FOREIGN KEY(fct_list_id) 
+	REFERENCES distinct_fct_list(id)
 );
 
 COMMENT ON TABLE consumption_composition_match IS 'Table to store optimised match between food consumption and food composition';

@@ -2,53 +2,52 @@ CREATE OR REPLACE VIEW country_intake AS
 
 SELECT
         c.id as country_id
-        , fooditem.fct_source_id
+        , fct_list_id
         , data_source_id
-        , sum(Moisture_in_g                  / 100 * amount_consumed_in_g) as Moisture_in_g
-        , sum(Energy_in_kCal                 / 100 * amount_consumed_in_g) as Energy_in_kCal
-        , sum(Energy_in_kJ                   / 100 * amount_consumed_in_g) as Energy_in_kJ
-        , sum(Nitrogen_in_g                  / 100 * amount_consumed_in_g) as Nitrogen_in_g
-        , sum(TotalProtein_in_g              / 100 * amount_consumed_in_g) as TotalProtein_in_g
-        , sum(TotalFats_in_g                 / 100 * amount_consumed_in_g) as TotalFats_in_g
-        , sum(SaturatedFA_in_g               / 100 * amount_consumed_in_g) as SaturatedFA_in_g
-        , sum(MonounsaturatedFA_in_g         / 100 * amount_consumed_in_g) as MonounsaturatedFA_in_g
-        , sum(PolyunsaturatedFA_in_g         / 100 * amount_consumed_in_g) as PolyunsaturatedFA_in_g
-        , sum(Cholesterol_in_mg              / 100 * amount_consumed_in_g) as Cholesterol_in_mg
-        , sum(carbohydrates_in_g             / 100 * amount_consumed_in_g) as carbohydrates_in_g
-        , sum(Fibre_in_g                     / 100 * amount_consumed_in_g) as Fibre_in_g
-        , sum(Ash_in_g                       / 100 * amount_consumed_in_g) as Ash_in_g
-        , sum(Ca_in_mg                       / 100 * amount_consumed_in_g) as Ca_in_mg
-        , sum(Fe_in_mg                       / 100 * amount_consumed_in_g) as Fe_in_mg
-        , sum(Mg_in_mg                       / 100 * amount_consumed_in_g) as Mg_in_mg
-        , sum(P_in_mg                        / 100 * amount_consumed_in_g) as P_in_mg
-        , sum(K_in_mg                        / 100 * amount_consumed_in_g) as K_in_mg
-        , sum(Na_in_mg                       / 100 * amount_consumed_in_g) as Na_in_mg
-        , sum(Zn_in_mg                       / 100 * amount_consumed_in_g) as Zn_in_mg
-        , sum(Cu_in_mg                       / 100 * amount_consumed_in_g) as Cu_in_mg
-        , sum(Mn_in_mcg                      / 100 * amount_consumed_in_g) as Mn_in_mcg
-        , sum(I_in_mcg                       / 100 * amount_consumed_in_g) as I_in_mcg
-        , sum(Se_in_mcg                      / 100 * amount_consumed_in_g) as Se_in_mcg
-        , sum(VitaminA_in_RAE_in_mcg         / 100 * amount_consumed_in_g) as VitaminA_in_RAE_in_mcg
-        , sum(Thiamin_in_mg                  / 100 * amount_consumed_in_g) as Thiamin_in_mg
-        , sum(Riboflavin_in_mg               / 100 * amount_consumed_in_g) as Riboflavin_in_mg
-        , sum(Niacin_in_mg                   / 100 * amount_consumed_in_g) as Niacin_in_mg
-        , sum(VitaminB6_in_mg                / 100 * amount_consumed_in_g) as VitaminB6_in_mg
-        , sum(Folicacid_in_mcg               / 100 * amount_consumed_in_g) as Folicacid_in_mcg
-        , sum(Folate_in_mcg                  / 100 * amount_consumed_in_g) as Folate_in_mcg
-        , sum(VitaminB12_in_mcg              / 100 * amount_consumed_in_g) as VitaminB12_in_mcg
-        , sum(Pantothenate_in_mg             / 100 * amount_consumed_in_g) as Pantothenate_in_mg
-        , sum(Biotin_in_mcg                  / 100 * amount_consumed_in_g) as Biotin_in_mcg
-        , sum(VitaminC_in_mg                 / 100 * amount_consumed_in_g) as VitaminC_in_mg
-        , sum(VitaminD_in_mcg                / 100 * amount_consumed_in_g) as VitaminD_in_mcg
-        , sum(VitaminE_in_mg                 / 100 * amount_consumed_in_g) as VitaminE_in_mg
-        , sum(PhyticAcid_in_mg               / 100 * amount_consumed_in_g) as PhyticAcid_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'A'             ) as VitaminA_in_RAE_in_mcg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B6'            ) as VitaminB6_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B12'           ) as VitaminB12_in_mcg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'C'             ) as VitaminC_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'D'             ) as VitaminD_in_mcg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'E'             ) as VitaminE_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B1'            ) as Thiamin_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B2'            ) as Riboflavin_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B3'            ) as Niacin_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Folic Acid'    ) as Folicacid_in_mcg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B9'            ) as Folate_in_mcg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B5'            ) as Pantothenate_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B7'            ) as Biotin_in_mcg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'IP6'           ) as PhyticAcid_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Ca'            ) as Ca_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Cu'            ) as Cu_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Fe'            ) as Fe_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Mg'            ) as Mg_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Mn'            ) as Mn_in_mcg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'P'             ) as P_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'K'             ) as K_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Na'            ) as Na_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Zn'            ) as Zn_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'I'             ) as I_in_mcg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'N'             ) as Nitrogen_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Se'            ) as Se_in_mcg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Ash'           ) as Ash_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Fibre'         ) as Fibre_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Carbohydrates' ) as carbohydrates_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Cholesterol'   ) as Cholesterol_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Protein'       ) as TotalProtein_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Fat'           ) as TotalFats_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Energy'        ) as Energy_in_kCal
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Moisture'      ) as Moisture_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Energy_in_kJ'  ) as Energy_in_kJ
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'MUFA'          ) as MonounsaturatedFA_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'PUFA'          ) as PolyunsaturatedFA_in_g
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'SAFA'          ) as SaturatedFA_in_g
     FROM
-        fooditem
-        JOIN food_genus ON food_genus.id = fooditem.food_genus_id
-        JOIN COUNTRY_CONSUMPTION as cc ON cc.food_genus_id = food_genus.id
+        fct_list_food_composition as flfc
+        JOIN COUNTRY_CONSUMPTION as cc ON cc.food_genus_id = flfc.food_genus_id
         JOIN country_consumption_source ccs on ccs.id = cc.data_source_id 
         JOIN country c ON ST_EQUALS(ccs.geometry, c.geometry)
         --JOIN survey on household.survey_id = survey.id
-    GROUP BY data_source_id, fooditem.fct_source_id, c.id;
+    GROUP BY data_source_id, flfc.fct_list_id, c.id;
     
 COMMENT ON VIEW country_intake IS 'View of amount of micronutrients consumed per capita per year by country';

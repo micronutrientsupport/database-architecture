@@ -8,7 +8,7 @@ with country_intake_pivot as
 		, c.id as country_id
 		, c.name as country_name
 		, c.geometry as geometry
-		, ci.fct_source_id as composition_data_id
+		, ci.fct_list_id as composition_data_id
 		, ci.data_source_id as consumption_data_id
 	from country_intake ci
 	join country_consumption_source ccs on ci.data_source_id = ccs.id 

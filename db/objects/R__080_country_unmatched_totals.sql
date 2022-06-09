@@ -43,6 +43,6 @@ select
 	group by cft.data_source_id, 
 	--fct.id,
 	cct.total_count, cct.total_weight --, amount_consumed_in_g, food_genus_id
-order by cft.data_source_id--, composition_data_id;
+order by cft.data_source_id;--, composition_data_id;
 
 COMMENT ON VIEW country_unmatched_totals IS 'Summary stats for unmatched food_genuses to composition data for country level consumption data';

@@ -13,7 +13,7 @@ FROM (
 		, row_number() over (
 			PARTITION BY
 				country_id
-				, fct_list_id
+				, fct_source_id
 				, data_source_id
 				, mn_name
 			ORDER BY mn_consumed_per_day desc NULLS LAST
@@ -21,7 +21,7 @@ FROM (
 	FROM (
 		SELECT
 			cc.country_id
-			, flfc.fct_list_id
+			, flfc.fct_list_id as fct_source_id
 			, cc.data_source_id
 			, flfc.micronutrient_id as mn_name
 			, flfc.food_genus_id

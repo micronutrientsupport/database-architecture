@@ -46,15 +46,15 @@ BEGIN
 	
 
 	-- drop and recreate household_fct_list table 
-	RAISE NOTICE 'Creating country_fct_list table...';
-	DROP TABLE IF EXISTS country_fct_list;
+	-- RAISE NOTICE 'Creating country_fct_list table...';
+	-- DROP TABLE IF EXISTS country_fct_list;
 	
-	create table country_fct_list
-	(
-	id 	integer primary key references country_consumption_source (id),
-	fct_list 		text
-	)
-	;
+	-- create table country_fct_list
+	-- (
+	-- id 	integer primary key references country_consumption_source (id),
+	-- fct_list 		text
+	-- )
+	-- ;
 
 	-- drop and recreate household_fct_list table 
 	RAISE NOTICE 'Creating household_fct_list table...';

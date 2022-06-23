@@ -41,7 +41,7 @@ select
 	--join fct_source fct on fct.id != all (included_fcts)
 	join country_consumption_totals cct on cct.data_source_id = cft.data_source_id
 	group by cft.data_source_id, 
-	cft.fct_list_id
+	cft.fct_list_id,
 	--fct.id,
 	cct.total_count, cct.total_weight --, amount_consumed_in_g, food_genus_id
 order by cft.data_source_id;--, composition_data_id;

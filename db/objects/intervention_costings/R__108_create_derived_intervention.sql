@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION create_derived_intervention(_parent_id numeric, _user_id numeric)
+CREATE OR REPLACE FUNCTION create_derived_intervention(_parent_id numeric, _new_name text, _new_description text, _user_id numeric)
 RETURNS setof intervention_list AS
 
 -- Creates a new record in the intervention table with data copied from the provided
@@ -15,6 +15,7 @@ begin
 -- Create new intervention in intervention table
 insert into intervention (
 	intervention_name
+	, description
 	, country_id
 	, app_user_id
 	, data_citation_id
@@ -28,7 +29,8 @@ insert into intervention (
 	, parent_intervention 
 )
 select 
-	'User: ' || intervention_name
+	_new_name
+	, _new_description
 	, country_id
 	, _user_id
 	, data_citation_id

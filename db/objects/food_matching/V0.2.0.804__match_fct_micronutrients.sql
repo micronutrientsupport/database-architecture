@@ -107,10 +107,10 @@ BEGIN
 
 	-- populate intermediate table
 	RAISE NOTICE 'Update references in household_fct_list table...';
-	ALTER TABLE household_fct_list
-	ADD COLUMN fct_list_id integer;
-	alter table household_fct_list 
-	ADD FOREIGN KEY (fct_list_id) REFERENCES distinct_fct_list(id);
+	-- ALTER TABLE household_fct_list
+	-- ADD COLUMN fct_list_id integer;
+	-- alter table household_fct_list 
+	-- ADD FOREIGN KEY (fct_list_id) REFERENCES distinct_fct_list(id);
 
 	update household_fct_list hc
 	set fct_list_id = new.fct_list_id 

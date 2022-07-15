@@ -41,7 +41,7 @@ select
 	from foo
 join country_consumption_totals cct on foo.data_source_id = cct.data_source_id 
 group by foo.data_source_id, micronutrient_id, fct_list_id, fct_used_id, fct_used_name, cct.total_count, cct.total_weight
-order by foo.data_source_id, fct_list_id ASC consumption_matched_count DESC
+order by foo.data_source_id, fct_list_id ASC, consumption_matched_count DESC
 )
 select * from agg;
 --select data_source_id, fct_list_id, sum(count) from agg group by data_source_id, fct_list_id

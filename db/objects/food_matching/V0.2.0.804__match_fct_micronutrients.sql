@@ -57,16 +57,16 @@ BEGIN
 	-- ;
 
 	-- drop and recreate household_fct_list table 
-	RAISE NOTICE 'Creating household_fct_list table...';
+	-- RAISE NOTICE 'Creating household_fct_list table...';
 	
-	DROP TABLE IF EXISTS household_fct_list;
+	-- DROP TABLE IF EXISTS household_fct_list;
 	
-	create table household_fct_list
-	(
-	household_id 	integer primary key references household (id),
-	fct_list 		text
-	)
-	;
+	-- create table household_fct_list
+	-- (
+	-- household_id 	integer primary key references household (id),
+	-- fct_list 		text
+	-- )
+	-- ;
 	
 	-- populate household_fct_list table 
 	RAISE NOTICE 'Populating household_fct_list table...';

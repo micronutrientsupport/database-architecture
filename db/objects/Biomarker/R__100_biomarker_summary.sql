@@ -3,7 +3,7 @@ create or replace view biomarker_summary as
 select
     hh.survey_id
     , hm.group_id
-    , aggregation_area.name as region_name
+    , aggregation_area.name as region
     , hh.wealth_quintile
     , hh.urbanity
     , hh.altitude_in_metres
@@ -13,7 +13,12 @@ select
 	, s.hb_is_adjusted_for_altitude as is_adjusted_for_altitude
 	, hm.is_pregnant
 	, hm.is_smoker
+	, hm.had_malaria
+	, hm.had_diarrhoea
+	, hm.weight_in_kg
+	, hm.height_in_cm
 	, bm.was_fasting
+	, bm.date_sampled
 	, bm.time_of_day_sampled
 	, hm.survey_cluster
 	, hm.survey_strata
@@ -36,6 +41,6 @@ join household_member hm on bm.household_member_id = hm.id -- Details of the ind
 join household hh on hm.household_id = hh.id -- Details of the household e.g. location, wealth
 join survey s on hh.survey_id = s.id
 left join aggregation_area on st_contains(aggregation_area.geometry, hh.location) 
-WHERE aggregation_area.id IS NULL OR (aggregation_area.type='admin' AND aggregation_area.admin_level=1) -- Which aggregation area the household falls into for aggregation
+WHERE s.survey_type = 'biomarker' AND aggregation_area.id IS NULL OR (aggregation_area.type='admin' AND aggregation_area.admin_level=1) -- Which aggregation area the household falls into for aggregation
 
 order by hh.survey_id, hm.group_id ASC;

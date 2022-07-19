@@ -6,70 +6,33 @@ SELECT b.* , food_genus.food_name
 	, food_group.name as food_group_name
 FROM (
 	SELECT
-		*
+		-1 as fct_source_id
+		, *
 		, row_number() over (
 			PARTITION BY
 				survey_id
-				, fct_source_id
+				--, fct_source_id
 				-- , data_source_id
 				, mn_name
 			ORDER BY mn_consumed_per_day desc NULLS LAST
 		) as ranking
 	FROM (
-		SELECT
-			hh.survey_id
-			, fi.fct_source_id
-			-- , cc.data_source_id
-			, mn.mn_name
-			, fi.food_genus_id
-			, sum( (mn.mn_value / 100 * amount_consumed_in_g) )/(select afe_total from survey_member_count smc where smc.survey_id = hh.survey_id)  AS mn_consumed_per_day
-		FROM food_genus_nutrients fi
-		CROSS JOIN LATERAL (
-			VALUES
-				('A'           , VitaminA_in_RAE_in_mcg     ),
-				('B6'          , VitaminB6_in_mg            ),
-				('B12'         , VitaminB12_in_mcg          ),
-				('C'           , VitaminC_in_mg             ),
-				('D'           , VitaminD_in_mcg            ),
-				('E'           , VitaminE_in_mg             ),
-				('B1'          , Thiamin_in_mg              ),
-				('B2'          , Riboflavin_in_mg           ),
-				('B3'          , Niacin_in_mg               ),
-				('Folic Acid'  , Folicacid_in_mcg           ),
-				('B9'          , Folate_in_mcg              ),
-				('B5'          , Pantothenate_in_mg         ),
-				('B7'          , Biotin_in_mcg              ),
-				('IP6'         , PhyticAcid_in_mg           ),
-				('Ca'          , Ca_in_mg                   ),
-				('Cu'          , Cu_in_mg                   ),
-				('Fe'          , Fe_in_mg                   ),
-				('Mg'          , Mg_in_mg                   ),
-				('Mn'          , Mn_in_mcg                  ),
-				('P'           , P_in_mg                    ),
-				('K'           , K_in_mg                    ),
-				('Na'          , Na_in_mg                   ),
-				('Zn'          , Zn_in_mg                   ),
-				('I'           , I_in_mcg                   ),
-				('N'           , Nitrogen_in_g              ),
-				('Se'          , Se_in_mcg                  ),
-				('Ash'         , Ash_in_g                   ),
-				('Fibre'       , Fibre_in_g                 ),
-				('Carbohydrates', carbohydrates_in_g         ),
-				('Cholesterol' , Cholesterol_in_mg          ),
-				('Protein'     , TotalProtein_in_g          ),
-				('Fat'         , TotalFats_in_g             ),
-				('Energy'      , Energy_in_kCal             ),
-				('Moisture'    , Moisture_in_g              )
-		) AS mn("mn_name", "mn_value")
-		JOIN household_consumption hc ON hc.food_genus_id = fi.food_genus_id
-        JOIN household hh ON hc.household_id = hh.id
-        JOIN survey ON hh.survey_id = survey.id
-		-- WHERE date_part('year', hc.date_consumed) = 2018
-		GROUP BY
-			hh.survey_id
-			, fi.food_genus_id
-			, fi.fct_source_id
-			, mn_name
+select 
+	hh.survey_id
+	--, hfl.fct_list_id as fct_source_id
+	, flfc.micronutrient_id as mn_name
+	, sum( (flfc.micronutrient_composition / 100 * amount_consumed_in_g) )/(select afe_total from survey_member_count smc where smc.survey_id = hh.survey_id)  AS mn_consumed_per_day
+	, hc.food_genus_id
+from household_consumption hc 
+join household hh on hc.household_id = hh.id
+join household_fct_list hfl on hh.id = hfl.household_id 
+join fct_list_food_composition flfc on flfc.fct_list_id = hfl.fct_list_id and flfc.food_genus_id = hc.food_genus_id 
+--where flfc.micronutrient_id = 'Ca'
+GROUP BY
+	hh.survey_id
+	, hc.food_genus_id
+	--, hfl.fct_list_id
+	, mn_name
 	) a
 ) b
 JOIN food_genus ON b.food_genus_id = food_genus.id

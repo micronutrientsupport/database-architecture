@@ -11,7 +11,7 @@ FROM (
 		 , EXTRACT(MONTH FROM hh.interview_date) AS month_consumed
 		 , fg.food_group_id
 		 , fgi.food_group_name
-		 , flfc.fct_list_id as fct_source_id
+		 , -1 as fct_source_id
 		 , hh.survey_id
 	FROM
 	    household_consumption AS hc
@@ -27,7 +27,7 @@ FROM (
 		AND amount_consumed_in_g IS NOT NULL
 	GROUP BY
 		survey_id
-		, -1 as fct_source_id
+		, fct_source_id
 		, fg.food_group_id
 		, fgi.food_group_name
 		, mn_name

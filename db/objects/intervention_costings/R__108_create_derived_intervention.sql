@@ -27,6 +27,7 @@ insert into intervention (
 	, is_premade 
 	, is_locked
 	, parent_intervention 
+	, last_edited
 )
 select 
 	_new_name
@@ -42,6 +43,7 @@ select
 	, false as is_premade 
 	, false as is_locked
 	, _parent_id as parent_intervention
+	, NOW()
 from intervention where id = _parent_id
 returning id INTO _new_id
 ;

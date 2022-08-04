@@ -6,23 +6,24 @@ SELECT
 	, *
 FROM (
 	SELECT
-		 mn_name
-		 , sum((mn_value / 100 * amount_consumed_in_g )) AS mn_consumed
+		 flfc.micronutrient_id  as mn_name
+		 , sum((flfc.micronutrient_composition  / 100 * amount_consumed_in_g )) AS mn_consumed
 		 , EXTRACT(MONTH FROM hh.interview_date) AS month_consumed
 		 , fg.food_group_id
 		 , fgi.food_group_name
-		 , fct_source_id
+		 , -1 as fct_source_id
 		 , hh.survey_id
 	FROM
-	    food_genus_nutrients_pivot AS fgnp
-	    JOIN household_consumption AS hhc ON hhc.food_genus_id = fgnp.food_genus_id
-	    JOIN household AS hh ON hhc.household_id = hh.id
-	    JOIN food_genus fg ON fg.id = fgnp.food_genus_id
+	    household_consumption AS hc
+	    JOIN household AS hh ON hc.household_id = hh.id
+		join household_fct_list hfl on hh.id = hfl.household_id 
+		join fct_list_food_composition flfc on flfc.fct_list_id = hfl.fct_list_id and flfc.food_genus_id = hc.food_genus_id 
+	    JOIN food_genus fg ON fg.id = flfc.food_genus_id
 	    join food_group_items fgi on fgi.food_group_id = fg.food_group_id
-
+	    
 	WHERE
 		1=1
-		AND mn_value IS NOT NULL
+		AND flfc.micronutrient_composition IS NOT NULL
 		AND amount_consumed_in_g IS NOT NULL
 	GROUP BY
 		survey_id

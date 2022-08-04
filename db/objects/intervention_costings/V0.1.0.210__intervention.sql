@@ -12,7 +12,8 @@ CREATE TABLE intervention(
     base_year                    integer,
     is_premade                   boolean,
     is_locked                    boolean,
-    parent_intervention          integer    REFERENCES intervention(id)
+    parent_intervention          integer    REFERENCES intervention(id),
+    last_edited                  timestamp
 )
 ;
 COMMENT ON TABLE intervention IS 'Food fortification interventions programs. An intervention is a program to fortify a food vehicle (e.g. wheat flour) with a premix of fortificants (e.g. Vitamin C powder and iron powder) in order to increase the micronutrient content of the food.';
@@ -29,6 +30,7 @@ COMMENT ON COLUMN intervention.base_year is 'the actual year (Common Era) from w
 COMMENT ON COLUMN intervention.is_premade is 'Whether this intervention is pre-created by professionals, or whether this is an intervention where an end-user has customised some values';
 COMMENT ON COLUMN intervention.is_locked is 'Whether this intervention is locked against editing (read-only)';
 COMMENT ON COLUMN intervention.parent_intervention IS 'If this intervention has been created by a user, this shows the id of the intervetnion used as a template.';
+COMMENT ON COLUMN intervention.last_edited IS 'Timestamp of the last edit made to this intervention or its corresponding data';
 
 
 

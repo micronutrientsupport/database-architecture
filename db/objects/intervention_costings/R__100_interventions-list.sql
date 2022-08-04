@@ -1,4 +1,5 @@
 create or replace view intervention_list as
+
 select
     i.id,
     i.intervention_name as name,
@@ -23,7 +24,9 @@ select
                 and d.intervention_id = i.id
         ),
         0
-    ) as ten_year_total_cost
+    ) as ten_year_total_cost,
+    i.parent_intervention,
+    i.last_edited 
 from
     intervention i
     join fortification_type ft on ft.id = i.fortification_type_id

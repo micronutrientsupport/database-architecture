@@ -43,7 +43,7 @@ SELECT
         , (hi.VitaminC_in_mg/hn.afe_factor             ) AS  VitaminC_in_mg
         , (hi.VitaminD_in_mcg/hn.afe_factor            ) AS  VitaminD_in_mcg
         , (hi.VitaminE_in_mg/hn.afe_factor             ) AS  VitaminE_in_mg
-        , (hi.PhyticAcid_in_mg/hn.afe_factor           ) AS  PhyticAcid_in_mg
+        , (hi.Phytate_in_mg/hn.afe_factor           ) AS  Phytate_in_mg
 
 
 FROM household_intake hi JOIN household_normalisation hn ON hi.household_id=hn.household_id;

@@ -48,7 +48,7 @@ SELECT
     , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B9'            ) as Folate_in_mcg
     , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B5'            ) as Pantothenate_in_mg
     , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'B7'            ) as Biotin_in_mcg
-    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'IP6'           ) as PhyticAcid_in_mg
+    , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'IP6'           ) as Phytate_in_mg
     , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Ca'            ) as Ca_in_mg
     , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Cu'            ) as Cu_in_mg
     , sum(micronutrient_composition / 100 * amount_consumed_in_g) FILTER (WHERE micronutrient_id = 'Fe'            ) as Fe_in_mg

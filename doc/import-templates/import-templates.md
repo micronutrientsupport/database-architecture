@@ -54,7 +54,7 @@
 | vitaminc_in_mg         | The Vitamin C content of this food item, in milligrams per 100g                                                                                                                                |
 | vitamind_in_mcg        | The Vitamin D content of this food item, in micrograms per 100g                                                                                                                                |
 | vitamine_in_mg         | The Vitamin E content of this food item, in milligrams per 100g                                                                                                                                |
-| phyticacid_in_mg       | The Phytic Acid content of this food item, in milligrams per 100g                                                                                                                              |
+| Phytate_in_mg       | The Phytic Acid content of this food item, in milligrams per 100g                                                                                                                              |
 
 ## Household & Intake data
 

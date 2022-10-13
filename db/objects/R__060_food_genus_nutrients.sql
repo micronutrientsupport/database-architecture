@@ -40,7 +40,7 @@ SELECT
     , avg(vitaminc_in_mg             )  as vitaminc_in_mg
     , avg(vitamind_in_mcg            )  as vitamind_in_mcg
     , avg(vitamine_in_mg             )  as vitamine_in_mg
-    , avg(phyticacid_in_mg           )  as phyticacid_in_mg
+    , avg(Phytate_in_mg           )  as Phytate_in_mg
 
     -- , avg(Starch_in_g               )
 from

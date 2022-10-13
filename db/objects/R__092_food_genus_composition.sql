@@ -46,7 +46,7 @@ SELECT food_genus_id,fct_source_id,
     AVG(vitaminc_in_mg)              AS vitaminc_in_mg, 
     AVG(vitamind_in_mcg)             AS vitamind_in_mcg, 
     AVG(vitamine_in_mg)              AS vitamine_in_mg, 
-    AVG(phyticacid_in_mg)            AS phyticacid_in_mg
+    AVG(Phytate_in_mg)            AS Phytate_in_mg
 FROM fooditem
 group by food_genus_id,fct_source_id
 order by food_genus_id ;

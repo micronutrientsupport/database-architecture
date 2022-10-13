@@ -42,7 +42,7 @@ RETURNS TABLE(
 	vitaminc_in_mg numeric,
 	vitamind_in_mcg numeric,
 	vitamine_in_mg numeric,
-	phyticacid_in_mg numeric
+	Phytate_in_mg numeric
 )
     AS $$
 
@@ -90,7 +90,7 @@ RETURNS TABLE(
  FULL JOIN (select a.vitaminc_in_mg from a where a.vitaminc_in_mg is not null LIMIT 1) vitaminc_in_mg ON TRUE
  FULL JOIN (select a.vitamind_in_mcg from a where a.vitamind_in_mcg is not null LIMIT 1) vitamind_in_mcg ON TRUE
  FULL JOIN (select a.vitamine_in_mg from a where a.vitamine_in_mg is not null LIMIT 1) vitamine_in_mg ON TRUE
- FULL JOIN (select a.phyticacid_in_mg from a where a.phyticacid_in_mg is not null LIMIT 1) phyticacid_in_mg ON TRUE
+ FULL JOIN (select a.Phytate_in_mg from a where a.Phytate_in_mg is not null LIMIT 1) Phytate_in_mg ON TRUE
     $$
     LANGUAGE SQL;
 

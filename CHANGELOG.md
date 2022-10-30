@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.0...v1.0.1) (2022-10-30)
+
+
+### Bug Fixes
+
+* improve unmatched items view ([7250975](https://github.com/micronutrientsupport/database-architecture/commit/725097504ec5db45123d557dc3154807d226941d))
+* tweak release please config ([7feb0b6](https://github.com/micronutrientsupport/database-architecture/commit/7feb0b6031dbd9b1b86b1216a83750e11eaf5ccd))
+
 ## 1.0.0 (2022-10-30)
 
 

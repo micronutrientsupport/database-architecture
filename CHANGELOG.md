@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.3](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.2...v1.0.3) (2022-10-30)
+
+
+### Bug Fixes
+
+* bump github action version ([116d91f](https://github.com/micronutrientsupport/database-architecture/commit/116d91f49e54f587d381355bfc8b113adc9b201d))
+* ga config ([da59adb](https://github.com/micronutrientsupport/database-architecture/commit/da59adb6e0c5f01eb075fcf822b7645235eb88ce))
+
 ## [1.0.2](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.1...v1.0.2) (2022-10-30)
 
 

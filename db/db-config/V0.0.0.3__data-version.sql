@@ -1,5 +1,5 @@
 CREATE TABLE data_version (
-	date                date
+	date                timestamp
     , version           text
     , type              text CHECK (type IN ('schema', 'seed'))
 );

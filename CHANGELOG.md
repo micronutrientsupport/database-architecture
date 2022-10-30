@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.1...v1.0.2) (2022-10-30)
+
+
+### Bug Fixes
+
+* debug rp action ([70e4cbc](https://github.com/micronutrientsupport/database-architecture/commit/70e4cbc394ab520cddeb14cda7cfff1fce76128f))
+
 ## [1.0.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.0...v1.0.1) (2022-10-30)
 
 

@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+      - develop
+name: release-please
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: GoogleCloudPlatform/release-please-action@v3.4.1
+        with:
+          release-type: node
+          package-name: release-please-action
+          changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}]'
+          default-branch: develop
+          extra-files: '[{"path": "db/db-config/V0.0.0.4__data-version-populate.sql"}]'

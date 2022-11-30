@@ -44,5 +44,5 @@ CREATE TABLE FOODITEM (
 	, VitaminC_in_mg                 numeric
 	, VitaminD_in_mcg                numeric
 	, VitaminE_in_mg                 numeric
-	, PhyticAcid_in_mg               numeric
+	, Phytate_in_mg               numeric
 );

@@ -42,5 +42,5 @@ COMMENT ON COLUMN FOODITEM.Biotin_in_mcg                  IS 'The Biotin content
 COMMENT ON COLUMN FOODITEM.VitaminC_in_mg                 IS 'The Vitamin C content of this food item, in milligrams per 100g edible portion';
 COMMENT ON COLUMN FOODITEM.VitaminD_in_mcg                IS 'The Vitamin D content of this food item, in micrograms per 100g edible portion';
 COMMENT ON COLUMN FOODITEM.VitaminE_in_mg                 IS 'The Vitamin E content of this food item, in milligrams per 100g edible portion';
-COMMENT ON COLUMN FOODITEM.PhyticAcid_in_mg               IS 'The Phytic Acid content of this food item, in milligrams per 100g edible portion';
+COMMENT ON COLUMN FOODITEM.Phytate_in_mg               IS 'The Phytic Acid content of this food item, in milligrams per 100g edible portion';
 

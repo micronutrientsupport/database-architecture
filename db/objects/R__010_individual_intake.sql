@@ -42,7 +42,7 @@ SELECT
     , sum(VitaminC_in_mg                 / 100 * amount_consumed_in_g) as  VitaminC_in_mg
     , sum(VitaminD_in_mcg                / 100 * amount_consumed_in_g) as  VitaminD_in_mcg
     , sum(VitaminE_in_mg                 / 100 * amount_consumed_in_g) as  VitaminE_in_mg
-    , sum(PhyticAcid_in_mg               / 100 * amount_consumed_in_g) as  PhyticAcid_in_mg
+    , sum(Phytate_in_mg               / 100 * amount_consumed_in_g) as  Phytate_in_mg
 FROM
     fooditem
     JOIN food_genus ON food_genus.id = fooditem.food_genus_id

@@ -28,7 +28,7 @@ with country_intake_pivot as
 	        ('B9'          , Folate_in_mcg              ),
 	        ('B5'          , Pantothenate_in_mg         ),
 	        ('B7'          , Biotin_in_mcg              ),
-	        ('IP6'         , PhyticAcid_in_mg           ),
+	        ('IP6'         , Phytate_in_mg           ),
 	        ('Ca'          , Ca_in_mg                   ),
 	        ('Cu'          , Cu_in_mg                   ),
 	        ('Fe'          , Fe_in_mg                   ),

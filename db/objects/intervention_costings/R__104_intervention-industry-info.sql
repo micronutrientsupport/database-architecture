@@ -1,4 +1,4 @@
-CREATE OR REPLACE view intervention_industry_information AS 
+CREATE OR REPLACE view intervention_industry_information AS
 with h2_agg as (
     select
         intervention_id,

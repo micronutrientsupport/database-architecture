@@ -79,6 +79,7 @@ gov_su as (
 	    left join intervention_data intervention_parent
 	    	ON intervention_parent.row_index = intervention_data.row_index
 	    	and intervention_parent.intervention_id = intervention.parent_intervention
+    ORDER BY intervention_data.row_index
 ),
 gov_su_agg as (
     select
@@ -156,6 +157,9 @@ select
 from
     su_agg2
 group by
-    intervention_id;
-    
+    intervention_id
+;
+
+
 comment ON view intervention_startup_scaleup_costs IS 'Extract intervention start-up/scale-up rows for a given intervention';
+

@@ -6,27 +6,15 @@ RETURNS SETOF integer AS
 
 $BODY$
 BEGIN
-    -- lists Food Composition Tables, ordered by their distance to the input geometry, area and publication_date.
+    -- lists Food Composition Tables, ordered by their distance to the input geometry, area of the region covered by the FCT and publication_date.
 	RETURN query
-	select a.id from 
-		(
-        -- list Food Composition Tables which contain or overlap with the given geometry.
-        SELECT
-			id, 0 as "distance", ST_AREA(geometry) as "area", publication_date
-		FROM
-			fct_source
-		WHERE
-			ST_Contains(geometry, $1) OR ST_Overlaps(geometry, $1)
-		UNION
-        -- list all other FCT's, with a calulcated distance and area.
-		select id, ST_DISTANCE($1, geometry) as "distance", ST_AREA(geometry) as "area", publication_date
-		FROM fct_source) a
-	ORDER BY
-	--priority asc
-	a.distance asc,
-	a."area" asc,
-	a.publication_date desc;
-
+		select id
+		FROM fct_source
+		ORDER BY
+			--priority asc
+			ST_DISTANCE($1, geometry) asc,
+			area asc,
+			publication_date desc;
 	RETURN;
 
 END

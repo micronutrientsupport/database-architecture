@@ -17,7 +17,7 @@ SELECT
             'rowUnits',
             intervention_data.units,
             'isEditable',
-            intervention_data.is_user_editable,            
+            intervention_data.is_user_editable,
             'year0',
             intervention_data.year_0,
             'year0Default',
@@ -81,32 +81,38 @@ SELECT
             'dataSource',
             data_citation.short_text,
             'dataSource',
-	            case when ((intervention_data.year_0 != intervention_parent.year_0) OR
-	            (intervention_data.year_1 != intervention_parent.year_1) OR
-	            (intervention_data.year_2 != intervention_parent.year_2) OR
-	            (intervention_data.year_3 != intervention_parent.year_3) OR
-	            (intervention_data.year_4 != intervention_parent.year_4) OR
-	            (intervention_data.year_5 != intervention_parent.year_5) OR
-	            (intervention_data.year_6 != intervention_parent.year_6) OR
-	            (intervention_data.year_7 != intervention_parent.year_7) OR
-	            (intervention_data.year_8 != intervention_parent.year_8) OR
-	            (intervention_data.year_9 != intervention_parent.year_9)) then
-	            'User Edited' else data_citation.short_text end,
+	            case
+                    when (
+                        (intervention_data.year_0 != intervention_parent.year_0)
+                        OR (intervention_data.year_1 != intervention_parent.year_1)
+                        OR (intervention_data.year_2 != intervention_parent.year_2)
+                        OR (intervention_data.year_3 != intervention_parent.year_3)
+                        OR (intervention_data.year_4 != intervention_parent.year_4)
+                        OR (intervention_data.year_5 != intervention_parent.year_5)
+                        OR (intervention_data.year_6 != intervention_parent.year_6)
+                        OR (intervention_data.year_7 != intervention_parent.year_7)
+                        OR (intervention_data.year_8 != intervention_parent.year_8)
+                        OR (intervention_data.year_9 != intervention_parent.year_9)
+                    ) then
+                        'User Edited'
+                    else
+                        data_citation.short_text
+                end,
             'dataSourceDefault',
             data_citation.short_text,
             'dataCitation',
             data_citation.citation_text
         )
         ORDER BY
-            intervention_data.row_index
+            intervention_data.row_index ASC
     ) AS data
 FROM
     intervention_data intervention_data
     join intervention on intervention_data.intervention_id = intervention.id
     left join data_citation on data_citation.id = intervention.data_citation_id
     -- Re-join intervention_data to get the values for the parent intervention
-    left join intervention_data intervention_parent 
-    	ON intervention_parent.row_index = intervention_data.row_index 
+    left join intervention_data intervention_parent
+    	ON intervention_parent.row_index = intervention_data.row_index
     	and intervention_parent.intervention_id = intervention.parent_intervention
 WHERE
     intervention_data.header1 IS NOT null

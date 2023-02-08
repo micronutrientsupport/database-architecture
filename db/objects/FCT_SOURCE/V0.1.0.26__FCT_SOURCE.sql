@@ -3,6 +3,7 @@ CREATE TABLE FCT_SOURCE (
 	, name                        text
 	, description                 text
 	, geometry                    geometry(MultiPolygon,4326)
+	, area                        numeric GENERATED ALWAYS AS (round(ST_AREA(geometry::geography) / 1000000)) STORED
     , geonetwork_uuid             text
 	, publication_date            date
 	, notes                       text
@@ -10,3 +11,10 @@ CREATE TABLE FCT_SOURCE (
 
 
 COMMENT ON TABLE FCT_SOURCE IS 'The names of the various Food Composition Tables from which we derive the information about food composition';
+COMMENT ON COLUMN FCT_SOURCE.name             IS '';
+COMMENT ON COLUMN FCT_SOURCE.description      IS '';
+COMMENT ON COLUMN FCT_SOURCE.geometry         IS 'Geometry object of the region covered by the Food Composition Table';
+COMMENT ON COLUMN FCT_SOURCE.area             IS 'The area of the geometry of the region covered by the Food Composition table, in square kilometers';
+COMMENT ON COLUMN FCT_SOURCE.geonetwork_uuid  IS '';
+COMMENT ON COLUMN FCT_SOURCE.publication_date IS '';
+COMMENT ON COLUMN FCT_SOURCE.notes            IS '';

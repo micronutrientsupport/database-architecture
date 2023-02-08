@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.3...v1.0.4) (2023-02-08)
+
+
+### Bug Fixes
+
+* do not try to calculate bmi when weight or height are zero ([95241fe](https://github.com/micronutrientsupport/database-architecture/commit/95241fe1e0bbc61a2163cb50c4de6e122fc20667))
+
 ## [1.0.3](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.2...v1.0.3) (2022-10-30)
 
 

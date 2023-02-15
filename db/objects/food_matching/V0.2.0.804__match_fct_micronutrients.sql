@@ -7,13 +7,19 @@ $code$
 declare
 
 fct_id int;
-fooditem_rec record;
+fooditem_rec fooditem%ROWTYPE;
 mn_rec record;
 consumption_rec record;
 the_household_id int;
 fct_list integer[];
 fct_list_rec record;
 have_found_fct_entry boolean;
+mn_map jsonb;
+mn_names text[];
+mn_names_orig text[];
+mn_val numeric;
+mn text;
+mn_field text;
 
 BEGIN
 
@@ -143,39 +149,97 @@ BEGIN
 
 	-- populate intermediate table
 	RAISE NOTICE 'Populating fct_list_food_compostion table...%', timeofday();
+
+	select json_object_agg(id, fooditem_column) into mn_map from micronutrient where is_user_visible = true;
+	select array_agg(id) into mn_names_orig from micronutrient where is_user_visible = true;
+
     for fct_list_rec in
 		select l.fct_list,
 			l.id as fct_list_id,
-			f.food_genus_id,
-			m.id as micronutrient_id,
-			m.name as micronutrient,
-			m.fooditem_column
+			f.food_genus_id
 		from distinct_fct_list l
 			cross join (
 				select distinct food_genus_id
 				from fooditem
 				where food_genus_id is not null
 			) f
-			cross join micronutrient m
+--		limit 10
 	loop
-       	have_found_fct_entry := FALSE;
+       	mn_names:= mn_names_orig;
 
 	 	FOREACH fct_id IN ARRAY fct_list_rec.fct_list::int[]
 		loop
-			execute 'select original_food_name,
-			''' || fct_list_rec.micronutrient || ''' as micronutrient,
-			' || fct_list_rec.fooditem_column || ' as thevalue
+			execute 'select *
 			from fooditem
 			where
 			fct_source_id = ' || fct_id || '
-			and food_genus_id = ''' || fct_list_rec.food_genus_id || '''
-			and ' || fct_list_rec.fooditem_column || ' is not null'
+			and food_genus_id = ''' || fct_list_rec.food_genus_id || ''';'
 			into fooditem_rec;
+		
+			IF fooditem_rec.original_food_name IS NOT NULL THEN
+--				raise notice 'Record found for % in FCT % (% outstanding MNs)', fct_list_rec.food_genus_id, fct_id, array_length(mn_names,1);
 
-			if fooditem_rec.micronutrient is not null THEN
+		      	foreach mn in array mn_names
+		      	loop
+			      	mn_field := mn_map->mn;
+			      	
+			      	--ensure we use lower case for mn_field
+			      	select lower(mn_field) into mn_field;
+			   
+			      	-- try to get the mn value for the given mn
+			        EXECUTE 'SELECT ($1).' || mn_field USING fooditem_rec INTO  mn_val;
+			       
+			      	
+			      	IF mn_val IS NOT NULL then
+--			      		raise notice 'Found: MN=%, Val=%', mn, mn_val;
+			      	
+					    insert into fct_list_food_composition
+						(
+							fct_list_id,
+							food_genus_id,
+							micronutrient_id,
+							micronutrient_composition,
+							fct_used
+						)
+						values
+						(
+							fct_list_rec.fct_list_id,
+							fct_list_rec.food_genus_id,
+							mn,
+							mn_val,
+							fct_id
+						);
+			      	
+			      		-- remove mn from the array of mns
+			      		execute 'with mns as 
+			      			(select unnest($1) as mn_unnest EXCEPT SELECT ''' || mn || ''') 
+			      			select array_agg(mn_unnest) from mns' using mn_names into mn_names;
+			      		
+			      	end if;
+			
+		      		if mn_names is null then
+						--raise notice 'ALL DONE!';
+						exit;
+					end if;
+		      	end loop;
+			
+      			if mn_names is null then
+					--raise notice 'ALL DONE2!';
+					exit;
+				end if;
+				-- if we find one, we can exit
+				--exit;
+        	else
+--        		raise notice 'Record not found for % in FCT % (% outstanding MNs)', fct_list_rec.food_genus_id, fct_id, array_length(mn_names,1);
+			end if;
 
-				have_found_fct_entry := TRUE;
-
+		end loop;
+	
+--		raise notice 'Outstanding MNs = %', array_length(mn_names,1);
+		
+		if array_length(mn_names,1) > 0 then
+			foreach mn in array mn_names
+			loop
 				insert into fct_list_food_composition
 				(
 					fct_list_id,
@@ -188,37 +252,13 @@ BEGIN
 				(
 					fct_list_rec.fct_list_id,
 					fct_list_rec.food_genus_id,
-					fct_list_rec.micronutrient_id,
-					fooditem_rec.thevalue,
-					fct_id
-				);
-
-				-- if we find one, we can exit
-				exit;
-
-			end if;
-
-		end loop;
-
-		IF NOT have_found_fct_entry THEN
-
-			insert into fct_list_food_composition
-			(
-					fct_list_id,
-					food_genus_id,
-					micronutrient_id,
-					micronutrient_composition,
-					fct_used
-			)
-			values
-			(
-					fct_list_rec.fct_list_id,
-					fct_list_rec.food_genus_id,
-					fct_list_rec.micronutrient_id,
+					mn,
 					null,
 					null
-			);
-		END IF;
+				);
+			
+			end loop;
+		end if;
 
     end loop;
 

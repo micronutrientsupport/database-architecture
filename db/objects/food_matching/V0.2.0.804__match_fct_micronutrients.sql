@@ -6,20 +6,20 @@ $code$
 
 declare
 
-fct_id int;
-fooditem_rec fooditem%ROWTYPE;
-mn_rec record;
-consumption_rec record;
-the_household_id int;
-fct_list integer[];
-fct_list_rec record;
-have_found_fct_entry boolean;
-mn_map jsonb;
-mn_names text[];
-mn_names_orig text[];
-mn_val numeric;
-mn text;
-mn_field text;
+	fct_id int;
+	fooditem_rec fooditem%ROWTYPE;
+	mn_rec record;
+	consumption_rec record;
+	the_household_id int;
+	fct_list integer[];
+	fct_list_rec record;
+	have_found_fct_entry boolean;
+	mn_map jsonb;
+	mn_names text[];
+	mn_names_orig text[];
+	mn_val numeric;
+	mn text;
+	mn_field text;
 
 BEGIN
 
@@ -77,20 +77,22 @@ BEGIN
 	-- populate household_fct_list table
 	RAISE NOTICE 'Populating household_fct_list table...%', timeofday();
 
-	insert into household_fct_list
-		(household_id,
-		fct_list)
+	insert into household_fct_list (
+		household_id,
+		fct_list
+	)
 	select
 		id,
 		ARRAY(SELECT * FROM get_fct_list(location))
 	from household;
 
-		-- populate household_fct_list table
+	-- populate household_fct_list table
 	RAISE NOTICE 'Populating country_fct_list table...%', timeofday();
 
-	insert into country_fct_list
-		(id,
-		fct_list)
+	insert into country_fct_list (
+		id,
+		fct_list
+	)
 	select
 		id,
 		ARRAY(SELECT * FROM get_fct_list(geometry))
@@ -99,16 +101,16 @@ BEGIN
 	-- create distinct_fct_list table
 	RAISE NOTICE 'Populating distinct_fct_list table...%', timeofday();
 
-	insert into distinct_fct_list (fct_list)
-	(select
-		distinct h.fct_list
-	from
-		household_fct_list h)
-		union
-	(select
-		distinct c.fct_list
-	from
-		country_fct_list c);
+	INSERT INTO	distinct_fct_list (fct_list)
+	(
+		SELECT DISTINCT h.fct_list
+		FROM household_fct_list h
+	)
+	UNION
+	(
+		SELECT DISTINCT c.fct_list
+		FROM country_fct_list c
+	);
 
 
 	-- populate intermediate table
@@ -150,49 +152,67 @@ BEGIN
 	-- populate intermediate table
 	RAISE NOTICE 'Populating fct_list_food_compostion table...%', timeofday();
 
-	select json_object_agg(id, fooditem_column) into mn_map from micronutrient where is_user_visible = true;
-	select array_agg(id) into mn_names_orig from micronutrient where is_user_visible = true;
+	SELECT
+		json_object_agg(id, fooditem_column) INTO mn_map
+	FROM
+		micronutrient
+	WHERE
+		is_user_visible = TRUE;
 
-    for fct_list_rec in
-		select l.fct_list,
-			l.id as fct_list_id,
+
+	SELECT
+		array_agg(id) INTO mn_names_orig
+	FROM
+		micronutrient
+	WHERE
+		is_user_visible = TRUE;
+
+
+	FOR fct_list_rec IN
+		SELECT
+			l.fct_list,
+			l.id AS fct_list_id,
 			f.food_genus_id
-		from distinct_fct_list l
-			cross join (
-				select distinct food_genus_id
-				from fooditem
-				where food_genus_id is not null
+		FROM
+			distinct_fct_list l
+			CROSS JOIN (
+				SELECT
+					DISTINCT food_genus_id
+				FROM
+					fooditem
+				WHERE
+					food_genus_id IS NOT NULL
 			) f
 --		limit 10
-	loop
+	LOOP
        	mn_names:= mn_names_orig;
 
 	 	FOREACH fct_id IN ARRAY fct_list_rec.fct_list::int[]
-		loop
-			execute 'select *
-			from fooditem
-			where
-			fct_source_id = ' || fct_id || '
-			and food_genus_id = ''' || fct_list_rec.food_genus_id || ''';'
-			into fooditem_rec;
-		
+		LOOP
+			execute '
+				SELECT *
+				FROM fooditem
+				WHERE
+					fct_source_id = ' || fct_id || '
+					AND food_genus_id = ''' || fct_list_rec.food_genus_id || '''
+				;'
+			INTO fooditem_rec;
+
 			IF fooditem_rec.original_food_name IS NOT NULL THEN
 --				raise notice 'Record found for % in FCT % (% outstanding MNs)', fct_list_rec.food_genus_id, fct_id, array_length(mn_names,1);
 
-		      	foreach mn in array mn_names
-		      	loop
+		      	FOREACH mn IN array mn_names
+		      	LOOP
 			      	mn_field := mn_map->mn;
-			      	
+
 			      	--ensure we use lower case for mn_field
-			      	select lower(mn_field) into mn_field;
-			   
+			      	SELECT lower(mn_field) into mn_field;
+
 			      	-- try to get the mn value for the given mn
 			        EXECUTE 'SELECT ($1).' || mn_field USING fooditem_rec INTO  mn_val;
-			       
-			      	
-			      	IF mn_val IS NOT NULL then
+
+			      	IF mn_val IS NOT NULL THEN
 --			      		raise notice 'Found: MN=%, Val=%', mn, mn_val;
-			      	
 					    insert into fct_list_food_composition
 						(
 							fct_list_id,
@@ -209,34 +229,33 @@ BEGIN
 							mn_val,
 							fct_id
 						);
-			      	
+
 			      		-- remove mn from the array of mns
-			      		execute 'with mns as 
-			      			(select unnest($1) as mn_unnest EXCEPT SELECT ''' || mn || ''') 
+			      		execute 'with mns as
+			      			(select unnest($1) as mn_unnest EXCEPT SELECT ''' || mn || ''')
 			      			select array_agg(mn_unnest) from mns' using mn_names into mn_names;
-			      		
+
 			      	end if;
-			
-		      		if mn_names is null then
+
+		      		IF mn_names IS NULL THEN
 						--raise notice 'ALL DONE!';
-						exit;
-					end if;
-		      	end loop;
-			
-      			if mn_names is null then
+						EXIT;
+					END IF;
+		      	END LOOP;
+
+      			IF mn_names IS NULL THEN
 					--raise notice 'ALL DONE2!';
 					exit;
-				end if;
+				END IF;
 				-- if we find one, we can exit
 				--exit;
-        	else
+        	ELSE
 --        		raise notice 'Record not found for % in FCT % (% outstanding MNs)', fct_list_rec.food_genus_id, fct_id, array_length(mn_names,1);
-			end if;
+			END IF;
+		END LOOP;
 
-		end loop;
-	
 --		raise notice 'Outstanding MNs = %', array_length(mn_names,1);
-		
+
 		if array_length(mn_names,1) > 0 then
 			foreach mn in array mn_names
 			loop
@@ -256,7 +275,7 @@ BEGIN
 					null,
 					null
 				);
-			
+
 			end loop;
 		end if;
 

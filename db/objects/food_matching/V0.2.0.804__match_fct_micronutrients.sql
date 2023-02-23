@@ -177,7 +177,7 @@ BEGIN
 								SELECT ''' || mn || '''
 							)
 				  			SELECT array_agg(mn_unnest)
-							FROM mns' using mn_names into mn_names; --TODO: wrong place for quote?
+							FROM mns' using mn_names into mn_names;
 				  	END IF;
 
 			  		IF mn_names IS NULL THEN

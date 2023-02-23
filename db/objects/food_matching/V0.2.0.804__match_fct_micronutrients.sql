@@ -125,7 +125,7 @@ BEGIN
 					food_genus_id IS NOT NULL
 			) f
 	LOOP
-       	mn_names:= mn_names_orig;
+	   	mn_names:= mn_names_orig;
 
 	 	FOREACH fct_id IN ARRAY fct_list_rec.fct_list::int[]
 		LOOP
@@ -139,19 +139,19 @@ BEGIN
 			INTO fooditem_rec;
 
 			IF fooditem_rec.original_food_name IS NOT NULL THEN
-		      	FOREACH mn IN array mn_names
-		      	LOOP
-			      	mn_field := mn_map->mn;
+			  	FOREACH mn IN array mn_names
+			  	LOOP
+				  	mn_field := mn_map->mn;
 
-			      	--ensure we use lower case for mn_field
-			      	SELECT lower(mn_field) into mn_field;
+				  	--ensure we use lower case for mn_field
+				  	SELECT lower(mn_field) into mn_field;
 
-			      	-- try to get the mn value for the given mn
-			        EXECUTE 'SELECT ($1).' || mn_field USING fooditem_rec INTO  mn_val;
+				  	-- try to get the mn value for the given mn
+					EXECUTE 'SELECT ($1).' || mn_field USING fooditem_rec INTO  mn_val;
 
-			      	IF mn_val IS NOT NULL THEN
+				  	IF mn_val IS NOT NULL THEN
 --			      		raise notice 'Found: MN=%, Val=%', mn, mn_val;
-					    insert into fct_list_food_composition
+						insert into fct_list_food_composition
 						(
 							fct_list_id,
 							food_genus_id,
@@ -168,31 +168,31 @@ BEGIN
 							fct_id
 						);
 
-			      		-- remove mn from the array of mns
+				  		-- remove mn from the array of mns
 						-- TODO: can this be done with array_remove()?
-			      		execute '
+				  		execute '
 							WITH mns AS (
 								SELECT unnest($1) as mn_unnest
 								EXCEPT
 								SELECT ''' || mn || '''
 							)
-			      			SELECT array_agg(mn_unnest)
+				  			SELECT array_agg(mn_unnest)
 							FROM mns' using mn_names into mn_names; --TODO: wrong place for quote?
-			      	END IF;
+				  	END IF;
 
-		      		IF mn_names IS NULL THEN
+			  		IF mn_names IS NULL THEN
 						--raise notice 'ALL DONE!';
 						EXIT;
 					END IF;
-		      	END LOOP;
+			  	END LOOP;
 
-      			IF mn_names IS NULL THEN
+	  			IF mn_names IS NULL THEN
 					--raise notice 'ALL DONE2!';
 					exit;
 				END IF;
 				-- if we find one, we can exit
 				--exit;
-        	ELSE
+			ELSE
 --        		raise notice 'Record not found for % in FCT % (% outstanding MNs)', fct_list_rec.food_genus_id, fct_id, array_length(mn_names,1);
 			END IF;
 		END LOOP;
@@ -222,63 +222,61 @@ BEGIN
 			end loop;
 		end if;
 
-    end loop;
+	end loop;
 
 	-- populate final results table
  	RAISE NOTICE 'Populating final results table...%', timeofday();
 
 	INSERT INTO consumption_composition_match
-        (food_genus_id,
-        household_id,
-        household_member_id,
-        fct_list_id,
-        micronutrient_id,
-        micronutrient_composition,
-        fct_used)
+		(food_genus_id,
+		household_id,
+		household_member_id,
+		fct_list_id,
+		micronutrient_id,
+		micronutrient_composition,
+		fct_used)
 	select
-        ci.food_genus_id,
-        ci.household_id,
-        ci.household_member_id,
-        ccm.fct_list_id,
-        ccm.micronutrient_id,
-        ccm.micronutrient_composition,
-        ccm.fct_used
+		ci.food_genus_id,
+		ci.household_id,
+		ci.household_member_id,
+		ccm.fct_list_id,
+		ccm.micronutrient_id,
+		ccm.micronutrient_composition,
+		ccm.fct_used
 	from
 		(
 		select
-	    		row_number() over () as rownum
-	    		, consumption_items.*
-	    	from
-	    	(
-	    	SELECT
-	             hc.food_genus_id
-	             , h.id AS household_id
-	             , null as household_member_id
-	             , f.fct_list_id
-	            FROM
-	            household_consumption hc
-	            join household h
-	            on hc.household_id = h.id
-	            JOIN household_fct_list f
-	            ON h.id = f.household_id
-
-	        union all
-
-        	SELECT
-               hmc.food_genus_id
-             , hmc.id AS household_id
+				row_number() over () as rownum
+				, consumption_items.*
+			from
+			(
+			SELECT
+				 hc.food_genus_id
+				 , h.id AS household_id
+				 , null as household_member_id
+				 , f.fct_list_id
+				FROM
+				household_consumption hc
+				join household h
+				on hc.household_id = h.id
+				JOIN household_fct_list f
+				ON h.id = f.household_id
+			union all
+			SELECT
+			   hmc.food_genus_id
+			 , hmc.id AS household_id
   			 , hhm.id AS household_member_id
-             , ff.fct_list_id
-            FROM
-            household_member_consumption hmc
-            join household_member hhm
-            on hhm.id = hmc.household_member_id
-            join household hh
-            on hhm.household_id = hh.id
-            JOIN household_fct_list ff
-	        ON hh.id = ff.household_id
-	         ) as consumption_items
-	    ) ci
+			 , ff.fct_list_id
+			FROM
+			household_member_consumption hmc
+			join household_member hhm
+			on hhm.id = hmc.household_member_id
+			join household hh
+			on hhm.household_id = hh.id
+			JOIN household_fct_list ff
+			ON hh.id = ff.household_id
+			 ) as consumption_items
+		) ci
 		join fct_list_food_composition ccm
 		on ci.fct_list_id = ccm.fct_list_id
 		and ci.food_genus_id = ccm.food_genus_id;

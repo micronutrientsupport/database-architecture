@@ -32,7 +32,7 @@ BEGIN
 	)
 	select
 		id,
-		ARRAY(SELECT * FROM get_fct_list(location))
+		ARRAY(SELECT * FROM get_fct_list(location)) -- TODO: this is inserting an array into a text column. Should we change the table column datatype?
 	from household;
 
 	-- populate household_fct_list table
@@ -169,11 +169,16 @@ BEGIN
 						);
 
 			      		-- remove mn from the array of mns
-			      		execute 'with mns as
-			      			(select unnest($1) as mn_unnest EXCEPT SELECT ''' || mn || ''')
-			      			select array_agg(mn_unnest) from mns' using mn_names into mn_names;
-
-			      	end if;
+						-- TODO: can this be done with array_remove()?
+			      		execute '
+							WITH mns AS (
+								SELECT unnest($1) as mn_unnest
+								EXCEPT
+								SELECT ''' || mn || '''
+							)
+			      			SELECT array_agg(mn_unnest)
+							FROM mns' using mn_names into mn_names; --TODO: wrong place for quote?
+			      	END IF;
 
 		      		IF mn_names IS NULL THEN
 						--raise notice 'ALL DONE!';

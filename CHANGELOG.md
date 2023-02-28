@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.5](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.4...v1.0.5) (2023-02-28)
+
+
+### Bug Fixes
+
+* addordering to other intervention json views: ([3909723](https://github.com/micronutrientsupport/database-architecture/commit/3909723a89d0f63e9bc113b3c7f822f18c70318c))
+
+
+### Miscellaneous
+
+* formatting ([73a4c64](https://github.com/micronutrientsupport/database-architecture/commit/73a4c64933ac5222470f925c2f437e69c758f7b6))
+
 ## [1.0.4](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.3...v1.0.4) (2023-02-08)
 
 

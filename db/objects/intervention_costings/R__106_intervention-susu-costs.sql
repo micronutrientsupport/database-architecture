@@ -79,7 +79,7 @@ gov_su as (
 	    left join intervention_data intervention_parent
 	    	ON intervention_parent.row_index = intervention_data.row_index
 	    	and intervention_parent.intervention_id = intervention.parent_intervention
-    ORDER BY intervention_data.row_index
+    ORDER BY intervention_data.row_index ASC
 ),
 gov_su_agg as (
     select

@@ -3,16 +3,12 @@ CREATE OR REPLACE VIEW afe_ear_threshold AS
 SELECT
     m.id AS micronutrient_id
     , nutrient_name AS micronutrient_name
-    , avg(ear) AS afe_ear
+    , ear AS afe_ear
 FROM
     intake_threshold it
 JOIN
     micronutrient m
     ON m."name" = it.nutrient_name
-WHERE
-    sex = 'Female'
-    AND age_lower >= 18
-    AND age_upper <= 29
 GROUP BY
     it.nutrient_name,
     m.id;

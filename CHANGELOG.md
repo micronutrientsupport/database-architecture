@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.5...v1.0.6) (2023-03-17)
+
+
+### Bug Fixes
+
+* update miccronutrient dictionary and intake_thresholds table ([21bb9c5](https://github.com/micronutrientsupport/database-architecture/commit/21bb9c5197dd45aad110f47b0bbbfbdd959e06c1))
+
 ## [1.0.5](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.4...v1.0.5) (2023-02-28)
 
 

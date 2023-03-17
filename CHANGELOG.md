@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.8](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.7...v1.0.8) (2023-03-17)
+
+
+### Bug Fixes
+
+* typo ([c634163](https://github.com/micronutrientsupport/database-architecture/commit/c63416355138eebf1f3a4ee3b6aaf6cdc9a59a6c))
+
 ## [1.0.7](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.6...v1.0.7) (2023-03-17)
 
 

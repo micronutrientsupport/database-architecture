@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.6...v1.0.7) (2023-03-17)
+
+
+### Bug Fixes
+
+* disable foritifcant for now ([9ecd146](https://github.com/micronutrientsupport/database-architecture/commit/9ecd146646b7bb8818e6e6f8eae784ee40ed242c))
+
 ## [1.0.6](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.5...v1.0.6) (2023-03-17)
 
 

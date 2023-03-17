@@ -3,7 +3,7 @@ CREATE OR REPLACE VIEW afe_ear_threshold AS
 SELECT
     m.id AS micronutrient_id
     , nutrient_name AS micronutrient_name
-    , ear AS afe_ear
+    , avg(ear) AS afe_ear
 FROM
     intake_threshold it
 JOIN

@@ -15,19 +15,19 @@
             "description": "The food genus of this food. Will be used for matching, and, in the future, will come from a curated list."
         },
         "food_genus_description": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "Description for this food_genus"
         },
         "food_group": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The food group for this food_genus."
         },
         "food_subgroup": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The food subgroup for this food genus."
         },
         "food_genus_confidence": {
-            "type": "string",
+            "type": ["string", "null"],
             "enum": [
                 "High",
                 "Medium",
@@ -36,183 +36,183 @@
             "description": "How confident we are in the matching. Mediums will show a warning to the user, low confidence fooditems won't be used in any calculations at all. Possible values: ['High', 'Medium', 'Low']"
         },
         "fct_name": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The name (citation text?) for the food composition table from which this fooditem came. For example, 'Gambia Prynand Paul'."
         },
         "citation_name": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The name of this citation"
         },
         "citation_original_id": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The original id of this citation"
         },
         "citation_author": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The author of the publication from where the nutrient values were derived"
         },
         "citation_publication": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The publication in which the micronutrient contents of this food were found."
         },
         "citation_isbn": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": ""
         },
         "citation_notes": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": ""
         },
         "moisture_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The moisture content of this food item, in grams per 100g"
         },
         "energy_in_kcal": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": ""
         },
         "energy_in_kj": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": ""
         },
         "nitrogen_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "Nitrogen content of this fooditem, in grams per 100g"
         },
         "totalprotein_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "Total Protein Content, in grams per 100g"
         },
         "totalfats_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "Total Fats, in grams per 100g"
         },
         "saturatedfa_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "Saturated Fatty Acids, in grams per 100g"
         },
         "monounsaturatedfa_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "Monounsaturated Fatty Acids, in grams per 100g"
         },
         "polyunsaturatedfa_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "Polyunsaturated Fatty Acids, in grams per 100g"
         },
         "cholesterol_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Cholesterol content of this food item, in milligrams per 100g"
         },
         "carbohydrates_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "carbohydrates in g per 100g"
         },
         "fibre_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The total dietary fibre content of this food item (determined by multiple methods), in grams per 100g"
         },
         "ash_in_g": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "(I don't think we really need the ash content of the food? candidate for deletion from the system)"
         },
         "ca_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Calcium content of this food item, in milligrams per 100g"
         },
         "fe_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Iron content of this food item, in milligrams per 100g"
         },
         "mg_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Magnesium content of this food item, in milligrams per 100g"
         },
         "p_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Phosporous content of the food item, in milligrams per 100g"
         },
         "k_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Potassium content of this food item, in milligrams per 100g"
         },
         "na_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Sodium content of this food item, in milligrams per 100g"
         },
         "zn_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Zinc content of this food item, in milligrams per 100g"
         },
         "cu_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Copper content of this food item, in milligrams per 100g"
         },
         "mn_in_mcg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Manganese content of this food item, in micrograms per 100g"
         },
         "i_in_mcg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "the Iodine content of this food item, in micrograms per 100g"
         },
         "se_in_mcg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Selenium content of this food item, in micrograms per 100g"
         },
         "vitamina_in_rae_in_mcg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Vitamin A content of the food, in Retinol Activity Equivalent (RAE), and in micrograms per 100g"
         },
         "thiamin_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Thiamin content of this food item, in milligrams per 100g"
         },
         "riboflavin_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Riboflavin content of this food item, in milligrams per 100g"
         },
         "niacin_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Niacin content of this food item, in milligrams per 100g"
         },
         "vitaminb6_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Vitamin B6 content of this food item, in milligrams per 100g"
         },
         "folicacid_in_mcg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Folic Acid content of this food item, in micrograms per 100g  "
         },
         "folate_in_mcg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The total folate content of this food item, including food folate and synthetic folate, in micrograms per 100g"
         },
         "vitaminb12_in_mcg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Vitamin B12 content of this food item, in micrograms per 100g"
         },
         "pantothenate_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Pantothenate content of this food item, in milligrams per 100g"
         },
         "biotin_in_mcg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Biotin content of this food item, in micrograms per 100g"
         },
         "vitaminc_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Vitamin C content of this food item, in milligrams per 100g"
         },
         "vitamind_in_mcg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Vitamin D content of this food item, in micrograms per 100g"
         },
         "vitamine_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Vitamin E content of this food item, in milligrams per 100g"
         },
         "phytate_in_mg": {
-            "type": "number",
+            "type": ["number", "null"],
             "description": "The Phytate content of this food item, in milligrams per 100g"
         }
     }

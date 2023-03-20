@@ -9,3 +9,6 @@
 # ci
 
 pipelines are run at https://kwvmxgit.ad.nerc.ac.uk/bmgf-maps/web/database-architecture
+
+# Data import
+JSON schemas that define the structure of data to be imported can be found at /doc/data-import-schemas. All data that is to be inserted into the db should be checked against these schemas.

@@ -131,7 +131,12 @@
       "was_fasting": {
         "type": "boolean"
       }
-    }
-    //   "required": ["person_id", "sex", "group_id", "age_in_months", "survey_cluster", "survey_strata", "survey_weight"]
+    },
+    "required": [
+      "person_id",
+      "sex",
+      "group_id",
+      "age_in_months"
+    ]
   }
 }

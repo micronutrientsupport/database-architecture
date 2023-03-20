@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Household Consumption",
+    "type": "object",
+    "required": [
+        "household_original_id",
+        "food_genus_id",
+        "food_genus_confidence",
+        "original_food_name",
+        "source_of_food",
+        "date_consumed",
+        "amount_consumed_in_g"
+    ],
+    "properties": {
+        "household_original_id": {
+            "type": "string",
+            "description": "The original id of the household that consumed the food item"
+        },
+        "food_genus_id": {
+            "type": "string",
+            "description": "The food_genus id of the fooditem that was consumed"
+        },
+        "food_genus_confidence": {
+            "type": "string",
+            "enum": [
+                "High",
+                "Medium",
+                "Low"
+            ],
+            "description": "How confident we are in matching this food to the corresponding food_genus entry"
+        },
+        "original_food_name": {
+            "type": "string",
+            "description": "The original food name, as given by the consumption survey"
+        },
+        "source_of_food": {
+            "type": "string",
+            "enum": [
+                "own production",
+                "bought",
+                "gifted"
+            ],
+            "description": "From where the household obtained the food; if they grew it themselves, bought it at market, or had it gifted to them"
+        },
+        "date_consumed": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the fooditem was consumed"
+        },
+        "amount_consumed_in_g": {
+            "type": "number",
+            "description": "How much of the fooditem was consumed on average per day, in grams"
+        }

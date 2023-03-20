@@ -211,9 +211,9 @@
             "type": "number",
             "description": "The Vitamin E content of this food item, in milligrams per 100g"
         },
-        "Phytate_in_mg": {
+        "phytate_in_mg": {
             "type": "number",
-            "description": "The Phytic Acid content of this food item, in milligrams per 100g"
+            "description": "The Phytate content of this food item, in milligrams per 100g"
         }
     }
 }

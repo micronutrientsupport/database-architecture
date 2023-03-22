@@ -11,7 +11,7 @@ select comds.country_id
 , composition_data_name
 , composition_data_description
 , composition_data_metadata_id
-, 'Dietary supply estimate (' || consumption_data_name || ', ' || composition_data_name || ' FCT)' as combined_name
+, consumption_data_name || ', ' || composition_data_name as combined_name
 
 from composition_data_sources comds 
 join consumption_data_sources conds 

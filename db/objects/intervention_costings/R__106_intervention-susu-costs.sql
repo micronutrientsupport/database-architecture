@@ -1,4 +1,4 @@
-CREATE OR REPLACE view intervention_startup_scaleup_costs AS 
+CREATE OR REPLACE view intervention_startup_scaleup_costs AS
 with totalfields as (
     select
         '{
@@ -11,7 +11,7 @@ with totalfields as (
 			"Equipment": "total_equipment_cost",
 			"Labeling": "total_labeling_cost",
 			"Training": "total_training_cost"
-		}, 
+		},
 		"Government-related start-up/scale-up costs": {
 			"Equipment": "total_equipment_cost_gov",
 			"Planning": "total_planning_cost",
@@ -76,9 +76,10 @@ gov_su as (
 	    join intervention on intervention_data.intervention_id = intervention.id
 	    left join data_citation on data_citation.id = intervention.data_citation_id
 	    -- Re-join intervention_data to get the values for the parent intervention
-	    left join intervention_data intervention_parent 
-	    	ON intervention_parent.row_index = intervention_data.row_index 
+	    left join intervention_data intervention_parent
+	    	ON intervention_parent.row_index = intervention_data.row_index
 	    	and intervention_parent.intervention_id = intervention.parent_intervention
+    ORDER BY intervention_data.row_index ASC
 ),
 gov_su_agg as (
     select
@@ -156,6 +157,9 @@ select
 from
     su_agg2
 group by
-    intervention_id;
-    
+    intervention_id
+;
+
+
 comment ON view intervention_startup_scaleup_costs IS 'Extract intervention start-up/scale-up rows for a given intervention';
+

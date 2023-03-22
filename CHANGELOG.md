@@ -1,5 +1,52 @@
 # Changelog
 
+## [1.0.9](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.8...v1.0.9) (2023-03-22)
+
+
+### Bug Fixes
+
+* simplify diet datasource view naming ([ce9e3a5](https://github.com/micronutrientsupport/database-architecture/commit/ce9e3a5dd2a0352b6209fade3d80ac1af944fdf7))
+
+## [1.0.8](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.7...v1.0.8) (2023-03-17)
+
+
+### Bug Fixes
+
+* typo ([c634163](https://github.com/micronutrientsupport/database-architecture/commit/c63416355138eebf1f3a4ee3b6aaf6cdc9a59a6c))
+
+## [1.0.7](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.6...v1.0.7) (2023-03-17)
+
+
+### Bug Fixes
+
+* disable foritifcant for now ([9ecd146](https://github.com/micronutrientsupport/database-architecture/commit/9ecd146646b7bb8818e6e6f8eae784ee40ed242c))
+
+## [1.0.6](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.5...v1.0.6) (2023-03-17)
+
+
+### Bug Fixes
+
+* update miccronutrient dictionary and intake_thresholds table ([21bb9c5](https://github.com/micronutrientsupport/database-architecture/commit/21bb9c5197dd45aad110f47b0bbbfbdd959e06c1))
+
+## [1.0.5](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.4...v1.0.5) (2023-02-28)
+
+
+### Bug Fixes
+
+* addordering to other intervention json views: ([3909723](https://github.com/micronutrientsupport/database-architecture/commit/3909723a89d0f63e9bc113b3c7f822f18c70318c))
+
+
+### Miscellaneous
+
+* formatting ([73a4c64](https://github.com/micronutrientsupport/database-architecture/commit/73a4c64933ac5222470f925c2f437e69c758f7b6))
+
+## [1.0.4](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.3...v1.0.4) (2023-02-08)
+
+
+### Bug Fixes
+
+* do not try to calculate bmi when weight or height are zero ([95241fe](https://github.com/micronutrientsupport/database-architecture/commit/95241fe1e0bbc61a2163cb50c4de6e122fc20667))
+
 ## [1.0.3](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.2...v1.0.3) (2022-10-30)
 
 

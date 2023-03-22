@@ -9,10 +9,6 @@ FROM
 JOIN
     micronutrient m
     ON m."name" = it.nutrient_name
-WHERE
-    sex = 'Female'
-    AND age_lower >= 18
-    AND age_upper <= 29
 GROUP BY
     it.nutrient_name,
     m.id;

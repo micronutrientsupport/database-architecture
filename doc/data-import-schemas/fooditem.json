@@ -32,7 +32,8 @@
             "enum": [
                 "High",
                 "Medium",
-                "Low"
+                "Low",
+                null
             ],
             "description": "How confident we are in the matching. Mediums will show a warning to the user, low confidence fooditems won't be used in any calculations at all. Possible values: ['High', 'Medium', 'Low']"
         },
@@ -58,11 +59,11 @@
         },
         "citation_isbn": {
             "type": ["string", "null"],
-            "description": ""
+            "description": "The ISBN for the document where the data were found, if applicable"
         },
         "citation_notes": {
             "type": ["string", "null"],
-            "description": ""
+            "description": "Additonal notes about the source/publication of the data"
         },
         "moisture_in_g": {
             "type": ["number", "null"],
@@ -71,11 +72,11 @@
         },
         "energy_in_kcal": {
             "type": ["number", "null"],
-            "description": ""
+            "description": "Energy per 100g, in kcal"
         },
         "energy_in_kj": {
             "type": ["number", "null"],
-            "description": ""
+            "description": "Energy per 100g, in kj"
         },
         "nitrogen_in_g": {
             "type": ["number", "null"],

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.10](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.9...v1.0.10) (2023-03-24)
+
+
+### Bug Fixes
+
+* rearrange table order in afe_ear_threshold view to include all mns even if no threshold present ([18469cb](https://github.com/micronutrientsupport/database-architecture/commit/18469cb3fdc9b1a59ffa4f263c719fe18f018646))
+
 ## [1.0.9](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.8...v1.0.9) (2023-03-22)
 
 

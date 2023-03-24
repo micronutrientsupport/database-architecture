@@ -5,10 +5,10 @@ SELECT
     , nutrient_name AS micronutrient_name
     , avg(ear) AS afe_ear
 FROM
-    intake_threshold it
-JOIN
     micronutrient m
-    ON m."name" = it.nutrient_name
+left JOIN
+    intake_threshold it
+ON m."name" = it.nutrient_name
 GROUP BY
     it.nutrient_name,
     m.id;

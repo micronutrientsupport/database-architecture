@@ -37,7 +37,7 @@ JOIN (
         household_intake_afe_deficiency_pivot hidp
         JOIN micronutrient m ON hidp.micronutrient_id = m.id
         JOIN aggregation_area s ON s.id = hidp.aggregation_area_id
-    WHERE s.type='admin' AND s.admin_level=1 || s.type='counntry'
+    WHERE (s.type='admin' AND s.admin_level=1) or s.type='country'
     GROUP BY
         survey_id,
         fct_source_id,

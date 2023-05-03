@@ -8,7 +8,6 @@ FROM aggregation_area
 JOIN (
     SELECT
         survey_id,
-        fct_source_id,
         country,
         aggregation_area_id,
         aggregation_area_name,
@@ -40,7 +39,6 @@ JOIN (
     WHERE (s.type='admin' AND s.admin_level=1) or s.type='country'
     GROUP BY
         survey_id,
-        fct_source_id,
         country,
         aggregation_area_id,
         aggregation_area_name,

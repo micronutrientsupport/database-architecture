@@ -9,4 +9,5 @@ select
 	is_deficient,
 	afe_ear as deficient_value
 from household_intake_afe_deficiency_pivot hiadp 
+where aggregation_area_type = 'country'
 order by afe_ear asc;

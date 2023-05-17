@@ -2,7 +2,22 @@ DROP MATERIALIZED VIEW IF EXISTS impact_summary;
 CREATE MATERIALIZED VIEW impact_summary as
 
 with country_median as (
-	select cda.country_id, cda.micronutrient_id, cda.dietary_supply 
+	select 
+		cda.country_id
+		, cda.micronutrient_id
+		, cda.dietary_supply 
+		, CASE
+    		WHEN cda.deficient_value is not null THEN 
+			case
+				when cda.dietary_supply >= cda.deficient_value then
+					'Above the threshold for inadequacy'
+				else
+					'Below the threshold for inadequacy'
+			    end
+			else
+				null
+			end
+		  as dietary_inadequacy 
 	from composition_data_sources cds
 	join country_deficiency_afe cda 
 	on cds.country_id = cda.country_id 
@@ -10,13 +25,27 @@ with country_median as (
 	and cds.composition_data_id = cda.composition_data_id 
 ),
 household_median as (
-	select hdaa.country as country_id, hdaa.micronutrient_id, hdaa.dietary_supply 
+	select 
+		hdaa.country as country_id
+		, hdaa.micronutrient_id
+		, hdaa.dietary_supply
+		, CASE
+    		WHEN hdaa.deficient_value is not null THEN 
+    			concat(hdaa.deficient_percentage, '% of sampled households (', hdaa.deficient_count , '/', hdaa.household_count, ')')
+    		else
+    			null
+  			END 
+		as dietary_inadequacy 
 	from household_deficiency_afe_aggregation hdaa 
 	where aggregation_area_type = 'country'
 )
 ,
 combined_median as (
-	select cm.country_id, cm.micronutrient_id, coalesce(hm.dietary_supply, cm.dietary_supply) as dietary_supply_median
+	select 
+		cm.country_id
+		, cm.micronutrient_id
+		, coalesce(hm.dietary_supply, cm.dietary_supply) as dietary_supply_median
+		, coalesce(hm.dietary_inadequacy, cm.dietary_inadequacy) as dietary_inadequacy
 	from country_median cm left join household_median hm 
 	on hm.country_id = cm.country_id
 	and hm.micronutrient_id = cm.micronutrient_id
@@ -35,6 +64,7 @@ SELECT
 		2
 	) as impact_difference
 	, cm.dietary_supply_median
+	, cm.dietary_inadequacy
 FROM
 	impact_scenario
 	CROSS JOIN country

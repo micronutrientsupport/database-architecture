@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.1.0...v1.1.1) (2023-05-17)
+
+
+### Miscellaneous
+
+* fix syntax error ([8fa5bf4](https://github.com/micronutrientsupport/database-architecture/commit/8fa5bf4cce9e411a8abbf650d44f550ad3e5ac02))
+
 ## [1.1.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.10...v1.1.0) (2023-05-17)
 
 

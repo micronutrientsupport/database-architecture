@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.1.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.1.0...v1.1.1) (2023-05-17)
+
+
+### Miscellaneous
+
+* fix syntax error ([8fa5bf4](https://github.com/micronutrientsupport/database-architecture/commit/8fa5bf4cce9e411a8abbf650d44f550ad3e5ac02))
+
+## [1.1.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.10...v1.1.0) (2023-05-17)
+
+
+### Features
+
+* ad override table for biomarker survey aggregation areas ([17ac48d](https://github.com/micronutrientsupport/database-architecture/commit/17ac48d955d6dcb319c9126e1bf39c7268c59e68))
+* add country level to household aggregation views alongside L1 aggregations ([62a2418](https://github.com/micronutrientsupport/database-architecture/commit/62a24187ad2ca6dd45ba7a56d39ff10679b9f83d))
+* add country level to household aggregation views alongside L1 aggregations 2 ([210b599](https://github.com/micronutrientsupport/database-architecture/commit/210b599bb09936960509593431cd885596a3c718))
+* add national median dietary supply to impact summary ([8fc6e8c](https://github.com/micronutrientsupport/database-architecture/commit/8fc6e8c955bb9bed0240b44e97334c848fcce6fc))
+* add national median values to impact summary view ([b44b281](https://github.com/micronutrientsupport/database-architecture/commit/b44b2818d34004f495623dda57e538390c40c42c))
+
+
+### Miscellaneous
+
+* add sort to household_intake_afe view ([ed519c7](https://github.com/micronutrientsupport/database-architecture/commit/ed519c764508712883a5527f2b199fbcc0d30848))
+* aggregate all household values irrespective of fct_list_id ([922bb32](https://github.com/micronutrientsupport/database-architecture/commit/922bb3207c641ec91c512bbfcf286fb384ceb06a))
+* fix country/admin aggregations ([5dc3be2](https://github.com/micronutrientsupport/database-architecture/commit/5dc3be2528ce8bd084dc43cafd2bbdb8f6c280ec))
+* reorder impact migrations ([ff33ecd](https://github.com/micronutrientsupport/database-architecture/commit/ff33ecd05c783538fed6494e580071e54b9f5697))
+
 ## [1.0.10](https://github.com/micronutrientsupport/database-architecture/compare/v1.0.9...v1.0.10) (2023-03-24)
 
 

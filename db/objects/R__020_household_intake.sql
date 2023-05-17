@@ -77,7 +77,7 @@ FROM household
 JOIN consumption_composition_match AS ccm ON ccm.household_id = household.id
 LEFT JOIN consumption_items ci ON household.id = ci.household_id AND ci.food_genus_id = ccm.food_genus_id
 JOIN aggregation_area on ST_Contains(aggregation_area.geometry,  household.location)
-WHERE aggregation_area.type='admin' AND aggregation_area.admin_level=1
+WHERE (aggregation_area.type='admin' AND aggregation_area.admin_level=1) or aggregation_area.type='country'
 GROUP BY aggregation_area_id, survey_id, household.id, ccm.fct_list_id 
 ;
 

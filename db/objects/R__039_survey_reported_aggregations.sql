@@ -13,7 +13,7 @@ on bm.household_member_id=hm.id
 join household h 
 on hm.household_id = h.id
 where group_id notnull
-group by survey_idr
+group by survey_id
 )
 
 select survey_id,

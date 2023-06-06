@@ -6,7 +6,7 @@ CREATE TABLE intervention(
     app_user_id                  text       REFERENCES app_user(id),
     data_citation_id             integer    REFERENCES data_citation(id),
     focus_micronutrient          text       REFERENCES micronutrient(id),
-    focus_geography              text       REFERENCES aggragtion_area(gid),
+    focus_geography              text       REFERENCES aggregation_area(gid),
     food_vehicle_id              integer    REFERENCES food_vehicle(id),
     fortification_type_id        text       REFERENCES fortification_type(id),
     program_status               text,

@@ -34,11 +34,11 @@ insert into intervention (
 select 
 	_new_name
 	, _new_description
-	, COALESCE(NULLIF(_new_country,''),country_id);
+	, COALESCE(NULLIF(_new_country,''),country_id)
 	, _user_id
 	, data_citation_id
-	, COALESCE(NULLIF(_new_focus_geography,''),focus_micronutrient);
-	, COALESCE(NULLIF(_new_focus_geography,''),focus_geography);
+	, COALESCE(NULLIF(_new_focus_geography,''),focus_micronutrient)
+	, COALESCE(NULLIF(_new_focus_geography,''),focus_geography)
 	, food_vehicle_id
 	, fortification_type_id
 	, program_status

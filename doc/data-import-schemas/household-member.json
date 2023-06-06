@@ -1,0 +1,164 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "household member",
+    "type": "object",
+    "properties": {
+        "household_original_id": {
+            "type": "string",
+            "description": "An identifier to indicate the household that this person belongs to."
+        },
+        "person_id": {
+            "type": "string",
+            "description": "Unique identifier for the person"
+        },
+        "sex": {
+            "type": "string",
+            "description": "Whether the household member is male or female",
+            "enum": [
+                "m",
+                "f"
+            ]
+        },
+        "education_level": {
+            "type": "string",
+            "description": "The highest level of education achieved by this person.",
+            "enum": [
+                "none",
+                "primary",
+                "secondary",
+                "tertiary"
+            ]
+        },
+        "literacy": {
+            "type": "string",
+            "description": "Literacy level of this person"
+        },
+        "weight_in_kg": {
+            "type": "number",
+            "description": "weight of the person in kilograms"
+        },
+        "height_in_cm": {
+            "type": "number",
+            "description": "height of the person in centimetres"
+        },
+        "age_in_months": {
+            "type": "integer",
+            "description": "The age of the person at the time of the survey"
+        },
+        "is_breastfed": {
+            "type": "boolean",
+            "description": "Whether the child is being breastfed",
+            "anyOf": [
+                {
+                    "enum": [
+                        true,
+                        false
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "is_lactating": {
+            "type": "boolean",
+            "description": "Whether this woman is lactating",
+            "anyOf": [
+                {
+                    "enum": [
+                        true,
+                        false
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "is_pregnant": {
+            "type": "boolean",
+            "description": "Whether this woman is pregnant",
+            "anyOf": [
+                {
+                    "enum": [
+                        true,
+                        false
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "is_smoker": {
+            "type": "boolean",
+            "description": "Whether this person smokes tobacco",
+            "anyOf": [
+                {
+                    "enum": [
+                        true,
+                        false
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "had_illness": {
+            "type": "boolean",
+            "description": "Whether this person has been ill in the last two weeks",
+            "anyOf": [
+                {
+                    "enum": [
+                        true,
+                        false
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "had_malaria": {
+            "type": "boolean",
+            "description": "Whether this person has had malaria in the last two weeks",
+            "anyOf": [
+                {
+                    "enum": [
+                        true,
+                        false
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "had_diarrhoea": {
+            "type": "boolean",
+            "description": "Whether this person has had diarrhoea in the last two weeks",
+            "anyOf": [
+                {
+                    "enum": [
+                        true,
+                        false
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "survey_cluster": {
+            "type": "integer",
+            "description": "The surveying cluster used for selecting this individual",
+        },
+        "survey_strata": {
+            "type": "integer",
+            "description": "The surveying strata used for selecting this individual",
+        },
+        "survey_weight": {
+            "type": "integer",
+            "description": "The surveying weight used for selecting this individual",
+        }

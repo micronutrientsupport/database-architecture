@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Household Data",
+    "type": "object",
+    "properties": {
+        "original_household_id": {
+            "type": "string",
+            "description": "Value to uniquely identify the household."
+        },
+        "survey_id": {
+            "type": "string",
+            "description": "Which survey this data is from e.g. 'IHS3'."
+        },
+        "latitude": {
+            "type": "number",
+            "description": "Latitude indicating where this household is located.",
+            "not": {"const": 0 }
+        },
+        "longitude": {
+            "type": "number",
+            "description": "Longitude indicating where this household is located.",
+            "not": {"const": 0 }
+        },
+        "urbanity": {
+            "type": "string",
+            "description": "Whether this household is located in an urban or rural area",
+            "enum": ["urban", "rural", "null"]
+        },
+        "household_expenditure": {
+            "type": "number",
+            "description": "How much money this household spends per month in local currency"
+        },
+        "wealth_quintile": {
+            "type": "integer",
+            "description": "In what quintile of household wealth this household is (5=richest, 1=poorest)",
+            "enum": [1, 2, 3, 4, 5]
+        },
+        "altitude_in_metres": {
+            "type": "number",
+            "description": "The altitude of the household above sea level in metres. Used to adjust hemoglobin levels when assessing deficiency."
+        },
+        "interview_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the household was interviewed/data was collected, in YYYY-MM-DD format"
+        }
+    }
+}

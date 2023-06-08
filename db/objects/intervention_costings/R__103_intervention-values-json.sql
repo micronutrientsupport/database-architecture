@@ -149,7 +149,7 @@ FROM
     left join intervention_data intervention_parent
     	ON intervention_parent.row_index = intervention_data.row_index
     	and intervention_parent.intervention_id = intervention.parent_intervention
-    left join intervention_cell_formula icf on icf.intervention_id = intervention_data.parent_intervention
+    left join intervention_cell_formula icf on icf.intervention_id = intervention.parent_intervention
      and icf.row_index = intervention_data.row_index 
 WHERE
     intervention_data.header1 IS NOT null

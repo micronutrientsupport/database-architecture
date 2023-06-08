@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW intervention_values_json AS
+git CREATE OR REPLACE VIEW intervention_values_json AS
 SELECT
     intervention_data.intervention_id,
     intervention_data.header1,
@@ -101,7 +101,42 @@ SELECT
             'dataSourceDefault',
             data_citation.short_text,
             'dataCitation',
-            data_citation.citation_text
+            data_citation.citation_text,
+            'year0Formula',
+            case when intervention_data.is_user_editable = false
+            then 
+            	icf.cell_formula_0
+            else
+            	null
+            end,
+            'year1Formula',
+            case when intervention_data.is_user_editable = false
+            then 
+            	icf.cell_formula_1
+            else
+            	null
+            end,
+            'year2Formula',
+            case when intervention_data.is_user_editable = false
+            then 
+            	icf.cell_formula_2
+            else
+            	null
+            end,
+            'year3Formula',
+            case when intervention_data.is_user_editable = false
+            then 
+            	icf.cell_formula_3
+            else
+            	null
+            end,
+            'year4Formula',
+            case when intervention_data.is_user_editable = false
+            then 
+            	icf.cell_formula_4
+            else
+            	null
+            end
         )
         ORDER BY
             intervention_data.row_index ASC
@@ -114,6 +149,8 @@ FROM
     left join intervention_data intervention_parent
     	ON intervention_parent.row_index = intervention_data.row_index
     	and intervention_parent.intervention_id = intervention.parent_intervention
+    left join intervention_cell_formula icf on icf.intervention_id = intervention_data.parent_intervention
+     and icf.row_index = intervention_data.row_index 
 WHERE
     intervention_data.header1 IS NOT null
 GROUP BY

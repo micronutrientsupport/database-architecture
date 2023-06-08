@@ -1,4 +1,4 @@
-git CREATE OR REPLACE VIEW intervention_values_json AS
+CREATE OR REPLACE VIEW intervention_values_json AS
 SELECT
     intervention_data.intervention_id,
     intervention_data.header1,

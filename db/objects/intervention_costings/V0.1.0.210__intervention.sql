@@ -5,6 +5,8 @@ CREATE TABLE intervention(
     country_id                   text       REFERENCES country(id),
     app_user_id                  text       REFERENCES app_user(id),
     data_citation_id             integer    REFERENCES data_citation(id),
+    focus_micronutrient          text       REFERENCES micronutrient(id),
+    focus_geography              text       REFERENCES aggregation_area(gid),
     food_vehicle_id              integer    REFERENCES food_vehicle(id),
     fortification_type_id        text       REFERENCES fortification_type(id),
     program_status               text,
@@ -21,6 +23,8 @@ COMMENT ON COLUMN intervention.intervention_name IS 'The name of the interventio
 COMMENT ON COLUMN intervention.description IS 'A brief description of the intervention; useful for telling users about premade interventions and for letting users make notes on their own user-created interventions';
 COMMENT ON COLUMN intervention.country_id IS '3-letter country code for the country to which the intervention applies';
 COMMENT ON COLUMN intervention.app_user_id IS 'The user who created this intervention';
+COMMENT ON COLUMN intervention.focus_micronutrient IS 'The focus micronutrient the intervention is concerend about';
+COMMENT ON COLUMN intervention.focus_geography IS 'The focus geography the intervention is evaluated at for effectiveness modelling';
 COMMENT ON COLUMN intervention.data_citation_id IS 'The citation data for the publication or organisation which provided the data underlying the costings analysys';
 COMMENT ON COLUMN intervention.food_vehicle_id IS 'Which food vehicle this interventions is concerned about';
 COMMENT ON COLUMN intervention.fortification_type_id IS 'whether the intervention is Large-Scale Food Fortificaion (LSFF), biofortification (BF), or agro-fortification (AF)';

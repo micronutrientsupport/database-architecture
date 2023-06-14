@@ -4,9 +4,9 @@ create table fortification_targeting(
     file_name           text,
     row_index           integer,
     food_vehicle_id	    integer REFERENCES food_vehicle (id),
-    crop				text,
+    micronutrient_id    text REFERENCES micronutrient (id),
     region	            text,
-    region_targeted     boolean,
+    is_region_targeted  boolean,
     zones_targeted 	    numeric,
     cultivation_area_ha numeric,
     targeted_area_ha    numeric,
@@ -19,10 +19,10 @@ comment on table fortification_targeting is 'Table to store intervention costing
 comment on column fortification_targeting.targeting_type      is 'The type of targeting - either biofortification or agro-fortification';
 comment on column fortification_targeting.file_name           is 'The name of the excel file from which this data was loaded';
 comment on column fortification_targeting.row_index           is 'Row number of the worksheet from where this data was taken';
-comment on column fortification_targeting.food_vehicle_id     is 'Identifier for the food vehicle referencing the food_vehicle table';
-comment on column fortification_targeting.crop                is 'Text which matches the IMPACT project name of the crop';
+comment on column fortification_targeting.food_vehicle_id     is 'Identifier for the food vehicle referencing the food_vehicle table. Can be a crop (e.g. Maize or cassava in case of Biofortification) or a food product (e.g. wheat flour or sigar in the case of Large Scale Food Fortification)';
+comment on column fortification_targeting.micronutrient_id    is 'The micronutrent that is boosted in this intervention';
 comment on column fortification_targeting.region              is 'Name of region';
-comment on column fortification_targeting.region_targeted     is 'Region targeted for biofortification - Modeling assumption (changeable by user)';
+comment on column fortification_targeting.is_region_targeted  is 'Region targeted for biofortification - Modeling assumption (changeable by user)';
 comment on column fortification_targeting.zones_targeted      is 'Number of districts/zones within region targeted for biofortification - Modeling assumption (changeable by user)';
 comment on column fortification_targeting.cultivation_area_ha is 'Area (ha) under cultivation';
 comment on column fortification_targeting.targeted_area_ha    is 'Targeted area (ha) under cultivation';

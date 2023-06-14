@@ -6,7 +6,7 @@ create table fortification_targeting(
     food_vehicle_id	    integer REFERENCES food_vehicle (id),
     crop				text,
     region	            text,
-    region_targeted     boolean,
+    is_region_targeted  boolean,
     zones_targeted 	    numeric,
     cultivation_area_ha numeric,
     targeted_area_ha    numeric,
@@ -22,7 +22,7 @@ comment on column fortification_targeting.row_index           is 'Row number of 
 comment on column fortification_targeting.food_vehicle_id     is 'Identifier for the food vehicle referencing the food_vehicle table';
 comment on column fortification_targeting.crop                is 'Text which matches the IMPACT project name of the crop';
 comment on column fortification_targeting.region              is 'Name of region';
-comment on column fortification_targeting.region_targeted     is 'Region targeted for biofortification - Modeling assumption (changeable by user)';
+comment on column fortification_targeting.is_region_targeted  is 'Region targeted for biofortification - Modeling assumption (changeable by user)';
 comment on column fortification_targeting.zones_targeted      is 'Number of districts/zones within region targeted for biofortification - Modeling assumption (changeable by user)';
 comment on column fortification_targeting.cultivation_area_ha is 'Area (ha) under cultivation';
 comment on column fortification_targeting.targeted_area_ha    is 'Targeted area (ha) under cultivation';

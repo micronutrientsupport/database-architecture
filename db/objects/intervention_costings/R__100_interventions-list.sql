@@ -22,6 +22,7 @@ select
             where
                 d.row_name = 'summary_10yr_discounted_startup_and_recurring_cost'
                 and d.intervention_id = i.id
+            limit 1
         ),
         0
     ) as ten_year_total_cost,

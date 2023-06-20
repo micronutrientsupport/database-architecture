@@ -1,12 +1,14 @@
 CREATE OR REPLACE view intervention_vehicle_standard AS 
 with food_vehicle as (
-    select
+   select
         intervention_data.intervention_id,
+        intervention_data.factor_text,
         split_part(
-            split_part(intervention_data.factor_text, 'Food vehicle standard, ', 2),
+            split_part(intervention_data.factor_text, 'Food vehicle standard or target, ', 2),
             '(',
             1
         ) as micronutrient,
+        f.micronutrient_id,
         split_part(split_part(intervention_data.factor_text, '(', 2), ')', 1) as compound,
         intervention_data.year_0 as target_val,
         intervention_parent.year_0 as target_val_default,
@@ -29,22 +31,22 @@ with food_vehicle as (
         data_citation.citation_text as data_citation
     from
 	    intervention_data intervention_data
+	    left join fortificant f on lower(f.name)=lower(split_part(split_part(intervention_data.factor_text, '(', 2), ')', 1))
 	    join intervention on intervention_data.intervention_id = intervention.id
 	    left join data_citation on data_citation.id = intervention.data_citation_id
 	    -- Re-join intervention_data to get the values for the parent intervention
 	    left join intervention_data intervention_parent 
 	    	ON intervention_parent.row_index = intervention_data.row_index 
 	    	and intervention_parent.intervention_id = intervention.parent_intervention
-    where
+	where
         intervention_data.header1 = 'Program assumptions'
-        and intervention_data.row_name is null
     order by
         row_index asc
 ),
 fvs as (
     select
         intervention_id,
-        micronutrient,
+        micronutrient_id,
         json_agg(
             json_build_object(
                 'compound',
@@ -71,16 +73,17 @@ fvs as (
         ) as food_vehicle_standard
     from
         food_vehicle fv
+    where not micronutrient = '' and micronutrient_id is not null
     group by
         intervention_id,
-        micronutrient
+        micronutrient_id
 )
 select
     intervention_id,
     array_agg(
         json_build_object(
             'micronutrient',
-            micronutrient,
+            micronutrient_id,
             'compounds',
             food_vehicle_standard
         )

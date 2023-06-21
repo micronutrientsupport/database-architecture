@@ -37,7 +37,7 @@ select
 	, COALESCE(NULLIF(_new_country,''),country_id)
 	, _user_id
 	, data_citation_id
-	, COALESCE(NULLIF(_new_focus_geography,''),focus_micronutrient)
+	, COALESCE(NULLIF(_new_focus_micronutrient,''),focus_micronutrient)
 	, COALESCE(NULLIF(_new_focus_geography,''),focus_geography)
 	, food_vehicle_id
 	, fortification_type_id

@@ -1,3 +1,16 @@
+
+create or replace function array_unique (a text[]) returns text[] as $$
+  select array (
+    select distinct v from unnest(a) as b(v)
+  )
+$$ language sql;
+
+create or replace function array_unique (a integer[]) returns integer[] as $$
+  select array (
+    select distinct v from unnest(a) as b(v)
+  )
+$$ language sql;
+
 create or replace FUNCTION parse_dependent_cells_from_excel_formula(text) RETURNS text[]
 AS 'select array_agg(distinct cells) from REGEXP_MATCHES(RIGHT($1, -(POSITION(''='' IN $1))), ''\$?[A-Z]+\$?\d+'',''g'') cells;'
 LANGUAGE SQL
@@ -39,18 +52,6 @@ AS '
 LANGUAGE SQL
 IMMUTABLE
 RETURNS NULL ON NULL INPUT;
-
-create or replace function array_unique (a text[]) returns text[] as $$
-  select array (
-    select distinct v from unnest(a) as b(v)
-  )
-$$ language sql;
-
-create or replace function array_unique (a integer[]) returns integer[] as $$
-  select array (
-    select distinct v from unnest(a) as b(v)
-  )
-$$ language sql;
 
 CREATE OR REPLACE VIEW intervention_values_json AS
 with grouped_rows as (

@@ -32,7 +32,7 @@ gov_su_agg as (
             'section',
             header2,
             'costBreakdown',
-            json_agg(data)->,
+            json_agg(data)->0,
             'year0Total',
             (
                 select

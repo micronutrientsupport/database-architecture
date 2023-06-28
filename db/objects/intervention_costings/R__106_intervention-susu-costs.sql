@@ -72,7 +72,7 @@ gov_su_agg as (
             )
         ) as d
     from
-        intervention_values_json g
+        intervention_values_json_subset g
     group by
         header1,
         header2,

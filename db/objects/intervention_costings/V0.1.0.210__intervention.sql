@@ -3,7 +3,7 @@ CREATE TABLE intervention(
     intervention_name            text,
     description                  text,
     country_id                   text       REFERENCES country(id),
-    app_user_id                  text       REFERENCES app_user(id),
+    app_user_id                  text,
     data_citation_id             integer    REFERENCES data_citation(id),
     focus_micronutrient          text       REFERENCES micronutrient(id),
     focus_geography              text       REFERENCES aggregation_area(gid),

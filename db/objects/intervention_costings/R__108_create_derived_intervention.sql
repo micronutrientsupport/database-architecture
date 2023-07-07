@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION create_derived_intervention(_parent_id numeric, _new_name text, _new_description text, _new_country text, _new_focus_micronutrient text, _new_focus_geography text, _user_id numeric)
+CREATE OR REPLACE FUNCTION create_derived_intervention(_parent_id numeric, _new_name text, _new_description text, _new_country text, _new_focus_micronutrient text, _new_focus_geography text, _user_id text)
 RETURNS setof intervention_list AS
 
 -- Creates a new record in the intervention table with data copied from the provided

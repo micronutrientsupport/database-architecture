@@ -1,4 +1,4 @@
-CREATE or replace function get_intervention_data_as_json(int_id integer) returns jsonb
+CREATE or replace function get_intervention_data_as_json(int_id uuid) returns jsonb
 AS
 $$
 DECLARE

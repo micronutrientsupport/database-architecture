@@ -33,6 +33,9 @@
                 "High",
                 "Medium",
                 "Low",
+                "h",
+                "m",
+                "l",
                 null
             ],
             "description": "How confident we are in the matching. Mediums will show a warning to the user, low confidence fooditems won't be used in any calculations at all. Possible values: ['High', 'Medium', 'Low']"

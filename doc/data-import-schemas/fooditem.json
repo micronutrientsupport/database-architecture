@@ -4,7 +4,7 @@
     "additionalProperties": false,
     "properties": {
         "original_food_id": {
-            "type": "string",
+            "type": ["string", "null"],
             "description": "The food ID as it was found in the original Food Composition Table. Kept for informational purposes only"
         },
         "original_food_name": {

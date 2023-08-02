@@ -3,6 +3,7 @@ create or replace view intervention_list as
 select
     i.id,
     i.intervention_name as name,
+    i.app_user_id,
     coalesce(i.description, 'No description available') as description,
     i.country_id,
     i.fortification_type_id,

@@ -54,6 +54,7 @@ IMMUTABLE
 RETURNS NULL ON NULL INPUT;
 
 CREATE OR REPLACE VIEW intervention_values_json AS
+
 with grouped_rows as (
 	select 
 		intervention_id
@@ -330,7 +331,22 @@ SELECT
 	            	from intervention_data i
 	            	JOIN	(
 	            		-- select ids that are in the missingRows but not in reported rows
-		            	SELECT unnest as row_index FROM unnest(array_unique(parse_dependent_rows_from_excel_formula(icf.cell_formula_1)))
+		            	SELECT unnest as row_index FROM unnest(
+		            		parse_dependent_rows_from_excel_formulae_array(
+		                        ARRAY[
+		                            icf.cell_formula_1,
+		                            icf.cell_formula_2,
+		                            icf.cell_formula_3,
+		                            icf.cell_formula_4,
+		                            icf.cell_formula_5,
+		                            icf.cell_formula_6,
+		                            icf.cell_formula_7,
+		                            icf.cell_formula_8,
+		                            icf.cell_formula_9,
+		                            icf.cell_formula_10
+		                        ]
+		                  )
+		            	)
 		            		except 
 		            	select * from unnest(gr.reported_rows) as index
 	            	) as not_reported
@@ -363,5 +379,5 @@ GROUP BY
     intervention_data.intervention_id,
     intervention_data.header1,
     intervention_data.header2;
-
+    
 comment ON view intervention_values_json IS 'Aggregate intervention_data year fields into json object';

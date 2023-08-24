@@ -1,3 +1,4 @@
+DROP MATERIALIZED VIEW IF EXISTS intervention_cell_formula_deps;
 create materialized VIEW intervention_cell_formula_deps as
 select 
 icf.intervention_id

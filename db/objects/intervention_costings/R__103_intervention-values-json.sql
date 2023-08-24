@@ -55,6 +55,8 @@ RETURNS NULL ON NULL INPUT;
 
 CREATE OR REPLACE VIEW intervention_values_json AS
 
+explain analyze
+
 with grouped_rows as (
 	select 
 		intervention_id
@@ -175,95 +177,27 @@ SELECT
             data_citation.citation_text
            )::jsonb || json_build_object(
             'year0Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_1
-            else
-            	null
-            end,
+			year_0_formula,
             'year1Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_2
-            else
-            	null
-            end,
+            year_1_formula,
             'year2Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_3
-            else
-            	null
-            end,
+            year_2_formula,
             'year3Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_4
-            else
-            	null
-            end,
+            year_3_formula,
             'year4Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_5
-            else
-            	null
-            end,
+            year_4_formula,
             'year5Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_6
-            else
-            	null
-            end,
+            year_5_formula,
             'year6Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_7
-            else
-            	null
-            end,
+            year_6_formula,
             'year7Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_8
-            else
-            	null
-            end,
+            year_7_formula,
             'year8Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_9
-            else
-            	null
-            end,
+            year_8_formula,
             'year9Formula',
-            case when intervention_data.is_user_editable = false
-            then 
-            	icf.cell_formula_10
-            else
-            	null
-            end,
+            year_9_formula,
             'dependentRows',
-            case when intervention_data.is_user_editable = false
-            then 
-                parse_dependent_rows_from_excel_formulae_array(
-                	ARRAY[
-                		icf.cell_formula_1,
-                		icf.cell_formula_2,
-                		icf.cell_formula_3,
-                		icf.cell_formula_4,
-                		icf.cell_formula_5,
-                		icf.cell_formula_6,
-                		icf.cell_formula_7,
-                		icf.cell_formula_8,
-                		icf.cell_formula_9,
-                		icf.cell_formula_10
-                	]
-                )
-            else
-            	null
-            end,
+            dependent_rows,
             'reportedRows',
             case when intervention_data.is_user_editable = false
             then 
@@ -277,20 +211,7 @@ SELECT
             	(SELECT array_agg(unnest ORDER BY unnest)
 	            FROM (
 	            SELECT * FROM unnest(
-                   parse_dependent_rows_from_excel_formulae_array(
-                        ARRAY[
-                            icf.cell_formula_1,
-                            icf.cell_formula_2,
-                            icf.cell_formula_3,
-                            icf.cell_formula_4,
-                            icf.cell_formula_5,
-                            icf.cell_formula_6,
-                            icf.cell_formula_7,
-                            icf.cell_formula_8,
-                            icf.cell_formula_9,
-                            icf.cell_formula_10
-                        ]
-                  )
+                   dependent_rows
                 )
 	            except 
 	            	select * from unnest(gr.reported_rows)) as sub)
@@ -332,20 +253,7 @@ SELECT
 	            	JOIN	(
 	            		-- select ids that are in the missingRows but not in reported rows
 		            	SELECT unnest as row_index FROM unnest(
-		            		parse_dependent_rows_from_excel_formulae_array(
-		                        ARRAY[
-		                            icf.cell_formula_1,
-		                            icf.cell_formula_2,
-		                            icf.cell_formula_3,
-		                            icf.cell_formula_4,
-		                            icf.cell_formula_5,
-		                            icf.cell_formula_6,
-		                            icf.cell_formula_7,
-		                            icf.cell_formula_8,
-		                            icf.cell_formula_9,
-		                            icf.cell_formula_10
-		                        ]
-		                  )
+		            		dependent_rows
 		            	)
 		            		except 
 		            	select * from unnest(gr.reported_rows) as index
@@ -369,7 +277,7 @@ FROM
     left join intervention_data intervention_parent
     	ON intervention_parent.row_index = intervention_data.row_index
     	and intervention_parent.intervention_id = intervention.parent_intervention
-    left join intervention_cell_formula icf on icf.intervention_id = coalesce(intervention.parent_intervention, intervention.id)
+    left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.parent_intervention, intervention.id)
      and icf.row_index = intervention_data.row_index 
     left join grouped_rows gr 
     	on intervention_data.intervention_id = gr.intervention_id and intervention_data.header1 = gr.header1 and intervention_data.header2 = gr.header2
@@ -379,5 +287,5 @@ GROUP BY
     intervention_data.intervention_id,
     intervention_data.header1,
     intervention_data.header2;
-    
+        
 comment ON view intervention_values_json IS 'Aggregate intervention_data year fields into json object';

@@ -1,4 +1,4 @@
-create materialized VIEW IF NOT EXISTS  intervention_cell_formula_deps as
+create materialized VIEW intervention_cell_formula_deps as
 select 
 icf.intervention_id
 , icf.row_index

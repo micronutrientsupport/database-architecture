@@ -55,8 +55,6 @@ RETURNS NULL ON NULL INPUT;
 
 CREATE OR REPLACE VIEW intervention_values_json AS
 
-explain analyze
-
 with grouped_rows as (
 	select 
 		intervention_id
@@ -287,5 +285,5 @@ GROUP BY
     intervention_data.intervention_id,
     intervention_data.header1,
     intervention_data.header2;
-        
+    
 comment ON view intervention_values_json IS 'Aggregate intervention_data year fields into json object';

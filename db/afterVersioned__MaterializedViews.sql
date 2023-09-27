@@ -15,3 +15,4 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS impact_food_group_aggregation AS SELECT '
 CREATE MATERIALIZED VIEW IF NOT EXISTS household_deficiency_afe_aggregation AS SELECT 'x'; REFRESH MATERIALIZED VIEW household_deficiency_afe_aggregation;
 CREATE MATERIALIZED VIEW IF NOT EXISTS household_intake_afe AS SELECT 'x'; REFRESH MATERIALIZED VIEW household_intake_afe;
 CREATE MATERIALIZED VIEW IF NOT EXISTS country_deficiency_afe AS SELECT 'x'; REFRESH MATERIALIZED VIEW country_deficiency_afe;
+CREATE MATERIALIZED VIEW IF NOT EXISTS intervention_cell_formula_deps AS SELECT 'x'; REFRESH MATERIALIZED VIEW intervention_cell_formula_deps;

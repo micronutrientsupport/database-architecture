@@ -3,18 +3,25 @@ with totalfields as (
     select
         '{
 		"Recurring premix costs": {
-			"Premix": "total_premix_cost"
+			"Premix ": "total_premix_cost"
 		},
 		"Government-related recurring monitoring and management costs ": {
 			"Mill inspections and monitoring": "total_factory_inspections_cost",
-			"Import monitoring": "???",
-			"Commercial monitoring/market surveys": "???",
+			"Import monitoring": "total_import_monitoring_cost",
+			"Commercial monitoring/market surveys": "total_commercial_monitoring_cost",
 			"Household monitoring  ": "total_household_monitoring_cost",
 			"Social marketing": "total_social_marketing_recurring_cost",
 			"Training/Retraining": "total_retraining_gov_cost",
 			"Management, overhead, administration ": "total_management_cost_gov"
 		},
 		"Industry-related recurring fortification costs": {
+			"Fortification": "total_fortification_cost",
+			"Internal quality assurance/quality control (QA/QC)": "total_internal_qaqc_cost",
+			"External quality assurance/quality control (QA/QC)": "total_external_qaqc_cost",
+			"Training/Retraining": "total_retraining_cost",
+			"Management, overhead, administration ": "total_management_cost"
+		},
+        "Total industry-related recurring fortification costs": {
 			"Fortification": "total_fortification_cost",
 			"Internal quality assurance/quality control (QA/QC)": "total_internal_qaqc_cost",
 			"External quality assurance/quality control (QA/QC)": "total_external_qaqc_cost",
@@ -222,7 +229,8 @@ su_agg2 as (
         header1 in (
             'Recurring premix costs',
             'Government-related recurring monitoring and management costs ',
-            'Industry-related recurring fortification costs'
+            'Industry-related recurring fortification costs',
+            'Total industry-related recurring fortification costs'
         )
     group by
         intervention_id,

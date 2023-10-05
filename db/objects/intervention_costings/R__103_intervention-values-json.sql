@@ -55,7 +55,16 @@ RETURNS NULL ON NULL INPUT;
 
 CREATE OR REPLACE VIEW intervention_values_json AS
 
-with grouped_rows as (
+with omitfields as (
+    select
+        array[
+        	'total_startup_cost_gov',
+            'total_startup_cost_industry',
+            'total_gov_recurring_monitoring_cost',
+            'total_recurring_premix_cost',
+            'total_industry_recurring_fortification_cost'
+        ] as mapping
+), grouped_rows as (
 	select 
 		intervention_id
 		, header1
@@ -69,7 +78,6 @@ GROUP BY
    	header1,
     header2
 )
-
 SELECT
     intervention_data.intervention_id,
     intervention_data.header1,
@@ -268,6 +276,7 @@ SELECT
             intervention_data.row_index ASC
     ) AS data
 FROM
+    omitfields,
     intervention_data intervention_data
     join intervention on intervention_data.intervention_id = intervention.id
     left join data_citation on data_citation.id = intervention.data_citation_id
@@ -281,6 +290,7 @@ FROM
     	on intervention_data.intervention_id = gr.intervention_id and intervention_data.header1 = gr.header1 and intervention_data.header2 = gr.header2
 WHERE
     intervention_data.header1 IS NOT null
+    and not (intervention_data.row_name = ANY (omitfields.mapping))
 GROUP BY
     intervention_data.intervention_id,
     intervention_data.header1,

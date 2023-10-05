@@ -8,12 +8,13 @@ with totalfields as (
 			"Training": "total_training_cost"
 		},
 		"Industry-related start-up/scale-up costs": {
-			"Equipment": "total_equipment_cost",
+            "Fortification equipment": "total_equipment_cost",
+			"Quality assurance/quality control (QA/QC) equipment": "total_quality_equipment_cost",
 			"Labeling": "total_labeling_cost",
 			"Training": "total_training_cost"
 		},
 		"Government-related start-up/scale-up costs": {
-			"Equipment": "total_equipment_cost_gov",
+			"Monitoring equipment": "total_equipment_cost_gov",
 			"Planning": "total_planning_cost",
 			"Social marketing and advocacy": "total_social_marketing_startup_cost",
 			"Training ": "total_training_cost_gov"
@@ -53,6 +54,26 @@ gov_su_agg as (
                             totalfields
                     )
             ),
+            'year0TotalFormula',
+            (
+                select
+                    year_0_formula
+                from
+                    intervention_data id2
+                    join intervention on id2.intervention_id = intervention.id
+                    left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.parent_intervention, intervention.id)
+                      and icf.row_index = id2.row_index 
+                where
+                    id2.intervention_id = g.intervention_id
+                    and header1 = g.header1
+                    and header2 = g.header2
+                    and row_name =(
+                        select
+                            mapping ->(g.header1) ->>(g.header2)
+                        from
+                            totalfields
+                    )
+            ),
             'year1Total',
             (
                 select
@@ -61,6 +82,26 @@ gov_su_agg as (
                     intervention_data id2
                 where
                     intervention_id = g.intervention_id
+                    and header1 = g.header1
+                    and header2 = g.header2
+                    and row_name =(
+                        select
+                            mapping ->(g.header1) ->>(g.header2)
+                        from
+                            totalfields
+                    )
+            ),
+            'year1TotalFormula',
+            (
+                select
+                    year_0_formula
+                from
+                    intervention_data id2
+                    join intervention on id2.intervention_id = intervention.id
+                    left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.parent_intervention, intervention.id)
+                      and icf.row_index = id2.row_index 
+                where
+                    id2.intervention_id = g.intervention_id
                     and header1 = g.header1
                     and header2 = g.header2
                     and row_name =(
@@ -104,7 +145,6 @@ from
 group by
     intervention_id
 ;
-
 
 comment ON view intervention_startup_scaleup_costs IS 'Extract intervention start-up/scale-up rows for a given intervention';
 

@@ -9,7 +9,7 @@ with totalfields as (
 			"Mill inspections and monitoring": "total_factory_inspections_cost",
 			"Import monitoring": "total_import_monitoring_cost",
 			"Commercial monitoring/market surveys": "total_commercial_monitoring_cost",
-			"Household monitoring  ": "total_household_monitoring_cost",
+			"Household monitoring ": "total_household_monitoring_cost",
 			"Social marketing": "total_social_marketing_recurring_cost",
 			"Training/Retraining": "total_retraining_gov_cost",
 			"Management, overhead, administration ": "total_management_cost_gov"

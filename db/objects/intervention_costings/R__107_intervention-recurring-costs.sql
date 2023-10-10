@@ -35,6 +35,7 @@ gov_su_agg as (
         intervention_id,
         header1,
         header2,
+        max(max_row) as max_row,
         json_build_object(
             'section',
             header2,
@@ -222,7 +223,8 @@ su_agg2 as (
     select
         intervention_id,
         header1,
-        json_build_object('category', header1, 'costs', array_agg(d)) as recurring_costs
+        max(max_row) as max_row,
+        json_build_object('category', header1, 'costs', array_agg(d ORDER BY max_row ASC)) as recurring_costs
     from
         gov_su_agg
     where
@@ -238,7 +240,7 @@ su_agg2 as (
 )
 select
     intervention_id,
-    array_agg(recurring_costs) as recurring_costs
+    array_agg(recurring_costs order by max_row asc) as recurring_costs
 from
     su_agg2
 group by

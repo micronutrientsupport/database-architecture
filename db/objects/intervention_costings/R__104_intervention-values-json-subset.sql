@@ -1,11 +1,11 @@
 CREATE OR REPLACE view intervention_values_json_subset AS
 
 WITH expanded_data AS (
-    SELECT intervention_id, header1, header2, jsonb_array_elements((data::jsonb)) AS expanded
+    SELECT intervention_id, header1, header2, max_row, jsonb_array_elements((data::jsonb)) AS expanded
     FROM intervention_values_json
 )
-select intervention_id, header1, header2, json_agg(data) as data from (
-	select intervention_id, header1, header2, json_build_object(
+select intervention_id, header1, header2, max(max_row) as max_row, json_agg(data) as data from (
+	select intervention_id, header1, header2, max_row, json_build_object(
 		'year0', (expanded->>'year0')::numeric,
 		'year0Edited', (expanded->>'year0Edited')::boolean,
 		'year0Formula', expanded->>'year0Formula',

@@ -22,17 +22,17 @@ year_8              numeric,
 year_9              numeric,
 notes               text,
 units               text,
-is_user_editable    boolean
-is_calculated       boolean default false
-year_0_overriden    boolean default false
-year_1_overriden    boolean default false
-year_2_overriden    boolean default false
-year_3_overriden    boolean default false
-year_4_overriden    boolean default false
-year_5_overriden    boolean default false
-year_6_overriden    boolean default false
-year_7_overriden    boolean default false
-year_8_overriden    boolean default false
+is_user_editable    boolean,
+is_calculated       boolean default false,
+year_0_overriden    boolean default false,
+year_1_overriden    boolean default false,
+year_2_overriden    boolean default false,
+year_3_overriden    boolean default false,
+year_4_overriden    boolean default false,
+year_5_overriden    boolean default false,
+year_6_overriden    boolean default false,
+year_7_overriden    boolean default false,
+year_8_overriden    boolean default false,
 year_9_overriden    boolean default false
 );
 

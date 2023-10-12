@@ -3,13 +3,15 @@ with food_vehicle as (
    select
         intervention_data.intervention_id,
         intervention_data.factor_text,
-        split_part(
+        trim(split_part(
             split_part(intervention_data.factor_text, 'Food vehicle standard or target, ', 2),
             '(',
             1
-        ) as micronutrient,
+        )) as micronutrient,
         f.micronutrient_id,
-        split_part(split_part(intervention_data.factor_text, '(', 2), ')', 1) as compound,
+        reverse(substr(reverse(TRIM(LEADING '(' FROM
+			substring(intervention_data.factor_text , '\(.*\)')
+		)),2)) as compound,
         intervention_data.year_0 as target_val,
         intervention_parent.year_0 as target_val_default,
         intervention_data.year_0 != intervention_parent.year_0 as target_val_edited,
@@ -31,7 +33,9 @@ with food_vehicle as (
         data_citation.citation_text as data_citation
     from
 	    intervention_data intervention_data
-	    left join fortificant f on lower(f.name)=lower(split_part(split_part(intervention_data.factor_text, '(', 2), ')', 1))
+	    left join fortificant f on lower(f.name)=lower(reverse(substr(reverse(TRIM(LEADING '(' FROM
+			substring(intervention_data.factor_text , '\(.*\)')
+		)),2)))
 	    join intervention on intervention_data.intervention_id = intervention.id
 	    left join data_citation on data_citation.id = intervention.data_citation_id
 	    -- Re-join intervention_data to get the values for the parent intervention

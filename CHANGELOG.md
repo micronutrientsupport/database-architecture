@@ -1,5 +1,64 @@
 # Changelog
 
+## [1.2.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.1.1...v1.2.0) (2023-10-13)
+
+
+### Features
+
+* add basic view to calculate summary premix cost per intervention ([de5aa0f](https://github.com/micronutrientsupport/database-architecture/commit/de5aa0f0a2d9b693967bdc41efc793972f40086c))
+* add fields to intervention to store focus geography and micronutrient.  Update intervention creation function to support their use ([1fff983](https://github.com/micronutrientsupport/database-architecture/commit/1fff9834f7bec13bc97affc6491dd546705b36e5))
+* add intervention id column to fortification targeting data ([97bcc8e](https://github.com/micronutrientsupport/database-architecture/commit/97bcc8e7da84724e3fb3555c34ea7f1d4488f8b9))
+* add mat view of cell formulae for interventions ([8b98829](https://github.com/micronutrientsupport/database-architecture/commit/8b98829e072e15a73eba1ef42ffa16468ec4ad25))
+* add ovverriden flag to intervention_data to support user ovverriding formula values ([b43380a](https://github.com/micronutrientsupport/database-architecture/commit/b43380a6bdc204d080e00bc954a3bc05943db47c))
+* add temporary population summary table ([1044da9](https://github.com/micronutrientsupport/database-architecture/commit/1044da95215fc490d2884e9890dfc714c74e5889))
+* fix fortificant extraction ([33a6ac1](https://github.com/micronutrientsupport/database-architecture/commit/33a6ac16a7e95090feae61625446b5954af6b05b))
+* initial include formulae in intervention-values-json aggregate ([62c57bd](https://github.com/micronutrientsupport/database-architecture/commit/62c57bde0984b9a3bbbf9bd409805f1a0ec0b5a9))
+* maintain source sorting order for intervention data views ([0c47710](https://github.com/micronutrientsupport/database-architecture/commit/0c4771064a7c3c70e6c53f512c5a2a6f073c89cd))
+* update biomarker datasources to include viable aggregation fields and other utility data ([5e3cfb1](https://github.com/micronutrientsupport/database-architecture/commit/5e3cfb11b2bf50158789b3071b26c8bef5401468))
+* update susu and recurring costs views to use the intervention_values_json view as parent ([acc631d](https://github.com/micronutrientsupport/database-architecture/commit/acc631d88d2476f6b14c330eb4699933531aa0f4))
+
+
+### Bug Fixes
+
+* add flag to intervention_data table to indicate if a value has been overriden ([7dbcaac](https://github.com/micronutrientsupport/database-architecture/commit/7dbcaacd14c69f885149f788c4972c74e6bb54f6))
+* add focus nutrient to intervention_list view ([f863864](https://github.com/micronutrientsupport/database-architecture/commit/f863864d5ae660ff70f0201e56ec26b800cead43))
+* add user_id to intervention_list view ([1b8a9ec](https://github.com/micronutrientsupport/database-architecture/commit/1b8a9ece6f7b93be37270c27c9e1fa74bd076cd2))
+* adjust sql order for intervention cell formula view ([4aa5505](https://github.com/micronutrientsupport/database-architecture/commit/4aa5505289d006372c2ea3bf8062b3e2b0da2006))
+* fix cells deps in dependent rows ([0e6d22a](https://github.com/micronutrientsupport/database-architecture/commit/0e6d22a7cca2a412e35ec35e967d354ffb29aaa7))
+* fix intervention create function typo ([b183095](https://github.com/micronutrientsupport/database-architecture/commit/b18309525d7ec664ba84c63cc81d3186976044a7))
+* fix intervention formulae ([348a846](https://github.com/micronutrientsupport/database-architecture/commit/348a846f7464b07503f8f9888d6212be6cc13bfb))
+* fix intervention total row names, omit uneeded rows from json view ([516223e](https://github.com/micronutrientsupport/database-architecture/commit/516223efe24f29d48cca31e70787f8c89ca3695e))
+* fix types in intervention subset view and use it for susu view ([eb9d26c](https://github.com/micronutrientsupport/database-architecture/commit/eb9d26c432657b606b74544161c9eed4468ed483))
+* formula order ([583f218](https://github.com/micronutrientsupport/database-architecture/commit/583f2184cf1a748c838909713ea55e3339c98ea3))
+* make aggregation_area gid unique so can be used in FK relations ([fccd6f5](https://github.com/micronutrientsupport/database-architecture/commit/fccd6f5dda7aa0b5efbc5ed8ea0109d8371268a9))
+* more fix ([c927037](https://github.com/micronutrientsupport/database-architecture/commit/c927037f60c9d85cbfddf41d85871849b6a762b6))
+* remove analyse statement ([b280169](https://github.com/micronutrientsupport/database-architecture/commit/b2801690325b9d3ec574a239669129f65576dc5f))
+* typo in recurring costs view ([373693d](https://github.com/micronutrientsupport/database-architecture/commit/373693d4f5ff55611f07d93fdb54874d728a8989))
+* update create intervention fnb to include premix ([90e362b](https://github.com/micronutrientsupport/database-architecture/commit/90e362b26e70ad8fd8d0932d02b7d507e1cabfc4))
+* update create_derived_intervention function to accept text user_id ([6e4a7d2](https://github.com/micronutrientsupport/database-architecture/commit/6e4a7d2722d101c9c2393a5fbd60e66e8a08bf07))
+* yearXEdited fields no longer null when parent intervention value is null ([61a7a45](https://github.com/micronutrientsupport/database-architecture/commit/61a7a45027b528338835c15ba5de44814f52a93b))
+
+
+### Miscellaneous
+
+* add limit to subquery in intervention_list so broken data import doesn't break the view ([2fe9399](https://github.com/micronutrientsupport/database-architecture/commit/2fe9399a589ae096f36201690697dbd62f7008ef))
+* fix function def order ([30d4612](https://github.com/micronutrientsupport/database-architecture/commit/30d4612157a8949c9c8661a60b9caf394932b596))
+* fix typio 2 ([f547349](https://github.com/micronutrientsupport/database-architecture/commit/f547349b13c048626c951da2cffeb357a7fc7293))
+* fix typo ([5ec6f4e](https://github.com/micronutrientsupport/database-architecture/commit/5ec6f4e2aa5f0fcf0af098e8cbbddf63d3e31f54))
+* fix typo ([e2d2778](https://github.com/micronutrientsupport/database-architecture/commit/e2d27788d21443651df2d90c0c81c0a9e6a7c37c))
+* fix typo ([a322a02](https://github.com/micronutrientsupport/database-architecture/commit/a322a02e6317740da62b79dbe0c5e378ae495621))
+* fix typo ([51aab8b](https://github.com/micronutrientsupport/database-architecture/commit/51aab8b6f5287a69edb3d92538dbc7e31252aa30))
+* fix typo ([c60874a](https://github.com/micronutrientsupport/database-architecture/commit/c60874ae0d6c0415a9a735593bbc9036f57b06b3))
+* fix typo ([67016de](https://github.com/micronutrientsupport/database-architecture/commit/67016de04be5d9020dd0ac7c64379eeb72bce2a4))
+* fix typo ([cd8468a](https://github.com/micronutrientsupport/database-architecture/commit/cd8468adf77ef5c9acddd9706921f1d1e1c672d5))
+* fix typo 2 ([42c1c0b](https://github.com/micronutrientsupport/database-architecture/commit/42c1c0b0f828b30f9c95ee1ec8ace3c15261a0ac))
+* fix typo in recurring costs view ([069e638](https://github.com/micronutrientsupport/database-architecture/commit/069e638a5a5536a7674b65bf8f4304eb41c8669c))
+* fix: folic acid/B9 micronutrient table reference ([c3f2e46](https://github.com/micronutrientsupport/database-architecture/commit/c3f2e46de25a1372b4026f80c68021f528b45a53))
+* if exists: ([37c58b4](https://github.com/micronutrientsupport/database-architecture/commit/37c58b4de6551e5bbbb671488bea9b316443a6c7))
+* improve intervention values json perf ([0fb1ada](https://github.com/micronutrientsupport/database-architecture/commit/0fb1ada01eb894da3833ec7b08a791336ccda055))
+* reenable folic acide in fortificant table ([a1f24a8](https://github.com/micronutrientsupport/database-architecture/commit/a1f24a80f58fdd37d8b772cdbdca56de258b30c2))
+* remove app user table and foreign key to it ([f34d867](https://github.com/micronutrientsupport/database-architecture/commit/f34d86787857b2877f9a6ba86e21d83497c90de3))
+
 ## [1.1.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.1.0...v1.1.1) (2023-05-17)
 
 

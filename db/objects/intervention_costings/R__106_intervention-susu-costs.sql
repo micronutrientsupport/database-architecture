@@ -32,6 +32,7 @@ gov_su_agg as (
         intervention_id,
         header1,
         header2,
+        max(max_row) as max_row,
         json_build_object(
             'section',
             header2,
@@ -123,7 +124,8 @@ su_agg2 as (
     select
         intervention_id,
         header1,
-        json_build_object('category', header1, 'costs', array_agg(d)) as startup_scaleup_costs
+        max(max_row) as max_row,
+        json_build_object('category', header1, 'costs', array_agg(d ORDER BY max_row ASC)) as startup_scaleup_costs
     from
         gov_su_agg
     where
@@ -139,7 +141,7 @@ su_agg2 as (
 )
 select
     intervention_id,
-    array_agg(startup_scaleup_costs) as startup_scaleup_costs
+    array_agg(startup_scaleup_costs ORDER BY max_row asc) as startup_scaleup_costs
 from
     su_agg2
 group by

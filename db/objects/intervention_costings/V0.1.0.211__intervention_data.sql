@@ -22,7 +22,18 @@ year_8              numeric,
 year_9              numeric,
 notes               text,
 units               text,
-is_user_editable    boolean
+is_user_editable    boolean,
+is_calculated       boolean default false,
+year_0_overriden    boolean default false,
+year_1_overriden    boolean default false,
+year_2_overriden    boolean default false,
+year_3_overriden    boolean default false,
+year_4_overriden    boolean default false,
+year_5_overriden    boolean default false,
+year_6_overriden    boolean default false,
+year_7_overriden    boolean default false,
+year_8_overriden    boolean default false,
+year_9_overriden    boolean default false
 );
 
 COMMENT on table intervention_data is 'Table to store data directly loaded from excel spreadsheet intervention costing models';
@@ -36,3 +47,5 @@ COMMENT ON COLUMN intervention_data.year_0              IS 'year_0 through year_
 COMMENT ON COLUMN intervention_data.notes               IS 'Additional notes about the data e.g. assumptions and citation sources. Imported for completeness, will not be displayed in the UI';
 COMMENT ON COLUMN intervention_data.units               IS 'The units applicable to the values in the year columns, whether percentages, units of measure or counts of items.';
 COMMENT ON COLUMN intervention_data.is_user_editable    IS 'Indication of whether this row is editable by the user, i.e. the value can be updated in the front-end, or is calculated or sourced elsewhere.';
+COMMENT ON COLUMN intervention_data.is_calculated       IS 'Indication of whether this row should be calculated based on its cell formula (unless overridden)';
+COMMENT ON COLUMN intervention_data.year_0_overriden    IS 'Indication of whether this cell which contained a formula has been overriden by a user and should no longer be auto-calculated';

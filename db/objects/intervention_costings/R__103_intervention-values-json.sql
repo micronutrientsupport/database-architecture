@@ -26,6 +26,7 @@ GROUP BY
 SELECT
     intervention_data.intervention_id,
     intervention_data.header1,
+    max(intervention_data.row_index) as max_row,
     COALESCE(
         NULLIF(intervention_data.header2, ''),
         'All'

@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION create_derived_intervention(_parent_id numeric, _new_name text, _new_description text, _user_id numeric)
+CREATE OR REPLACE FUNCTION create_derived_intervention(_parent_id numeric, _new_name text, _new_description text, _new_country text, _new_focus_micronutrient text, _new_focus_geography text, _user_id text)
 RETURNS setof intervention_list AS
 
 -- Creates a new record in the intervention table with data copied from the provided
@@ -19,6 +19,8 @@ insert into intervention (
 	, country_id
 	, app_user_id
 	, data_citation_id
+	, focus_micronutrient
+	, focus_geography
 	, food_vehicle_id
 	, fortification_type_id
 	, program_status
@@ -32,14 +34,16 @@ insert into intervention (
 select 
 	_new_name
 	, _new_description
-	, country_id
+	, COALESCE(NULLIF(_new_country,''),country_id)
 	, _user_id
 	, data_citation_id
+	, COALESCE(NULLIF(_new_focus_micronutrient,''),focus_micronutrient)
+	, COALESCE(NULLIF(_new_focus_geography,''),focus_geography)
 	, food_vehicle_id
 	, fortification_type_id
 	, program_status
 	, 'User Defined' as file_name
-	, base_year
+	, coalesce(base_year,2023)
 	, false as is_premade 
 	, false as is_locked
 	, _parent_id as parent_intervention
@@ -49,7 +53,7 @@ returning id INTO _new_id
 ;
 
 -- Lock the parent intervention
-update intervention set is_locked = '1' where id = _parent_id;
+-- update intervention set is_locked = '1' where id = _parent_id;
 
 -- Duplicate intervention_data rows from
 -- parent intervention with the new intervention_id
@@ -97,6 +101,29 @@ select
 from intervention_data 
 where intervention_id = _parent_id;
 
+-- Duplicate intervention_targeting rows from
+-- parent intervention with the new intervention_id
+insert into fortification_level (
+	intervention_id
+	, fortificant_id
+	, year
+	, fortificant_amount 
+	, fortificant_proportion
+	, fortificant_price
+	, target_level
+	, actual_level 
+)
+select 
+	_new_id as intervention_id
+	, fortificant_id
+	, year
+	, fortificant_amount 
+	, fortificant_proportion
+	, fortificant_price
+	, target_level
+	, actual_level
+from fortification_level 
+where intervention_id = _parent_id;
 
 return query select * from intervention_list where id = _new_id;
 

@@ -1,0 +1,66 @@
+create or replace FUNCTION parseDependentCellsFromExcelFormula(text) RETURNS text[]
+AS 'select array_agg(distinct cells) from REGEXP_MATCHES(RIGHT($1, -(POSITION(''='' IN $1))), ''\$?[A-Z]+\$?\d+'',''g'') cells;'
+LANGUAGE SQL
+IMMUTABLE
+RETURNS NULL ON NULL INPUT;
+
+create or replace FUNCTION parseDependentRowsFromExcelFormula(text) RETURNS text[]
+AS 'select array_agg(distinct cells) from REGEXP_MATCHES(RIGHT($1, -(POSITION(''='' IN $1))), ''\$?[A-Z]+\$?(\d+)'',''g'') cells;'
+LANGUAGE SQL
+IMMUTABLE
+RETURNS NULL ON NULL INPUT;
+
+create or replace function array_unique (a text[]) returns text[] as $$
+  select array (
+    select distinct v from unnest(a) as b(v)
+  )
+$$ language sql;
+
+
+create or replace view row_deps as
+with a as (
+select 
+	id.intervention_id
+	, id.row_index
+	, id.is_user_editable
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_1) as y1
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_2) as y2
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_3) as y3
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_4) as y4
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_5) as y5
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_6) as y6
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_7) as y7
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_8) as y8
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_9) as y9
+	, parseDependentRowsFromExcelFormula(icf.cell_formula_10) as y10
+
+	from intervention_cell_formula icf
+	join 
+		(intervention_data id join intervention i on id.intervention_id = i.id)
+	on 
+		icf.intervention_id = coalesce(i.parent_intervention, id.intervention_id)
+	and 
+		icf.row_index = id.row_index 
+),
+dependencies as (
+	select intervention_id, row_index, array_unique(y1 || y2 || y3 || y4 || y5 || y6 || y7 || y8 || y9 || y10)::integer[] as deps
+	from a where is_user_editable = false
+)
+select intervention_id, row_index, unnest(deps) as dependency from dependencies;
+
+with
+recursive row_dependents as
+(
+	select row_deps.dependency
+	from row_deps
+	where row_deps.row_index = 70
+	union 
+	select row_deps.dependency
+	from row_deps
+	join row_dependents on row_deps.row_index = row_dependents.dependency
+)
+
+select * from row_dependents
+
+select * from row_deps join row_dependents on row_deps.row_index = row_dependents.dependency where intervention_id = 1
+

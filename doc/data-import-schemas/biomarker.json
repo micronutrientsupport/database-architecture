@@ -1,0 +1,286 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "person_id": {
+      "type": "string"
+    },
+    "sex": {
+      "description": "Whether the household member is male or female",
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ]
+    },
+    "education_level": {
+      "description": "The highest level of education achieved by this person.",
+      "enum": [
+        "none",
+        "primary",
+        "secondary",
+        "tertiary"
+      ],
+      "type": "string"
+    },
+    "interview_date": {
+      "description": "Date when person was interviewed/sampled",
+      "type": "string"
+    },
+    "group_id": {
+      "description": "The group id of the person, usually depends on a combination of sex, age, pregnancy status",
+      "type": "string",
+      "enum": [
+        "PREG",
+        "WRA",
+        "PSC",
+        "SAC",
+        "MEN"
+      ]
+    },
+    "age_in_months": {
+      "description": "The age of the person at the time of the survey",
+      "type": "integer"
+    },
+    "is_breastfed": {
+      "description": "Whether the child is being breastfed; 'true' indicates that they are",
+      "type": "boolean"
+    },
+    "is_lactating": {
+      "description": "Whether this woman is lactating; 'true' indicates that she is",
+      "type": "boolean"
+    },
+    "is_pregnant": {
+      "description": "Whether this woman is pregnant; 'true' indicates that she is",
+      "type": "boolean"
+    },
+    "is_smoker": {
+      "description": "Whether this person smokes tobacco",
+      "type": "boolean"
+    },
+    "had_illness": {
+      "description": "Whether this person has been ill in the last two weeks",
+      "type": "boolean"
+    },
+    "had_malaria": {
+      "description": "Whether this person has had malaria in the last two weeks",
+      "type": "boolean"
+    },
+    "had_diarrhoea": {
+      "description": "Whether this person has had diarrhoea in the last two weeks",
+      "type": "boolean"
+    },
+    "survey_cluster": {
+      "description": "The surveying cluster used for selecting this individual",
+      "type": "string"
+    },
+    "survey_strata": {
+      "description": "The surveying strata used for selecting this individual",
+      "type": "integer"
+    },
+    "survey_weight": {
+      "description": "The surveying weight used for selecting this individual",
+      "type": "integer"
+    },
+    "literacy": {
+      "description": "Examples: 'fully literate', 'Able to read whole sentence', 'Cannot read at all'",
+      "type": "string"
+    },
+    "weight_in_kg": {
+      "description": "Weight of person in kilograms",
+      "type": "number",
+      "minimum": 1
+    },
+    "height_in_cm": {
+      "description": "Height of person in centimetres",
+      "type": "number",
+      "minimum": 20
+    },
+    "bmi": {
+      "description": "body mass index - can be submitted or calculated from weight and height , if present",
+      "type": "number"
+    },
+    "date_sampled": {
+      "description": "The date when the sample was taken from the body",
+      "type": "string",
+      "format": "date"
+    },
+    "sample_type": {
+      "description": "Whether this is a urine, blood, or breastmilk sample",
+      "type": "string"
+    },
+    "haemoglobin": {
+      "description": "The amount of haemoglbin (also known as hemoglobin) in the blood, in grams per litre.",
+      "type": "number"
+    },
+    "ferritin": {
+      "description": "The amount of (serum or plasma) Ferritn found in the blood, in micrograms per litre",
+      "type": "number"
+    },
+    "stfr": {
+      "description": "The amount of (serum or plasma) Soluble Transferrin Receptors (sTfR) in the blood, in milligrams per litre",
+      "type": "number"
+    },
+    "rbp": {
+      "description": "The amount of (serum or plasma) Retinol Binding Protein (RBP) in the blood, in micromoles per litre",
+      "type": "number"
+    },
+    "retinol": {
+      "description": "The amount of (serum or plasma) Retinol in the blood, in micromoles per litre",
+      "type": "number"
+    },
+    "rbc_folate": {
+      "description": "The amount of red blood cell Folate in the blood, in nanomoles per litre",
+      "type": "number"
+    },
+    "ps_folate": {
+      "description": "The amount of serum or plasma Folate in the blood, in nanomoles per litre",
+      "type": "number"
+    },
+    "vitamin_b12": {
+      "description": "The amount of (serum or plasma) Vitamin B12 (also known as cobalamin) in the blood, in picomoles per litre",
+      "type": "number"
+    },
+    "zinc": {
+      "description": "The amount of (serum or plasma) zinc, in micrograms per decilitre",
+      "type": "number"
+    },
+    "crp": {
+      "description": "The amount of (serum or plasma) C-reactive protein (CRP) in the blood, in milligrams per litre. A value >=5 defines inflammation",
+      "type": "number"
+    },
+    "agp": {
+      "description": "The amount of (serum or plasma) Alpha 1 acid GlycoProtein (AGP) in the blood, in grams per litre. A value >=1 defines inflammation",
+      "type": "number"
+    },
+    "iodine": {
+      "description": "The amount of Urinary Iodine, in micrograms per litre.",
+      "type": "number"
+    },
+    "selenium": {
+      "description": "The amount of (serum or plasma) selenium, in micrograms per decilitre",
+      "type": "number"
+    },
+    "time_of_day_sampled": {
+      "description": "Whether the measurement was taken in the morning or afternoon (pre or post noon local time)",
+      "type": "string",
+      "enum": [
+        "am",
+        "pm"
+      ]
+    },
+    "was_fasting": {
+      "description": "Whether the sample was taken while the patient was fasting",
+      "type": "boolean"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "Name of the person or organisation responsible for creating the file"
+    },
+    "created_date": {
+      "type": "string",
+      "description": "Date when file created"
+    },
+    "file_notes": {
+      "type": "string",
+      "description": "Notes about file preparation, considerations, assumptions etc. might include notes about which data were excluded from the file, and why"
+    },
+    "survey_name": {
+      "type": "string",
+      "description": "The name of the survey"
+    },
+    "publication_date": {
+      "type": "string",
+      "description": "The month and year or date when the survey was published"
+    },
+    "surveying_date_start": {
+      "type": "string",
+      "description": "The month and year or date when surveying and interviewing started"
+    },
+    "surveying_date_end": {
+      "type": "string",
+      "description": "The month and year or date when no further interviews took place"
+    },
+    "geometry": {
+      "description": "The name of the area that is covered by the survey. all households interviewed by the survey should fall into this area - geometry will be used to represent this area.",
+      "type": "string"
+    },
+    "notes": {
+      "description": "A generic text field for notes about a survey. Can include such as: Whether biomarker measurements were taken from blood plasma or blood serum",
+      "type": "string"
+    },
+    "geonetwork_uuid": {
+      "description": "a UUID for Geonetwork. See https://geonetwork-opensource.org/ for further info ",
+      "type": "string"
+    },
+    "survey_type": {
+      "description": "Type of survey",
+      "type": "integer",
+      "enum": [
+        "biomarker",
+        "food consumption"
+      ]
+    },
+    "hb_is_adjusted_for_smoking": {
+      "description": "Haemoglobin data is already adjusted per individual to account for whether the individual smokes",
+      "type": "boolean"
+    },
+    "hb_is_adjusted_for_altitude": {
+      "description": "Haemoglobin data is already adjusted per individual to account for whether the individual lives at high altitude",
+      "type": "boolean"
+    },
+    "household_id": {
+      "type": "string"
+    },
+    "region": {
+      "description": "Region in which the household is situated",
+      "type": "string"
+    },
+    "household_expenditure": {
+      "description": "How much money this household spends per month in local currency",
+      "type": "number"
+    },
+    "urbanity": {
+      "description": "Whether this household is located in an urban or rural area",
+      "type": "string",
+      "enum": [
+        "urban",
+        "rural",
+        null
+      ]
+    },
+    "latitude": {
+      "description": "The latitude of the location of the household, or the centroid of the cluster of households this household belongs to. If values are not identical for a given id then use the average value per household id",
+      "type": "number",
+      "maximum": 90,
+      "minimum": -90
+    },
+    "longitude": {
+      "description": "The longitude of the location of the household, or the centroid of the cluster of households this household belongs to. If values are not identical for a given id then use the average value per household id",
+      "type": "number",
+      "maximum": 180,
+      "minimum": -180
+    },
+    "altitude_in_metres": {
+      "type": "number",
+      "maximum": 6000
+    },
+    "wealth_quintile": {
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "description": "In what quintile of household wealth this household is (5=richest, 1=poorest). If values are not identical for a given id then use the lowest value in all rows for that household id"
+    }
+  },
+  "required": [
+    "person_id",
+    "household_id",
+    "group_id"
+  ]
+}

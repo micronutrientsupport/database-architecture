@@ -1,0 +1,29 @@
+with a as (
+select 
+	i.intervention_name
+	, id.intervention_id
+	, id.row_name
+	, id.row_index
+	, id.is_user_editable
+	, id.factor_text
+	, icf.cell_formula_1
+	, parse_dependent_rows_from_excel_formula(icf.cell_formula_1) as y1
+	, parse_dependent_rows_from_excel_formula(icf.cell_formula_2) as y2
+	, parse_dependent_rows_from_excel_formula(icf.cell_formula_3) as y3
+	, parse_dependent_rows_from_excel_formula(icf.cell_formula_4) as y4
+	, parse_dependent_rows_from_excel_formula(icf.cell_formula_5) as y5
+	, parse_dependent_rows_from_excel_formula(icf.cell_formula_6) as y6
+	, parse_dependent_rows_from_excel_formula(icf.cell_formula_7) as y7
+	, parse_dependent_rows_from_excel_formula(icf.cell_formula_8) as y8
+	, parse_dependent_rows_from_excel_formula(icf.cell_formula_9) as y9
+
+	from intervention_cell_formula icf
+	join 
+		(intervention_data id join intervention i on id.intervention_id = i.id)
+	on 
+		icf.intervention_id = coalesce(i.parent_intervention, id.intervention_id)
+	and 
+		icf.row_index = id.row_index 
+)
+
+select *, (y1=y2 and y2=y3 and y3=y4 and y4=y5 and y5=y6 and y6=y7 and y7=y8 and y8=y9) as same from a where is_user_editable = false

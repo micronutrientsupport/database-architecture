@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "citation_name": {
+      "type": "string",
+      "description": "Name of the food compositon table source"
+    },
+    "citation_original_id": {
+      "type": "string",
+      "description": "Original identifier for the citation"
+    },
+    "citation_author": {
+      "type": "string",
+      "description": "The author of the publication from where the nutrient values were derived"
+    },
+    "citation_publication": {
+      "type": "string",
+      "description": "The publication in which the micronutrient contents of this food were found"
+    },
+    "citation_isbn": {
+      "type": "string",
+      "description": "International Standard Book Number"
+    },
+    "citation_notes": {
+      "type": "string",
+      "description": "Any other notes or comments about the citation"
+    }
+  },
+  "required": [
+    "citation_name",
+    "citation_original_id",
+    "citation_author"
+  ]
+}

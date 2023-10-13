@@ -1,98 +1,129 @@
-CREATE
-OR REPLACE view intervention_summary_costs AS with summary_costs as (
+CREATE OR REPLACE view intervention_summary_costs AS 
+with totalfields as (
     select
-        intervention_id,
-        json_build_object(
-            'row_name',
-            row_name,
-            'rowIndex',
-            row_index,
-            'rowUnits',
-            units,
-            'labelText',
-            factor_text,
-            'year0',
-            year_0,
-            'year1',
-            year_1,
-            'year2',
-            year_2,
-            'year3',
-            year_3,
-            'year4',
-            year_4,
-            'year5',
-            year_5,
-            'year6',
-            year_6,
-            'year7',
-            year_7,
-            'year8',
-            year_8,
-            'year9',
-            year_9
-        ) as summary_costs
-    from
-        intervention_data id
-    where
-        row_name = 'summary_annual_startup_and_recurring_cost'
+        '{
+		"Undiscounted costs, real 2021 US dollars": {
+			"Summaries": "summary_10yr_startup_and_recurring_cost"
+		}
+}' :: json as mapping
 ),
-summary_costs_discounted as (
+gov_su_agg as (
     select
         intervention_id,
+        header1,
+        header2,
         json_build_object(
-            'row_name',
-            row_name,
-            'rowIndex',
-            row_index,
-            'rowUnits',
-            units,
-            'labelText',
-            factor_text,
-            'year0',
-            year_0,
-            'year1',
-            year_1,
-            'year2',
-            year_2,
-            'year3',
-            year_3,
-            'year4',
-            year_4,
-            'year5',
-            year_5,
-            'year6',
-            year_6,
-            'year7',
-            year_7,
-            'year8',
-            year_8,
-            'year9',
-            year_9
-        ) as summary_costs_discounted
+            'section',
+            header2,
+            'costBreakdown',
+            json_agg(data)->0,
+            'year0Total',
+            (
+                select
+                    year_0
+                from
+                    intervention_data id2
+                where
+                    intervention_id = g.intervention_id
+                    and header1 = g.header1
+                    and header2 = g.header2
+                    and row_name =(
+                        select
+                            mapping ->(g.header1) ->>(g.header2)
+                        from
+                            totalfields
+                    )
+            ),
+            'year0TotalFormula',
+            (
+                select
+                    year_0_formula
+                from
+                    intervention_data id2
+                    join intervention on id2.intervention_id = intervention.id
+                    left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.parent_intervention, intervention.id)
+                      and icf.row_index = id2.row_index 
+                where
+                    id2.intervention_id = g.intervention_id
+                    and header1 = g.header1
+                    and header2 = g.header2
+                    and row_name =(
+                        select
+                            mapping ->(g.header1) ->>(g.header2)
+                        from
+                            totalfields
+                    )
+            ),
+            'year1Total',
+            (
+                select
+                    year_1
+                from
+                    intervention_data id2
+                where
+                    intervention_id = g.intervention_id
+                    and header1 = g.header1
+                    and header2 = g.header2
+                    and row_name =(
+                        select
+                            mapping ->(g.header1) ->>(g.header2)
+                        from
+                            totalfields
+                    )
+            ),
+            'year1TotalFormula',
+            (
+                select
+                    year_0_formula
+                from
+                    intervention_data id2
+                    join intervention on id2.intervention_id = intervention.id
+                    left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.parent_intervention, intervention.id)
+                      and icf.row_index = id2.row_index 
+                where
+                    id2.intervention_id = g.intervention_id
+                    and header1 = g.header1
+                    and header2 = g.header2
+                    and row_name =(
+                        select
+                            mapping ->(g.header1) ->>(g.header2)
+                        from
+                            totalfields
+                    )
+            )
+        ) as d
     from
-        intervention_data id
-    where
-        row_name = 'summary_annual_discounted_startup_and_recurring_cost'
-),
-discount_rate as (
+        intervention_values_json g
+    group by
+        header1,
+        header2,
+        intervention_id
+)
+
+--select * from gov_su_agg where intervention_id = 2 and header1 = 'Undiscounted costs, real 2021 US dollars'
+
+, su_agg2 as (
     select
         intervention_id,
-        year_0 as discount_rate
+        header1,
+        json_build_object('category', header1, 'costs', array_agg(d)) as startup_scaleup_costs
     from
-        intervention_data id
+        gov_su_agg
     where
-        row_name = 'discount_rate'
+        header1 in (
+            'Undiscounted costs, real 2021 US dollars'
+        )
+    group by
+        intervention_id,
+        header1
 )
 select
-    sc.intervention_id,
-    summary_costs,
-    discount_rate,
-    summary_costs_discounted
+    intervention_id,
+    array_agg(startup_scaleup_costs) as summary_costs
 from
-    summary_costs sc
-    join summary_costs_discounted scd on sc.intervention_id = scd.intervention_id
-    join discount_rate dr on dr.intervention_id = sc.intervention_id
+    su_agg2
+group by
+    intervention_id
 ;
 
 comment ON view intervention_summary_costs IS 'Extract summary cost total rows for a given intervention';

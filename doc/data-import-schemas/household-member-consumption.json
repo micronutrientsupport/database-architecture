@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Household Member Consumption",
+    "type": "object",
+    "properties": {
+        "household_member_id": {
+            "type": "integer",
+            "description": "The id of the household member that consumed the food item"
+        },
+        "food_genus_id": {
+            "type": "integer",
+            "description": "The food_genus id of the fooditem that was consumed"
+        },
+        "food_genus_confidence": {
+            "type": "number",
+            "description": "How confident we are in matching this food to the corresponding food_genus entry"
+        },
+        "source_of_food": {
+            "type": "string",
+            "description": "From where the household member obtained the food; if they grew it themselves, bought it at market, or had it gifted to them",
+            "enum": [
+                "own production",
+                "bought",
+                "gifted"
+            ]
+        },
+        "date_consumed": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the fooditem was consumed"
+        },
+        "amount_consumed_in_g": {
+            "type": "number",
+            "description": "How much of the fooditem was consumed, in grams"
+        }
+    },
+    "required": [
+        "household_member_id",
+        "food_genus_id",
+        "food_genus_confidence",
+        "source_of_food",
+        "date_consumed",
+        "amount_consumed_in_g"
+    ]
+}

@@ -10,7 +10,7 @@ VALUES
     (16    , 'Fe'         , 'Encapsulated ferrous sulfate ET-50%'),
     (32    , 'Fe'         , 'Ferrous fumarate'),
     (13    , 'Fe'         , 'NaFeEDTA'),
-    (25    , 'Fe'         , 'Micronized ferric pyrophosphate')
+    (25    , 'Fe'         , 'Micronized ferric pyrophosphate'),
     (80    , 'Zn'         , 'Zinc oxide'),
     (36    , 'Zn'         , 'Zinc sulfate'),
     (40    , 'Ca'         , 'Calcium carbonate'),

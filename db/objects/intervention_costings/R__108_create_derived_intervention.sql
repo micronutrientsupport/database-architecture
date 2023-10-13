@@ -43,7 +43,7 @@ select
 	, fortification_type_id
 	, program_status
 	, 'User Defined' as file_name
-	, base_year
+	, coalesce(base_year,2023)
 	, false as is_premade 
 	, false as is_locked
 	, _parent_id as parent_intervention
@@ -53,7 +53,7 @@ returning id INTO _new_id
 ;
 
 -- Lock the parent intervention
-update intervention set is_locked = '1' where id = _parent_id;
+-- update intervention set is_locked = '1' where id = _parent_id;
 
 -- Duplicate intervention_data rows from
 -- parent intervention with the new intervention_id
@@ -101,6 +101,29 @@ select
 from intervention_data 
 where intervention_id = _parent_id;
 
+-- Duplicate intervention_targeting rows from
+-- parent intervention with the new intervention_id
+insert into fortification_level (
+	intervention_id
+	, fortificant_id
+	, year
+	, fortificant_amount 
+	, fortificant_proportion
+	, fortificant_price
+	, target_level
+	, actual_level 
+)
+select 
+	_new_id as intervention_id,
+	, fortificant_id
+	, year
+	, fortificant_amount 
+	, fortificant_proportion
+	, fortificant_price
+	, target_level
+	, actual_level
+from fortification_level 
+where intervention_id = _parent_id;
 
 return query select * from intervention_list where id = _new_id;
 

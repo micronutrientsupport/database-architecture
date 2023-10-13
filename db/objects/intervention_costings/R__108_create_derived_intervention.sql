@@ -114,7 +114,7 @@ insert into fortification_level (
 	, actual_level 
 )
 select 
-	_new_id as intervention_id,
+	_new_id as intervention_id
 	, fortificant_id
 	, year
 	, fortificant_amount 

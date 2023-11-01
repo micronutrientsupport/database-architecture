@@ -98,6 +98,8 @@ SELECT
             intervention_data.units,
             'isEditable',
             intervention_data.is_user_editable,
+            'isCalculated',
+            intervention_data.is_calculated,
             'year0',
             intervention_data.year_0,
             'year0Default',
@@ -158,6 +160,26 @@ SELECT
             intervention_parent.year_9,
             'year9Edited',
             coalesce(intervention_data.year_9 != intervention_parent.year_9,false),
+            'year0Overriden',
+            intervention_data.year_0_overriden,
+            'year1Overriden',
+            intervention_data.year_1_overriden,
+            'year2Overriden',
+            intervention_data.year_2_overriden,
+            'year3Overriden',
+            intervention_data.year_3_overriden,
+            'year4Overriden',
+            intervention_data.year_4_overriden,
+            'year5Overriden',
+            intervention_data.year_5_overriden,
+            'year6Overriden',
+            intervention_data.year_6_overriden,
+            'year7Overriden',
+            intervention_data.year_7_overriden,
+            'year8Overriden',
+            intervention_data.year_8_overriden,
+            'year9Overriden',
+            intervention_data.year_9_overriden,
             'dataSource',
             data_citation.short_text,
             'dataSource',
@@ -183,6 +205,8 @@ SELECT
             'dataCitation',
             data_citation.citation_text
            )::jsonb || json_build_object(
+            'rowNotes',
+            intervention_data.notes,
             'year0Formula',
 			year_0_formula,
             'year1Formula',
@@ -206,14 +230,14 @@ SELECT
             'dependentRows',
             dependent_rows,
             'reportedRows',
-            case when intervention_data.is_user_editable = false
+            case when intervention_data.is_user_editable = false or intervention_data.is_calculated = true
             then 
             	gr.reported_rows
             else
             	null
             end,
             'missingRows',
-            case when intervention_data.is_user_editable = false
+            case when intervention_data.is_user_editable = false or intervention_data.is_calculated = true
             then 
             	(SELECT array_agg(unnest ORDER BY unnest)
 	            FROM (
@@ -226,7 +250,7 @@ SELECT
             	null
             end,
             'missingData',
-            case when intervention_data.is_user_editable = false
+            case when intervention_data.is_user_editable = false  or intervention_data.is_calculated = true
             then 
 	            (select 
 	           		json_object_agg(row_index, 

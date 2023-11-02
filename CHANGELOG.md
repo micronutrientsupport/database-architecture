@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.2.0...v1.3.0) (2023-11-02)
+
+
+### Features
+
+* add support for intervention formula overrides to views ([9192ac5](https://github.com/micronutrientsupport/database-architecture/commit/9192ac501b8cc3fb3906bed50721f2359c3546d7))
+
+
+### Bug Fixes
+
+* add missing field to baseline assumptions view ([8cf4c9f](https://github.com/micronutrientsupport/database-architecture/commit/8cf4c9f3460887865e1b3fca96193b0f67962fb6))
+
 ## [1.2.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.1.1...v1.2.0) (2023-10-13)
 
 

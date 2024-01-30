@@ -48,4 +48,31 @@ select
 from filler_totals, excipient_config;
 	
 	
+create or replace view intervention_premix_calculator as
 
+with fvs as 
+(select 
+	intervention_id
+	, unnest(food_vehicle_standard)->>'micronutrient' as micronutrient_id
+	, json_array_elements(unnest(food_vehicle_standard)->'compounds')->>'compound' as compound
+	, json_array_elements(unnest(food_vehicle_standard)->'compounds')->>'targetVal' as target_val
+from intervention_vehicle_standard)
+
+select
+	fl.intervention_id
+	, f.micronutrient_id as fortificant_micronutrient
+	, f."name" as fortificant_compound
+	, f.mn_percent as fortificant_activity
+	, fvs.target_val::numeric  as fortification_level
+	, fl.fortificant_amount 
+	, fl.fortificant_proportion 
+	, fl.fortificant_price 
+from 
+	fortification_level fl 
+join
+	fortificant f on f.id = fl.fortificant_id 
+left join fvs 
+	on fvs.intervention_id = fl.intervention_id
+	and fvs.micronutrient_id = f.micronutrient_id 
+	and lower(fvs.compound) = lower(f.name)
+order by fl.intervention_id, f.micronutrient_id asc;

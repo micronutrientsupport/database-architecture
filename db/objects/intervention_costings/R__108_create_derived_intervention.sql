@@ -109,7 +109,8 @@ insert into fortification_level (
 	intervention_id
 	, fortificant_id
 	, year
-	, fortificant_amount 
+	, fortificant_amount
+	, fortificant_overage 
 	, fortificant_proportion
 	, fortificant_price
 	, target_level
@@ -120,6 +121,7 @@ select
 	, fortificant_id
 	, year
 	, fortificant_amount 
+	, fortificant_overage
 	, fortificant_proportion
 	, fortificant_price
 	, target_level

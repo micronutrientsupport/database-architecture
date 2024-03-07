@@ -1,51 +1,113 @@
 create or replace view intervention_premix_cost as
+-- Food Vehicle Standards from main data for targets
+with fvs as 
+(select 
+	intervention_id
+	, unnest(food_vehicle_standard)->>'micronutrient' as micronutrient_id
+	, json_array_elements(unnest(food_vehicle_standard)->'compounds')->>'compound' as compound
+	, json_array_elements(unnest(food_vehicle_standard)->'compounds')->>'targetVal' as target_val
+from intervention_vehicle_standard)
+-- Intervention specific fortification levels
+, fl as (
+select 
+	fl.row_index
+	, fl.intervention_id
+	, fl.fortificant_id
+	, fl.year
+	, fl.fortificant_activity
+	, fvs.target_val::numeric  as fortification_level
+	, fl.fortificant_overage
+	, ((1+fl.fortificant_overage)*fvs.target_val::numeric)/(fl.fortificant_activity) as fortificant_amount
+	, fl.fortificant_price
 
-with excipient_config as (
-	select 
-		0.25 as filler_percentage
-		, 1.5 as filler_price
-		, 1 as upcharge
-),
-totals as (
+from fortification_level fl 
+join
+	fortificant f on f.id = fl.fortificant_id 
+left join fvs 
+	on fvs.intervention_id = fl.intervention_id
+	and fvs.micronutrient_id = f.micronutrient_id 
+	and lower(fvs.compound) = lower(f.name)
+)
+-- Sub-total nutrient vals
+, totals as (
 select 
 	intervention_id
 	, sum(fortificant_amount) as nutrients_subtotal
-	, sum(fortificant_proportion) as fortificant_proportion 
-	, sum(fortificant_price * fortificant_proportion) as fortificant_cost
-from fortification_level fl 
+from fl 
 group by intervention_id 
-),
-excipient as (
-select 
-	intervention_id,
-	nutrients_subtotal
-	, fortificant_proportion
-	, case 
-		when filler_percentage = 0 then nutrients_subtotal	
-		else round(((1+filler_percentage)*nutrients_subtotal) / 50) * 50
-	  end as addition_rate
-	, fortificant_cost
-	  	
-	from totals, excipient_config
-),
-filler_totals as (
-	select 
-		intervention_id
-		, nutrients_subtotal
-		, addition_rate
-		, addition_rate - nutrients_subtotal as filler
-		, greatest(1 - fortificant_proportion, 0) as filler_proportion
-		, filler_price * greatest(1 - fortificant_proportion, 0) as filler_cost
-		, fortificant_cost
-	from excipient, excipient_config
 )
-
+-- Excipient Values
+, excipient_config as (
+	select 
+		0.25 as filler_percentage
+		, 1 as upcharge
+)
+-- Addition Rate
+, addition_rate as (
 select 
 	intervention_id
---	, (fortificant_cost+filler_cost) as premix_cost
---	, (fortificant_cost+filler_cost+upcharge) as total_premix_cost
-	, ((fortificant_cost+filler_cost+upcharge) * addition_rate)/1000 as premix_cost_per_mt
-from filler_totals, excipient_config;
+	, (1+filler_percentage)*nutrients_subtotal as nutrient_and_excipient
+	, case 
+		when filler_percentage = 0 then nutrients_subtotal	
+		else ceiling(((1+filler_percentage)*nutrients_subtotal) / 50) * 50
+	  end as addition_rate
+from totals, excipient_config
+)
+-- Grab cost values for the excipient also
+, excipient as (
+	select 
+		fl.row_index
+		, fl.intervention_id
+		, fl.fortificant_id
+		, fl.year
+		, fl.fortificant_activity
+		, 0  as fortification_level
+		, fl.fortificant_overage
+		, (addition_rate - nutrients_subtotal) as fortificant_amount
+		, fl.fortificant_price
+		from 
+	fortification_level fl
+	join fortificant f on fl.fortificant_id = f.id
+	join addition_rate on fl.intervention_id = addition_rate.intervention_id
+	join totals on fl.intervention_id = totals.intervention_id
+	where f."name" = 'Excipient'
+)
+, fla as (
+select
+	fl.*,
+	case 
+		when addition_rate = 0 then fl.fortificant_amount	
+		else fl.fortificant_amount * (1/addition_rate)
+	  end as fortificant_proportion
+from fl
+join addition_rate ar on ar.intervention_id = fl.intervention_id
+
+union
+
+select
+	e.*,
+	case 
+		when addition_rate = 0 then e.fortificant_amount	
+		else e.fortificant_amount * (1/addition_rate)
+	  end as fortificant_proportion
+from excipient e
+join addition_rate ar on ar.intervention_id = e.intervention_id
+
+)
+-- Calculate fortificant costs
+, flc as (
+select 
+	fla.*
+	, fla.fortificant_price * fla.fortificant_proportion as fortificant_cost
+from fla
+)
+select 
+	flc.intervention_id
+	, ((sum(fortificant_cost)+upcharge)*addition_rate)/1000 as premix_cost_per_mt
+from flc
+join addition_rate ar on ar.intervention_id = flc.intervention_id 
+, excipient_config
+group by flc.intervention_id, upcharge, addition_rate;
 	
 	
 create or replace view intervention_premix_calculator as
@@ -60,12 +122,13 @@ from intervention_vehicle_standard)
 
 select
 	fl.intervention_id
+	, fl.row_index
 	, f.micronutrient_id as fortificant_micronutrient
 	, f."name" as fortificant_compound
-	, f.mn_percent as fortificant_activity
+	, fl.fortificant_id
 	, fvs.target_val::numeric  as fortification_level
-	, fl.fortificant_amount 
-	, fl.fortificant_proportion 
+	, fl.fortificant_activity as fortificant_activity
+	, fl.fortificant_overage
 	, fl.fortificant_price 
 from 
 	fortification_level fl 

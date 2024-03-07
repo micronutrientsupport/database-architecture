@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.0...v1.4.1) (2024-03-07)
+
+
+### Miscellaneous
+
+* fix declaration order ([bef6744](https://github.com/micronutrientsupport/database-architecture/commit/bef6744e26bd982b6c76047aec3c67167791943b))
+
 ## [1.4.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.3.0...v1.4.0) (2024-03-07)
 
 

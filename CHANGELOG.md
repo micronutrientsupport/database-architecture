@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.3.0...v1.4.0) (2024-03-07)
+
+
+### Features
+
+* premix calculator updateS: ([682650d](https://github.com/micronutrientsupport/database-architecture/commit/682650d1585b4298b9921eaecb7f2c872bc51115))
+
+
+### Bug Fixes
+
+* various intervention fixes ([35aeaa8](https://github.com/micronutrientsupport/database-architecture/commit/35aeaa8aac021ebe728679d1785aabe69df05371))
+
 ## [1.3.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.2.0...v1.3.0) (2023-11-02)
 
 

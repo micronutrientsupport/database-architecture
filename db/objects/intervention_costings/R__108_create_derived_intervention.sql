@@ -109,23 +109,17 @@ insert into fortification_level (
 	intervention_id
 	, fortificant_id
 	, year
-	, fortificant_amount
+	, fortificant_activity
 	, fortificant_overage 
-	, fortificant_proportion
 	, fortificant_price
-	, target_level
-	, actual_level 
 )
 select 
 	_new_id as intervention_id
 	, fortificant_id
 	, year
-	, fortificant_amount 
+	, fortificant_activity 
 	, fortificant_overage
-	, fortificant_proportion
 	, fortificant_price
-	, target_level
-	, actual_level
 from fortification_level 
 where intervention_id = _parent_id;
 

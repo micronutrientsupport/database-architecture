@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.2...v1.4.3) (2024-03-08)
+
+
+### Bug Fixes
+
+* add missing updates ([b6e9310](https://github.com/micronutrientsupport/database-architecture/commit/b6e9310aec941b938355ba602449312cf3436446))
+
 ## [1.4.2](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.1...v1.4.2) (2024-03-07)
 
 

@@ -15,8 +15,10 @@ select
 	, h.wealth_quintile
 	, hn.afe_factor
 	, hn.member_count
+	, hfl.fct_list_id
 	from household h 
 	left join aggregation_area lvl0 on st_contains(lvl0.geometry, h.location) AND (lvl0.id IS NULL OR (lvl0.type='country' AND lvl0.admin_level=0))
 	left join aggregation_area lvl1 on st_contains(lvl1.geometry, h.location) AND (lvl1.id IS NULL OR (lvl1.type='admin' AND lvl1.admin_level=1))
 	left join aggregation_area lvl2 on st_contains(lvl2.geometry, h.location) AND (lvl2.id IS NULL OR (lvl2.type='admin' AND lvl2.admin_level=2))
-	left join household_normalisation hn on hn.household_id = h.id;
+	left join household_normalisation hn on hn.household_id = h.id
+	left join household_fct_list hfl on hfl.household_id = h.id;

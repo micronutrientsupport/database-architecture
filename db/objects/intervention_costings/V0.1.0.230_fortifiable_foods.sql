@@ -65,10 +65,13 @@ food_vehicle_id
 , fv.vehicle_name as food_vehicle_name
 , food_genus_id
 , food_name as food_genus_name
+, grp.id as food_group_id
+, grp.name as food_group_name
 , fortifiable_portion
 
 from fortifiable_portions_food_genus fpfg 
 join food_genus fg on fpfg.food_genus_id = fg.id
+join food_group grp on fg.food_group_id = grp.id
 join food_vehicle fv on fpfg.food_vehicle_id = fv.id; 
 
 create or replace view fortifiable_food_groups as

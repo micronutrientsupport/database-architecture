@@ -28,8 +28,8 @@ with food_vehicle as (
 	        (intervention_data.year_7 != intervention_parent.year_7) OR
 	        (intervention_data.year_8 != intervention_parent.year_8) OR
 	        (intervention_data.year_9 != intervention_parent.year_9)) then
-	        'User Edited' else data_citation.short_text end as data_source,
-        data_citation.short_text as data_source_default,
+	        'User Edited' else intervention_data.source end as data_source,
+         intervention_data.source as data_source_default,
         data_citation.citation_text as data_citation
     from
 	    intervention_data intervention_data

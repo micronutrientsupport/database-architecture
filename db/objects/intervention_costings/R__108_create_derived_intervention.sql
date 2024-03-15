@@ -75,6 +75,7 @@ insert into intervention_data (
 	, year_8 
 	, year_9
 	, notes
+	, source
 	, units
 	, is_user_editable
 	, is_calculated
@@ -97,6 +98,7 @@ select
 	year_8,
 	year_9,
 	notes,
+	source,
 	units,
 	is_user_editable,
 	is_calculated

@@ -198,10 +198,10 @@ SELECT
                     ) then
                         'User Edited'
                     else
-                        data_citation.short_text
+                        intervention_data.source
                 end,
             'dataSourceDefault',
-            data_citation.short_text,
+            intervention_data.source,
             'dataCitation',
             data_citation.citation_text
            )::jsonb || json_build_object(

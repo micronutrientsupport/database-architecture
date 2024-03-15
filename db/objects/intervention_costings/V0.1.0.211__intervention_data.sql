@@ -22,6 +22,7 @@ year_8              numeric,
 year_9              numeric,
 notes               text,
 units               text,
+source              text,
 is_user_editable    boolean,
 is_calculated       boolean default false,
 year_0_overriden    boolean default false,
@@ -44,7 +45,8 @@ COMMENT ON COLUMN intervention_data.header1             IS 'The header/section t
 COMMENT ON COLUMN intervention_data.header2             IS 'The subheader/subsection to which this fields belongs. Relates directly to subheadings in the UI';
 COMMENT ON COLUMN intervention_data.factor_text         IS 'The full text for this factor, as written in the excel sheet. Will be displayed like this in the UI';
 COMMENT ON COLUMN intervention_data.year_0              IS 'year_0 through year_9 contain the data values for the 10 years for this factor.';
-COMMENT ON COLUMN intervention_data.notes               IS 'Additional notes about the data e.g. assumptions and citation sources. Imported for completeness, will not be displayed in the UI';
+COMMENT ON COLUMN intervention_data.notes               IS 'Additional notes about the data e.g. assumptions';
+COMMENT ON COLUMN intervention_data.source              IS 'Additional information about the source of the initial data values';
 COMMENT ON COLUMN intervention_data.units               IS 'The units applicable to the values in the year columns, whether percentages, units of measure or counts of items.';
 COMMENT ON COLUMN intervention_data.is_user_editable    IS 'Indication of whether this row is editable by the user, i.e. the value can be updated in the front-end, or is calculated or sourced elsewhere.';
 COMMENT ON COLUMN intervention_data.is_calculated       IS 'Indication of whether this row should be calculated based on its cell formula (unless overridden)';

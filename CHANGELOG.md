@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.3...v1.4.4) (2024-03-15)
+
+
+### Bug Fixes
+
+* source field for intervention data ([b9f0e26](https://github.com/micronutrientsupport/database-architecture/commit/b9f0e26f8c59a60aee912ab8fec338e21f9efaf6))
+
 ## [1.4.3](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.2...v1.4.3) (2024-03-08)
 
 

@@ -40,7 +40,7 @@ BEGIN
 		, aggregation_area.name
 		, aggregation_area_type
 	from household 
-		JOIN bmgf.aggregation_area ON st_contains(aggregation_area.geometry, h.location)
+		JOIN bmgf.aggregation_area ON st_contains(aggregation_area.geometry, household.location)
   		WHERE aggregation_area.type = 'admin'::text AND aggregation_area.admin_level = 1;
 
 	-- populate household_fct_list table

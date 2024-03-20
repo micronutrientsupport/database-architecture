@@ -46,4 +46,4 @@ CREATE TABLE household_intake_static (
 );
 ;
 
-COMMENT ON VIEW household_intake IS 'View of amount of micronutrients consumed in total by individual households ';
+COMMENT ON TABLE household_intake IS 'View of amount of micronutrients consumed in total by individual households ';

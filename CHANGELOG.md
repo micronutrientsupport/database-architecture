@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.4...v1.5.0) (2024-03-20)
+
+
+### Features
+
+* revamp matching to use static intake table (externally populated) ([038b0d5](https://github.com/micronutrientsupport/database-architecture/commit/038b0d5a33fdc0f07d437c9e86dd05c848b7df45))
+
+
+### Bug Fixes
+
+* household intake data table rather than view ([b855988](https://github.com/micronutrientsupport/database-architecture/commit/b85598823421e018d6ca701d4df2a88fa536c222))
+* update fct match ([7f45753](https://github.com/micronutrientsupport/database-architecture/commit/7f45753d207c50118efd845eec406005e4260933))
+
 ## [1.4.4](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.3...v1.4.4) (2024-03-15)
 
 

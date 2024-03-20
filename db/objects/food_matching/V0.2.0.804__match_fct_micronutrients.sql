@@ -33,14 +33,6 @@ BEGIN
 		aggregation_area_name,
 		aggregation_area_type
 	)
-
-	insert into household_fct_list (
-		household_id,
-		fct_list,
-		aggregation_area_id,
-		aggregation_area_name,
-		aggregation_area_type
-	)
 	select
 		household.id,
 		ARRAY(SELECT * FROM get_fct_list(location)) -- TODO: this is inserting an array into a text column. Should we change the table column datatype?

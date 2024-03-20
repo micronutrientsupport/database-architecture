@@ -1,4 +1,4 @@
-CREATE TABLE household_intake_static (
+CREATE TABLE household_intake (
 	survey_id int4 NULL,
 	household_id int8 NULL,
 	fct_source_id int4 NULL,

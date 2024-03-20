@@ -33,14 +33,22 @@ BEGIN
 		aggregation_area_name,
 		aggregation_area_type
 	)
+
+	insert into household_fct_list (
+		household_id,
+		fct_list,
+		aggregation_area_id,
+		aggregation_area_name,
+		aggregation_area_type
+	)
 	select
-		id,
+		household.id,
 		ARRAY(SELECT * FROM get_fct_list(location)) -- TODO: this is inserting an array into a text column. Should we change the table column datatype?
 		, aggregation_area.id
 		, aggregation_area.name
-		, aggregation_area_type
+		, aggregation_area.type
 	from household 
-		JOIN bmgf.aggregation_area ON st_contains(aggregation_area.geometry, household.location)
+		JOIN aggregation_area ON st_contains(aggregation_area.geometry, household.location)
   		WHERE aggregation_area.type = 'admin'::text AND aggregation_area.admin_level = 1;
 
 	-- populate household_fct_list table

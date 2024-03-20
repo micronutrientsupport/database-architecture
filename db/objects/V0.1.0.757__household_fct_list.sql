@@ -5,7 +5,7 @@ fct_list 		text,
 fct_list_id     integer,
 aggregation_area_id integer,
 aggregation_area_name text,
-aggregation_area_type text
+aggregation_area_type text,
 FOREIGN KEY (fct_list_id) REFERENCES distinct_fct_list(id),
 FOREIGN KEY (aggregation_area_id) REFERENCES aggregation_area(id),
 );

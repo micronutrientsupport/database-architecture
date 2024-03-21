@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.5.0...v1.5.1) (2024-03-21)
+
+
+### Bug Fixes
+
+* fix typo ([dbd1a88](https://github.com/micronutrientsupport/database-architecture/commit/dbd1a883d854c9b920af6b37c0deec639d838e1e))
+* fix typo ([ba1bf11](https://github.com/micronutrientsupport/database-architecture/commit/ba1bf116ea193a2505d13933e7e43a31fdaee7d1))
+* fix typo ([e2e8825](https://github.com/micronutrientsupport/database-architecture/commit/e2e88251c6799b181d13724daea702976053240b))
+* fix typo ([727fb02](https://github.com/micronutrientsupport/database-architecture/commit/727fb02de425d779cf765ff83eff281486fd709b))
+* fix typo ([7cb1c94](https://github.com/micronutrientsupport/database-architecture/commit/7cb1c94041b80aef7988286a1c4838691cf401e1))
+* fix typo ([7e2484f](https://github.com/micronutrientsupport/database-architecture/commit/7e2484f090d01f0ae096d86bbc8040ae1e471c0e))
+* match function tweak ([26bec46](https://github.com/micronutrientsupport/database-architecture/commit/26bec46c7bd6a7a75e9583c0cb3caceac93fb0c1))
+* match function tweak ([f5626a9](https://github.com/micronutrientsupport/database-architecture/commit/f5626a99e2f2a19f9298146e9061cdbecd6e073d))
+
 ## [1.5.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.4...v1.5.0) (2024-03-20)
 
 

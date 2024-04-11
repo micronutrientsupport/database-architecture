@@ -26,7 +26,7 @@ FROM (
 		AND flfc.micronutrient_composition IS NOT NULL
 		AND amount_consumed_in_g IS NOT NULL
 	GROUP BY
-		survey_id
+		hh.survey_id
 		, fct_source_id
 		, fg.food_group_id
 		, fgi.food_group_name

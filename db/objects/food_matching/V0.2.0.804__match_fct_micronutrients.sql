@@ -44,7 +44,7 @@ BEGIN
 	from household 
 		JOIN survey on household.survey_id = survey.id
 		JOIN aggregation_area ON st_contains(aggregation_area.geometry, household.location)
-  		WHERE aggregation_area.type = 'admin'::text AND aggregation_area.admin_level = 1;
+  		WHERE aggregation_area.type = 'admin'::text AND aggregation_area.admin_level = 1 OR aggregation_area.type = 'country'::text;
 
 	-- populate household_fct_list table
 	RAISE NOTICE 'Populating country_fct_list table...%', timeofday();

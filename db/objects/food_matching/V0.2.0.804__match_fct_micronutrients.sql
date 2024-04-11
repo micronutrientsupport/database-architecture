@@ -31,7 +31,8 @@ BEGIN
 		fct_list,
 		aggregation_area_id,
 		aggregation_area_name,
-		aggregation_area_type
+		aggregation_area_type,
+		survey_id
 	)
 	select
 		household.id,
@@ -39,7 +40,9 @@ BEGIN
 		, aggregation_area.id
 		, aggregation_area.name
 		, aggregation_area.type
+		, survey.id
 	from household 
+		JOIN survey on household.survey_id = survey.id
 		JOIN aggregation_area ON st_contains(aggregation_area.geometry, household.location)
   		WHERE aggregation_area.type = 'admin'::text AND aggregation_area.admin_level = 1;
 

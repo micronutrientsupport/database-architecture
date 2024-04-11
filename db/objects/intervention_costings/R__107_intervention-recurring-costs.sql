@@ -27,6 +27,9 @@ with totalfields as (
 			"External quality assurance/quality control (QA/QC)": "total_external_qaqc_cost",
 			"Training/Retraining": "total_retraining_cost",
 			"Management, overhead, administration ": "total_management_cost"
+		},
+		"Impact evaluation costs": {
+			"Impact evaluation/nutrition surveillance": "total_impact_evalutaion_cost"
 		}
 }' :: json as mapping
 ),
@@ -232,7 +235,8 @@ su_agg2 as (
             'Recurring premix costs',
             'Government-related recurring monitoring and management costs ',
             'Industry-related recurring fortification costs',
-            'Total industry-related recurring fortification costs'
+            'Total industry-related recurring fortification costs',
+            'Impact evaluation costs'
         )
     group by
         intervention_id,

@@ -2,7 +2,7 @@ CREATE OR REPLACE view intervention_summary_costs AS
 with totalfields as (
     select
         '{
-		"Undiscounted costs, real 2021 US dollars": {
+		"Undiscounted costs, US dollars (USD)": {
 			"Summaries": "summary_10yr_startup_and_recurring_cost"
 		}
 }' :: json as mapping
@@ -111,7 +111,7 @@ gov_su_agg as (
         gov_su_agg
     where
         header1 in (
-            'Undiscounted costs, real 2021 US dollars'
+            'Undiscounted costs, US dollars (USD)'
         )
     group by
         intervention_id,

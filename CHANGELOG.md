@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/micronutrientsupport/database-architecture/compare/v1.5.1...v1.5.2) (2024-04-14)
+
+
+### Bug Fixes
+
+* tweak household matching, intervention data fixes ([#422](https://github.com/micronutrientsupport/database-architecture/issues/422)) ([8b5339b](https://github.com/micronutrientsupport/database-architecture/commit/8b5339b69e0fc1abc44b952906b0a6fa75ff3575))
+
 ## [1.5.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.5.0...v1.5.1) (2024-03-21)
 
 

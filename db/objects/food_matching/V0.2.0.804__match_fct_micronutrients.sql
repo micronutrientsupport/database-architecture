@@ -28,12 +28,23 @@ BEGIN
 
 	insert into household_fct_list (
 		household_id,
-		fct_list
+		fct_list,
+		aggregation_area_id,
+		aggregation_area_name,
+		aggregation_area_type,
+		survey_id
 	)
 	select
-		id,
+		household.id,
 		ARRAY(SELECT * FROM get_fct_list(location)) -- TODO: this is inserting an array into a text column. Should we change the table column datatype?
-	from household;
+		, aggregation_area.id
+		, aggregation_area.name
+		, aggregation_area.type
+		, survey.id
+	from household 
+		JOIN survey on household.survey_id = survey.id
+		JOIN aggregation_area ON st_contains(aggregation_area.geometry, household.location)
+  		WHERE aggregation_area.type = 'admin'::text AND aggregation_area.admin_level = 1;
 
 	-- populate household_fct_list table
 	RAISE NOTICE 'Populating country_fct_list table...%', timeofday();
@@ -225,61 +236,61 @@ BEGIN
 	end loop;
 
 	-- populate final results table
- 	RAISE NOTICE 'Populating final results table...%', timeofday();
+ 	-- RAISE NOTICE 'Populating final results table...%', timeofday();
 
-	INSERT INTO consumption_composition_match
-		(food_genus_id,
-		household_id,
-		household_member_id,
-		fct_list_id,
-		micronutrient_id,
-		micronutrient_composition,
-		fct_used)
-	select
-		ci.food_genus_id,
-		ci.household_id,
-		ci.household_member_id,
-		ccm.fct_list_id,
-		ccm.micronutrient_id,
-		ccm.micronutrient_composition,
-		ccm.fct_used
-	from
-		(
-		select
-				row_number() over () as rownum
-				, consumption_items.*
-			from
-			(
-			SELECT
-				 hc.food_genus_id
-				 , h.id AS household_id
-				 , null as household_member_id
-				 , f.fct_list_id
-				FROM
-				household_consumption hc
-				join household h
-				on hc.household_id = h.id
-				JOIN household_fct_list f
-				ON h.id = f.household_id
-			union all
-			SELECT
-			   hmc.food_genus_id
-			 , hmc.id AS household_id
-  			 , hhm.id AS household_member_id
-			 , ff.fct_list_id
-			FROM
-			household_member_consumption hmc
-			join household_member hhm
-			on hhm.id = hmc.household_member_id
-			join household hh
-			on hhm.household_id = hh.id
-			JOIN household_fct_list ff
-			ON hh.id = ff.household_id
-			 ) as consumption_items
-		) ci
-		join fct_list_food_composition ccm
-		on ci.fct_list_id = ccm.fct_list_id
-		and ci.food_genus_id = ccm.food_genus_id;
+	-- INSERT INTO consumption_composition_match
+	-- 	(food_genus_id,
+	-- 	household_id,
+	-- 	household_member_id,
+	-- 	fct_list_id,
+	-- 	micronutrient_id,
+	-- 	micronutrient_composition,
+	-- 	fct_used)
+	-- select
+	-- 	ci.food_genus_id,
+	-- 	ci.household_id,
+	-- 	ci.household_member_id,
+	-- 	ccm.fct_list_id,
+	-- 	ccm.micronutrient_id,
+	-- 	ccm.micronutrient_composition,
+	-- 	ccm.fct_used
+	-- from
+	-- 	(
+	-- 	select
+	-- 			row_number() over () as rownum
+	-- 			, consumption_items.*
+	-- 		from
+	-- 		(
+	-- 		SELECT
+	-- 			 hc.food_genus_id
+	-- 			 , h.id AS household_id
+	-- 			 , null as household_member_id
+	-- 			 , f.fct_list_id
+	-- 			FROM
+	-- 			household_consumption hc
+	-- 			join household h
+	-- 			on hc.household_id = h.id
+	-- 			JOIN household_fct_list f
+	-- 			ON h.id = f.household_id
+	-- 		union all
+	-- 		SELECT
+	-- 		   hmc.food_genus_id
+	-- 		 , hmc.id AS household_id
+  	-- 		 , hhm.id AS household_member_id
+	-- 		 , ff.fct_list_id
+	-- 		FROM
+	-- 		household_member_consumption hmc
+	-- 		join household_member hhm
+	-- 		on hhm.id = hmc.household_member_id
+	-- 		join household hh
+	-- 		on hhm.household_id = hh.id
+	-- 		JOIN household_fct_list ff
+	-- 		ON hh.id = ff.household_id
+	-- 		 ) as consumption_items
+	-- 	) ci
+	-- 	join fct_list_food_composition ccm
+	-- 	on ci.fct_list_id = ccm.fct_list_id
+	-- 	and ci.food_genus_id = ccm.food_genus_id;
 
 RAISE NOTICE 'End....%', timeofday();
 

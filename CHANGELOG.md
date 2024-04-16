@@ -1,5 +1,80 @@
 # Changelog
 
+## [1.5.2](https://github.com/micronutrientsupport/database-architecture/compare/v1.5.1...v1.5.2) (2024-04-14)
+
+
+### Bug Fixes
+
+* tweak household matching, intervention data fixes ([#422](https://github.com/micronutrientsupport/database-architecture/issues/422)) ([8b5339b](https://github.com/micronutrientsupport/database-architecture/commit/8b5339b69e0fc1abc44b952906b0a6fa75ff3575))
+
+## [1.5.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.5.0...v1.5.1) (2024-03-21)
+
+
+### Bug Fixes
+
+* fix typo ([dbd1a88](https://github.com/micronutrientsupport/database-architecture/commit/dbd1a883d854c9b920af6b37c0deec639d838e1e))
+* fix typo ([ba1bf11](https://github.com/micronutrientsupport/database-architecture/commit/ba1bf116ea193a2505d13933e7e43a31fdaee7d1))
+* fix typo ([e2e8825](https://github.com/micronutrientsupport/database-architecture/commit/e2e88251c6799b181d13724daea702976053240b))
+* fix typo ([727fb02](https://github.com/micronutrientsupport/database-architecture/commit/727fb02de425d779cf765ff83eff281486fd709b))
+* fix typo ([7cb1c94](https://github.com/micronutrientsupport/database-architecture/commit/7cb1c94041b80aef7988286a1c4838691cf401e1))
+* fix typo ([7e2484f](https://github.com/micronutrientsupport/database-architecture/commit/7e2484f090d01f0ae096d86bbc8040ae1e471c0e))
+* match function tweak ([26bec46](https://github.com/micronutrientsupport/database-architecture/commit/26bec46c7bd6a7a75e9583c0cb3caceac93fb0c1))
+* match function tweak ([f5626a9](https://github.com/micronutrientsupport/database-architecture/commit/f5626a99e2f2a19f9298146e9061cdbecd6e073d))
+
+## [1.5.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.4...v1.5.0) (2024-03-20)
+
+
+### Features
+
+* revamp matching to use static intake table (externally populated) ([038b0d5](https://github.com/micronutrientsupport/database-architecture/commit/038b0d5a33fdc0f07d437c9e86dd05c848b7df45))
+
+
+### Bug Fixes
+
+* household intake data table rather than view ([b855988](https://github.com/micronutrientsupport/database-architecture/commit/b85598823421e018d6ca701d4df2a88fa536c222))
+* update fct match ([7f45753](https://github.com/micronutrientsupport/database-architecture/commit/7f45753d207c50118efd845eec406005e4260933))
+
+## [1.4.4](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.3...v1.4.4) (2024-03-15)
+
+
+### Bug Fixes
+
+* source field for intervention data ([b9f0e26](https://github.com/micronutrientsupport/database-architecture/commit/b9f0e26f8c59a60aee912ab8fec338e21f9efaf6))
+
+## [1.4.3](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.2...v1.4.3) (2024-03-08)
+
+
+### Bug Fixes
+
+* add missing updates ([b6e9310](https://github.com/micronutrientsupport/database-architecture/commit/b6e9310aec941b938355ba602449312cf3436446))
+
+## [1.4.2](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.1...v1.4.2) (2024-03-07)
+
+
+### Miscellaneous
+
+* fix declaration order ([401693b](https://github.com/micronutrientsupport/database-architecture/commit/401693b94b4c639df15d3c8a0e82d752deb864c0))
+* remove unneccesary files ([bc14b18](https://github.com/micronutrientsupport/database-architecture/commit/bc14b189c9433ce1b0cee49aa85dd79232d63666))
+
+## [1.4.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.4.0...v1.4.1) (2024-03-07)
+
+
+### Miscellaneous
+
+* fix declaration order ([bef6744](https://github.com/micronutrientsupport/database-architecture/commit/bef6744e26bd982b6c76047aec3c67167791943b))
+
+## [1.4.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.3.0...v1.4.0) (2024-03-07)
+
+
+### Features
+
+* premix calculator updateS: ([682650d](https://github.com/micronutrientsupport/database-architecture/commit/682650d1585b4298b9921eaecb7f2c872bc51115))
+
+
+### Bug Fixes
+
+* various intervention fixes ([35aeaa8](https://github.com/micronutrientsupport/database-architecture/commit/35aeaa8aac021ebe728679d1785aabe69df05371))
+
 ## [1.3.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.2.0...v1.3.0) (2023-11-02)
 
 

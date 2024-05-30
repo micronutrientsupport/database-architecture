@@ -12,8 +12,7 @@ CREATE TABLE intervention_extra_costs(
     year_6           numeric,
     year_7           numeric,
     year_8           numeric,
-    year_9           numeric,
-    mn_percent       numeric
+    year_9           numeric
 )
 ;
 

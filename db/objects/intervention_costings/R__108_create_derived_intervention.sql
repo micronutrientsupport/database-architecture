@@ -125,6 +125,44 @@ select
 from fortification_level 
 where intervention_id = _parent_id;
 
+-- Duplicate relevant reference thresholds from intake_thresholds
+-- into intervention specific threshold record in intervention_thresholds
+insert into intervention_thresholds (
+	intervention_id
+	, unit_adequacy
+	, unit_excess
+	, unit_cnd
+	, reference_person
+	, ear
+	, ear_default
+	, ul
+	, ul_default
+	, cnd
+	, cul
+	, energy
+	, energy_default
+	, notes
+	, source
+)
+select 
+	_new_id as intervention_id
+	, unit_adequacy
+	, unit_excess
+	, unit_cnd
+	, reference_person
+	, ear
+	, ear
+	, ul
+	, ul
+	, cnd
+	, cul
+	, 2100
+	, 2100
+	, notes
+	, source
+from intake_threshold 
+where nutrient = _new_focus_micronutrient;
+
 return query select * from intervention_list where id = _new_id;
 
 END

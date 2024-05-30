@@ -19,7 +19,6 @@ CREATE OR REPLACE FUNCTION update_cnd() RETURNS trigger AS $intake_threshold_tg1
 
         IF NEW.ear is not null
             THEN
-                IF NEW.
 				NEW.cnd := (NEW.ear/NEW.energy)*1000;
                 NEW.unit_cnd := 'kcal';
         ELSE

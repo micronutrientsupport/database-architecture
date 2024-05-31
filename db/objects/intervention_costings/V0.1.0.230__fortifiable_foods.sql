@@ -11,14 +11,6 @@ COMMENT on column fortifiable_portions_food_group.food_vehicle_id     IS 'The fo
 COMMENT on column fortifiable_portions_food_group.food_group_id      IS 'The FAO food group of this food genus. References the food_group table';
 COMMENT on column fortifiable_portions_food_group.fortifiable_portion IS 'The proportion of the food item (by weight) which is impacted by the fortification program (0-100)';
 
-INSERT into fortifiable_portions_food_group 
-(food_vehicle_id, food_group_id, fortifiable_portion) 
-
-VALUES 
- (1, 2035, 100),    -- FV #1 = Wheat Flour, FG #103 = Wheat and wheat-based products
- (4, 2028, 100),   -- Sugar / Sugar (raw equivalent) and products 
- (4, 2020, 50);      -- Cocoa beans and products
-
 
 
 CREATE TABLE fortifiable_portions_food_genus (
@@ -33,17 +25,6 @@ COMMENT ON TABLE fortifiable_portions_food_genus IS 'List of food groups which a
 COMMENT on column fortifiable_portions_food_genus.food_vehicle_id     IS 'The food vehicle which is fortified.  References the food_vehicle table';
 COMMENT on column fortifiable_portions_food_genus.food_genus_id      IS 'The MAPS food genus for the food item. References the food_genus table';
 COMMENT on column fortifiable_portions_food_genus.fortifiable_portion IS 'The proportion of the food item (by weight) which is impacted by the fortification program (0-100)';
-
-INSERT into fortifiable_portions_food_genus 
-(food_vehicle_id, food_genus_id, fortifiable_portion) 
-
-VALUES 
- (1, '23991.01.05', 90),    -- Include infant whole wheat food
- (1, '23991.01.06', 90),   -- Include infant whole wheat food 
- (1, 'F1232.25', 100),      -- Include couscous from misc products
- (1, 'F0020.06', 80),       -- Reduce fortifiable component for chapati with ghee from the default for the wheat products group
- (1, '23140.03.02', 0);    -- Mark museli flakes as unfortifiable
-
 
  CREATE or replace view fortifiable_food_items as 
 

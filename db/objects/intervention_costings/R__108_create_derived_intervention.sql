@@ -10,6 +10,7 @@ RETURNS setof intervention_list AS
 $$
 DECLARE
    _new_id   numeric;  -- id of new intervention
+   _new_food_vehicle_id  numeric;  -- id of food vehicle
 begin
 	
 -- Create new intervention in intervention table
@@ -131,14 +132,11 @@ insert into intervention_thresholds (
 	intervention_id
 	, unit_adequacy
 	, unit_excess
-	, unit_cnd
 	, reference_person
 	, ear
 	, ear_default
 	, ul
 	, ul_default
-	, cnd
-	, cul
 	, energy
 	, energy_default
 	, notes
@@ -148,20 +146,55 @@ select
 	_new_id as intervention_id
 	, unit_adequacy
 	, unit_excess
-	, unit_cnd
 	, reference_person
 	, ear
 	, ear
 	, ul
 	, ul
-	, cnd
-	, cul
 	, 2100
 	, 2100
 	, notes
 	, source
 from intake_threshold 
 where nutrient = _new_focus_micronutrient;
+
+-- Duplicate relevant reference expected losses from expected_losses
+-- into intervention specific threshold record in intervention_thresholds
+
+select 
+	food_vehicle_id into _new_food_vehicle_id
+from intervention where id = _new_id
+;
+
+with food_vehicle_standards as (
+select 
+	unnest(food_vehicle_standard)->>'micronutrient' as micronutrient, 
+	json_array_elements((unnest(food_vehicle_standard)->>'compounds')::json) as compounds
+from intervention_vehicle_standard ivs 
+where ivs.intervention_id = _new_id
+),
+intervention_premix as (
+select array_agg(micronutrient) as premix_micronutrients from food_vehicle_standards
+where (compounds->>'targetVal')::numeric > 0)
+
+
+insert into intervention_expected_losses (
+	intervention_id
+	, micronutrient_id
+	, expected_losses
+	, expected_losses_default
+	, source
+)
+
+select 
+	_new_id as intervention_id
+	, micronutrient_id
+	, expected_losses
+	, expected_losses 
+	, source
+from expected_losses, intervention_premix
+where micronutrient_id = ANY(premix_micronutrients)
+and food_vehicle_id = _new_food_vehicle_id;
 
 return query select * from intervention_list where id = _new_id;
 

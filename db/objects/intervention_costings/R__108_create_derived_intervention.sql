@@ -130,6 +130,7 @@ where intervention_id = _parent_id;
 -- into intervention specific threshold record in intervention_thresholds
 insert into intervention_thresholds (
 	intervention_id
+	, nutrient
 	, unit_adequacy
 	, unit_excess
 	, reference_person
@@ -144,6 +145,7 @@ insert into intervention_thresholds (
 )
 select 
 	_new_id as intervention_id
+	, nutrient
 	, unit_adequacy
 	, unit_excess
 	, reference_person

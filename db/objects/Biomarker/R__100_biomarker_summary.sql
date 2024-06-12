@@ -40,7 +40,7 @@ from biomarker_measurement bm	-- Biomarker measurement data
 join household_member hm on bm.household_member_id = hm.id -- Details of the individual e.g. age, pregnancy
 join household hh on hm.household_id = hh.id -- Details of the household e.g. location, wealth
 join survey s on hh.survey_id = s.id
-left join aggregation_area on st_contains(aggregation_area.geometry, hh.location)  AND aggregation_area.id IS NULL OR (aggregation_area.type='admin' AND aggregation_area.admin_level=1)
+left join aggregation_area on st_contains(aggregation_area.geometry, hh.location)  AND (aggregation_area.id IS NULL OR (aggregation_area.type='admin' AND aggregation_area.admin_level=1))
 left join biomarker_aggregation_area on st_contains(biomarker_aggregation_area.geometry, hh.location) 
 WHERE s.survey_type = 'biomarker' -- Which aggregation area the household falls into for aggregation
 

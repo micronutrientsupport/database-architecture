@@ -15,6 +15,7 @@ CREATE TABLE intervention(
     is_premade                   boolean,
     is_locked                    boolean,
     parent_intervention          integer    REFERENCES intervention(id),
+    template_intervention        integer    REFERENCES intervention(id),
     last_edited                  timestamp
 )
 ;
@@ -33,7 +34,8 @@ COMMENT ON COLUMN intervention.file_name             IS 'If the data is imported
 COMMENT ON COLUMN intervention.base_year             IS 'the actual year (Common Era) from when the intervention program is to start its calculations, e.g. 2026. As opposed to "year 3".';
 COMMENT ON COLUMN intervention.is_premade            IS 'Whether this intervention is pre-created by professionals, or whether this is an intervention where an end-user has customised some values';
 COMMENT ON COLUMN intervention.is_locked             IS 'Whether this intervention is locked against editing (read-only)';
-COMMENT ON COLUMN intervention.parent_intervention   IS 'If this intervention has been created by a user, this shows the id of the intervetnion used as a template.';
+COMMENT ON COLUMN intervention.parent_intervention   IS 'If this intervention has been created by a user, this shows the id of the intervetnion it was copied from.';
+COMMENT ON COLUMN intervention.parent_intervention   IS 'If this intervention has been created by a user, this shows the id of the intervetnion which was its ancestral template.';
 COMMENT ON COLUMN intervention.last_edited           IS 'Timestamp of the last edit made to this intervention or its corresponding data';
 
 

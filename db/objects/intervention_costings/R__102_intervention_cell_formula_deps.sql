@@ -115,5 +115,5 @@ create or replace view intervention_formulae as
  	icfd.dependent_rows
 
  from  intervention_data id join intervention i on id.intervention_id = i.id
- join intervention_cell_formula_deps icfd on icfd.intervention_id = i.parent_intervention  and icfd.row_index = id.row_index  
+ join intervention_cell_formula_deps icfd on icfd.intervention_id = i.template_intervention  and icfd.row_index = id.row_index  
  

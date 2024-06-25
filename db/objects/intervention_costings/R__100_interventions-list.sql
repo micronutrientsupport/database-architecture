@@ -29,6 +29,7 @@ select
         0
     ) as ten_year_total_cost,
     i.parent_intervention,
+    i.template_intervention,
     i.last_edited 
 from
     intervention i

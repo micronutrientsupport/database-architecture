@@ -30,6 +30,7 @@ insert into intervention (
 	, is_premade 
 	, is_locked
 	, parent_intervention 
+	, template_intervention
 	, last_edited
 )
 select 
@@ -48,6 +49,7 @@ select
 	, false as is_premade 
 	, false as is_locked
 	, _parent_id as parent_intervention
+	, get_intervention_template_parent_id(_parent_id::int) as template_intervention
 	, NOW()
 from intervention where id = _parent_id
 returning id INTO _new_id
@@ -158,7 +160,7 @@ select
 	, notes
 	, source
 from intake_threshold 
-where nutrient = _new_focus_micronutrient;
+where nutrient = (select focus_micronutrient from intervention i where id = _new_id);
 
 -- Duplicate relevant reference expected losses from expected_losses
 -- into intervention specific threshold record in intervention_thresholds

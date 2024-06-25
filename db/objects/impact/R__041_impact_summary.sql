@@ -24,6 +24,44 @@ with country_median as (
 	and cds.micronutrient_id = cda.micronutrient_id 
 	and cds.composition_data_id = cda.composition_data_id 
 ),
+hh_national as (
+	  SELECT
+        survey_id,
+        country,
+        country as aggregation_area_id,
+        'doo' as aggregation_area_name,
+        'country' as aggregation_area_type,
+        micronutrient_id,
+        unit,
+        median(micronutrient_supply) AS dietary_supply,
+        count(household_id) AS household_count,
+        count(household_id) FILTER (
+            WHERE
+                is_deficient
+        ) AS deficient_count,
+        round(
+            (
+                (
+                    count(household_id) FILTER (
+                        WHERE
+                            is_deficient
+                    )
+                ) :: numeric /(count(household_id))
+            ) * 100,
+            2
+        ) AS deficient_percentage,
+        hidp.afe_ear as deficient_value
+    FROM
+        household_intake_afe_deficiency_pivot hidp
+                JOIN micronutrient m ON hidp.micronutrient_id = m.id
+        JOIN aggregation_area s ON s.id = hidp.aggregation_area_id
+    GROUP BY
+        survey_id,
+        country,
+        micronutrient_id,
+        hidp.afe_ear,
+        m.unit
+),
 household_median as (
 	select 
 		hdaa.country as country_id
@@ -36,7 +74,7 @@ household_median as (
     			null
   			END 
 		as dietary_inadequacy 
-	from household_deficiency_afe_aggregation hdaa 
+	from hh_national hdaa 
 	where aggregation_area_type = 'country'
 )
 ,

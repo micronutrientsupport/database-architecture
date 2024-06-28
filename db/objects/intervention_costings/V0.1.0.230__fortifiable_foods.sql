@@ -29,9 +29,29 @@ COMMENT on column fortifiable_portions_food_genus.fortifiable_portion IS 'The pr
  CREATE or replace view fortifiable_food_items as 
 
  with fgrp as 
-(select fpgrp.food_vehicle_id, fpgrp.fortifiable_portion, fg.id as food_genus_id, fg.food_name, fg.food_group_id from fortifiable_portions_food_group fpgrp join food_genus fg on fg.food_group_id = fpgrp.food_group_id)
+(select 
+    fpgrp.food_vehicle_id
+    , fv.vehicle_name as food_vehicle_name
+    , fpgrp.fortifiable_portion
+    , fg.id as food_genus_id
+    , fg.food_name as food_genus_name
+    , fg.food_group_id 
+from fortifiable_portions_food_group fpgrp 
+    join food_genus fg on fg.food_group_id = fpgrp.food_group_id
+    join food_vehicle fv on fv.id = fpgrp.food_vehicle_id
+)
 , fgen as 
-(select fpgen.food_vehicle_id, fpgen.fortifiable_portion, fg.id as food_genus_id, fg.food_name, fg.food_group_id from fortifiable_portions_food_genus fpgen join food_genus fg on fg.id = fpgen.food_genus_id)
+(select 
+    fpgen.food_vehicle_id
+    , fv.vehicle_name as food_vehicle_name
+    , fpgen.fortifiable_portion
+    , fg.id as food_genus_id
+    , fg.food_name as food_genus_name
+    , fg.food_group_id 
+from fortifiable_portions_food_genus fpgen 
+    join food_genus fg on fg.id = fpgen.food_genus_id
+    join food_vehicle fv on fv.id = fpgen.food_vehicle_id
+)
 
 select * from fgrp where food_genus_id in (select food_genus_id from fgrp except select food_genus_id from fgen) -- only rows unique to the food group table (not overriden by food_genus table)
 union

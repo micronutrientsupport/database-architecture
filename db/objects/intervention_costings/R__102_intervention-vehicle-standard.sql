@@ -41,7 +41,7 @@ with food_vehicle as (
 	    -- Re-join intervention_data to get the values for the parent intervention
 	    left join intervention_data intervention_parent 
 	    	ON intervention_parent.row_index = intervention_data.row_index 
-	    	and intervention_parent.intervention_id = intervention.parent_intervention
+	    	and intervention_parent.intervention_id = intervention.template_intervention
 	where
         intervention_data.header1 = 'Program assumptions'
     order by

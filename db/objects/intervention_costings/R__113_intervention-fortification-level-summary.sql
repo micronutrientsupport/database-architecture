@@ -40,12 +40,12 @@ where header1 = 'Program assumptions'
 baseline as (
 select
    fortifiable.intervention_id
-   , unnest(array['2021', '2022', '2023','2024']) AS "Year"
+   , unnest(array['2021','2022','2023','2024','2025','2026','2027','2028','2029','2030']) AS "Year"
    , intervention.food_vehicle_id as fortification_vehicle_id
    , food_vehicle.vehicle_name as fortification_vehicle_name
-   , unnest(array[fortifiable.year_0, fortifiable.year_1, fortifiable.year_2,fortifiable.year_3]) AS "perc_fortifiable"
-   , unnest(array[fortified.year_0, fortified.year_1, fortified.year_2,fortified.year_3]) AS "perc_fortified"
-   , unnest(array[average.year_0, average.year_1, average.year_2,average.year_3]) AS "perc_average_fortification_level"
+   , unnest(array[fortifiable.year_0, fortifiable.year_1, fortifiable.year_2,fortifiable.year_3,fortifiable.year_4,fortifiable.year_5,fortifiable.year_6,fortifiable.year_7,fortifiable.year_8,fortifiable.year_9]) AS "perc_fortifiable"
+   , unnest(array[fortified.year_0, fortified.year_1, fortified.year_2,fortified.year_3,fortified.year_4,fortified.year_5,fortified.year_6,fortified.year_7,fortified.year_8,fortified.year_9]) AS "perc_fortified"
+   , unnest(array[average.year_0, average.year_1, average.year_2,average.year_3,average.year_4,average.year_5,average.year_6,average.year_7,average.year_8,average.year_9]) AS "perc_average_fortification_level"
 from 
 	fortifiable 
 		join fortified on fortifiable.intervention_id = fortified.intervention_id

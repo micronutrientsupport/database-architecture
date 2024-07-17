@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION create_derived_intervention(_parent_id numeric, _new_name text, _new_description text, _new_country text, _new_focus_micronutrient text, _new_focus_geography text, _user_id text)
+CREATE OR REPLACE FUNCTION create_derived_intervention(_parent_id numeric, _new_name text, _new_description text, _new_country text, _new_focus_micronutrient text, _new_focus_geography text, _user_id text, _new_status integer, _new_nature integer)
 RETURNS setof intervention_list AS
 
 -- Creates a new record in the intervention table with data copied from the provided
@@ -32,6 +32,8 @@ insert into intervention (
 	, parent_intervention 
 	, template_intervention
 	, last_edited
+	, intervention_status
+	, intervention_nature
 )
 select 
 	_new_name
@@ -51,6 +53,8 @@ select
 	, _parent_id as parent_intervention
 	, get_intervention_template_parent_id(_parent_id::int) as template_intervention
 	, NOW()
+	, _new_status as intervention_status
+	, _new_nature as intervention_nature
 from intervention where id = _parent_id
 returning id INTO _new_id
 ;
@@ -82,6 +86,8 @@ insert into intervention_data (
 	, units
 	, is_user_editable
 	, is_calculated
+	, intervention_status
+	, intervention_nature
 )
 select 
 	_new_id as intervention_id,
@@ -104,9 +110,11 @@ select
 	source,
 	units,
 	is_user_editable,
-	is_calculated
+	is_calculated,
+	intervention_status,
+	intervention_nature
 from intervention_data 
-where intervention_id = _parent_id;
+where intervention_id = _parent_id and intervention_status = _new_status and intervention_nature = _new_nature;
 
 -- Duplicate intervention_targeting rows from
 -- parent intervention with the new intervention_id

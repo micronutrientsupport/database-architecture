@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 CREATE OR REPLACE FUNCTION get_intervention_template_parent_id(int_id integer, OUT parent_id integer)
  RETURNS integer
  LANGUAGE plpgsql
@@ -21,24 +20,6 @@ $function$
 ;
 
 
-=======
-CREATE OR REPLACE FUNCTION get_intervention_template_parent_id(in int_id int, out parent_id int)
-as 
-$$
-    BEGIN
-
-	    	parent_id := (
-        with recursive rec_a (id, name, parent_id) AS
-    (
-      SELECT intervention.* FROM "bmgf".intervention WHERE id = int_id
-      UNION ALL
-      SELECT intervention.* FROM rec_a, "bmgf".intervention WHERE intervention.id = rec_a.parent_intervention
-    )
-    SELECT id as template_parent FROM rec_a where is_premade = true);
-    
-    END;
-$$ LANGUAGE plpgsql;
->>>>>>> develop
 
 CREATE OR REPLACE VIEW intervention_values_json AS
 
@@ -296,11 +277,8 @@ FROM
     left join intervention_data intervention_parent
     	ON intervention_parent.row_index = intervention_data.row_index
     	and intervention_parent.intervention_id = intervention.template_intervention
-<<<<<<< HEAD
         and intervention_parent.intervention_status = intervention.intervention_status
         and intervention_parent.intervention_nature = intervention.intervention_nature
-=======
->>>>>>> develop
     left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.template_intervention, intervention.parent_intervention, intervention.id)
      and icf.row_index = intervention_data.row_index 
     left join grouped_rows gr 

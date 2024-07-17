@@ -17,7 +17,9 @@ CREATE TABLE intervention(
     parent_intervention          integer    REFERENCES intervention(id),
     template_intervention        integer    REFERENCES intervention(id),
     template_date                date,
-    last_edited                  timestamp
+    last_edited                  timestamp,
+    intervention_status          integer,
+    intervention_nature          integer,
 )
 ;
 COMMENT ON TABLE intervention IS 'Food fortification interventions programs. An intervention is a program to fortify a food vehicle (e.g. wheat flour) with a premix of fortificants (e.g. Vitamin C powder and iron powder) in order to increase the micronutrient content of the food.';

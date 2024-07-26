@@ -16,7 +16,13 @@ select
 		'isAdjustedForSmoking',
 		condition_is_adjusted_for_smoking,
 		'isAdjustedForAltitude',
-		condition_is_adjusted_for_altitude
+		condition_is_adjusted_for_altitude,
+		'ageLessGreater',
+		condition_age_less_greater,
+		'lowerAgeInMonths',
+		condition_lower_age_in_months,
+		'upperAgeInMonths',
+		condition_upper_age_in_months
 	)) as condition,
 	threshold_type,
 	source,

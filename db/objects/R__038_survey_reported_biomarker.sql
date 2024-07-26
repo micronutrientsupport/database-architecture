@@ -2,7 +2,7 @@ create or replace view survey_reported_biomarkers as
 
 with survey_measurements as 
 (
-select h.survey_id, bm.* from biomarker_measurement bm 
+select h.survey_id, hm.group_id, bm.* from biomarker_measurement bm 
 join household_member hm 
 on bm.household_member_id=hm.id
 join household h 
@@ -10,7 +10,7 @@ on hm.household_id = h.id
 )
 
 select survey_id, 
-
+	   group_id,
        string_to_array(
        		CONCAT_WS(',', 
 				CASE WHEN sum(haemoglobin) IS NULL THEN NULL ELSE 'haemoglobin' END,
@@ -29,6 +29,6 @@ select survey_id,
        , ',')
        AS "reported_biomarkers"
 
-from survey_measurements group by survey_id;
+from survey_measurements group by survey_id, group_id;
 
 COMMENT ON VIEW survey_reported_biomarkers IS 'View of array of reported biomarkers for a given biomarker survey';

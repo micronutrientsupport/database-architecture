@@ -41,7 +41,7 @@ gov_su_agg as (
                 from
                     intervention_data id2
                     join intervention on id2.intervention_id = intervention.id
-                    left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.parent_intervention, intervention.id)
+                    left join intervention_cell_formula_deps icf on icf.intervention_id = intervention.template_intervention
                       and icf.row_index = id2.row_index 
                 where
                     id2.intervention_id = g.intervention_id
@@ -78,7 +78,7 @@ gov_su_agg as (
                 from
                     intervention_data id2
                     join intervention on id2.intervention_id = intervention.id
-                    left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.parent_intervention, intervention.id)
+                    left join intervention_cell_formula_deps icf on icf.intervention_id = intervention.template_intervention
                       and icf.row_index = id2.row_index 
                 where
                     id2.intervention_id = g.intervention_id

@@ -1,3 +1,26 @@
+CREATE OR REPLACE FUNCTION get_intervention_template_parent_id(int_id integer, OUT parent_id integer)
+ RETURNS integer
+ LANGUAGE plpgsql
+AS $function$
+declare
+
+    schema text = CURRENT_SCHEMA();
+    BEGIN
+        EXECUTE '
+			with recursive rec_a (id, name, parent_id) AS
+			    (
+			      SELECT intervention.* FROM "' || schema || '".intervention WHERE id = ' || int_id || '
+			      UNION ALL
+			      SELECT intervention.* FROM rec_a, "' || schema || '".intervention WHERE intervention.id = rec_a.parent_intervention
+			    )
+			    SELECT id as template_parent FROM rec_a where is_premade = true;
+		' INTO  parent_id;
+    END;
+$function$
+;
+
+
+
 CREATE OR REPLACE VIEW intervention_values_json AS
 
 with omitfields as (
@@ -253,8 +276,10 @@ FROM
     -- Re-join intervention_data to get the values for the parent intervention
     left join intervention_data intervention_parent
     	ON intervention_parent.row_index = intervention_data.row_index
-    	and intervention_parent.intervention_id = intervention.parent_intervention
-    left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.parent_intervention, intervention.id)
+    	and intervention_parent.intervention_id = intervention.template_intervention
+        and intervention_parent.intervention_status = intervention.intervention_status
+        and intervention_parent.intervention_nature = intervention.intervention_nature
+    left join intervention_cell_formula_deps icf on icf.intervention_id = coalesce(intervention.template_intervention, intervention.parent_intervention, intervention.id)
      and icf.row_index = intervention_data.row_index 
     left join grouped_rows gr 
     	on intervention_data.intervention_id = gr.intervention_id and intervention_data.header1 = gr.header1 and intervention_data.header2 = gr.header2

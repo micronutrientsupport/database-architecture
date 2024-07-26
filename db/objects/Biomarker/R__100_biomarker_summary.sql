@@ -1,4 +1,5 @@
-create or replace view biomarker_summary as
+DROP MATERIALIZED VIEW IF EXISTS biomarker_summary;
+CREATE MATERIALIZED VIEW biomarker_summary AS
 
 select
     hh.survey_id

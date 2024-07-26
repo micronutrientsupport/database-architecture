@@ -49,6 +49,7 @@ create TABLE population_subnational_summary (
 	source						text
 );
 
+
 create or replace view intervention_projected_population as
 select 
 	pss.country_id,

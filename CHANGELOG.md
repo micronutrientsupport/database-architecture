@@ -7,6 +7,7 @@
 
 * intervention status, fix: biomarker views ([#431](https://github.com/micronutrientsupport/database-architecture/issues/431)) ([65d1a70](https://github.com/micronutrientsupport/database-architecture/commit/65d1a70367d156bb8f4bee6ac3f266ad3888e89a))
 
+
 ## [1.5.2](https://github.com/micronutrientsupport/database-architecture/compare/v1.5.1...v1.5.2) (2024-04-14)
 
 

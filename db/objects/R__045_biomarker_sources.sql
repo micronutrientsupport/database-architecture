@@ -1,3 +1,19 @@
+-- Inspired by https://stackoverflow.com/questions/5966274/how-to-handle-to-date-exceptions-in-a-select-statment-to-ignore-those-rows
+CREATE OR REPLACE FUNCTION bm_date_to_date( p_date_str IN text ) RETURNS DATE
+AS
+$$
+DECLARE
+  l_date DATE;
+BEGIN
+  l_date := to_date( p_date_str, 'Month YY' );
+  RETURN l_date;
+EXCEPTION
+  WHEN others THEN
+     l_date := to_date( p_date_str, 'Mon-YY' );
+    RETURN l_date;
+end;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE VIEW biomarker_data_sources AS
 with surveys as (
     select 
@@ -7,7 +23,7 @@ with surveys as (
         , sra.reported_aggregations as aggregation_fields
         , micronutrient_id
         , survey.name as survey_name
-        , DATE_PART('Year', to_date(survey.surveying_date_end,'Month YY')) as survey_year
+        , DATE_PART('Year', bm_date_to_date(survey.surveying_date_end)) as survey_year
         , survey.description as survey_description
         , survey.geonetwork_uuid as survey_metadata_id
         , country.id as country_id
@@ -28,7 +44,7 @@ join biomarker_micronutrient_mapping bmm on the_biomarker_name=bmm.biomarker_nam
 where survey.survey_type = 'biomarker' 
 --group by survey.id, group_id, the_biomarker_name, sra.reported_aggregations, bmm.micronutrient_id, country.id
 )
-select country_id, biomarker_name, array_agg(group_id), aggregation_fields, micronutrient_id, survey_id, survey_name, survey_year, survey_description, survey_metadata_id from surveys
+select country_id, biomarker_name, array_agg(group_id) as group_id, aggregation_fields, micronutrient_id, survey_id, survey_name, survey_year, survey_description, survey_metadata_id from surveys
 where rank = 1
 group by country_id, biomarker_name, aggregation_fields, micronutrient_id, survey_id, survey_name, survey_year, survey_description, survey_metadata_id;
 

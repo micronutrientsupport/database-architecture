@@ -168,6 +168,7 @@ select
 	, notes
 	, source
 from intake_threshold 
+
 where nutrient = (select focus_micronutrient from intervention i where id = _new_id);
 
 -- Duplicate relevant reference expected losses from expected_losses

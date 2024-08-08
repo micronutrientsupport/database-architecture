@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.6.0...v1.6.1) (2024-08-08)
+
+
+### Bug Fixes
+
+* biomarker data  ([#438](https://github.com/micronutrientsupport/database-architecture/issues/438)) ([21109eb](https://github.com/micronutrientsupport/database-architecture/commit/21109eb107f5e1b141a2ced772a386c36ca2e3ee))
+* biomarker threshold units and intervention status ([#436](https://github.com/micronutrientsupport/database-architecture/issues/436)) ([3debe9b](https://github.com/micronutrientsupport/database-architecture/commit/3debe9bddfd59e69954ca7167b514748afb962e5))
+
 ## [1.6.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.5.2...v1.6.0) (2024-07-25)
 
 

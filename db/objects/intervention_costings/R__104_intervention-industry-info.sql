@@ -32,6 +32,17 @@ select
 from
     intervention_data_json_aggregate
 where
-    section = 'Industry information';
+    section = 'Industry information'
+
+UNION 
+
+select
+    intervention_id,
+    data -> 'All' -> 'data' as industry_information
+from
+    intervention_data_json_aggregate
+where
+    section = 'Industry-related capital costs'
+;
 
 comment ON view intervention_industry_information IS 'Extract industry information rows for a given intervention';

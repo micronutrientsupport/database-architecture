@@ -43,6 +43,7 @@ aggregated_data AS (
     WHERE mn_consumed > 0
 )
 SELECT
+    fct_source_id,
     ROUND((mn_consumed / total_mn_consumed) * 100, 1) AS percentage_mn_consumed,
     mn_name,
     month_consumed,
@@ -51,6 +52,7 @@ SELECT
     mn_consumed,
     total_mn_consumed
 FROM aggregated_data
+GROUP BY fct_source_id
 ORDER BY
     mn_name,
     month_consumed,

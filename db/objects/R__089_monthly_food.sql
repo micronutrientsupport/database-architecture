@@ -52,7 +52,7 @@ SELECT
     mn_consumed,
     total_mn_consumed
 FROM aggregated_data
-GROUP BY fct_source_id
+GROUP BY fct_source_id, mn_consumed, total_mn_consumed, mn_name, month_consumed, food_group_id, food_group_name
 ORDER BY
     mn_name,
     month_consumed,

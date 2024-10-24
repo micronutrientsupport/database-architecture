@@ -85,6 +85,7 @@ icf.intervention_id
 
 from intervention_cell_formula icf 
 join intervention_data id on id.intervention_id = icf.intervention_id AND id.row_index = icf.row_index
+and id.intervention_status = 101 and id.intervention_nature = 1
 where id.is_user_editable = false OR id.is_calculated = true;
 
 

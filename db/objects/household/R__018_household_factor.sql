@@ -10,7 +10,7 @@ WITH factors AS (
     FROM
         household_member hm
         JOIN household_normalisation_factor hnf 
-        ON hm.age_in_months = hnf.age_in_months
+        ON (round(hm.age_in_months/12)*12) = hnf.age_in_months
         AND hm.sex = hnf.sex
     GROUP BY
         hm.household_id,

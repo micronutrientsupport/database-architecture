@@ -46,6 +46,6 @@ SELECT
         , (hi.Phytate_in_mg/hn.afe_factor           ) AS  Phytate_in_mg
 
 
-FROM household_intake hi JOIN household_normalisation hn ON hi.household_id=hn.household_id;
+FROM household_intake hi JOIN household_normalisation hn ON hi.household_id=hn.household_id and hn.afe_factor > 0;
 
 COMMENT ON VIEW household_intake_afe_normalised IS 'View of amount of micronutrients consumed in total by individual households normalised to Adult Female Equivalent (AFE)';

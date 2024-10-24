@@ -25,6 +25,7 @@ select
 		condition_upper_age_in_months
 	)) as condition,
 	threshold_type,
+	unit,
 	source,
 	matrix,
 	lower_threshold,

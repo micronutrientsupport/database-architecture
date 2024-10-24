@@ -7,7 +7,7 @@ SELECT DISTINCT ON (country_id, food_vehicle_id)
 FROM (
     SELECT
          i.id,
-    concat(i.intervention_name,' (',i.template_date,')') as name,
+    i.intervention_name as name,
     i.app_user_id,
     coalesce(i.description, 'No description available') as description,
     i.country_id,

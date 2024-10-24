@@ -1,9 +1,17 @@
 CREATE OR REPLACE view intervention_recurring_costs AS 
+
 with totalfields as (
     select
         '{
 		"Recurring premix costs": {
 			"Premix ": "total_premix_cost"
+		},
+		"Government-related capital costs": {
+			"Monitoring equipment": "annualized_equip2_cost_gov"
+		},
+		"Industry-related capital costs": {
+			"Fortification equipment": "annualized_fort_equip3_cost",
+			"Quality assurance/quality control (QA/QC) equipment": "annualized_quality_equip2_cost"
 		},
 		"Government-related recurring monitoring and management costs ": {
 			"Mill inspections and monitoring": "total_factory_inspections_cost",
@@ -32,6 +40,159 @@ with totalfields as (
 			"Impact evaluation/nutrition surveillance": "total_impact_evalutaion_cost"
 		}
 }' :: json as mapping
+),
+default_susu_costs as 
+	(select
+	0 as row_index
+	, id as intervention_id
+	, 'susu' as cost_type
+	, 'Blank' as factor_text
+	, 0 as year_0
+	, 0 as year_1
+	, 0 as year_2
+	, 0 as year_3
+	, 0 as year_4
+	, 0 as year_5
+	, 0 as year_6
+	, 0 as year_7
+	, 0 as year_8
+	, 0 as year_9
+	from intervention i 
+	where i.is_premade = false)
+, default_recurring_costs as 
+	(select
+	0 as row_index
+	, id as intervention_id
+	, 'recurring' as cost_type
+	, 'Blank' as factor_text
+	, 0 as year_0
+	, 0 as year_1
+	, 0 as year_2
+	, 0 as year_3
+	, 0 as year_4
+	, 0 as year_5
+	, 0 as year_6
+	, 0 as year_7
+	, 0 as year_8
+	, 0 as year_9
+	from intervention i 
+	where i.is_premade = false),
+intervention_extra_costs_totalled as (
+select * from intervention_extra_costs iec 
+union (select 
+	99999 as row_index,
+	intervention_id,
+	cost_type,
+	'Total' as factor_text,
+	sum(year_0) as year_0,
+	sum(year_1) as year_1,
+	sum(year_2) as year_2,
+	sum(year_3) as year_3,
+	sum(year_4) as year_4,
+	sum(year_5) as year_5,
+	sum(year_6) as year_6,
+	sum(year_7) as year_7,
+	sum(year_8) as year_8,
+	sum(year_9) as year_9
+	from (
+		select * from intervention_extra_costs iec2
+		union select * from default_susu_costs
+		union select * from default_recurring_costs
+	) as iec
+	
+	group by intervention_id, cost_type)
+),
+add_extra_costs as (
+(select intervention_id, header1, header2, max_row, data from intervention_values_json)
+union all 
+select 
+	iec.intervention_id
+	, 'User added recurring costs' as header1
+	, 'Additional Costs' as header2
+	, max(iec.id + 9999) as max_row
+	, json_agg(
+        json_build_object(
+            'rowIndex',
+            concat('uecr_',iec.id),
+            'labelText',
+            iec.factor_text,
+            'rowName',
+            iec.factor_text,
+            'rowUnits',
+            'US dollars',
+            'isEditable',
+            (CASE WHEN (iec.factor_text = 'Total') THEN false ELSE true END),
+            'isCalculated',
+            false,
+            'year0',
+            iec.year_0,
+            'year0Default',
+            iec.year_0,
+            'year0Edited',
+            true,
+            'year1',
+            iec.year_1,
+            'year1Default',
+            iec.year_1,
+            'year1Edited',
+            true,
+            'year2',
+            iec.year_2,
+            'year2Default',
+            iec.year_2,
+            'year2Edited',
+            true,
+            'year3',
+            iec.year_3,
+            'year3Default',
+            iec.year_3,
+            'year3Edited',
+            true,
+            'year4',
+            iec.year_4,
+            'year4Default',
+            iec.year_4,
+            'year4Edited',
+            true,
+            'year5',
+            iec.year_5,
+            'year5Default',
+            iec.year_5,
+            'year5Edited',
+            true,
+            'year6',
+            iec.year_6,
+            'year6Default',
+            iec.year_6,
+            'year6Edited',
+            true,
+            'year7',
+            iec.year_7,
+            'year7Default',
+            iec.year_7,
+            'year7Edited',
+            true,
+            'year8',
+            iec.year_8,
+            'year8Default',
+            iec.year_8,
+            'year8Edited',
+            true,
+            'year9',
+            iec.year_9,
+            'year9Default',
+            iec.year_9,
+            'year9Edited',
+            true
+            )::jsonb
+            ORDER BY
+            iec.id ASC
+    ) AS d
+from intervention_extra_costs_totalled iec 
+where iec.cost_type = 'recurring'
+GROUP by
+    iec.intervention_id
+
 ),
 gov_su_agg as (
     select
@@ -216,7 +377,7 @@ gov_su_agg as (
             )
         ) as d
     from
-        intervention_values_json g
+        add_extra_costs g
     group by
         header1,
         header2,
@@ -233,10 +394,13 @@ su_agg2 as (
     where
         header1 in (
             'Recurring premix costs',
+            'Government-related capital costs',
             'Government-related recurring monitoring and management costs ',
+            'Industry-related capital costs',
             'Industry-related recurring fortification costs',
             'Total industry-related recurring fortification costs',
-            'Impact evaluation costs'
+            'Impact evaluation costs',
+            'User added recurring costs'
         )
     group by
         intervention_id,

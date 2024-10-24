@@ -8,6 +8,6 @@ select
 	micronutrient_supply as dietary_supply,
 	is_deficient,
 	afe_ear as deficient_value
-from household_intake_afe_deficiency_pivot hiadp 
+from household_intake_afe_deficiency_pivot_tbl hiadp 
 --where aggregation_area_type = 'country'
 order by afe_ear asc;

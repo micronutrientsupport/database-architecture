@@ -33,7 +33,7 @@ JOIN (
         ) AS deficient_percentage,
         hidp.afe_ear as deficient_value
     FROM
-        household_intake_afe_deficiency_pivot hidp
+        household_intake_afe_deficiency_pivot_tbl hidp
         JOIN micronutrient m ON hidp.micronutrient_id = m.id
         JOIN aggregation_area s ON s.id = hidp.aggregation_area_id
     WHERE (s.type='admin' AND s.admin_level=1) or s.type='country'

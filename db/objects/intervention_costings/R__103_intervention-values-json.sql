@@ -284,7 +284,8 @@ FROM
     left join grouped_rows gr 
     	on intervention_data.intervention_id = gr.intervention_id and intervention_data.header1 = gr.header1 and intervention_data.header2 = gr.header2
 WHERE
-    intervention_data.header1 IS NOT null
+    intervention.is_premade = false
+    and intervention_data.header1 IS NOT null
     and not (intervention_data.row_name = ANY (omitfields.mapping))
 GROUP BY
     intervention_data.intervention_id,

@@ -29,6 +29,42 @@ with totalfields as (
 		}
 }' :: json as mapping
 ),
+default_susu_costs as 
+	(select
+	0 as row_index
+	, id as intervention_id
+	, 'susu' as cost_type
+	, 'Blank' as factor_text
+	, 0 as year_0
+	, 0 as year_1
+	, 0 as year_2
+	, 0 as year_3
+	, 0 as year_4
+	, 0 as year_5
+	, 0 as year_6
+	, 0 as year_7
+	, 0 as year_8
+	, 0 as year_9
+	from intervention i 
+	where i.is_premade = false)
+, default_recurring_costs as 
+	(select
+	0 as row_index
+	, id as intervention_id
+	, 'recurring' as cost_type
+	, 'Blank' as factor_text
+	, 0 as year_0
+	, 0 as year_1
+	, 0 as year_2
+	, 0 as year_3
+	, 0 as year_4
+	, 0 as year_5
+	, 0 as year_6
+	, 0 as year_7
+	, 0 as year_8
+	, 0 as year_9
+	from intervention i 
+	where i.is_premade = false),
 intervention_extra_costs_totalled as (
 select * from intervention_extra_costs iec 
 union (select 
@@ -46,7 +82,12 @@ union (select
 	sum(year_7) as year_7,
 	sum(year_8) as year_8,
 	sum(year_9) as year_9
-	from intervention_extra_costs iec 
+	from (
+		select * from intervention_extra_costs iec2
+		union select * from default_susu_costs
+		union select * from default_recurring_costs
+	) as iec
+	
 	group by intervention_id, cost_type)
 ),
 add_extra_costs as (

@@ -1,5 +1,4 @@
- DROP MATERIALIZED VIEW IF EXISTS monthly_food;
- CREATE MATERIALIZED VIEW monthly_food AS
+
 
 WITH base_data AS (
     SELECT
@@ -44,6 +43,7 @@ aggregated_data AS (
 )
 SELECT
     fct_source_id,
+    survey_id,
     ROUND((mn_consumed / total_mn_consumed) * 100, 1) AS percentage_mn_consumed,
     mn_name,
     month_consumed,
@@ -52,7 +52,7 @@ SELECT
     mn_consumed,
     total_mn_consumed
 FROM aggregated_data
-GROUP BY fct_source_id, mn_consumed, total_mn_consumed, mn_name, month_consumed, food_group_id, food_group_name
+GROUP BY fct_source_id, survey_id, mn_consumed, total_mn_consumed, mn_name, month_consumed, food_group_id, food_group_name
 ORDER BY
     mn_name,
     month_consumed,

@@ -1,6 +1,8 @@
 create or replace view intervention_list as
 
 
+
+
 with latest_templates as (
 SELECT DISTINCT ON (country_id, food_vehicle_id)
     *
@@ -36,12 +38,14 @@ FROM (
     i.parent_intervention,
     i.template_intervention,
     i.template_date,
-    i.last_edited 
+    i.last_edited,
+    cds.consumption_data_id as hces_survey_id
        -- COUNT(*) OVER (PARTITION BY country_id, food_vehicle_id, fortification_type_id)
 from
     intervention i
     join fortification_type ft on ft.id = i.fortification_type_id
     join food_vehicle fv on fv.id = i.food_vehicle_id
+    left join consumption_data_sources cds on cds.country_id = i.country_id and cds.consumption_data_type = 'household'
     WHERE is_premade = TRUE
 ) s
 ORDER BY country_id ASC, food_vehicle_id asc, template_date desc
@@ -53,7 +57,7 @@ union
 
 select
     i.id,
-    concat(i.intervention_name,' (',i.template_date,')') as name,
+    i.intervention_name as name,
     i.app_user_id,
     coalesce(i.description, 'No description available') as description,
     i.country_id,
@@ -82,11 +86,13 @@ select
     i.parent_intervention,
     i.template_intervention,
     i.template_date,
-    i.last_edited 
+    i.last_edited,
+    cds.consumption_data_id as hces_survey_id
 from
     intervention i
     join fortification_type ft on ft.id = i.fortification_type_id
     join food_vehicle fv on fv.id = i.food_vehicle_id
+    left join consumption_data_sources cds on cds.country_id = i.country_id and cds.consumption_data_type = 'household'
     where i.is_premade = false;
 
 comment on view intervention_list is 'View of interventions and summary attributes';

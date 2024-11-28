@@ -26,7 +26,10 @@ with totalfields as (
 			"Planning": "total_planning_cost",
 			"Social marketing and advocacy": "total_social_marketing_startup_cost",
 			"Training ": "total_training_cost_gov"
-		}
+		},
+        "User added start-up/scale-up costs": {
+            "Additional Costs": "Total"
+        }
 }' :: json as mapping
 ),
 default_susu_costs as 
@@ -65,9 +68,8 @@ default_susu_costs as
 	, 0 as year_9
 	from intervention i 
 	where i.is_premade = false),
-intervention_extra_costs_totalled as (
-select * from intervention_extra_costs iec 
-union (select 
+iec_totals as (
+    select 
 	99999 as row_index,
 	intervention_id,
 	cost_type,
@@ -88,9 +90,20 @@ union (select
 		union select * from default_recurring_costs
 	) as iec
 	
-	group by intervention_id, cost_type)
+	group by intervention_id, cost_type
+),
+intervention_extra_costs_totalled as (
+select * from intervention_extra_costs iec 
+union select * from iec_totals
 ),
 add_extra_costs as (
+    select intervention_id, header1, header2, factor_text, row_name, year_0, year_1, year_2, year_3, year_4, year_5, year_6, year_7, year_8, year_9 from intervention_data id
+union 
+	select intervention_id,'User added start-up/scale-up costs' as header1, 'Additional Costs' as header2, factor_text, factor_text as row_name, year_0, year_1, year_2, year_3, year_4, year_5, year_6, year_7, year_8, year_9 from iec_totals iec
+	where cost_type = 'susu'
+order by intervention_id desc
+),
+add_extra_costs_json as (
 (select intervention_id, header1, header2, max_row, data  from intervention_values_json_subset)
 union all 
 select 
@@ -109,7 +122,7 @@ select
             'rowUnits',
             'US dollars',
             'isEditable',
-            true,
+            (CASE WHEN (iec.factor_text = 'Total') THEN false ELSE true END),
             'isCalculated',
             false,
             'year0',
@@ -150,29 +163,9 @@ gov_su_agg as (
                 select
                     year_0
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
-                    and header1 = g.header1
-                    and header2 = g.header2
-                    and row_name =(
-                        select
-                            mapping ->(g.header1) ->>(g.header2)
-                        from
-                            totalfields
-                    )
-            ),
-            'year0TotalFormula',
-            (
-                select
-                    year_0_formula
-                from
-                    intervention_data id2
-                    join intervention on id2.intervention_id = intervention.id
-                    left join intervention_cell_formula_deps icf on icf.intervention_id = i.template_intervention
-                      and icf.row_index = id2.row_index 
-                where
-                    id2.intervention_id = g.intervention_id
                     and header1 = g.header1
                     and header2 = g.header2
                     and row_name =(
@@ -187,29 +180,9 @@ gov_su_agg as (
                 select
                     year_1
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
-                    and header1 = g.header1
-                    and header2 = g.header2
-                    and row_name =(
-                        select
-                            mapping ->(g.header1) ->>(g.header2)
-                        from
-                            totalfields
-                    )
-            ),
-            'year1TotalFormula',
-            (
-                select
-                    year_0_formula
-                from
-                    intervention_data id2
-                    join intervention on id2.intervention_id = intervention.id
-                    left join intervention_cell_formula_deps icf on icf.intervention_id = i.template_intervention
-                      and icf.row_index = id2.row_index 
-                where
-                    id2.intervention_id = g.intervention_id
                     and header1 = g.header1
                     and header2 = g.header2
                     and row_name =(
@@ -221,13 +194,12 @@ gov_su_agg as (
             )
         ) as d
     from
-        add_extra_costs g
+        add_extra_costs_json g
         JOIN intervention i ON g.intervention_id = i.id
     group by
         header1,
         header2,
-        intervention_id,
-        template_intervention
+        intervention_id
 ),
 su_agg2 as (
     select

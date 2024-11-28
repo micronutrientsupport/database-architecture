@@ -38,7 +38,10 @@ with totalfields as (
 		},
 		"Impact evaluation costs": {
 			"Impact evaluation/nutrition surveillance": "total_impact_evalutaion_cost"
-		}
+		},
+        "User added recurring costs": {
+            "Additional Costs": "Total"
+        }
 }' :: json as mapping
 ),
 default_susu_costs as 
@@ -77,9 +80,8 @@ default_susu_costs as
 	, 0 as year_9
 	from intervention i 
 	where i.is_premade = false),
-intervention_extra_costs_totalled as (
-select * from intervention_extra_costs iec 
-union (select 
+iec_totals as (
+    select 
 	99999 as row_index,
 	intervention_id,
 	cost_type,
@@ -100,9 +102,20 @@ union (select
 		union select * from default_recurring_costs
 	) as iec
 	
-	group by intervention_id, cost_type)
+	group by intervention_id, cost_type
+),
+intervention_extra_costs_totalled as (
+select * from intervention_extra_costs iec 
+union select * from iec_totals
 ),
 add_extra_costs as (
+    select intervention_id, header1, header2, factor_text, row_name, year_0, year_1, year_2, year_3, year_4, year_5, year_6, year_7, year_8, year_9 from intervention_data id
+union 
+	select intervention_id,'User added recurring costs' as header1, 'Additional Costs' as header2, factor_text, factor_text as row_name, year_0, year_1, year_2, year_3, year_4, year_5, year_6, year_7, year_8, year_9 from iec_totals iec
+	where cost_type = 'recurring'
+order by intervention_id desc
+),
+add_extra_costs_json as (
 (select intervention_id, header1, header2, max_row, data from intervention_values_json)
 union all 
 select 
@@ -210,7 +223,7 @@ gov_su_agg as (
                 select
                     year_0
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -227,7 +240,7 @@ gov_su_agg as (
                 select
                     year_1
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -244,7 +257,7 @@ gov_su_agg as (
                 select
                     year_2
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -261,7 +274,7 @@ gov_su_agg as (
                 select
                     year_3
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -278,7 +291,7 @@ gov_su_agg as (
                 select
                     year_4
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -295,7 +308,7 @@ gov_su_agg as (
                 select
                     year_5
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -312,7 +325,7 @@ gov_su_agg as (
                 select
                     year_6
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -329,7 +342,7 @@ gov_su_agg as (
                 select
                     year_7
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -346,7 +359,7 @@ gov_su_agg as (
                 select
                     year_8
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -363,7 +376,7 @@ gov_su_agg as (
                 select
                     year_9
                 from
-                    intervention_data id2
+                    add_extra_costs id2
                 where
                     intervention_id = g.intervention_id
                     and header1 = g.header1
@@ -377,7 +390,7 @@ gov_su_agg as (
             )
         ) as d
     from
-        add_extra_costs g
+        add_extra_costs_json g
     group by
         header1,
         header2,

@@ -3,6 +3,9 @@ CREATE TABLE fortifiable_portions_food_group (
     , food_vehicle_id      integer references food_vehicle (id)
     , food_group_id        integer references food_group (id)
     , fortifiable_portion  integer 
+    , lsff                 boolean
+    , bio                  boolean
+    , fert                 boolean
     CHECK (fortifiable_portion BETWEEN 1 AND 100)
 );
 
@@ -18,6 +21,9 @@ CREATE TABLE fortifiable_portions_food_genus (
     , food_vehicle_id      integer references food_vehicle (id)
     , food_genus_id        text references food_genus (id)
     , fortifiable_portion  integer 
+    , lsff                 boolean
+    , bio                  boolean
+    , fert                 boolean
     CHECK (fortifiable_portion BETWEEN 0 AND 100)
 );
 
@@ -36,6 +42,9 @@ COMMENT on column fortifiable_portions_food_genus.fortifiable_portion IS 'The pr
     , fg.id as food_genus_id
     , fg.food_name as food_genus_name
     , fg.food_group_id 
+    , fpgrp.lsff
+    , fpgrp.bio
+    , fpgrp.fert
 from fortifiable_portions_food_group fpgrp 
     join food_genus fg on fg.food_group_id = fpgrp.food_group_id
     join food_vehicle fv on fv.id = fpgrp.food_vehicle_id
@@ -48,6 +57,9 @@ from fortifiable_portions_food_group fpgrp
     , fg.id as food_genus_id
     , fg.food_name as food_genus_name
     , fg.food_group_id 
+    , fpgen.lsff
+    , fpgen.bio
+    , fpgen.fert
 from fortifiable_portions_food_genus fpgen 
     join food_genus fg on fg.id = fpgen.food_genus_id
     join food_vehicle fv on fv.id = fpgen.food_vehicle_id

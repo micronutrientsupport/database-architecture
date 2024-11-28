@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.2](https://github.com/micronutrientsupport/database-architecture/compare/v1.6.1...v1.6.2) (2024-11-28)
+
+
+### Bug Fixes
+
+* Nov bug fixes ([#443](https://github.com/micronutrientsupport/database-architecture/issues/443)) ([56f7a7a](https://github.com/micronutrientsupport/database-architecture/commit/56f7a7a278d1e84fbeb47db143566239bdac5aeb))
+
 ## [1.6.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.6.0...v1.6.1) (2024-08-08)
 
 

@@ -57,7 +57,7 @@ union
 
 select
     i.id,
-    i.intervention_name as name,
+    concat(i.intervention_name,' (',i.template_date,')') as name,
     i.app_user_id,
     coalesce(i.description, 'No description available') as description,
     i.country_id,

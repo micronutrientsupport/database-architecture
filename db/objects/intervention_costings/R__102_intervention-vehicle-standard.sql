@@ -1,4 +1,5 @@
 CREATE OR REPLACE view intervention_vehicle_standard AS 
+
 with food_vehicle as (
    select
         intervention_data.intervention_id,
@@ -42,6 +43,8 @@ with food_vehicle as (
 	    left join intervention_data intervention_parent 
 	    	ON intervention_parent.row_index = intervention_data.row_index 
 	    	and intervention_parent.intervention_id = intervention.template_intervention
+	    	and intervention_parent.intervention_status = intervention.intervention_status
+	    	and intervention_parent.intervention_nature = intervention.intervention_nature
 	where
         intervention_data.header1 = 'Program assumptions'
     order by

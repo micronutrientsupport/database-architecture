@@ -1,4 +1,7 @@
 
+DROP MATERIALIZED VIEW IF EXISTS monthly_food;
+CREATE MATERIALIZED VIEW monthly_food AS
+
 
 WITH base_data AS (
     SELECT

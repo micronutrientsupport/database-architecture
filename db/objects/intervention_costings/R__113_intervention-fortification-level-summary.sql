@@ -57,6 +57,12 @@ order by intervention_id, "Year"
 
 select 
 	b.*
+	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'Ca' ) 
+		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "Ca"
+	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'I' ) 
+		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "I"
+	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'Fe' ) 
+		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "Fe"
 	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'A' ) 
 		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "A"
 	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'B12' ) 
@@ -67,8 +73,10 @@ select
 		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "B3"
 	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'B9' ) 
 		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "B9"
-	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'Fe' ) 
-		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "Fe"
+	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'D' ) 
+		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "D"
+	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'E' ) 
+		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "E"
 	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'Zn' ) 
 		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "Zn"
 from baseline b;

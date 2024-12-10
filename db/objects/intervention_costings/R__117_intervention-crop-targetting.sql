@@ -7,11 +7,12 @@ select
 		'region', region
 		, 'is_region_targeted', is_region_targeted
 		, 'zones_targeted', zones_targeted
-		, 'culitvation_area_ha', cultivation_area_ha
+		, 'cultivation_area_ha', cultivation_area_ha
 		, 'targeted_area_ha', targeted_area_ha
-		, 'regiomal_share_pc', regional_share_pc
+		, 'regional_share_pc', regional_share_pc
 	) as targetting
 	from intervention_targetting it 
+    order by region
 )
 
 select intervention_id, json_agg(targetting) as crop_targetting

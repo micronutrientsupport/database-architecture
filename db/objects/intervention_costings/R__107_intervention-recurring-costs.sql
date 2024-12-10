@@ -39,6 +39,15 @@ with totalfields as (
 		"Impact evaluation costs": {
 			"Impact evaluation/nutrition surveillance": "total_impact_evalutaion_cost"
 		},
+        "Recurring costs ": {
+            "Seed maintenance": "total_maintenance_breeding_cost",
+            "Seed production and dissemination": "total_seed_production_distribution_cost",
+            "Ag extension ": "ag_extension_cost",
+            "Market and value chain promotion and development": "total_market_promotion_recurring_cost",
+            "Social marketing/advocacy and nutrition education": "total_social_marketing_recurring_cost",
+            "Monitoring": "total_monitoring_cost",
+            "Management, overhead, administration ": "total_management_cost"
+        },
         "User added recurring costs": {
             "Additional Costs": "Total"
         }
@@ -413,6 +422,7 @@ su_agg2 as (
             'Industry-related recurring fortification costs',
             'Total industry-related recurring fortification costs',
             'Impact evaluation costs',
+            'Recurring costs ',
             'User added recurring costs'
         )
     group by

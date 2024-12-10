@@ -171,6 +171,27 @@ from intake_threshold
 
 where nutrient = (select focus_micronutrient from intervention i where id = _new_id);
 
+-- Duplicate relevant reference taregting from fortification_targeting
+-- into intervention specific threshold record in intervention_targeting
+insert into intervention_targetting (
+	intervention_id
+	, region
+	, is_region_targeted
+	, zones_targeted
+	, cultivation_area_ha
+	, targeted_area_ha
+	, regional_share_pc
+)
+select i.id as intervention_id
+	, ft.region
+	, ft.is_region_targeted
+	, ft.zones_targeted
+	, ft.cultivation_area_ha
+	, ft.targeted_area_ha
+	, ft.regional_share_pc 
+from intervention i join fortification_targeting ft on ft.food_vehicle_id = i.food_vehicle_id
+where i.fortification_type_id = 'BF' and i.id = _new_id;
+
 -- Duplicate relevant reference expected losses from expected_losses
 -- into intervention specific threshold record in intervention_thresholds
 

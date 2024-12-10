@@ -91,8 +91,8 @@ select
 )
 , summary_rows as (
 	select intervention_id, max_row, json_array_elements(data) as r from intervention_values_json ivj 
-	where header1 = 'Undiscounted costs, US dollars (USD)'
-	and header2 = 'Summaries'
+	where (header1 = 'Undiscounted costs, US dollars (USD)'
+	and header2 = 'Summaries') or (header1 = 'Undiscounted costs')
 ),
 sum_comb as (
 	select sr.*, s.average_annual_cost_per_hh_consuming, s.average_annual_cost_per_person_consuming from summary_rows sr join summary s on s.intervention_id = sr.intervention_id
@@ -222,7 +222,8 @@ gov_su_agg as (
         gov_su_agg
     where
         header1 in (
-            'Undiscounted costs, US dollars (USD)'
+            'Undiscounted costs, US dollars (USD)',
+            'Undiscounted costs'
         )
     group by
         intervention_id,

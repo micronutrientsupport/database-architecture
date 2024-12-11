@@ -109,7 +109,7 @@ BEGIN
 	FROM
 		micronutrient
 	WHERE
-		is_user_visible = TRUE;
+		is_diet = TRUE;
 
 
 	SELECT
@@ -117,7 +117,7 @@ BEGIN
 	FROM
 		micronutrient
 	WHERE
-		is_user_visible = TRUE;
+		is_diet = TRUE;
 
 
 	FOR fct_list_rec IN

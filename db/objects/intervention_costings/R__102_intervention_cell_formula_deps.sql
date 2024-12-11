@@ -54,6 +54,18 @@ RETURNS NULL ON NULL INPUT;
 
 DROP MATERIALIZED VIEW IF EXISTS intervention_cell_formula_deps;
 create materialized VIEW intervention_cell_formula_deps as
+
+with id_flattened as (
+select 
+intervention_id,
+row_index,
+bool_and(is_user_editable) as is_user_editable,
+bool_and(is_calculated) as is_calculated
+from intervention_data
+join intervention on intervention_data.intervention_id = intervention.id
+where intervention.is_premade = true
+group by intervention_id, row_index)
+
 select 
 icf.intervention_id
 , icf.row_index
@@ -84,9 +96,11 @@ icf.intervention_id
 
 
 from intervention_cell_formula icf 
-join intervention_data id on id.intervention_id = icf.intervention_id AND id.row_index = icf.row_index
-and id.intervention_status = 101 and id.intervention_nature = 1
-where id.is_user_editable = false OR id.is_calculated = true;
+left join id_flattened 
+	on icf.intervention_id = id_flattened.intervention_id
+	AND icf.row_index = id_flattened.row_index
+--and id.intervention_status = i.intervention_status and id.intervention_nature = i.intervention_nature 
+where id_flattened.is_user_editable = false OR id_flattened.is_calculated = true;
 
 
 create or replace view intervention_formulae as 

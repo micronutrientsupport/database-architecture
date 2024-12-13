@@ -42,7 +42,7 @@ select
         adoption_rate_hybrid,
         'adoptionRateRecycled',
         adoption_rate_recycled
-	) as farmer_adoption_rate
+	) as farmer_adoption_rates
 from
     adoption_local al
     join adoption_hybrid ah on al.intervention_id = ah.intervention_id

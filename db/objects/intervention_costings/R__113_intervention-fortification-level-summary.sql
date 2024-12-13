@@ -53,8 +53,8 @@ from
 		join intervention on intervention.id = fortifiable.intervention_id
 		join food_vehicle on food_vehicle.id = intervention.food_vehicle_id 
 order by intervention_id, "Year"
-)
-
+),
+lsff_levels as (
 select 
 	b.*
 	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'Ca' ) 
@@ -79,4 +79,62 @@ select
 		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "E"
 	, (select standard from standards s where s.intervention_id=b.intervention_id and s.micronutrient_id = 'Zn' ) 
 		* b.perc_fortifiable * b.perc_fortified * b.	perc_average_fortification_level as "Zn"
-from baseline b;
+from baseline b
+),
+---
+---
+---
+bf_state as (
+	select 
+		intervention_id
+		, unnest(array['2021','2022','2023','2024','2025','2026','2027','2028','2029','2030']) AS "Year"
+		, i.food_vehicle_id as fortification_vehicle_id
+		, i.focus_micronutrient
+		, fv.vehicle_name as fortification_vehicle_name
+		, unnest(array[year_0
+		, year_1
+		, year_2
+		, year_3
+		, year_4
+		, year_5
+		, year_6
+		, year_7
+		, year_8
+		, year_9]) as perc_replaced_with_bf
+		, bmc.bf_add_mn_content 
+	from intervention_data id 
+	join intervention i on i.id = id.intervention_id and i.intervention_nature = id.intervention_nature and i.intervention_status = id.intervention_status 
+	join food_vehicle fv on fv.id = i.food_vehicle_id 
+	join biofortification_mn_content bmc on 
+		bmc.micronutrient_id = i.focus_micronutrient 
+		and bmc.food_vehicle_id = i.food_vehicle_id 
+	where fortification_type_id = 'BF'
+	and id.row_name = 'farmer_adoption_rate_total'
+),
+bf_levels as (
+	select
+		intervention_id
+		, "Year"
+		, fortification_vehicle_id
+		, fortification_vehicle_name
+		, 0 as perc_fortifiable
+		, 0 as perc_fortified
+		, 0 as perc_average_fortification_level
+		, case when focus_micronutrient='Ca' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "Ca"
+		, case when focus_micronutrient='I' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "I"
+		, case when focus_micronutrient='Fe' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "Fe"
+		, case when focus_micronutrient='A' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "A"
+		, case when focus_micronutrient='B12' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "B12"
+		, case when focus_micronutrient='B2' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "B2"
+		, case when focus_micronutrient='B3' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "B3"
+		, case when focus_micronutrient='B9' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "B9"
+		, case when focus_micronutrient='D' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "D"
+		, case when focus_micronutrient='E' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "E"
+		, case when focus_micronutrient='Zn' then perc_replaced_with_bf * bf_add_mn_content else 0 end as "Zn"
+		from bf_state
+)
+	
+select * from lsff_levels 
+union
+select * from bf_levels
+order by intervention_id, "Year";

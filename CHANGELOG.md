@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.7.0](https://github.com/micronutrientsupport/database-architecture/compare/v1.6.2...v1.7.0) (2024-12-11)
+
+
+### Features
+
+* BF functionality ([#447](https://github.com/micronutrientsupport/database-architecture/issues/447)) ([5ba79f1](https://github.com/micronutrientsupport/database-architecture/commit/5ba79f1c4b92a79bedc0330ce11b555b336421e8))
+
+
+### Bug Fixes
+
+* tweak ([e659021](https://github.com/micronutrientsupport/database-architecture/commit/e6590218132d971d044fa643d27ef1039fff81ab))
+
+## [1.6.2](https://github.com/micronutrientsupport/database-architecture/compare/v1.6.1...v1.6.2) (2024-11-28)
+
+
+### Bug Fixes
+
+* Nov bug fixes ([#443](https://github.com/micronutrientsupport/database-architecture/issues/443)) ([56f7a7a](https://github.com/micronutrientsupport/database-architecture/commit/56f7a7a278d1e84fbeb47db143566239bdac5aeb))
+
 ## [1.6.1](https://github.com/micronutrientsupport/database-architecture/compare/v1.6.0...v1.6.1) (2024-08-08)
 
 

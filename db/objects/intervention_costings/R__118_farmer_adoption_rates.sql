@@ -49,6 +49,7 @@ from
 
 
 
+
 create or replace view intervention_farmer_adoption_rates_af as
 with baseline_assumptions as 
 (

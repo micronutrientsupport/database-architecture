@@ -1,7 +1,5 @@
 create or replace view intervention_templates as
 
-
-
 with lsff_mns as (
 	select 
 		intervention_id

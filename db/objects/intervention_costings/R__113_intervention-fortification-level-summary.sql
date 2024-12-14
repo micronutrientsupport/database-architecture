@@ -135,9 +135,13 @@ af_state as (
 	join agrofortification_mn_content amc on 
 		amc.micronutrient_id = i.focus_micronutrient 
 		and amc.food_vehicle_id = i.food_vehicle_id 
-		and amc.application_type = 'foliar'
+		and amc.application_type = (select type from (select 
+case 
+	when(select year_0+year_1+year_2+year_3+year_4+year_5+year_6+year_7+year_8+year_9 from intervention_data id where row_name = 'farmer_adoption_rate_among_adopters_granular' and intervention_id=18)<0 then 'granular'
+	else 'foliar'
+end as type))
 	where fortification_type_id = 'AF'
-	and id.row_name = 'farmer_adoption_rate_granular'
+	and id.row_name = 'farmer_agro_biofort_adoption_rate_overall'
 ),
 bf_levels as (
 	select

@@ -56,6 +56,17 @@ with totalfields as (
 			"Labor for foliar micronutrient fertilizer application": "total_labor_mn_labor_cost_foliar",
 			"Equipment and other miscellaneous supplies for foliar micronutrient fertilizer application": "total_foliar_equipment_cost"
 		},
+        "Recurring costs for granular application": {
+            "Granular micronutrient fertilizer": "total_mn_fertilizer_cost_granular",
+            "Distribution/transportation of granular micronutrient fertilizer": "total_mn_distribution_cost_granular",
+            "Labor for granular micronutrient fertilizer application": "total_labor_mn_labor_cost_granular"
+        },
+        "Other recurring costs": {
+            "Ag extension ": "ag_extension_cost",
+            "Social marketing/advocacy and nutrition education": "total_social_marketing_recurring_cost",
+            "Monitoring": "total_monitoring_cost",
+            "Management, overhead, administration ": "total_agro_biofort_management_cost"
+        },
         "User added recurring costs": {
             "Additional Costs": "Total"
         }
@@ -432,6 +443,8 @@ su_agg2 as (
             'Impact evaluation costs',
             'Recurring costs ',
             'Recurring costs for foliar application',
+            'Recurring costs for granular application',
+            'Other recurring costs',
             'User added recurring costs'
         )
     group by

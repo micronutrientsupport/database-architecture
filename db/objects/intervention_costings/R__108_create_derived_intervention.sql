@@ -176,6 +176,7 @@ where nutrient = (select focus_micronutrient from intervention i where id = _new
 with ft_normalised as (
 	select 
 		food_vehicle_id
+		,lower(targeting_type) as targeting_type
 		,region
 		,is_region_targeted
 		,zones_targeted
@@ -205,9 +206,10 @@ select i.id as intervention_id
 	, ft.targeted_area_ha
 	, ft.regional_share_pc
 from intervention i 
-join ft_normalised ft on ft.food_vehicle_id = i.food_vehicle_id and ft.country_id = i.country_id 
+join fortification_type f on f.id = i.fortification_type_id
+join ft_normalised ft on ft.food_vehicle_id = i.food_vehicle_id and ft.country_id = i.country_id and ft.targeting_type = lower(f.name) 
 where 
-	i.fortification_type_id = 'BF' 
+	(i.fortification_type_id = 'BF' or i.fortification_type_id = 'AF')
 	and i.id = _new_id;
 
 

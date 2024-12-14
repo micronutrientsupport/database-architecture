@@ -4,7 +4,7 @@ create or replace view intervention_list as
 
 
 with latest_templates as (
-SELECT DISTINCT ON (country_id, food_vehicle_id)
+SELECT DISTINCT ON (country_id, fortification_type_id, food_vehicle_id)
     *
 FROM (
     SELECT
@@ -13,6 +13,7 @@ FROM (
     i.app_user_id,
     coalesce(i.description, 'No description available') as description,
     i.country_id,
+    i.focus_geography,
     i.fortification_type_id,
     ft."name" as fortification_type_name,
     i.program_status,
@@ -48,7 +49,7 @@ from
     left join consumption_data_sources cds on cds.country_id = i.country_id and cds.consumption_data_type = 'household'
     WHERE is_premade = TRUE
 ) s
-ORDER BY country_id ASC, food_vehicle_id asc, template_date desc
+ORDER BY country_id ASC, fortification_type_id asc, food_vehicle_id asc, template_date desc
 )
 
 select * from latest_templates
@@ -57,10 +58,11 @@ union
 
 select
     i.id,
-    concat(i.intervention_name,' (',i.template_date,')') as name,
+    i.intervention_name as name,
     i.app_user_id,
     coalesce(i.description, 'No description available') as description,
     i.country_id,
+    i.focus_geography,
     i.fortification_type_id,
     ft."name" as fortification_type_name,
     i.program_status,

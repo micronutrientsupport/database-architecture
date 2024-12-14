@@ -27,6 +27,16 @@ with totalfields as (
 			"Social marketing and advocacy": "total_social_marketing_startup_cost",
 			"Training ": "total_training_cost_gov"
 		},
+        "Start-up/Scale-up Costs": {
+            "Planning": "total_planning_cost",
+            "Market and value chain promotion and development": "total_market_promotion_startup_cost",
+            "Sensitization/advocacy and nutrition education for farmers": "total_sensitization_startup_cost",
+            "Social marketing/advocacy and nutrition education for consumers": "total_social_marketing_startup_cost",
+            "Training ": "total_training_cost_ag_extension",
+            "Demonstration days at farmer field schools": "total_demonstration_days_cost",
+            "Support to seed industry to promote production and improve access": "total_support_seed_industry_startup_cost",
+            "Variety testing and finalization": "total_support_seed_industry_startup_cost"
+        },
         "User added start-up/scale-up costs": {
             "Additional Costs": "Total"
         }
@@ -215,7 +225,8 @@ su_agg2 as (
             'Industry-related start-up/scale-up costs',
             'Government-related start-up/scale-up costs',
             'Government start-up/scale-up costs',
-            'User added start-up/scale-up costs'
+            'User added start-up/scale-up costs',
+            'Start-up/Scale-up Costs'
         )
     group by
         intervention_id,

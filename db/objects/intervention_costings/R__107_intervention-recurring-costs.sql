@@ -1,5 +1,7 @@
 CREATE OR REPLACE view intervention_recurring_costs AS 
 
+
+
 with totalfields as (
     select
         '{
@@ -39,6 +41,32 @@ with totalfields as (
 		"Impact evaluation costs": {
 			"Impact evaluation/nutrition surveillance": "total_impact_evalutaion_cost"
 		},
+        "Recurring costs ": {
+            "Seed maintenance": "total_maintenance_breeding_cost",
+            "Seed production and dissemination": "total_seed_production_distribution_cost",
+            "Ag extension ": "ag_extension_cost",
+            "Market and value chain promotion and development": "total_market_promotion_recurring_cost",
+            "Social marketing/advocacy and nutrition education": "total_social_marketing_recurring_cost",
+            "Monitoring": "total_monitoring_cost",
+            "Management, overhead, administration ": "total_management_cost"
+        },
+		"Recurring costs for foliar application": {
+			"Foliar micronutrient fertilizer": "total_mn_fertilizer_cost_foliar",
+			"Distribution/transportation of foliar micronutrient fertilizer": "total_mn_distribution_cost_foliar",
+			"Labor for foliar micronutrient fertilizer application": "total_labor_mn_labor_cost_foliar",
+			"Equipment and other miscellaneous supplies for foliar micronutrient fertilizer application": "total_foliar_equipment_cost"
+		},
+        "Recurring costs for granular application": {
+            "Granular micronutrient fertilizer": "total_mn_fertilizer_cost_granular",
+            "Distribution/transportation of granular micronutrient fertilizer": "total_mn_distribution_cost_granular",
+            "Labor for granular micronutrient fertilizer application": "total_labor_mn_labor_cost_granular"
+        },
+        "Other recurring costs": {
+            "Ag extension ": "ag_extension_cost",
+            "Social marketing/advocacy and nutrition education": "total_social_marketing_recurring_cost",
+            "Monitoring": "total_monitoring_cost",
+            "Management, overhead, administration ": "total_agro_biofort_management_cost"
+        },
         "User added recurring costs": {
             "Additional Costs": "Total"
         }
@@ -413,6 +441,10 @@ su_agg2 as (
             'Industry-related recurring fortification costs',
             'Total industry-related recurring fortification costs',
             'Impact evaluation costs',
+            'Recurring costs ',
+            'Recurring costs for foliar application',
+            'Recurring costs for granular application',
+            'Other recurring costs',
             'User added recurring costs'
         )
     group by

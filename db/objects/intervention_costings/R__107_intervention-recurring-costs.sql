@@ -1,5 +1,7 @@
 CREATE OR REPLACE view intervention_recurring_costs AS 
 
+
+
 with totalfields as (
     select
         '{
@@ -48,6 +50,12 @@ with totalfields as (
             "Monitoring": "total_monitoring_cost",
             "Management, overhead, administration ": "total_management_cost"
         },
+		"Recurring costs for foliar application": {
+			"Foliar micronutrient fertilizer": "total_mn_fertilizer_cost_foliar",
+			"Distribution/transportation of foliar micronutrient fertilizer": "total_mn_distribution_cost_foliar",
+			"Labor for foliar micronutrient fertilizer application": "total_labor_mn_labor_cost_foliar",
+			"Equipment and other miscellaneous supplies for foliar micronutrient fertilizer application": "total_foliar_equipment_cost"
+		},
         "User added recurring costs": {
             "Additional Costs": "Total"
         }
@@ -423,6 +431,7 @@ su_agg2 as (
             'Total industry-related recurring fortification costs',
             'Impact evaluation costs',
             'Recurring costs ',
+            'Recurring costs for foliar application',
             'User added recurring costs'
         )
     group by

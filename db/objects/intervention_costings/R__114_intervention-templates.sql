@@ -1,5 +1,7 @@
 create or replace view intervention_templates as
 
+
+
 with lsff_mns as (
 	select 
 		intervention_id
@@ -15,10 +17,20 @@ bf_mns as (
 	from intervention i 
 	where i.is_premade = true and i.fortification_type_id = 'BF'
 ),
+af_mns as (
+	select 
+		id as intervention_id
+		, fortification_type_id 
+		, focus_micronutrient as micronutrient
+	from intervention i 
+	where i.is_premade = true and i.fortification_type_id = 'AF'
+),
 int_mns as (
 	select * from lsff_mns
 	union
 	select * from bf_mns
+	union
+	select * from af_mns
 ),
 food_vehicle_agg as (
  select country_id, 

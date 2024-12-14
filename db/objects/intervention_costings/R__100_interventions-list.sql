@@ -1,6 +1,8 @@
 create or replace view intervention_list as
 
 
+
+
 with latest_templates as (
 SELECT DISTINCT ON (country_id, fortification_type_id, food_vehicle_id)
     *

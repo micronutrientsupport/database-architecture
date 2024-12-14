@@ -13,7 +13,7 @@ CREATE TABLE biofortification_mn_content (
 
 CREATE TABLE agrofortification_mn_content (
 	country_id text REFERENCES country(id),
-	application_type text check (application_type in ('foliar','granular','both') )
+	application_type text check (application_type in ('foliar','granular','both') ),
 	food_vehicle_id integer  REFERENCES food_vehicle(id),
     micronutrient_id text REFERENCES micronutrient(id),
 	application_rate number NULL,
